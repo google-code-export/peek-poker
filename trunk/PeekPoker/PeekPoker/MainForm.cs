@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using ISOLib.XBDMPackage;
@@ -13,6 +14,7 @@ namespace PeekPoker
         private bool _trigger;
         private String _lastAddress;
         private AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
+        string filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
 
         public MainForm()
         {
@@ -32,6 +34,9 @@ namespace PeekPoker
                 statusStripLabel.Text = String.Format("Connected");
                 MessageBox.Show(this, String.Format("Connected"), String.Format("Peek Poker"), MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
+                System.IO.StreamWriter objWriter = new System.IO.StreamWriter(filepath); //Writer Declaration
+                objWriter.Write(ipAddressTextBox.Text); //Writes IP address to text file
+                objWriter.Close(); //Close Writer
             }
             catch (Exception ex)
             {
@@ -140,6 +145,19 @@ namespace PeekPoker
             }
             if (!trigger) _data.Add(peekAddressTextBox.Text);
             if (!trigger2) _data.Add(pokeAddressTextBox.Text);
+        }
+        private void Form1_Load(System.Object sender, System.EventArgs e)
+        {
+            //This is for handling automatic loading of the IP address and txt file creation. -8Ball
+            FileInfo f = new FileInfo(filepath);
+            if (!System.IO.File.Exists(filepath))
+            {
+                System.IO.File.Create(filepath).Dispose();
+            }
+            if (!(f.Length == 0))
+            {
+                ipAddressTextBox.Text = System.IO.File.ReadAllText(filepath);
+            }
         }
     }
 }

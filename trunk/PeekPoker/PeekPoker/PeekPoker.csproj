@@ -57,9 +57,8 @@
     <ApplicationIcon>xbox360.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ISOLib, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\Shared\USB\VB2008\Visual C#\ISOLib\IsoLib - DLL\bin\Release\ISOLib.dll</HintPath>
+    <Reference Include="ISOLib">
+      <HintPath>..\..\..\..\..\..\Desktop\Editor Work\Delicious Sauce\ISOLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />

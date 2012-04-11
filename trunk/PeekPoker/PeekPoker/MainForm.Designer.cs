@@ -40,23 +40,23 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pokeValueTextBox = new System.Windows.Forms.TextBox();
             this.pokeButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.pokeAddressTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.peekResultTextBox = new System.Windows.Forms.RichTextBox();
             this.newPeekButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.peekLengthTextBox = new System.Windows.Forms.TextBox();
             this.peekButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.peekAddressTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.peekResultTextBox = new System.Windows.Forms.RichTextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
@@ -179,6 +179,25 @@
             this.panel2.Size = new System.Drawing.Size(331, 326);
             this.panel2.TabIndex = 13;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(-1, 82);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 240);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "0x00\r\n0x10\r\n0x20\r\n0x30\r\n0x40\r\n0x50\r\n0x60\r\n0x70\r\n0x80\r\n0x90\r\n0xA0\r\n0xB0\r\n0xC0\r\n0xD" +
+    "0\r\n0xE0\r\n0xF0\r\n";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(41, 64);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(265, 15);
+            this.label8.TabIndex = 14;
+            this.label8.Text = " 000102030405060708090A0B0C0D0E0F";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -243,6 +262,34 @@
             this.panel1.Size = new System.Drawing.Size(333, 326);
             this.panel1.TabIndex = 12;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 82);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 240);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "0x00\r\n0x10\r\n0x20\r\n0x30\r\n0x40\r\n0x50\r\n0x60\r\n0x70\r\n0x80\r\n0x90\r\n0xA0\r\n0xB0\r\n0xC0\r\n0xD" +
+    "0\r\n0xE0\r\n0xF0\r\n";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(45, 61);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(265, 15);
+            this.label7.TabIndex = 13;
+            this.label7.Text = " 000102030405060708090A0B0C0D0E0F";
+            // 
+            // peekResultTextBox
+            // 
+            this.peekResultTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.peekResultTextBox.Location = new System.Drawing.Point(48, 82);
+            this.peekResultTextBox.Name = "peekResultTextBox";
+            this.peekResultTextBox.Size = new System.Drawing.Size(262, 243);
+            this.peekResultTextBox.TabIndex = 12;
+            this.peekResultTextBox.Text = "";
+            // 
             // newPeekButton
             // 
             this.newPeekButton.Location = new System.Drawing.Point(233, 31);
@@ -297,53 +344,6 @@
             this.peekAddressTextBox.Size = new System.Drawing.Size(116, 22);
             this.peekAddressTextBox.TabIndex = 4;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(45, 61);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(265, 15);
-            this.label7.TabIndex = 13;
-            this.label7.Text = " 000102030405060708090A0B0C0D0E0F";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(41, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(265, 15);
-            this.label8.TabIndex = 14;
-            this.label8.Text = " 000102030405060708090A0B0C0D0E0F";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 82);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 240);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "0x00\r\n0x10\r\n0x20\r\n0x30\r\n0x40\r\n0x50\r\n0x60\r\n0x70\r\n0x80\r\n0x90\r\n0xA0\r\n0xB0\r\n0xC0\r\n0xD" +
-    "0\r\n0xE0\r\n0xF0\r\n";
-            // 
-            // peekResultTextBox
-            // 
-            this.peekResultTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.peekResultTextBox.Location = new System.Drawing.Point(48, 82);
-            this.peekResultTextBox.Name = "peekResultTextBox";
-            this.peekResultTextBox.Size = new System.Drawing.Size(262, 243);
-            this.peekResultTextBox.TabIndex = 12;
-            this.peekResultTextBox.Text = "";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(-1, 82);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 240);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "0x00\r\n0x10\r\n0x20\r\n0x30\r\n0x40\r\n0x50\r\n0x60\r\n0x70\r\n0x80\r\n0x90\r\n0xA0\r\n0xB0\r\n0xC0\r\n0xD" +
-    "0\r\n0xE0\r\n0xF0\r\n";
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label11);
@@ -380,6 +380,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Peek Poker";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
