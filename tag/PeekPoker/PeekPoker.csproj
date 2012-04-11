@@ -58,7 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ISOLib">
-      <HintPath>..\..\..\..\..\..\Desktop\Editor Work\Delicious Sauce\ISOLib.dll</HintPath>
+      <HintPath>..\..\..\..\Dlls\ISOLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
