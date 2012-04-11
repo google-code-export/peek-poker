@@ -36,7 +36,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ipAddressTextBox = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -74,7 +73,7 @@
             this.statusStripLabel,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 427);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 408);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -103,7 +102,7 @@
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 19);
-            this.toolStripStatusLabel1.Text = "Revision 4";
+            this.toolStripStatusLabel1.Text = "Revision 5";
             // 
             // label2
             // 
@@ -130,16 +129,6 @@
             this.connectButton.Text = "Connect";
             this.connectButton.UseVisualStyleBackColor = true;
             this.connectButton.Click += new System.EventHandler(this.ConnectButtonClick);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(303, 408);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Author : PureIso";
             // 
             // tabControl1
             // 
@@ -369,9 +358,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(693, 451);
+            this.ClientSize = new System.Drawing.Size(693, 432);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ipAddressTextBox);
@@ -404,7 +392,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox ipAddressTextBox;
         private System.Windows.Forms.Button connectButton;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;

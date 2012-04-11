@@ -54,11 +54,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>xbox360.ico</ApplicationIcon>
+    <ApplicationIcon>Important Files\xbox360.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ISOLib">
-      <HintPath>..\..\..\..\Dlls\ISOLib.dll</HintPath>
+    <Reference Include="ISOLib, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Important Files\ISOLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -97,7 +98,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="xbox360.ico" />
+    <Content Include="Important Files\ReadMe.txt" />
+    <Content Include="Important Files\xbox360.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
