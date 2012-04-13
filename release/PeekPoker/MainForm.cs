@@ -132,7 +132,7 @@ namespace PeekPoker
         {
             try
             {
-                _searchRangeDumpLength = (Convert(startRangeAddressTextBox.Text) - Convert(endRangeAddressTextBox.Text));
+                _searchRangeDumpLength = (Convert(endRangeAddressTextBox.Text) - Convert(startRangeAddressTextBox.Text));
                 var oThread = new Thread(SearchRange);
                 oThread.Start();
             }
@@ -270,7 +270,7 @@ namespace PeekPoker
             if (searchRangeResultListView.InvokeRequired)
                 searchRangeResultListView.Invoke((MethodInvoker)(SearchRangeListViewListClean));
             else
-                searchRangeResultListView.Clear();
+                searchRangeResultListView.Items.Clear();
         }
         #endregion
         
