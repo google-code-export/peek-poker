@@ -45,6 +45,7 @@ namespace PeekPoker
                 var objWriter = new StreamWriter(_filepath); //Writer Declaration
                 objWriter.Write(ipAddressTextBox.Text); //Writes IP address to text file
                 objWriter.Close(); //Close Writer
+                connectButton.Text = "Re-Connect"; 
             }
             catch (Exception ex)
             {
@@ -272,5 +273,20 @@ namespace PeekPoker
                 searchRangeResultListView.Clear();
         }
         #endregion
+        
+        #region Addressbox Autocorrection
+        // These will automatically add "0x" to an offset if it hasn't been added already - 8Ball
+        private void FixTheAddresses(object sender, EventArgs e)
+        {
+            if (!peekAddressTextBox.Text.Contains("0x"))
+            {
+                peekAddressTextBox.Text = ("0x" + peekAddressTextBox.Text);
+            }
+            if (!pokeAddressTextBox.Text.Contains("0x"))
+            {
+                pokeAddressTextBox.Text = ("0x" + pokeAddressTextBox.Text);
+            }
+        }
+        #endregion 
     }
 }

@@ -57,6 +57,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.peekAddressTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dumpLengthTextBoxReadOnly = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.searchRangeResultListView = new System.Windows.Forms.ListView();
             this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -70,8 +72,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.dumpLengthTextBoxReadOnly = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -234,7 +234,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 6);
+            this.label5.Location = new System.Drawing.Point(34, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 15);
             this.label5.TabIndex = 5;
@@ -248,6 +248,7 @@
             this.pokeAddressTextBox.Name = "pokeAddressTextBox";
             this.pokeAddressTextBox.Size = new System.Drawing.Size(116, 22);
             this.pokeAddressTextBox.TabIndex = 4;
+            this.pokeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // panel1
             // 
@@ -308,7 +309,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 36);
+            this.label3.Location = new System.Drawing.Point(45, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 10;
@@ -334,7 +335,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 6);
+            this.label1.Location = new System.Drawing.Point(34, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 5;
@@ -348,6 +349,7 @@
             this.peekAddressTextBox.Name = "peekAddressTextBox";
             this.peekAddressTextBox.Size = new System.Drawing.Size(116, 22);
             this.peekAddressTextBox.TabIndex = 4;
+            this.peekAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // tabPage3
             // 
@@ -369,6 +371,25 @@
             this.tabPage3.Size = new System.Drawing.Size(682, 335);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Search Range";
+            // 
+            // dumpLengthTextBoxReadOnly
+            // 
+            this.dumpLengthTextBoxReadOnly.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.dumpLengthTextBoxReadOnly.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.dumpLengthTextBoxReadOnly.Location = new System.Drawing.Point(198, 94);
+            this.dumpLengthTextBoxReadOnly.Name = "dumpLengthTextBoxReadOnly";
+            this.dumpLengthTextBoxReadOnly.ReadOnly = true;
+            this.dumpLengthTextBoxReadOnly.Size = new System.Drawing.Size(79, 22);
+            this.dumpLengthTextBoxReadOnly.TabIndex = 14;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(102, 97);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(90, 15);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Dump Length:";
             // 
             // label14
             // 
@@ -485,25 +506,6 @@
             this.label11.Size = new System.Drawing.Size(251, 15);
             this.label11.TabIndex = 0;
             this.label11.Text = "I don\'t have time to implement this yet :P";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(102, 97);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(90, 15);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Dump Length:";
-            // 
-            // dumpLengthTextBoxReadOnly
-            // 
-            this.dumpLengthTextBoxReadOnly.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.dumpLengthTextBoxReadOnly.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.dumpLengthTextBoxReadOnly.Location = new System.Drawing.Point(198, 94);
-            this.dumpLengthTextBoxReadOnly.Name = "dumpLengthTextBoxReadOnly";
-            this.dumpLengthTextBoxReadOnly.ReadOnly = true;
-            this.dumpLengthTextBoxReadOnly.Size = new System.Drawing.Size(79, 22);
-            this.dumpLengthTextBoxReadOnly.TabIndex = 14;
             // 
             // MainForm
             // 
