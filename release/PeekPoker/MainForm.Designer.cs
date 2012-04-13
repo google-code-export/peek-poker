@@ -56,13 +56,28 @@
             this.peekButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.peekAddressTextBox = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.searchRangeResultListView = new System.Windows.Forms.ListView();
+            this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.offsetHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label13 = new System.Windows.Forms.Label();
+            this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
+            this.searchRangeButton = new System.Windows.Forms.Button();
+            this.endRangeAddressTextBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.dumpLengthTextBoxReadOnly = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,6 +148,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 42);
             this.tabControl1.Name = "tabControl1";
@@ -333,6 +349,123 @@
             this.peekAddressTextBox.Size = new System.Drawing.Size(116, 22);
             this.peekAddressTextBox.TabIndex = 4;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tabPage3.Controls.Add(this.dumpLengthTextBoxReadOnly);
+            this.tabPage3.Controls.Add(this.label15);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.searchRangeResultListView);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.searchRangeValueTextBox);
+            this.tabPage3.Controls.Add(this.searchRangeButton);
+            this.tabPage3.Controls.Add(this.endRangeAddressTextBox);
+            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.startRangeAddressTextBox);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(682, 335);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Search Range";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(48, 200);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(337, 15);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "*NB: The larger the range the longer the search will take";
+            // 
+            // searchRangeResultListView
+            // 
+            this.searchRangeResultListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.numberColumn,
+            this.offsetHeader});
+            this.searchRangeResultListView.FullRowSelect = true;
+            this.searchRangeResultListView.GridLines = true;
+            this.searchRangeResultListView.Location = new System.Drawing.Point(396, 3);
+            this.searchRangeResultListView.Name = "searchRangeResultListView";
+            this.searchRangeResultListView.Size = new System.Drawing.Size(280, 326);
+            this.searchRangeResultListView.TabIndex = 11;
+            this.searchRangeResultListView.UseCompatibleStateImageBehavior = false;
+            this.searchRangeResultListView.View = System.Windows.Forms.View.Details;
+            // 
+            // numberColumn
+            // 
+            this.numberColumn.Text = "Number";
+            // 
+            // offsetHeader
+            // 
+            this.offsetHeader.Width = 195;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(22, 126);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(48, 15);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Value :";
+            // 
+            // searchRangeValueTextBox
+            // 
+            this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.searchRangeValueTextBox.Location = new System.Drawing.Point(76, 119);
+            this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(314, 22);
+            this.searchRangeValueTextBox.TabIndex = 9;
+            // 
+            // searchRangeButton
+            // 
+            this.searchRangeButton.Location = new System.Drawing.Point(302, 147);
+            this.searchRangeButton.Name = "searchRangeButton";
+            this.searchRangeButton.Size = new System.Drawing.Size(88, 50);
+            this.searchRangeButton.TabIndex = 8;
+            this.searchRangeButton.Text = "Search Range";
+            this.searchRangeButton.UseVisualStyleBackColor = true;
+            this.searchRangeButton.Click += new System.EventHandler(this.SearchRangeButtonClick);
+            // 
+            // endRangeAddressTextBox
+            // 
+            this.endRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.endRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.endRangeAddressTextBox.Location = new System.Drawing.Point(274, 66);
+            this.endRangeAddressTextBox.Name = "endRangeAddressTextBox";
+            this.endRangeAddressTextBox.Size = new System.Drawing.Size(116, 22);
+            this.endRangeAddressTextBox.TabIndex = 7;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(198, 73);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(70, 15);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "<--- To --->";
+            // 
+            // startRangeAddressTextBox
+            // 
+            this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(76, 66);
+            this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(116, 22);
+            this.startRangeAddressTextBox.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 73);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Range :";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.label11);
@@ -352,6 +485,25 @@
             this.label11.Size = new System.Drawing.Size(251, 15);
             this.label11.TabIndex = 0;
             this.label11.Text = "I don\'t have time to implement this yet :P";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(102, 97);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(90, 15);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Dump Length:";
+            // 
+            // dumpLengthTextBoxReadOnly
+            // 
+            this.dumpLengthTextBoxReadOnly.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.dumpLengthTextBoxReadOnly.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.dumpLengthTextBoxReadOnly.Location = new System.Drawing.Point(198, 94);
+            this.dumpLengthTextBoxReadOnly.Name = "dumpLengthTextBoxReadOnly";
+            this.dumpLengthTextBoxReadOnly.ReadOnly = true;
+            this.dumpLengthTextBoxReadOnly.Size = new System.Drawing.Size(79, 22);
+            this.dumpLengthTextBoxReadOnly.TabIndex = 14;
             // 
             // MainForm
             // 
@@ -377,6 +529,8 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -415,6 +569,20 @@
         private System.Windows.Forms.RichTextBox peekResultTextBox;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ListView searchRangeResultListView;
+        private System.Windows.Forms.ColumnHeader numberColumn;
+        private System.Windows.Forms.ColumnHeader offsetHeader;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox searchRangeValueTextBox;
+        private System.Windows.Forms.Button searchRangeButton;
+        private System.Windows.Forms.TextBox endRangeAddressTextBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox startRangeAddressTextBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox dumpLengthTextBoxReadOnly;
+        private System.Windows.Forms.Label label15;
 
     }
 }
