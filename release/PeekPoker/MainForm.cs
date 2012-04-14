@@ -129,10 +129,10 @@ namespace PeekPoker
 
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
-            if (peekResultTextBox.Text.Equals("")) // Check if you have peeked code yet.
-            { ShowMessageBox("Please peek the memory first.", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            else //If you have peeked it continues
-            {
+            //if (peekResultTextBox.Text.Equals("")) // Check if you have peeked code yet.
+            //{ ShowMessageBox("Please peek the memory first.", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            //else //If you have peeked it continues
+            //{
                 try
                 {
                     _searchRangeDumpLength = (Convert(endRangeAddressTextBox.Text) - Convert(startRangeAddressTextBox.Text));
@@ -144,7 +144,7 @@ namespace PeekPoker
                 {
                     ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
+            //}
         }
         
         #endregion
