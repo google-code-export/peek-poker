@@ -72,6 +72,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -354,6 +355,7 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tabPage3.Controls.Add(this.label16);
             this.tabPage3.Controls.Add(this.dumpLengthTextBoxReadOnly);
             this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Controls.Add(this.label14);
@@ -376,16 +378,16 @@
             // 
             this.dumpLengthTextBoxReadOnly.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.dumpLengthTextBoxReadOnly.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.dumpLengthTextBoxReadOnly.Location = new System.Drawing.Point(198, 94);
+            this.dumpLengthTextBoxReadOnly.Location = new System.Drawing.Point(122, 94);
             this.dumpLengthTextBoxReadOnly.Name = "dumpLengthTextBoxReadOnly";
             this.dumpLengthTextBoxReadOnly.ReadOnly = true;
-            this.dumpLengthTextBoxReadOnly.Size = new System.Drawing.Size(79, 22);
+            this.dumpLengthTextBoxReadOnly.Size = new System.Drawing.Size(98, 22);
             this.dumpLengthTextBoxReadOnly.TabIndex = 14;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(102, 97);
+            this.label15.Location = new System.Drawing.Point(26, 97);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(90, 15);
             this.label15.TabIndex = 13;
@@ -408,9 +410,9 @@
             this.offsetHeader});
             this.searchRangeResultListView.FullRowSelect = true;
             this.searchRangeResultListView.GridLines = true;
-            this.searchRangeResultListView.Location = new System.Drawing.Point(396, 3);
+            this.searchRangeResultListView.Location = new System.Drawing.Point(478, 9);
             this.searchRangeResultListView.Name = "searchRangeResultListView";
-            this.searchRangeResultListView.Size = new System.Drawing.Size(280, 326);
+            this.searchRangeResultListView.Size = new System.Drawing.Size(201, 320);
             this.searchRangeResultListView.TabIndex = 11;
             this.searchRangeResultListView.UseCompatibleStateImageBehavior = false;
             this.searchRangeResultListView.View = System.Windows.Forms.View.Details;
@@ -418,27 +420,29 @@
             // numberColumn
             // 
             this.numberColumn.Text = "Number";
+            this.numberColumn.Width = 58;
             // 
             // offsetHeader
             // 
-            this.offsetHeader.Width = 195;
+            this.offsetHeader.Text = "Offset";
+            this.offsetHeader.Width = 128;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 126);
+            this.label13.Location = new System.Drawing.Point(42, 122);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(48, 15);
+            this.label13.Size = new System.Drawing.Size(74, 15);
             this.label13.TabIndex = 10;
-            this.label13.Text = "Value :";
+            this.label13.Text = "Search for :";
             // 
             // searchRangeValueTextBox
             // 
             this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchRangeValueTextBox.Location = new System.Drawing.Point(76, 119);
+            this.searchRangeValueTextBox.Location = new System.Drawing.Point(122, 119);
             this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(314, 22);
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(296, 22);
             this.searchRangeValueTextBox.TabIndex = 9;
             // 
             // searchRangeButton
@@ -455,37 +459,37 @@
             // 
             this.endRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.endRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.endRangeAddressTextBox.Location = new System.Drawing.Point(274, 66);
+            this.endRangeAddressTextBox.Location = new System.Drawing.Point(285, 66);
             this.endRangeAddressTextBox.Name = "endRangeAddressTextBox";
-            this.endRangeAddressTextBox.Size = new System.Drawing.Size(116, 22);
+            this.endRangeAddressTextBox.Size = new System.Drawing.Size(98, 22);
             this.endRangeAddressTextBox.TabIndex = 7;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(198, 73);
+            this.label12.Location = new System.Drawing.Point(226, 73);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(70, 15);
+            this.label12.Size = new System.Drawing.Size(53, 15);
             this.label12.TabIndex = 6;
-            this.label12.Text = "<--- To --->";
+            this.label12.Text = "≥ and ≤";
             // 
             // startRangeAddressTextBox
             // 
             this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.startRangeAddressTextBox.Location = new System.Drawing.Point(76, 66);
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(122, 66);
             this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
-            this.startRangeAddressTextBox.Size = new System.Drawing.Size(116, 22);
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(98, 22);
             this.startRangeAddressTextBox.TabIndex = 5;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 73);
+            this.label6.Location = new System.Drawing.Point(32, 73);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.Size = new System.Drawing.Size(84, 15);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Range :";
+            this.label6.Text = "Value Within:";
             // 
             // tabPage2
             // 
@@ -506,6 +510,16 @@
             this.label11.Size = new System.Drawing.Size(251, 15);
             this.label11.TabIndex = 0;
             this.label11.Text = "I don\'t have time to implement this yet :P";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.Red;
+            this.label16.Location = new System.Drawing.Point(48, 28);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(216, 30);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "Example:\r\n0xC0000000 <--To--> 0xC000FFFF";
             // 
             // MainForm
             // 
@@ -585,6 +599,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox dumpLengthTextBoxReadOnly;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
 
     }
 }

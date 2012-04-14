@@ -18,11 +18,10 @@ Automatic addressbox formatting - 8Ball
 -Changes - 14/04/12
 Search Range coded searching forever bugfix - pureIso
 Clearing SearchListView box bugfix - pureIso
+search range result bugfix
+added RealTimeMemory class - trying to slowly decrease ISOLib dependancy
 
 To Do: 
 Peek Length box should be able to take hex string?
-Search Range Column Header rename ColumnHEader to offset
-Column Header should display 4Byte Hex String not 8
 Message to tell user pointer not found or a notification
-change search range value from - Value to Pointer Hex Value
 Add a loading bar ?

@@ -3,7 +3,6 @@ using System.IO;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using ISOLib.XBDMPackage;
 
 namespace PeekPoker
 {
@@ -45,7 +44,7 @@ namespace PeekPoker
                 var objWriter = new StreamWriter(_filepath); //Writer Declaration
                 objWriter.Write(ipAddressTextBox.Text); //Writes IP address to text file
                 objWriter.Close(); //Close Writer
-                connectButton.Text = "Re-Connect"; 
+                connectButton.Text = String.Format("Re-Connect"); 
             }
             catch (Exception ex)
             {
@@ -107,7 +106,7 @@ namespace PeekPoker
             AutoComplete(); //run function
             try
             {
-                _rtm.DumpOffset = pokeAddressTextBox.Text;//Set the dump offset
+                _rtm.DumpOffset = Convert(pokeAddressTextBox.Text);//Set the dump offset
                 _rtm.DumpLength = (uint)pokeValueTextBox.Text.Length/2;//The length of data to dump
                 _rtm.Poke(pokeAddressTextBox.Text, pokeValueTextBox.Text);
                 MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -133,6 +132,7 @@ namespace PeekPoker
             try
             {
                 _searchRangeDumpLength = (Convert(endRangeAddressTextBox.Text) - Convert(startRangeAddressTextBox.Text));
+                dumpLengthTextBoxReadOnly.Text = _searchRangeDumpLength.ToString();
                 var oThread = new Thread(SearchRange);
                 oThread.Start();
             }
@@ -179,7 +179,7 @@ namespace PeekPoker
                 _rtm.DumpLength = _searchRangeDumpLength;
 
                 //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
-                var offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());
+                var offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
                 if(offsets == null)
                 {
                     ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -237,14 +237,14 @@ namespace PeekPoker
                 return searchRangeValueTextBox.Text;
             return returnVal;
         }
-        private String GetStartRangeAddressTextBoxText()
+        private uint GetStartRangeAddressTextBoxText()
         {
             //recursion
-            var returnVal = "";
+            uint returnVal = 0;
             if (startRangeAddressTextBox.InvokeRequired) startRangeAddressTextBox.Invoke((MethodInvoker)
                   delegate { returnVal = GetStartRangeAddressTextBoxText(); });
             else
-                return startRangeAddressTextBox.Text;
+                return Convert(startRangeAddressTextBox.Text);
             return returnVal;
         }
         private void ShowMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
@@ -280,11 +280,11 @@ namespace PeekPoker
         {
             if (!peekAddressTextBox.Text.Contains("0x"))
             {
-                peekAddressTextBox.Text = ("0x" + peekAddressTextBox.Text);
+                peekAddressTextBox.Text = (String.Format("0x" + peekAddressTextBox.Text));
             }
             if (!pokeAddressTextBox.Text.Contains("0x"))
             {
-                pokeAddressTextBox.Text = ("0x" + pokeAddressTextBox.Text);
+                pokeAddressTextBox.Text = (String.Format("0x" + pokeAddressTextBox.Text));
             }
         }
         #endregion 
