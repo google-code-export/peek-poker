@@ -129,18 +129,24 @@ namespace PeekPoker
 
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
-            try
+            if (peekResultTextBox.Text.Equals("")) // Check if you have peeked code yet.
+            { ShowMessageBox("Please peek the memory first.", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            else //If you have peeked it continues
             {
-                _searchRangeDumpLength = (Convert(endRangeAddressTextBox.Text) - Convert(startRangeAddressTextBox.Text));
-                dumpLengthTextBoxReadOnly.Text = _searchRangeDumpLength.ToString();
-                var oThread = new Thread(SearchRange);
-                oThread.Start();
-            }
-            catch (Exception ex)
-            {
-                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    _searchRangeDumpLength = (Convert(endRangeAddressTextBox.Text) - Convert(startRangeAddressTextBox.Text));
+                    dumpLengthTextBoxReadOnly.Text = _searchRangeDumpLength.ToString();
+                    var oThread = new Thread(SearchRange);
+                    oThread.Start();
+                }
+                catch (Exception ex)
+                {
+                    ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+        
         #endregion
 
         #region functions
@@ -273,18 +279,46 @@ namespace PeekPoker
                 searchRangeResultListView.Items.Clear();
         }
         #endregion
-        
+
         #region Addressbox Autocorrection
         // These will automatically add "0x" to an offset if it hasn't been added already - 8Ball
         private void FixTheAddresses(object sender, EventArgs e)
         {
-            if (!peekAddressTextBox.Text.Contains("0x"))
+            if (!peekAddressTextBox.Text.StartsWith("0x")) //Peek Address Box, Formatting Check.
             {
-                peekAddressTextBox.Text = (String.Format("0x" + peekAddressTextBox.Text));
+                if (!peekAddressTextBox.Text.Equals("")) //Empty Check
+                    peekAddressTextBox.Text = ("0x" + peekAddressTextBox.Text); //Formatting
             }
-            if (!pokeAddressTextBox.Text.Contains("0x"))
+            if (peekLengthTextBox.Text.StartsWith("0x")) // Checks if peek length is hex value or not based on 0x
+            { //This could probably do with some cleanup -8Ball
+                string Result;
+                UInt32 Result2;
+                Result = (peekLengthTextBox.Text.ToUpper().Substring(2));
+                Result2 = UInt32.Parse(Result, System.Globalization.NumberStyles.HexNumber);
+                peekLengthTextBox.Text = Result2.ToString();
+            }
+            else if (System.Text.RegularExpressions.Regex.IsMatch(peekLengthTextBox.Text.ToUpper(), "^[A-Z]$")) //Checks if hex, based on uppercase alphabet presence.
             {
-                pokeAddressTextBox.Text = (String.Format("0x" + pokeAddressTextBox.Text));
+                string Result;
+                UInt32 Result2;
+                Result = (peekLengthTextBox.Text.ToUpper());
+                Result2 = UInt32.Parse(Result, System.Globalization.NumberStyles.HexNumber);
+                peekLengthTextBox.Text = Result2.ToString();
+            }
+            if (!pokeAddressTextBox.Text.StartsWith("0x"))
+            {
+                if (!pokeAddressTextBox.Text.Equals(""))
+                    pokeAddressTextBox.Text = ("0x" + pokeAddressTextBox.Text);
+            }
+            if (!startRangeAddressTextBox.Text.StartsWith("0x"))
+            {
+                if (!startRangeAddressTextBox.Text.Equals(""))
+                    startRangeAddressTextBox.Text = ("0x" + startRangeAddressTextBox.Text);
+            }
+            if (!endRangeAddressTextBox.Text.StartsWith("0x"))
+            {
+                if (!endRangeAddressTextBox.Text.Equals(""))
+                    endRangeAddressTextBox.Text = ("0x" + endRangeAddressTextBox.Text);
             }
         }
         #endregion 
