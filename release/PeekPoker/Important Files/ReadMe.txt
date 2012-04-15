@@ -26,3 +26,12 @@ To Do:
 Peek Length box should be able to take hex string? [Awaiting Review] -8Ball
 Message to tell user pointer not found or a notification
 Add a loading bar ?
+
+
+- Changes - 16/04/12
+Combined the peek&poke textbox together in to one hexbox using (Be.hexbox with some modifications)
+changed the functions and events to work with the new hexbox
+added teh Be.Windows.Forms.HexBox.dll to the Important Files directory
+added 2 new functions
++ ByteArrayToString(byte[] bytes)
++ StringToByteArray(string text)

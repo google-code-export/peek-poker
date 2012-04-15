@@ -3,6 +3,7 @@ using System.IO;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace PeekPoker
 {
@@ -38,7 +39,6 @@ namespace PeekPoker
                 _lastAddress = null;
                 _trigger = false;
                 panel1.Enabled = true;
-                panel2.Enabled = true;
                 statusStripLabel.Text = String.Format("Connected");
                 MessageBox.Show(this, String.Format("Connected"), String.Format("Peek Poker"), MessageBoxButtons.OK,MessageBoxIcon.Information);
                 var objWriter = new StreamWriter(_filepath); //Writer Declaration
@@ -60,37 +60,13 @@ namespace PeekPoker
             {
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text))
                     throw new Exception("Invalide peek length!");
-                //Check if you are peeking the same offset so we can identify changes
-                if (_trigger && _lastAddress == peekAddressTextBox.Text)
-                {
-                    var retValue = _rtm.Peek(peekAddressTextBox.Text, peekLengthTextBox.Text, peekAddressTextBox.Text, peekLengthTextBox.Text);
-                    var previousValue = peekResultTextBox.Text.ToCharArray();
-                    peekResultTextBox.Clear();
-                    var i = 0;
-                    foreach (var character in retValue)
-                    {
-                        if (character == previousValue[i])
-                        {
-                            peekResultTextBox.SelectionColor = Color.Black;
-                            peekResultTextBox.SelectedText = character.ToString();
-                        }
-                        else
-                        {
-                            peekResultTextBox.SelectionColor = Color.Red;
-                            peekResultTextBox.SelectedText = character.ToString();
-                        }
-                        i++;
-                    }
-                }
-                else
-                {
-                    peekResultTextBox.Clear();
-                    var retValue = _rtm.Peek(peekAddressTextBox.Text, peekLengthTextBox.Text, peekAddressTextBox.Text, peekLengthTextBox.Text);
-                    peekResultTextBox.Text = retValue;
+                byte[] retValue = StringToByteArray(_rtm.Peek(PeekPokeAddressTextBox.Text, peekLengthTextBox.Text, PeekPokeAddressTextBox.Text, peekLengthTextBox.Text));
+                Be.Windows.Forms.DynamicByteProvider _buffer = new Be.Windows.Forms.DynamicByteProvider(retValue);
+                _buffer.IsWriteByte = true;
+                hexBox.ByteProvider = _buffer;
+                hexBox.Refresh();
+                // the changed are handled automatically with my modifications of Be.HexBox
 
-                    _lastAddress = peekAddressTextBox.Text;
-                    _trigger = true;
-                }
                 MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
             }
@@ -106,9 +82,13 @@ namespace PeekPoker
             AutoComplete(); //run function
             try
             {
-                _rtm.DumpOffset = Convert(pokeAddressTextBox.Text);//Set the dump offset
-                _rtm.DumpLength = (uint)pokeValueTextBox.Text.Length/2;//The length of data to dump
-                _rtm.Poke(pokeAddressTextBox.Text, pokeValueTextBox.Text);
+                _rtm.DumpOffset = Convert(PeekPokeAddressTextBox.Text);//Set the dump offset
+                _rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
+
+                Be.Windows.Forms.DynamicByteProvider _buffer = (Be.Windows.Forms.DynamicByteProvider)hexBox.ByteProvider;
+                
+                Console.WriteLine(ByteArrayToString(_buffer.Bytes.ToArray()));
+                _rtm.Poke(PeekPokeAddressTextBox.Text, ByteArrayToString(_buffer.Bytes.ToArray()));
                 MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -155,24 +135,21 @@ namespace PeekPoker
             //Clean up
             _lastAddress = null;
             _trigger = false;
-            peekAddressTextBox.Clear();
+            PeekPokeAddressTextBox.Clear();
             peekLengthTextBox.Clear();
-            peekResultTextBox.Clear();
-            pokeAddressTextBox.Clear();
-            pokeValueTextBox.Clear();
+            hexBox.ByteProvider = null;
+            hexBox.Refresh();
         }
         private void AutoComplete()
         {
-            peekAddressTextBox.AutoCompleteCustomSource = _data;//put the auto complete data into the textbox
+            PeekPokeAddressTextBox.AutoCompleteCustomSource = _data;//put the auto complete data into the textbox
             var count = _data.Count;
             for (var index = 0; index < count; index++)
             {
                 var value = _data[index];
                 //if the text in peek or poke text box is not in autocomplete data - Add it
-                if (!ReferenceEquals(value, peekAddressTextBox.Text))
-                    _data.Add(peekAddressTextBox.Text);
-                if (!ReferenceEquals(value, pokeAddressTextBox.Text))
-                    _data.Add(pokeAddressTextBox.Text);
+                if (!ReferenceEquals(value, PeekPokeAddressTextBox.Text))
+                    _data.Add(PeekPokeAddressTextBox.Text);
             }
         }
         private void SearchRange()
@@ -215,6 +192,29 @@ namespace PeekPoker
             //using Ternary operator
             return value.Contains("0x") ? 
                 System.Convert.ToUInt32(value.Substring(2), 16) : System.Convert.ToUInt32(value);
+        }
+        private string ByteArrayToString(byte[] bytes)
+        {
+            string text = "";
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                text += String.Format("{0,0:X2}", bytes[i]);
+            }
+
+            return text;
+        }
+        public byte[] StringToByteArray(string text)
+        {
+            byte[] bytes = new byte[text.Length / 2];
+
+            for (int i = 0; i < text.Length; i += 2)
+            {
+                bytes[i / 2] = byte.Parse(text[i].ToString() + text[i + 1].ToString(),
+                    System.Globalization.NumberStyles.HexNumber);
+            }
+
+            return bytes;
         }
         #endregion
 
@@ -284,10 +284,10 @@ namespace PeekPoker
         // These will automatically add "0x" to an offset if it hasn't been added already - 8Ball
         private void FixTheAddresses(object sender, EventArgs e)
         {
-            if (!peekAddressTextBox.Text.StartsWith("0x")) //Peek Address Box, Formatting Check.
+            if (!PeekPokeAddressTextBox.Text.StartsWith("0x")) //Peek Address Box, Formatting Check.
             {
-                if (!peekAddressTextBox.Text.Equals("")) //Empty Check
-                    peekAddressTextBox.Text = ("0x" + peekAddressTextBox.Text); //Formatting
+                if (!PeekPokeAddressTextBox.Text.Equals("")) //Empty Check
+                    PeekPokeAddressTextBox.Text = ("0x" + PeekPokeAddressTextBox.Text); //Formatting
             }
             if (peekLengthTextBox.Text.StartsWith("0x")) // Checks if peek length is hex value or not based on 0x
             { //This could probably do with some cleanup -8Ball
@@ -304,11 +304,6 @@ namespace PeekPoker
                 Result = (peekLengthTextBox.Text.ToUpper());
                 Result2 = UInt32.Parse(Result, System.Globalization.NumberStyles.HexNumber);
                 peekLengthTextBox.Text = Result2.ToString();
-            }
-            if (!pokeAddressTextBox.Text.StartsWith("0x"))
-            {
-                if (!pokeAddressTextBox.Text.Equals(""))
-                    pokeAddressTextBox.Text = ("0x" + pokeAddressTextBox.Text);
             }
             if (!startRangeAddressTextBox.Text.StartsWith("0x"))
             {

@@ -38,24 +38,15 @@
             this.connectButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pokeValueTextBox = new System.Windows.Forms.TextBox();
-            this.pokeButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pokeAddressTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.peekResultTextBox = new System.Windows.Forms.RichTextBox();
             this.newPeekButton = new System.Windows.Forms.Button();
+            this.pokeButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.peekLengthTextBox = new System.Windows.Forms.TextBox();
             this.peekButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.peekAddressTextBox = new System.Windows.Forms.TextBox();
+            this.PeekPokeAddressTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label16 = new System.Windows.Forms.Label();
             this.dumpLengthTextBoxReadOnly = new System.Windows.Forms.TextBox();
@@ -73,10 +64,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
+            this.hexBox = new Be.Windows.Forms.HexBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -117,8 +108,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 19);
-            this.toolStripStatusLabel1.Text = "Revision 5";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(122, 19);
+            this.toolStripStatusLabel1.Text = "Revision 6 (Unofficial)";
             // 
             // label2
             // 
@@ -160,7 +151,6 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
@@ -169,133 +159,33 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Peek & Poke";
             // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.pokeValueTextBox);
-            this.panel2.Controls.Add(this.pokeButton);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.pokeAddressTextBox);
-            this.panel2.Enabled = false;
-            this.panel2.Location = new System.Drawing.Point(347, 6);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(331, 326);
-            this.panel2.TabIndex = 13;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(-1, 82);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(39, 240);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "0x00\r\n0x10\r\n0x20\r\n0x30\r\n0x40\r\n0x50\r\n0x60\r\n0x70\r\n0x80\r\n0x90\r\n0xA0\r\n0xB0\r\n0xC0\r\n0xD" +
-    "0\r\n0xE0\r\n0xF0\r\n";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(41, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(265, 15);
-            this.label8.TabIndex = 14;
-            this.label8.Text = " 000102030405060708090A0B0C0D0E0F";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(157, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 15);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Value:";
-            // 
-            // pokeValueTextBox
-            // 
-            this.pokeValueTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.pokeValueTextBox.Location = new System.Drawing.Point(44, 82);
-            this.pokeValueTextBox.Multiline = true;
-            this.pokeValueTextBox.Name = "pokeValueTextBox";
-            this.pokeValueTextBox.Size = new System.Drawing.Size(262, 240);
-            this.pokeValueTextBox.TabIndex = 9;
-            // 
-            // pokeButton
-            // 
-            this.pokeButton.Location = new System.Drawing.Point(233, 1);
-            this.pokeButton.Name = "pokeButton";
-            this.pokeButton.Size = new System.Drawing.Size(87, 27);
-            this.pokeButton.TabIndex = 7;
-            this.pokeButton.Text = "Poke";
-            this.pokeButton.UseVisualStyleBackColor = true;
-            this.pokeButton.Click += new System.EventHandler(this.PokeButtonClick);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 15);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Address:";
-            // 
-            // pokeAddressTextBox
-            // 
-            this.pokeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.pokeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.pokeAddressTextBox.Location = new System.Drawing.Point(99, 3);
-            this.pokeAddressTextBox.Name = "pokeAddressTextBox";
-            this.pokeAddressTextBox.Size = new System.Drawing.Size(116, 22);
-            this.pokeAddressTextBox.TabIndex = 4;
-            this.pokeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.hexBox);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.peekResultTextBox);
             this.panel1.Controls.Add(this.newPeekButton);
+            this.panel1.Controls.Add(this.pokeButton);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.peekLengthTextBox);
             this.panel1.Controls.Add(this.peekButton);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.peekAddressTextBox);
+            this.panel1.Controls.Add(this.PeekPokeAddressTextBox);
             this.panel1.Enabled = false;
             this.panel1.Location = new System.Drawing.Point(8, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(333, 326);
+            this.panel1.Size = new System.Drawing.Size(668, 326);
             this.panel1.TabIndex = 12;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 82);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 240);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "0x00\r\n0x10\r\n0x20\r\n0x30\r\n0x40\r\n0x50\r\n0x60\r\n0x70\r\n0x80\r\n0x90\r\n0xA0\r\n0xB0\r\n0xC0\r\n0xD" +
-    "0\r\n0xE0\r\n0xF0\r\n";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(45, 61);
+            this.label7.Font = new System.Drawing.Font("Courier New", 10F);
+            this.label7.Location = new System.Drawing.Point(83, 60);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(265, 15);
+            this.label7.Size = new System.Drawing.Size(392, 17);
             this.label7.TabIndex = 13;
-            this.label7.Text = " 000102030405060708090A0B0C0D0E0F";
-            // 
-            // peekResultTextBox
-            // 
-            this.peekResultTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.peekResultTextBox.Location = new System.Drawing.Point(48, 82);
-            this.peekResultTextBox.Name = "peekResultTextBox";
-            this.peekResultTextBox.Size = new System.Drawing.Size(262, 243);
-            this.peekResultTextBox.TabIndex = 6;
-            this.peekResultTextBox.Text = "";
+            this.label7.Text = "00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F ";
             // 
             // newPeekButton
             // 
@@ -306,6 +196,16 @@
             this.newPeekButton.Text = "New";
             this.newPeekButton.UseVisualStyleBackColor = true;
             this.newPeekButton.Click += new System.EventHandler(this.NewPeekButtonClick);
+            // 
+            // pokeButton
+            // 
+            this.pokeButton.Location = new System.Drawing.Point(337, 1);
+            this.pokeButton.Name = "pokeButton";
+            this.pokeButton.Size = new System.Drawing.Size(87, 27);
+            this.pokeButton.TabIndex = 7;
+            this.pokeButton.Text = "Poke";
+            this.pokeButton.UseVisualStyleBackColor = true;
+            this.pokeButton.Click += new System.EventHandler(this.PokeButtonClick);
             // 
             // label3
             // 
@@ -343,15 +243,15 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Address:";
             // 
-            // peekAddressTextBox
+            // PeekPokeAddressTextBox
             // 
-            this.peekAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.peekAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.peekAddressTextBox.Location = new System.Drawing.Point(99, 3);
-            this.peekAddressTextBox.Name = "peekAddressTextBox";
-            this.peekAddressTextBox.Size = new System.Drawing.Size(116, 22);
-            this.peekAddressTextBox.TabIndex = 2;
-            this.peekAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
+            this.PeekPokeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.PeekPokeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.PeekPokeAddressTextBox.Location = new System.Drawing.Point(99, 3);
+            this.PeekPokeAddressTextBox.Name = "PeekPokeAddressTextBox";
+            this.PeekPokeAddressTextBox.Size = new System.Drawing.Size(116, 22);
+            this.PeekPokeAddressTextBox.TabIndex = 2;
+            this.PeekPokeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // tabPage3
             // 
@@ -524,6 +424,19 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "I don\'t have time to implement this yet :P";
             // 
+            // hexBox
+            // 
+            this.hexBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hexBox.LineInfoForeColor = System.Drawing.Color.Empty;
+            this.hexBox.LineInfoVisible = true;
+            this.hexBox.Location = new System.Drawing.Point(0, 77);
+            this.hexBox.Name = "hexBox";
+            this.hexBox.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            this.hexBox.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
+            this.hexBox.Size = new System.Drawing.Size(487, 246);
+            this.hexBox.TabIndex = 15;
+            this.hexBox.UseFixedBytesPerLine = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -544,8 +457,6 @@
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -568,24 +479,15 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox pokeValueTextBox;
         private System.Windows.Forms.Button pokeButton;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox pokeAddressTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button newPeekButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox peekLengthTextBox;
         private System.Windows.Forms.Button peekButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox peekAddressTextBox;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox PeekPokeAddressTextBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RichTextBox peekResultTextBox;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tabPage3;
@@ -603,6 +505,7 @@
         private System.Windows.Forms.TextBox dumpLengthTextBoxReadOnly;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
+        private Be.Windows.Forms.HexBox hexBox;
 
     }
 }
