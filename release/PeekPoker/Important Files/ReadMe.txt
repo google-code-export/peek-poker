@@ -35,3 +35,10 @@ added teh Be.Windows.Forms.HexBox.dll to the Important Files directory
 added 2 new functions
 + ByteArrayToString(byte[] bytes)
 + StringToByteArray(string text)
+
+Remove IsoLib Dependancy
+Added the Function class where all the functions goes into
+Added the IO class for reading - feel free to edit it for better algorithm
+Cleaned up the realtimememory class for somethings we don't need
+Transfered some of the functions in the MainForm.cs to the Function class
+Added random future stuff to the UI

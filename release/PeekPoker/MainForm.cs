@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace PeekPoker
 {
@@ -11,8 +9,6 @@ namespace PeekPoker
     {
         #region global varibales
         private RealTimeMemory _rtm;//DLL is now in the Important File Folder
-        private bool _trigger;//Traggers(True) if using the same memory address
-        private String _lastAddress;//The last address the user ented
         private readonly AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
         private uint _searchRangeDumpLength;
@@ -36,8 +32,6 @@ namespace PeekPoker
             try
             {
                 if (!_rtm.Connect())throw new Exception("Connection Failed!");
-                _lastAddress = null;
-                _trigger = false;
                 panel1.Enabled = true;
                 statusStripLabel.Text = String.Format("Connected");
                 MessageBox.Show(this, String.Format("Connected"), String.Format("Peek Poker"), MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -60,10 +54,10 @@ namespace PeekPoker
             {
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text))
                     throw new Exception("Invalide peek length!");
-                byte[] retValue = StringToByteArray(_rtm.Peek(PeekPokeAddressTextBox.Text, peekLengthTextBox.Text, PeekPokeAddressTextBox.Text, peekLengthTextBox.Text));
-                Be.Windows.Forms.DynamicByteProvider _buffer = new Be.Windows.Forms.DynamicByteProvider(retValue);
-                _buffer.IsWriteByte = true;
-                hexBox.ByteProvider = _buffer;
+                byte[] retValue = Functions.StringToByteArray(_rtm.Peek(PeekPokeAddressTextBox.Text, peekLengthTextBox.Text, PeekPokeAddressTextBox.Text, peekLengthTextBox.Text));
+                Be.Windows.Forms.DynamicByteProvider buffer = new Be.Windows.Forms.DynamicByteProvider(retValue);
+                buffer.IsWriteByte = true;
+                hexBox.ByteProvider = buffer;
                 hexBox.Refresh();
                 // the changed are handled automatically with my modifications of Be.HexBox
 
@@ -82,13 +76,13 @@ namespace PeekPoker
             AutoComplete(); //run function
             try
             {
-                _rtm.DumpOffset = Convert(PeekPokeAddressTextBox.Text);//Set the dump offset
+                _rtm.DumpOffset = Functions.Convert(PeekPokeAddressTextBox.Text);//Set the dump offset
                 _rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
 
-                Be.Windows.Forms.DynamicByteProvider _buffer = (Be.Windows.Forms.DynamicByteProvider)hexBox.ByteProvider;
-                
-                Console.WriteLine(ByteArrayToString(_buffer.Bytes.ToArray()));
-                _rtm.Poke(PeekPokeAddressTextBox.Text, ByteArrayToString(_buffer.Bytes.ToArray()));
+                Be.Windows.Forms.DynamicByteProvider buffer = (Be.Windows.Forms.DynamicByteProvider)hexBox.ByteProvider;
+
+                Console.WriteLine(Functions.ByteArrayToString(buffer.Bytes.ToArray()));
+                _rtm.Poke(PeekPokeAddressTextBox.Text, Functions.ByteArrayToString(buffer.Bytes.ToArray()));
                 MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -115,7 +109,7 @@ namespace PeekPoker
             //{
                 try
                 {
-                    _searchRangeDumpLength = (Convert(endRangeAddressTextBox.Text) - Convert(startRangeAddressTextBox.Text));
+                    _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
                     dumpLengthTextBoxReadOnly.Text = _searchRangeDumpLength.ToString();
                     var oThread = new Thread(SearchRange);
                     oThread.Start();
@@ -133,8 +127,6 @@ namespace PeekPoker
         private void NewPeek()
         {
             //Clean up
-            _lastAddress = null;
-            _trigger = false;
             PeekPokeAddressTextBox.Clear();
             peekLengthTextBox.Clear();
             hexBox.ByteProvider = null;
@@ -187,35 +179,6 @@ namespace PeekPoker
             }
             
         }
-        private uint Convert(string value)
-        {
-            //using Ternary operator
-            return value.Contains("0x") ? 
-                System.Convert.ToUInt32(value.Substring(2), 16) : System.Convert.ToUInt32(value);
-        }
-        private string ByteArrayToString(byte[] bytes)
-        {
-            string text = "";
-
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                text += String.Format("{0,0:X2}", bytes[i]);
-            }
-
-            return text;
-        }
-        public byte[] StringToByteArray(string text)
-        {
-            byte[] bytes = new byte[text.Length / 2];
-
-            for (int i = 0; i < text.Length; i += 2)
-            {
-                bytes[i / 2] = byte.Parse(text[i].ToString() + text[i + 1].ToString(),
-                    System.Globalization.NumberStyles.HexNumber);
-            }
-
-            return bytes;
-        }
         #endregion
 
         #region safeThreadingProperties
@@ -250,7 +213,7 @@ namespace PeekPoker
             if (startRangeAddressTextBox.InvokeRequired) startRangeAddressTextBox.Invoke((MethodInvoker)
                   delegate { returnVal = GetStartRangeAddressTextBoxText(); });
             else
-                return Convert(startRangeAddressTextBox.Text);
+                return Functions.Convert(startRangeAddressTextBox.Text);
             return returnVal;
         }
         private void ShowMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
@@ -287,33 +250,29 @@ namespace PeekPoker
             if (!PeekPokeAddressTextBox.Text.StartsWith("0x")) //Peek Address Box, Formatting Check.
             {
                 if (!PeekPokeAddressTextBox.Text.Equals("")) //Empty Check
-                    PeekPokeAddressTextBox.Text = ("0x" + PeekPokeAddressTextBox.Text); //Formatting
+                    PeekPokeAddressTextBox.Text = (string.Format("0x" + PeekPokeAddressTextBox.Text)); //Formatting
             }
             if (peekLengthTextBox.Text.StartsWith("0x")) // Checks if peek length is hex value or not based on 0x
             { //This could probably do with some cleanup -8Ball
-                string Result;
-                UInt32 Result2;
-                Result = (peekLengthTextBox.Text.ToUpper().Substring(2));
-                Result2 = UInt32.Parse(Result, System.Globalization.NumberStyles.HexNumber);
-                peekLengthTextBox.Text = Result2.ToString();
+                string result = (peekLengthTextBox.Text.ToUpper().Substring(2));
+                uint result2 = UInt32.Parse(result, System.Globalization.NumberStyles.HexNumber);
+                peekLengthTextBox.Text = result2.ToString();
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(peekLengthTextBox.Text.ToUpper(), "^[A-Z]$")) //Checks if hex, based on uppercase alphabet presence.
             {
-                string Result;
-                UInt32 Result2;
-                Result = (peekLengthTextBox.Text.ToUpper());
-                Result2 = UInt32.Parse(Result, System.Globalization.NumberStyles.HexNumber);
-                peekLengthTextBox.Text = Result2.ToString();
+                string result = (peekLengthTextBox.Text.ToUpper());
+                uint result2 = UInt32.Parse(result, System.Globalization.NumberStyles.HexNumber);
+                peekLengthTextBox.Text = result2.ToString();
             }
             if (!startRangeAddressTextBox.Text.StartsWith("0x"))
             {
                 if (!startRangeAddressTextBox.Text.Equals(""))
-                    startRangeAddressTextBox.Text = ("0x" + startRangeAddressTextBox.Text);
+                    startRangeAddressTextBox.Text = (string.Format("0x" + startRangeAddressTextBox.Text));
             }
             if (!endRangeAddressTextBox.Text.StartsWith("0x"))
             {
                 if (!endRangeAddressTextBox.Text.Equals(""))
-                    endRangeAddressTextBox.Text = ("0x" + endRangeAddressTextBox.Text);
+                    endRangeAddressTextBox.Text = (string.Format("0x" + endRangeAddressTextBox.Text));
             }
         }
         #endregion 
