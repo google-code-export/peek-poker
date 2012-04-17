@@ -1,9 +1,9 @@
-﻿Last Update - 14/04/12 by 8Ball
+﻿Last Update - 17/04/12 by 8Ball
 ==============================================================
 NB: Make sure the ISOLib DLL is in the Important Files Folder.
 NB: Update source file before you commit.
 ==============================================================
-Revision 5
+Revision 6
 Release date: Unreleased
 
 
@@ -23,7 +23,7 @@ added RealTimeMemory class - trying to slowly decrease ISOLib dependancy
 Addressbox formatting improvements and peek checks -8Ball
 
 To Do: 
-Peek Length box should be able to take hex string? [Awaiting Review] -8Ball
+Peek Length box should be able to take hex string? [Done] -8Ball
 Message to tell user pointer not found or a notification
 Add a loading bar ?
 
@@ -42,3 +42,8 @@ Added the IO class for reading - feel free to edit it for better algorithm
 Cleaned up the realtimememory class for somethings we don't need
 Transfered some of the functions in the MainForm.cs to the Function class
 Added random future stuff to the UI
+
+- Changes - 17/04/12
+Added support for "h" in peeklength box, now supports 0x or h to indicate hex.
+Changed calculator to automatically calculate when text is entered, added checks.
+Added context menu to Listview to enable copying addresses. [Incomplete, uncoded]
