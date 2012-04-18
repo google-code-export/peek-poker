@@ -13,6 +13,7 @@ namespace PeekPoker
         private readonly AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
         private uint _searchRangeDumpLength;
+        private List<string> _offsets;
         #endregion
 
         public MainForm()
@@ -27,6 +28,7 @@ namespace PeekPoker
         }
 
         #region button clicks
+        //When you click on the connect button
         private void ConnectButtonClick(object sender, EventArgs e)
         {
             _rtm = new RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
@@ -48,6 +50,7 @@ namespace PeekPoker
             }
         }
 
+        //When you click on the peek button
         private void PeekButtonClick(object sender, EventArgs e)
         {
             AutoComplete();//run function
@@ -55,9 +58,8 @@ namespace PeekPoker
             {
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text))
                     throw new Exception("Invalide peek length!");
-                byte[] retValue = Functions.StringToByteArray(_rtm.Peek(PeekPokeAddressTextBox.Text, peekLengthTextBox.Text, PeekPokeAddressTextBox.Text, peekLengthTextBox.Text));
-                Be.Windows.Forms.DynamicByteProvider buffer = new Be.Windows.Forms.DynamicByteProvider(retValue);
-                buffer.IsWriteByte = true;
+                var retValue = Functions.StringToByteArray(_rtm.Peek(peekPokeAddressTextBox.Text, peekLengthTextBox.Text, peekPokeAddressTextBox.Text, peekLengthTextBox.Text));
+                var buffer = new Be.Windows.Forms.DynamicByteProvider(retValue) {IsWriteByte = true}; //object initilizer 
                 hexBox.ByteProvider = buffer;
                 hexBox.Refresh();
                 // the changed are handled automatically with my modifications of Be.HexBox
@@ -72,18 +74,19 @@ namespace PeekPoker
             }
         }
 
+        //When you click on the poke button
         private void PokeButtonClick(object sender, EventArgs e)
         {
             AutoComplete(); //run function
             try
             {
-                _rtm.DumpOffset = Functions.Convert(PeekPokeAddressTextBox.Text);//Set the dump offset
+                _rtm.DumpOffset = Functions.Convert(peekPokeAddressTextBox.Text);//Set the dump offset
                 _rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
 
-                Be.Windows.Forms.DynamicByteProvider buffer = (Be.Windows.Forms.DynamicByteProvider)hexBox.ByteProvider;
+                var buffer = (Be.Windows.Forms.DynamicByteProvider)hexBox.ByteProvider;
 
-                Console.WriteLine(Functions.ByteArrayToString(buffer.Bytes.ToArray()));
-                _rtm.Poke(PeekPokeAddressTextBox.Text, Functions.ByteArrayToString(buffer.Bytes.ToArray()));
+                Console.WriteLine(Functions.ByteArrayToString(buffer.Bytes.ToArray()));//?????
+                _rtm.Poke(peekPokeAddressTextBox.Text, Functions.ByteArrayToString(buffer.Bytes.ToArray()));
                 MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -92,26 +95,24 @@ namespace PeekPoker
             }
         }
 
+        //When you click on the www.360haven.com
         private void ToolStripStatusLabel2Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("www.360haven.com");
         }
 
+        //When you click on the new button
         private void NewPeekButtonClick(object sender, EventArgs e)
         {
             NewPeek();
         }
 
+        //When you click on the search range button - Search Range Tab
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
-            //if (peekResultTextBox.Text.Equals("")) // Check if you have peeked code yet.
-            //{ ShowMessageBox("Please peek the memory first.", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            //else //If you have peeked it continues
-            //{
             try
             {
                 _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
-                dumpLengthTextBoxReadOnly.Text = _searchRangeDumpLength.ToString();
                 var oThread = new Thread(SearchRange);
                 oThread.Start();
             }
@@ -119,15 +120,28 @@ namespace PeekPoker
             {
                 ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //}
+        }
+
+        //When you click on an item on the search range result list view - Search Range tab
+        private void SearchRangeResultListViewMouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return; //if its not a left click return
+            var item = searchRangeResultListView.GetItemAt(e.X, e.Y);
+            if (item == null || _offsets == null) return;
+            /**item index is the index of the item you selected
+             * since the _offsets are inorder the item idex corresponding to the offset index
+             * insert the value into the peekPokeAddress
+             */
+            peekPokeAddressTextBox.Text = _offsets[item.Index];
         }
         #endregion
+        
         #region HexBox Events
-        private void hexBox_SelectionStartChanged(object sender, EventArgs e)
+        private void HexBoxSelectionStartChanged(object sender, EventArgs e)
         {
-            ChangeNumericValue();
+            ChangeNumericValue();//When you select an offset on the hexbox
         }
-        private void isSigned_CheckedChanged(object sender, EventArgs e)
+        private void IsSignedCheckedChanged(object sender, EventArgs e)
         {
             if (isSigned.Checked)
             {
@@ -156,42 +170,46 @@ namespace PeekPoker
         private void NewPeek()
         {
             //Clean up
-            PeekPokeAddressTextBox.Clear();
+            peekPokeAddressTextBox.Clear();
             peekLengthTextBox.Clear();
             hexBox.ByteProvider = null;
             hexBox.Refresh();
         }
         private void AutoComplete()
         {
-            PeekPokeAddressTextBox.AutoCompleteCustomSource = _data;//put the auto complete data into the textbox
+            peekPokeAddressTextBox.AutoCompleteCustomSource = _data;//put the auto complete data into the textbox
             var count = _data.Count;
             for (var index = 0; index < count; index++)
             {
                 var value = _data[index];
                 //if the text in peek or poke text box is not in autocomplete data - Add it
-                if (!ReferenceEquals(value, PeekPokeAddressTextBox.Text))
-                    _data.Add(PeekPokeAddressTextBox.Text);
+                if (!ReferenceEquals(value, peekPokeAddressTextBox.Text))
+                    _data.Add(peekPokeAddressTextBox.Text);
             }
         }
+        //Search the memory for the specified value
         private void SearchRange()
         {
             try
             {
+                toolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                toolStripProgressBar.MarqueeAnimationSpeed = 40;//Start progressbar
+
                 //You can always use: 
                 //CheckForIllegalCrossThreadCalls = false; when dealing with threads
                 _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
                 _rtm.DumpLength = _searchRangeDumpLength;
 
                 //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
-                var offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
-                if (offsets == null)
+                _offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+                if (_offsets == null)
                 {
                     ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return; //We don't want it to continue
                 }
                 SearchRangeListViewListClean();//Clean list view
                 var i = 0; //The index number
-                foreach (var offset in offsets)
+                foreach (var offset in _offsets)
                 {
                     //Collection initializer or use array either will do
                     //put the numnber @index 0
@@ -201,6 +219,7 @@ namespace PeekPoker
                     SearchRangeListViewListUpdate(newOffset);
                     i++;
                 }
+                toolStripProgressBar.MarqueeAnimationSpeed = 0;//Stop progrss bar
             }
             catch (Exception e)
             {
@@ -208,6 +227,7 @@ namespace PeekPoker
             }
 
         }
+        //When you select an offset on the hexbox
         private void ChangeNumericValue()
         {
             List<byte> buffer = hexBox.ByteProvider.Bytes;
@@ -225,9 +245,9 @@ namespace PeekPoker
                 if ((buffer.Count - hexBox.SelectionStart) > 3)
                     NumericInt32.Value = Functions.BytesToUInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray());
             }
-            byte[] _prev = Functions.HexToBytes(PeekPokeAddressTextBox.Text);
-            int _address = Functions.BytesToInt32(_prev);
-            SelAddress.Text = string.Format("0x" + (_address + (int)hexBox.SelectionStart).ToString("X8"));
+            var prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
+            var address = Functions.BytesToInt32(prev);
+            SelAddress.Text = string.Format("0x" + (address + (int)hexBox.SelectionStart).ToString("X8"));
         }
         #endregion
 
@@ -297,10 +317,10 @@ namespace PeekPoker
         // These will automatically add "0x" to an offset if it hasn't been added already - 8Ball
         private void FixTheAddresses(object sender, EventArgs e)
         {
-            if (!PeekPokeAddressTextBox.Text.StartsWith("0x")) //Peek Address Box, Formatting Check.
+            if (!peekPokeAddressTextBox.Text.StartsWith("0x")) //Peek Address Box, Formatting Check.
             {//PeekPokeAddress
-                if (!PeekPokeAddressTextBox.Text.Equals("")) //Empty Check
-                    PeekPokeAddressTextBox.Text = (string.Format("0x" + PeekPokeAddressTextBox.Text)); //Formatting
+                if (!peekPokeAddressTextBox.Text.Equals("")) //Empty Check
+                    peekPokeAddressTextBox.Text = (string.Format("0x" + peekPokeAddressTextBox.Text)); //Formatting
             }
             if (peekLengthTextBox.Text.StartsWith("0x")) // Checks if peek length is hex value or not based on 0x
             { //Peeklength pt1

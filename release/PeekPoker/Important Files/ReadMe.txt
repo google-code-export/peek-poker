@@ -55,3 +55,11 @@ added target address (Selected Address label) in the peek&poke tab
 added values numerics for (U)Int8, (U)Int16 & (U)Int32 
 	(still need to add events so one can edit inside those numerics)
 added a checkbox to change between signed and unsigned values
+
+added search range list view code - tested - pureIso
+added group box to make the UI cleaner
+added option to select search range value base: hex or dec - [Incomplete, uncoded]
+added option to select Search range end type: by offset or by length - [Incomplete, uncoded]
+added marquee progress bar for search range: [completed but not tested]
+code clean up with a little more documentation
+*******Added context menu to Listview to enable copying addresses. [Removed]

@@ -157,7 +157,7 @@ namespace PeekPoker
         /// <summary>Find the address of a pointer from the start dump offset</summary>
         /// <param name="pointer">The hex string of the pointer Example: 821122114455EEFF000000</param>
         /// <returns>Returns and array of the address or all address where the pointer was found</returns>
-        public IEnumerable<string> FindHexOffset(string pointer)
+        public List<string> FindHexOffset(string pointer)
         {
             if (!Functions.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
@@ -196,7 +196,7 @@ namespace PeekPoker
                         addresses.Add(Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)value)));
                     }
                     readWriter.Close();
-                    return addresses.ToArray();
+                    return new List<string>(addresses.ToArray());
             }
             catch (Exception ex)
             {
