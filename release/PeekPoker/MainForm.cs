@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace PeekPoker
 {
@@ -32,7 +33,7 @@ namespace PeekPoker
             try
             {
                 if (!_rtm.Connect()) throw new Exception("Connection Failed!");
-                panel1.Enabled = true;
+                peeknpoke.Enabled = true;
                 statusStripLabel.Text = String.Format("Connected");
                 MessageBox.Show(this, String.Format("Connected"), String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var objWriter = new StreamWriter(_filepath); //Writer Declaration
@@ -120,7 +121,35 @@ namespace PeekPoker
             }
             //}
         }
+        #endregion
+        #region HexBox Events
+        private void hexBox_SelectionStartChanged(object sender, EventArgs e)
+        {
+            ChangeNumericValue();
+        }
+        private void isSigned_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isSigned.Checked)
+            {
+                NumericInt8.Maximum = SByte.MaxValue;
+                NumericInt8.Minimum = SByte.MinValue;
+                NumericInt16.Maximum = Int16.MaxValue;
+                NumericInt16.Minimum = Int16.MinValue;
+                NumericInt32.Maximum = Int32.MaxValue;
+                NumericInt32.Minimum = Int32.MinValue;
+            }
+            else
+            {
+                NumericInt8.Maximum = Byte.MaxValue;
+                NumericInt8.Minimum = Byte.MinValue;
+                NumericInt16.Maximum = UInt16.MaxValue;
+                NumericInt16.Minimum = UInt16.MinValue;
+                NumericInt32.Maximum = UInt32.MaxValue;
+                NumericInt32.Minimum = UInt32.MinValue;
+            }
 
+            ChangeNumericValue();
+        }
         #endregion
 
         #region functions
@@ -178,6 +207,27 @@ namespace PeekPoker
                 ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+        private void ChangeNumericValue()
+        {
+            List<byte> buffer = hexBox.ByteProvider.Bytes;
+            if (isSigned.Checked)
+            {
+                NumericInt8.Value = Functions.ByteToSByte(hexBox.ByteProvider.ReadByte(hexBox.SelectionStart));
+                NumericInt16.Value = Functions.BytesToInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray());
+                NumericInt32.Value = Functions.BytesToInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray());
+            }
+            else
+            {
+                NumericInt8.Value = buffer[(int)hexBox.SelectionStart];
+                if ((buffer.Count - hexBox.SelectionStart) > 1)
+                    NumericInt16.Value = Functions.BytesToUInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray());
+                if ((buffer.Count - hexBox.SelectionStart) > 3)
+                    NumericInt32.Value = Functions.BytesToUInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray());
+            }
+            byte[] _prev = Functions.HexToBytes(PeekPokeAddressTextBox.Text);
+            int _address = Functions.BytesToInt32(_prev);
+            SelAddress.Text = string.Format("0x" + (_address + (int)hexBox.SelectionStart).ToString("X8"));
         }
         #endregion
 
@@ -284,7 +334,7 @@ namespace PeekPoker
         #endregion
 
         #region Autocalculation
-        private void Dec2Hex(object sender, EventArgs e) 
+        private void Dec2Hex(object sender, EventArgs e)
         {
             if (decimalbox.Focused) //Prevents chaos via triggering both textchange events
             {
@@ -294,11 +344,11 @@ namespace PeekPoker
                     bool result = Int32.TryParse(decimalbox.Text, out number); //Stops things like a single "-" causing errors
                     if (result)
                     {
-                        string hex = number.ToString("x4").ToUpper(); //x is for hex and 4 is padding to a 4 digit value, uppercases.
+                        string hex = number.ToString("X4"); //x is for hex and 4 is padding to a 4 digit value, uppercases.
                         hexcalcbox.Text = (string.Format("0x" + hex)); //Formats string, adds 0x
                     }
                 }
-            }       
+            }
         }
         private void Hex2Dec(object sender, EventArgs e)
         {
@@ -311,6 +361,5 @@ namespace PeekPoker
             }
         }
         #endregion
-
-            }
+    }
 }

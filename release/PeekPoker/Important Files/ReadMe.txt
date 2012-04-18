@@ -47,3 +47,11 @@ Added random future stuff to the UI
 Added support for "h" in peeklength box, now supports 0x or h to indicate hex.
 Changed calculator to automatically calculate when text is entered, added checks.
 Added context menu to Listview to enable copying addresses. [Incomplete, uncoded]
+
+- Changes 18/04/12
+added a few conversion functions in the Functions.cs
+	((u)int16,32, float & double to bytes array and vice versa)
+added target address (Selected Address label) in the peek&poke tab 
+added values numerics for (U)Int8, (U)Int16 & (U)Int32 
+	(still need to add events so one can edit inside those numerics)
+added a checkbox to change between signed and unsigned values

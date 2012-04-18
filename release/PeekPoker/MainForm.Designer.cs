@@ -40,7 +40,16 @@
             this.connectButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.peeknpoke = new System.Windows.Forms.Panel();
+            this.labelSelAddress = new System.Windows.Forms.Label();
+            this.SelAddress = new System.Windows.Forms.TextBox();
+            this.NumericInt32 = new System.Windows.Forms.NumericUpDown();
+            this.NumericInt16 = new System.Windows.Forms.NumericUpDown();
+            this.LabelInt32 = new System.Windows.Forms.Label();
+            this.NumericInt8 = new System.Windows.Forms.NumericUpDown();
+            this.LabelInt16 = new System.Windows.Forms.Label();
+            this.LabelInt8 = new System.Windows.Forms.Label();
+            this.isSigned = new System.Windows.Forms.CheckBox();
             this.hexBox = new Be.Windows.Forms.HexBox();
             this.label7 = new System.Windows.Forms.Label();
             this.newPeekButton = new System.Windows.Forms.Button();
@@ -57,9 +66,6 @@
             this.searchRangeResultListView = new System.Windows.Forms.ListView();
             this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.offsetHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label13 = new System.Windows.Forms.Label();
             this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
             this.searchRangeButton = new System.Windows.Forms.Button();
@@ -83,6 +89,9 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,11 +99,14 @@
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.peeknpoke.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt8)).BeginInit();
             this.tabPage3.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,7 +122,7 @@
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.statusStrip1.Size = new System.Drawing.Size(507, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(700, 24);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
@@ -178,38 +190,159 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(508, 363);
+            this.tabControl1.Size = new System.Drawing.Size(700, 363);
             this.tabControl1.TabIndex = 13;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Controls.Add(this.peeknpoke);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(500, 335);
+            this.tabPage1.Size = new System.Drawing.Size(692, 335);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Peek & Poke";
             // 
-            // panel1
+            // peeknpoke
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.hexBox);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.newPeekButton);
-            this.panel1.Controls.Add(this.pokeButton);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.peekLengthTextBox);
-            this.panel1.Controls.Add(this.peekButton);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.PeekPokeAddressTextBox);
-            this.panel1.Enabled = false;
-            this.panel1.Location = new System.Drawing.Point(8, 6);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(492, 326);
-            this.panel1.TabIndex = 12;
+            this.peeknpoke.BackColor = System.Drawing.SystemColors.Control;
+            this.peeknpoke.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.peeknpoke.Controls.Add(this.labelSelAddress);
+            this.peeknpoke.Controls.Add(this.SelAddress);
+            this.peeknpoke.Controls.Add(this.NumericInt32);
+            this.peeknpoke.Controls.Add(this.NumericInt16);
+            this.peeknpoke.Controls.Add(this.LabelInt32);
+            this.peeknpoke.Controls.Add(this.NumericInt8);
+            this.peeknpoke.Controls.Add(this.LabelInt16);
+            this.peeknpoke.Controls.Add(this.LabelInt8);
+            this.peeknpoke.Controls.Add(this.isSigned);
+            this.peeknpoke.Controls.Add(this.hexBox);
+            this.peeknpoke.Controls.Add(this.label7);
+            this.peeknpoke.Controls.Add(this.newPeekButton);
+            this.peeknpoke.Controls.Add(this.pokeButton);
+            this.peeknpoke.Controls.Add(this.label3);
+            this.peeknpoke.Controls.Add(this.peekLengthTextBox);
+            this.peeknpoke.Controls.Add(this.peekButton);
+            this.peeknpoke.Controls.Add(this.label1);
+            this.peeknpoke.Controls.Add(this.PeekPokeAddressTextBox);
+            this.peeknpoke.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.peeknpoke.Enabled = false;
+            this.peeknpoke.Location = new System.Drawing.Point(3, 3);
+            this.peeknpoke.Name = "peeknpoke";
+            this.peeknpoke.Size = new System.Drawing.Size(686, 329);
+            this.peeknpoke.TabIndex = 12;
+            // 
+            // labelSelAddress
+            // 
+            this.labelSelAddress.AutoSize = true;
+            this.labelSelAddress.Location = new System.Drawing.Point(440, 9);
+            this.labelSelAddress.Name = "labelSelAddress";
+            this.labelSelAddress.Size = new System.Drawing.Size(114, 15);
+            this.labelSelAddress.TabIndex = 20;
+            this.labelSelAddress.Text = "Selected Address:";
+            // 
+            // SelAddress
+            // 
+            this.SelAddress.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.SelAddress.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.SelAddress.Location = new System.Drawing.Point(564, 6);
+            this.SelAddress.Name = "SelAddress";
+            this.SelAddress.ReadOnly = true;
+            this.SelAddress.Size = new System.Drawing.Size(116, 22);
+            this.SelAddress.TabIndex = 19;
+            // 
+            // NumericInt32
+            // 
+            this.NumericInt32.Location = new System.Drawing.Point(571, 143);
+            this.NumericInt32.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.NumericInt32.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.NumericInt32.Name = "NumericInt32";
+            this.NumericInt32.Size = new System.Drawing.Size(109, 22);
+            this.NumericInt32.TabIndex = 18;
+            this.NumericInt32.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // NumericInt16
+            // 
+            this.NumericInt16.Location = new System.Drawing.Point(571, 115);
+            this.NumericInt16.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.NumericInt16.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
+            this.NumericInt16.Name = "NumericInt16";
+            this.NumericInt16.Size = new System.Drawing.Size(109, 22);
+            this.NumericInt16.TabIndex = 18;
+            this.NumericInt16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // LabelInt32
+            // 
+            this.LabelInt32.AutoSize = true;
+            this.LabelInt32.Location = new System.Drawing.Point(502, 145);
+            this.LabelInt32.Name = "LabelInt32";
+            this.LabelInt32.Size = new System.Drawing.Size(52, 15);
+            this.LabelInt32.TabIndex = 17;
+            this.LabelInt32.Text = "(U)Int32";
+            // 
+            // NumericInt8
+            // 
+            this.NumericInt8.Location = new System.Drawing.Point(571, 87);
+            this.NumericInt8.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.NumericInt8.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
+            this.NumericInt8.Name = "NumericInt8";
+            this.NumericInt8.Size = new System.Drawing.Size(109, 22);
+            this.NumericInt8.TabIndex = 18;
+            this.NumericInt8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // LabelInt16
+            // 
+            this.LabelInt16.AutoSize = true;
+            this.LabelInt16.Location = new System.Drawing.Point(502, 117);
+            this.LabelInt16.Name = "LabelInt16";
+            this.LabelInt16.Size = new System.Drawing.Size(52, 15);
+            this.LabelInt16.TabIndex = 17;
+            this.LabelInt16.Text = "(U)Int16";
+            // 
+            // LabelInt8
+            // 
+            this.LabelInt8.AutoSize = true;
+            this.LabelInt8.Location = new System.Drawing.Point(510, 89);
+            this.LabelInt8.Name = "LabelInt8";
+            this.LabelInt8.Size = new System.Drawing.Size(44, 15);
+            this.LabelInt8.TabIndex = 17;
+            this.LabelInt8.Text = "(U)Int8";
+            // 
+            // isSigned
+            // 
+            this.isSigned.AutoSize = true;
+            this.isSigned.Location = new System.Drawing.Point(571, 58);
+            this.isSigned.Name = "isSigned";
+            this.isSigned.Size = new System.Drawing.Size(109, 19);
+            this.isSigned.TabIndex = 16;
+            this.isSigned.Text = "Signed Values";
+            this.isSigned.UseVisualStyleBackColor = true;
+            this.isSigned.CheckedChanged += new System.EventHandler(this.isSigned_CheckedChanged);
             // 
             // hexBox
             // 
@@ -223,6 +356,7 @@
             this.hexBox.Size = new System.Drawing.Size(487, 246);
             this.hexBox.TabIndex = 15;
             this.hexBox.UseFixedBytesPerLine = true;
+            this.hexBox.SelectionStartChanged += new System.EventHandler(this.hexBox_SelectionStartChanged);
             // 
             // label7
             // 
@@ -317,7 +451,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(500, 335);
+            this.tabPage3.Size = new System.Drawing.Size(692, 335);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Search Range";
             // 
@@ -325,7 +459,7 @@
             // 
             this.dumpLengthTextBoxReadOnly.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.dumpLengthTextBoxReadOnly.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.dumpLengthTextBoxReadOnly.Location = new System.Drawing.Point(378, 6);
+            this.dumpLengthTextBoxReadOnly.Location = new System.Drawing.Point(390, 6);
             this.dumpLengthTextBoxReadOnly.Name = "dumpLengthTextBoxReadOnly";
             this.dumpLengthTextBoxReadOnly.ReadOnly = true;
             this.dumpLengthTextBoxReadOnly.Size = new System.Drawing.Size(70, 22);
@@ -334,7 +468,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(269, 9);
+            this.label15.Location = new System.Drawing.Point(281, 9);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(106, 15);
             this.label15.TabIndex = 13;
@@ -358,6 +492,7 @@
             this.searchRangeResultListView.FullRowSelect = true;
             this.searchRangeResultListView.GridLines = true;
             this.searchRangeResultListView.Location = new System.Drawing.Point(23, 86);
+            this.searchRangeResultListView.MultiSelect = false;
             this.searchRangeResultListView.Name = "searchRangeResultListView";
             this.searchRangeResultListView.Size = new System.Drawing.Size(229, 229);
             this.searchRangeResultListView.TabIndex = 11;
@@ -374,30 +509,10 @@
             this.offsetHeader.Text = "Offset";
             this.offsetHeader.Width = 166;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem,
-            this.copyAllToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 70);
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.copyToolStripMenuItem.Text = "Copy Highlighted";
-            // 
-            // copyAllToolStripMenuItem
-            // 
-            this.copyAllToolStripMenuItem.Name = "copyAllToolStripMenuItem";
-            this.copyAllToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.copyAllToolStripMenuItem.Text = "Copy All";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 49);
+            this.label13.Location = new System.Drawing.Point(20, 49);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(74, 15);
             this.label13.TabIndex = 10;
@@ -407,14 +522,14 @@
             // 
             this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchRangeValueTextBox.Location = new System.Drawing.Point(89, 46);
+            this.searchRangeValueTextBox.Location = new System.Drawing.Point(100, 46);
             this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(296, 22);
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(360, 22);
             this.searchRangeValueTextBox.TabIndex = 8;
             // 
             // searchRangeButton
             // 
-            this.searchRangeButton.Location = new System.Drawing.Point(392, 31);
+            this.searchRangeButton.Location = new System.Drawing.Point(466, 31);
             this.searchRangeButton.Name = "searchRangeButton";
             this.searchRangeButton.Size = new System.Drawing.Size(88, 50);
             this.searchRangeButton.TabIndex = 9;
@@ -426,7 +541,7 @@
             // 
             this.endRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.endRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.endRangeAddressTextBox.Location = new System.Drawing.Point(181, 6);
+            this.endRangeAddressTextBox.Location = new System.Drawing.Point(193, 6);
             this.endRangeAddressTextBox.Name = "endRangeAddressTextBox";
             this.endRangeAddressTextBox.Size = new System.Drawing.Size(82, 22);
             this.endRangeAddressTextBox.TabIndex = 7;
@@ -435,7 +550,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(143, 9);
+            this.label12.Location = new System.Drawing.Point(155, 9);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 15);
             this.label12.TabIndex = 6;
@@ -445,7 +560,7 @@
             // 
             this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.startRangeAddressTextBox.Location = new System.Drawing.Point(51, 6);
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(63, 6);
             this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
             this.startRangeAddressTextBox.Size = new System.Drawing.Size(86, 22);
             this.startRangeAddressTextBox.TabIndex = 5;
@@ -454,7 +569,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 9);
+            this.label6.Location = new System.Drawing.Point(20, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 15);
             this.label6.TabIndex = 0;
@@ -478,7 +593,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(500, 335);
+            this.tabPage2.Size = new System.Drawing.Size(692, 335);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Calculator";
             // 
@@ -603,7 +718,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(500, 335);
+            this.tabPage4.Size = new System.Drawing.Size(692, 335);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Dumping";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -622,10 +737,30 @@
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(500, 335);
+            this.tabPage5.Size = new System.Drawing.Size(692, 335);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Credit";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.copyAllToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 48);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.copyToolStripMenuItem.Text = "Copy Highlighted";
+            // 
+            // copyAllToolStripMenuItem
+            // 
+            this.copyAllToolStripMenuItem.Name = "copyAllToolStripMenuItem";
+            this.copyAllToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.copyAllToolStripMenuItem.Text = "Copy All";
             // 
             // menuStrip1
             // 
@@ -635,7 +770,7 @@
             this.aboutToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(507, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(700, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -662,7 +797,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(507, 450);
+            this.ClientSize = new System.Drawing.Size(700, 450);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.label2);
@@ -679,15 +814,18 @@
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.peeknpoke.ResumeLayout(false);
+            this.peeknpoke.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt8)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -707,7 +845,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button pokeButton;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel peeknpoke;
         private System.Windows.Forms.Button newPeekButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox peekLengthTextBox;
@@ -754,6 +892,15 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label labelSelAddress;
+        private System.Windows.Forms.TextBox SelAddress;
+        private System.Windows.Forms.NumericUpDown NumericInt32;
+        private System.Windows.Forms.NumericUpDown NumericInt16;
+        private System.Windows.Forms.Label LabelInt32;
+        private System.Windows.Forms.NumericUpDown NumericInt8;
+        private System.Windows.Forms.Label LabelInt16;
+        private System.Windows.Forms.Label LabelInt8;
+        private System.Windows.Forms.CheckBox isSigned;
 
     }
 }
