@@ -176,7 +176,6 @@ namespace PeekPoker
         #region Search Tab Events
         private void searchRangeValueTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(Keys.Return + "  - " + Keys.Enter);
             if (e.KeyCode == Keys.Return && searchRangeValueTextBox.Focused)
             {
                 try

@@ -184,7 +184,6 @@ namespace PeekPoker
                     {
                         _tcp.Client.Receive(data);
                         readWriter.WriteBytes(data, 2, 1024);
-                        Debug.WriteLine(String.Format("Index: {0}  - Max: {1}", i, Math.Ceiling((double)(size / 1024))));
                         ReportProgress(0, (int)(size / 1024), (i + 1), "Reading Dump...");
                     }
                     //Write whatever is left
