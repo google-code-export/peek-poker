@@ -34,22 +34,23 @@
             this.statusStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.StatusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.label2 = new System.Windows.Forms.Label();
             this.ipAddressTextBox = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.peeknpoke = new System.Windows.Forms.Panel();
-            this.labelSelAddress = new System.Windows.Forms.Label();
-            this.SelAddress = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.isSigned = new System.Windows.Forms.CheckBox();
+            this.LabelInt8 = new System.Windows.Forms.Label();
+            this.LabelInt16 = new System.Windows.Forms.Label();
             this.NumericInt32 = new System.Windows.Forms.NumericUpDown();
+            this.NumericInt8 = new System.Windows.Forms.NumericUpDown();
             this.NumericInt16 = new System.Windows.Forms.NumericUpDown();
             this.LabelInt32 = new System.Windows.Forms.Label();
-            this.NumericInt8 = new System.Windows.Forms.NumericUpDown();
-            this.LabelInt16 = new System.Windows.Forms.Label();
-            this.LabelInt8 = new System.Windows.Forms.Label();
-            this.isSigned = new System.Windows.Forms.CheckBox();
+            this.labelSelAddress = new System.Windows.Forms.Label();
+            this.SelAddress = new System.Windows.Forms.TextBox();
             this.hexBox = new Be.Windows.Forms.HexBox();
             this.label7 = new System.Windows.Forms.Label();
             this.newPeekButton = new System.Windows.Forms.Button();
@@ -60,18 +61,29 @@
             this.label1 = new System.Windows.Forms.Label();
             this.peekPokeAddressTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label14 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.searchRangeResultListView = new System.Windows.Forms.ListView();
             this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.offsetHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label13 = new System.Windows.Forms.Label();
-            this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SearchRangeEndTypeCB = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.SearchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
+            this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
             this.searchRangeButton = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
             this.endRangeAddressTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.decimalbox = new System.Windows.Forms.TextBox();
+            this.hexcalcbox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -79,40 +91,28 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.hexcalcbox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.decimalbox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.valueTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.peeknpoke.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -122,7 +122,7 @@
             this.statusStripLabel,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel1,
-            this.toolStripProgressBar});
+            this.StatusProgressBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 426);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
@@ -155,11 +155,10 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(126, 19);
             this.toolStripStatusLabel1.Text = "Revision 6 (Unofficial)";
             // 
-            // toolStripProgressBar
+            // StatusProgressBar
             // 
-            this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 18);
-            this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.StatusProgressBar.Name = "StatusProgressBar";
+            this.StatusProgressBar.Size = new System.Drawing.Size(100, 18);
             // 
             // label2
             // 
@@ -234,6 +233,118 @@
             this.peeknpoke.Size = new System.Drawing.Size(686, 329);
             this.peeknpoke.TabIndex = 12;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.isSigned);
+            this.groupBox3.Controls.Add(this.LabelInt8);
+            this.groupBox3.Controls.Add(this.LabelInt16);
+            this.groupBox3.Controls.Add(this.NumericInt32);
+            this.groupBox3.Controls.Add(this.NumericInt8);
+            this.groupBox3.Controls.Add(this.NumericInt16);
+            this.groupBox3.Controls.Add(this.LabelInt32);
+            this.groupBox3.Location = new System.Drawing.Point(493, 106);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(189, 143);
+            this.groupBox3.TabIndex = 21;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Value";
+            // 
+            // isSigned
+            // 
+            this.isSigned.AutoSize = true;
+            this.isSigned.Location = new System.Drawing.Point(74, 19);
+            this.isSigned.Name = "isSigned";
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
+            this.isSigned.TabIndex = 16;
+            this.isSigned.Text = "Signed Values";
+            this.isSigned.UseVisualStyleBackColor = true;
+            this.isSigned.CheckedChanged += new System.EventHandler(this.IsSignedCheckedChanged);
+            // 
+            // LabelInt8
+            // 
+            this.LabelInt8.AutoSize = true;
+            this.LabelInt8.Location = new System.Drawing.Point(13, 52);
+            this.LabelInt8.Name = "LabelInt8";
+            this.LabelInt8.Size = new System.Drawing.Size(44, 15);
+            this.LabelInt8.TabIndex = 17;
+            this.LabelInt8.Text = "(U)Int8";
+            // 
+            // LabelInt16
+            // 
+            this.LabelInt16.AutoSize = true;
+            this.LabelInt16.Location = new System.Drawing.Point(5, 80);
+            this.LabelInt16.Name = "LabelInt16";
+            this.LabelInt16.Size = new System.Drawing.Size(52, 15);
+            this.LabelInt16.TabIndex = 17;
+            this.LabelInt16.Text = "(U)Int16";
+            // 
+            // NumericInt32
+            // 
+            this.NumericInt32.Location = new System.Drawing.Point(74, 106);
+            this.NumericInt32.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.NumericInt32.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.NumericInt32.Name = "NumericInt32";
+            this.NumericInt32.Size = new System.Drawing.Size(109, 22);
+            this.NumericInt32.TabIndex = 18;
+            this.NumericInt32.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumericInt32.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericInt_KeyPress);
+            // 
+            // NumericInt8
+            // 
+            this.NumericInt8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NumericInt8.Location = new System.Drawing.Point(74, 50);
+            this.NumericInt8.Maximum = new decimal(new int[] {
+            256,
+            0,
+            0,
+            0});
+            this.NumericInt8.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
+            this.NumericInt8.Name = "NumericInt8";
+            this.NumericInt8.Size = new System.Drawing.Size(109, 18);
+            this.NumericInt8.TabIndex = 18;
+            this.NumericInt8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumericInt8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericInt_KeyPress);
+            // 
+            // NumericInt16
+            // 
+            this.NumericInt16.Location = new System.Drawing.Point(74, 78);
+            this.NumericInt16.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.NumericInt16.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
+            this.NumericInt16.Name = "NumericInt16";
+            this.NumericInt16.Size = new System.Drawing.Size(109, 22);
+            this.NumericInt16.TabIndex = 18;
+            this.NumericInt16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumericInt16.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericInt_KeyPress);
+            // 
+            // LabelInt32
+            // 
+            this.LabelInt32.AutoSize = true;
+            this.LabelInt32.Location = new System.Drawing.Point(5, 108);
+            this.LabelInt32.Name = "LabelInt32";
+            this.LabelInt32.Size = new System.Drawing.Size(52, 15);
+            this.LabelInt32.TabIndex = 17;
+            this.LabelInt32.Text = "(U)Int32";
+            // 
             // labelSelAddress
             // 
             this.labelSelAddress.AutoSize = true;
@@ -253,98 +364,6 @@
             this.SelAddress.Size = new System.Drawing.Size(116, 22);
             this.SelAddress.TabIndex = 19;
             // 
-            // NumericInt32
-            // 
-            this.NumericInt32.Location = new System.Drawing.Point(74, 106);
-            this.NumericInt32.Maximum = new decimal(new int[] {
-            -1,
-            0,
-            0,
-            0});
-            this.NumericInt32.Minimum = new decimal(new int[] {
-            -2147483648,
-            0,
-            0,
-            -2147483648});
-            this.NumericInt32.Name = "NumericInt32";
-            this.NumericInt32.Size = new System.Drawing.Size(109, 22);
-            this.NumericInt32.TabIndex = 18;
-            this.NumericInt32.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // NumericInt16
-            // 
-            this.NumericInt16.Location = new System.Drawing.Point(74, 78);
-            this.NumericInt16.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.NumericInt16.Minimum = new decimal(new int[] {
-            32768,
-            0,
-            0,
-            -2147483648});
-            this.NumericInt16.Name = "NumericInt16";
-            this.NumericInt16.Size = new System.Drawing.Size(109, 22);
-            this.NumericInt16.TabIndex = 18;
-            this.NumericInt16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // LabelInt32
-            // 
-            this.LabelInt32.AutoSize = true;
-            this.LabelInt32.Location = new System.Drawing.Point(5, 108);
-            this.LabelInt32.Name = "LabelInt32";
-            this.LabelInt32.Size = new System.Drawing.Size(52, 15);
-            this.LabelInt32.TabIndex = 17;
-            this.LabelInt32.Text = "(U)Int32";
-            // 
-            // NumericInt8
-            // 
-            this.NumericInt8.Location = new System.Drawing.Point(74, 50);
-            this.NumericInt8.Maximum = new decimal(new int[] {
-            256,
-            0,
-            0,
-            0});
-            this.NumericInt8.Minimum = new decimal(new int[] {
-            128,
-            0,
-            0,
-            -2147483648});
-            this.NumericInt8.Name = "NumericInt8";
-            this.NumericInt8.Size = new System.Drawing.Size(109, 22);
-            this.NumericInt8.TabIndex = 18;
-            this.NumericInt8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // LabelInt16
-            // 
-            this.LabelInt16.AutoSize = true;
-            this.LabelInt16.Location = new System.Drawing.Point(5, 80);
-            this.LabelInt16.Name = "LabelInt16";
-            this.LabelInt16.Size = new System.Drawing.Size(52, 15);
-            this.LabelInt16.TabIndex = 17;
-            this.LabelInt16.Text = "(U)Int16";
-            // 
-            // LabelInt8
-            // 
-            this.LabelInt8.AutoSize = true;
-            this.LabelInt8.Location = new System.Drawing.Point(13, 52);
-            this.LabelInt8.Name = "LabelInt8";
-            this.LabelInt8.Size = new System.Drawing.Size(44, 15);
-            this.LabelInt8.TabIndex = 17;
-            this.LabelInt8.Text = "(U)Int8";
-            // 
-            // isSigned
-            // 
-            this.isSigned.AutoSize = true;
-            this.isSigned.Location = new System.Drawing.Point(74, 21);
-            this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(109, 19);
-            this.isSigned.TabIndex = 16;
-            this.isSigned.Text = "Signed Values";
-            this.isSigned.UseVisualStyleBackColor = true;
-            this.isSigned.CheckedChanged += new System.EventHandler(this.IsSignedCheckedChanged);
-            // 
             // hexBox
             // 
             this.hexBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -357,6 +376,7 @@
             this.hexBox.Size = new System.Drawing.Size(487, 246);
             this.hexBox.TabIndex = 15;
             this.hexBox.UseFixedBytesPerLine = true;
+            this.hexBox.VScrollBarVisible = true;
             this.hexBox.SelectionStartChanged += new System.EventHandler(this.HexBoxSelectionStartChanged);
             // 
             // label7
@@ -447,15 +467,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Search Range";
             // 
-            // label14
+            // groupBox2
             // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(250, 89);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(222, 30);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "*NB: The larger the range the longer \r\nthe search will take";
+            this.groupBox2.Controls.Add(this.searchRangeResultListView);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Location = new System.Drawing.Point(89, 125);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(499, 195);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Result/s";
             // 
             // searchRangeResultListView
             // 
@@ -483,23 +504,79 @@
             this.offsetHeader.Text = "Offset";
             this.offsetHeader.Width = 166;
             // 
-            // label13
+            // label14
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 51);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(74, 15);
-            this.label13.TabIndex = 10;
-            this.label13.Text = "Search for :";
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(250, 89);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(222, 30);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "*NB: The larger the range the longer \r\nthe search will take";
             // 
-            // searchRangeValueTextBox
+            // groupBox1
             // 
-            this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchRangeValueTextBox.Location = new System.Drawing.Point(87, 48);
-            this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(422, 22);
-            this.searchRangeValueTextBox.TabIndex = 8;
+            this.groupBox1.Controls.Add(this.SearchRangeEndTypeCB);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.SearchRangeBaseValueTypeCB);
+            this.groupBox1.Controls.Add(this.startRangeAddressTextBox);
+            this.groupBox1.Controls.Add(this.searchRangeButton);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
+            this.groupBox1.Controls.Add(this.endRangeAddressTextBox);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Location = new System.Drawing.Point(79, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(520, 113);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search Range Selection Options";
+            // 
+            // SearchRangeEndTypeCB
+            // 
+            this.SearchRangeEndTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SearchRangeEndTypeCB.FormattingEnabled = true;
+            this.SearchRangeEndTypeCB.Items.AddRange(new object[] {
+            "Length",
+            "Offset"});
+            this.SearchRangeEndTypeCB.Location = new System.Drawing.Point(364, 21);
+            this.SearchRangeEndTypeCB.Name = "SearchRangeEndTypeCB";
+            this.SearchRangeEndTypeCB.Size = new System.Drawing.Size(57, 23);
+            this.SearchRangeEndTypeCB.TabIndex = 17;
+            this.toolTips.SetToolTip(this.SearchRangeEndTypeCB, "use offset or length");
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 24);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(75, 15);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Value Base:";
+            // 
+            // SearchRangeBaseValueTypeCB
+            // 
+            this.SearchRangeBaseValueTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SearchRangeBaseValueTypeCB.FormattingEnabled = true;
+            this.SearchRangeBaseValueTypeCB.Items.AddRange(new object[] {
+            "Hex",
+            "Dec"});
+            this.SearchRangeBaseValueTypeCB.Location = new System.Drawing.Point(87, 21);
+            this.SearchRangeBaseValueTypeCB.Name = "SearchRangeBaseValueTypeCB";
+            this.SearchRangeBaseValueTypeCB.Size = new System.Drawing.Size(57, 23);
+            this.SearchRangeBaseValueTypeCB.TabIndex = 15;
+            this.toolTips.SetToolTip(this.SearchRangeBaseValueTypeCB, "Insert your values in hex or dec");
+            // 
+            // startRangeAddressTextBox
+            // 
+            this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(234, 21);
+            this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(86, 22);
+            this.startRangeAddressTextBox.TabIndex = 5;
+            this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // searchRangeButton
             // 
@@ -510,6 +587,34 @@
             this.searchRangeButton.Text = "Search Hex Value";
             this.searchRangeButton.UseVisualStyleBackColor = true;
             this.searchRangeButton.Click += new System.EventHandler(this.SearchRangeButtonClick);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 51);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(74, 15);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Search for :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(150, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 15);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Start Offset:";
+            // 
+            // searchRangeValueTextBox
+            // 
+            this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.searchRangeValueTextBox.Location = new System.Drawing.Point(87, 48);
+            this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(422, 22);
+            this.searchRangeValueTextBox.TabIndex = 8;
+            this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.searchRangeValueTextBox_KeyUp);
             // 
             // endRangeAddressTextBox
             // 
@@ -530,25 +635,6 @@
             this.label12.TabIndex = 6;
             this.label12.Text = "End:";
             // 
-            // startRangeAddressTextBox
-            // 
-            this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.startRangeAddressTextBox.Location = new System.Drawing.Point(234, 21);
-            this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
-            this.startRangeAddressTextBox.Size = new System.Drawing.Size(86, 22);
-            this.startRangeAddressTextBox.TabIndex = 5;
-            this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(150, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Start Offset:";
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
@@ -566,6 +652,68 @@
             this.tabPage2.Size = new System.Drawing.Size(692, 335);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Calculator";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Controls.Add(this.decimalbox);
+            this.groupBox4.Controls.Add(this.hexcalcbox);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Location = new System.Drawing.Point(95, 17);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(507, 63);
+            this.groupBox4.TabIndex = 15;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Converter";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Decimal:";
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(232, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = ">>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            // 
+            // decimalbox
+            // 
+            this.decimalbox.Location = new System.Drawing.Point(81, 20);
+            this.decimalbox.MaxLength = 3276700;
+            this.decimalbox.Name = "decimalbox";
+            this.decimalbox.Size = new System.Drawing.Size(145, 22);
+            this.decimalbox.TabIndex = 1;
+            this.decimalbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.decimalbox.TextChanged += new System.EventHandler(this.Dec2Hex);
+            // 
+            // hexcalcbox
+            // 
+            this.hexcalcbox.Location = new System.Drawing.Point(340, 20);
+            this.hexcalcbox.Name = "hexcalcbox";
+            this.hexcalcbox.Size = new System.Drawing.Size(145, 22);
+            this.hexcalcbox.TabIndex = 4;
+            this.hexcalcbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hexcalcbox.TextChanged += new System.EventHandler(this.Hex2Dec);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(300, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 15);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Hex:";
             // 
             // label17
             // 
@@ -634,54 +782,6 @@
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.Visible = false;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(300, 23);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 15);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Hex:";
-            // 
-            // hexcalcbox
-            // 
-            this.hexcalcbox.Location = new System.Drawing.Point(340, 20);
-            this.hexcalcbox.Name = "hexcalcbox";
-            this.hexcalcbox.Size = new System.Drawing.Size(145, 22);
-            this.hexcalcbox.TabIndex = 4;
-            this.hexcalcbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hexcalcbox.TextChanged += new System.EventHandler(this.Hex2Dec);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Decimal:";
-            // 
-            // decimalbox
-            // 
-            this.decimalbox.Location = new System.Drawing.Point(81, 20);
-            this.decimalbox.MaxLength = 3276700;
-            this.decimalbox.Name = "decimalbox";
-            this.decimalbox.Size = new System.Drawing.Size(145, 22);
-            this.decimalbox.TabIndex = 1;
-            this.decimalbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.decimalbox.TextChanged += new System.EventHandler(this.Dec2Hex);
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(232, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = ">>";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.label8);
@@ -735,101 +835,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.aboutToolStripMenuItem.Text = "Select Game";
             // 
-            // valueTypeComboBox
-            // 
-            this.valueTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.valueTypeComboBox.FormattingEnabled = true;
-            this.valueTypeComboBox.Items.AddRange(new object[] {
-            "Hex",
-            "Dec"});
-            this.valueTypeComboBox.Location = new System.Drawing.Point(87, 21);
-            this.valueTypeComboBox.Name = "valueTypeComboBox";
-            this.valueTypeComboBox.Size = new System.Drawing.Size(57, 23);
-            this.valueTypeComboBox.TabIndex = 15;
-            this.toolTips.SetToolTip(this.valueTypeComboBox, "Insert your values in hex or dec");
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.valueTypeComboBox);
-            this.groupBox1.Controls.Add(this.startRangeAddressTextBox);
-            this.groupBox1.Controls.Add(this.searchRangeButton);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
-            this.groupBox1.Controls.Add(this.endRangeAddressTextBox);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Location = new System.Drawing.Point(79, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(520, 113);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Range Selection Options";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 24);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(75, 15);
-            this.label16.TabIndex = 16;
-            this.label16.Text = "Value Base:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Offset",
-            "Length"});
-            this.comboBox1.Location = new System.Drawing.Point(364, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(57, 23);
-            this.comboBox1.TabIndex = 17;
-            this.toolTips.SetToolTip(this.comboBox1, "use offset or length");
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.searchRangeResultListView);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(89, 125);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(499, 195);
-            this.groupBox2.TabIndex = 17;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Result/s";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.isSigned);
-            this.groupBox3.Controls.Add(this.LabelInt8);
-            this.groupBox3.Controls.Add(this.LabelInt16);
-            this.groupBox3.Controls.Add(this.NumericInt32);
-            this.groupBox3.Controls.Add(this.NumericInt8);
-            this.groupBox3.Controls.Add(this.NumericInt16);
-            this.groupBox3.Controls.Add(this.LabelInt32);
-            this.groupBox3.Location = new System.Drawing.Point(493, 106);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(189, 143);
-            this.groupBox3.TabIndex = 21;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "???";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.button1);
-            this.groupBox4.Controls.Add(this.decimalbox);
-            this.groupBox4.Controls.Add(this.hexcalcbox);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Location = new System.Drawing.Point(95, 17);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(507, 63);
-            this.groupBox4.TabIndex = 15;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Converter";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -854,24 +859,24 @@
             this.tabPage1.ResumeLayout(false);
             this.peeknpoke.ResumeLayout(false);
             this.peeknpoke.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -911,7 +916,6 @@
         private System.Windows.Forms.TextBox startRangeAddressTextBox;
         private System.Windows.Forms.Label label6;
         private Be.Windows.Forms.HexBox hexBox;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox hexcalcbox;
         private System.Windows.Forms.Label label4;
@@ -939,14 +943,15 @@
         private System.Windows.Forms.Label LabelInt16;
         private System.Windows.Forms.Label LabelInt8;
         private System.Windows.Forms.CheckBox isSigned;
-        private System.Windows.Forms.ComboBox valueTypeComboBox;
+        private System.Windows.Forms.ComboBox SearchRangeBaseValueTypeCB;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ToolTip toolTips;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox SearchRangeEndTypeCB;
         private System.Windows.Forms.GroupBox groupBox4;
+        internal System.Windows.Forms.ToolStripProgressBar StatusProgressBar;
 
     }
 }

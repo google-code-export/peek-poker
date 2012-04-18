@@ -112,15 +112,6 @@ namespace PeekPoker
             int signed = b - ((b & 0x80) << 1);
             return (sbyte)signed;
         }
-        /// <summary>
-        /// Converts a signed byte to an unsigned one
-        /// </summary>
-        /// <param name="b"> sbyte </param>
-        /// <returns>byte</returns>
-        public static byte ByteToSByte(sbyte b)
-        {
-            return (byte)b;
-        }
         #endregion
         #region (u)int to byte array to (u)int
         /// <summary>

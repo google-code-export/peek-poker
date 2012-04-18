@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using System.Diagnostics;
 namespace PeekPoker
 {
     /// <summary>Real Time Memory Access Class using xbdm
     /// NB: Large dump speed depends on the version of xbdm you have</summary>
     public class RealTimeMemory
     {
+        #region Eventhandlers/DelegateHandlers
+        public event UpdateProgressBarHandler ReportProgress;
+        #endregion
+
         private readonly string _ipAddress;
         private bool _connected;
         private bool _memexValidConnection;
@@ -48,6 +53,7 @@ namespace PeekPoker
                 string reponseString = Encoding.ASCII.GetString(response).Replace("\0", "");
                 //validate connection
                 _connected = reponseString.Substring(0, 3) == "201";
+
                 return _connected;
             }
             catch (Exception ex)
@@ -169,6 +175,7 @@ namespace PeekPoker
                     //LENGTH or Szie = Length of the dump
                     var size = _startDumpLength;
                     var readWriter = new RWStream();
+                    readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
                     var data = new byte[1026]; //byte chuncks
 
                     //Writing each byte chuncks========
@@ -177,6 +184,8 @@ namespace PeekPoker
                     {
                         _tcp.Client.Receive(data);
                         readWriter.WriteBytes(data, 2, 1024);
+                        Debug.WriteLine(String.Format("Index: {0}  - Max: {1}", i, Math.Ceiling((double)(size / 1024))));
+                        ReportProgress(0, (int)(size / 1024), (i + 1), "Reading Dump...");
                     }
                     //Write whatever is left
                     var extra = (int)(size % 1024);
@@ -191,9 +200,12 @@ namespace PeekPoker
                     readWriter.Position = 0;
                     var values = readWriter.SearchHexString(pointer, false);
                     var addresses = new List<string>(values.Length);
+                    int x = 0;
                     foreach (var value in values)
                     {
                         addresses.Add(Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)value)));
+                        ReportProgress(0, values.Length, x, "Add Results to list");
+                        x++;
                     }
                     readWriter.Close();
                     return new List<string>(addresses.ToArray());

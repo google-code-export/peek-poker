@@ -63,3 +63,12 @@ added option to select Search range end type: by offset or by length - [Incomple
 added marquee progress bar for search range: [completed but not tested]
 code clean up with a little more documentation
 *******Added context menu to Listview to enable copying addresses. [Removed]
+
+changed how the progressbar works... (it didn't really work in the first place... no delegates)
+	no longer marquee but it behaves like a normal progressbar
+added UpdateProgressbar(int min, int max, int value, string text) delegate to the MainForm.cs
+added Eventhandler to the RWStream.cs and RealTimeMemory.cs tp handle the progressbar updates
+added events to _rtm(in the MainForm.cs) and readWriter(in RealTimeMemory.cs) variables
+added KeyUp event to the searchRangeValueTextBox to handle enter/return keys 
+set the combobox selectedindex for the 2 comboboxes (search tab)
+also corrected the range canlculation for the Range/length textbox (search tab)

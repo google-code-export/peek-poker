@@ -7,6 +7,10 @@ namespace PeekPoker
     /// <summary>Contains function/s that deals with I/O reading and writing of Data</summary>
     public class RWStream
     {
+        #region Eventhandlers/DelegateHandlers
+        public event UpdateProgressBarHandler ReportProgress;
+        #endregion
+
         private bool _accessed;
         private BinaryReader _bReader;
         private BinaryWriter _bWriter;
@@ -144,9 +148,13 @@ namespace PeekPoker
                 //location of the value/s
                 var locations = new List<long>();
                 long index;
+                int prev = (int)Position;
                 for (index = Position; index < Length; index++)
                 {
                     Position = index;
+
+                    if (!firstFind)
+                        ReportProgress(prev, (int)Length, (int)index, "Searching...");
 
                     var buffer = ReadBytes(data.Length/2, _isBigEndian);
                     if (data != Functions.ToHexString(buffer)) continue;
