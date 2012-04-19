@@ -140,18 +140,47 @@ namespace PeekPoker
                 ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //Experimental search Button
+        private void EXSearchRangeButtonClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (SearchRangeEndTypeCB.SelectedIndex == 1)
+                {
+                    _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
+                }
+                else
+                {
+                    _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
+                }
+                var oThread = new Thread(ExSearchRange);
+                oThread.Start();
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         //When you click on an item on the search range result list view - Search Range tab
         private void SearchRangeResultListViewMouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return; //if its not a left click return
-            var item = searchRangeResultListView.GetItemAt(e.X, e.Y);
-            if (item == null || _offsets == null) return;
-            /**item index is the index of the item you selected
-             * since the _offsets are inorder the item idex corresponding to the offset index
-             * insert the value into the peekPokeAddress
-             */
-            peekPokeAddressTextBox.Text = _offsets[item.Index];
+
+            peekPokeAddressTextBox.Text = "0x" + searchRangeResultListView.FocusedItem.SubItems[1].Text;
+        }
+        // Refresh results
+        private void ResultRefresh_Click(object sender, EventArgs e)
+        {
+            if (searchRangeResultListView.Items.Count > 0)
+            {
+                var oThread = new Thread(RefreshSearchRangeListViewList);
+                oThread.Start();
+            }
+            else
+            {
+                ShowMessageBox("Can not refresh! \r\n Resultlist empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
         
@@ -159,6 +188,10 @@ namespace PeekPoker
         private void HexBoxSelectionStartChanged(object sender, EventArgs e)
         {
             ChangeNumericValue();//When you select an offset on the hexbox
+
+            var prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
+            var address = Functions.BytesToInt32(prev);
+            SelAddress.Text = string.Format("0x" + (address + (int)hexBox.SelectionStart).ToString("X8"));
         }
         private void IsSignedCheckedChanged(object sender, EventArgs e)
         {
@@ -231,7 +264,8 @@ namespace PeekPoker
                 //CheckForIllegalCrossThreadCalls = false; when dealing with threads
                 _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
                 _rtm.DumpLength = _searchRangeDumpLength;
-                
+
+                SearchRangeListViewListClean();//Clean list view
 
                 //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
                 _offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
@@ -246,7 +280,6 @@ namespace PeekPoker
                 //Reset the progressbar...
                 UpdateProgressbar(0, 100, 0, "Idle");
 
-                SearchRangeListViewListClean();//Clean list view
                 var i = 0; //The index number
                 foreach (var offset in _offsets)
                 {
@@ -254,6 +287,50 @@ namespace PeekPoker
                     //put the numnber @index 0
                     //put the hex offset @index 1
                     var newOffset = new[] { i.ToString(), offset };
+                    //send the newOffset details to safe thread which adds to listview
+                    SearchRangeListViewListUpdate(newOffset);
+                    i++;
+                }
+            }
+            catch (Exception e)
+            {
+                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        //Searches the memory for the specified value (Experimental)
+        private void ExSearchRange()
+        {
+            try
+            {
+                //You can always use: 
+                //CheckForIllegalCrossThreadCalls = false; when dealing with threads
+                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
+                _rtm.DumpLength = _searchRangeDumpLength;
+
+                SearchRangeListViewListClean();//Clean list view
+
+                //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
+                List<Types.SearchResults>  _results = _rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+
+                if (_results.Count < 1)
+                {
+                    //Reset the progressbar...
+                    UpdateProgressbar(0, 100, 0, "Idle");
+
+                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return; //We don't want it to continue
+                }
+                //Reset the progressbar...
+                UpdateProgressbar(0, 100, 0, "Idle");
+
+                var i = 0; //The index number
+                foreach (Types.SearchResults result in _results)
+                {
+                    //Collection initializer or use array either will do
+                    //put the numnber @index 0
+                    //put the hex offset @index 1
+                    var newOffset = new[] { i.ToString(), result.Offset, result.Value};
                     //send the newOffset details to safe thread which adds to listview
                     SearchRangeListViewListUpdate(newOffset);
                     i++;
@@ -370,10 +447,6 @@ namespace PeekPoker
                 NumericInt32.Maximum = UInt32.MaxValue;
                 NumericInt32.Minimum = UInt32.MinValue;
             }
-
-            var prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
-            var address = Functions.BytesToInt32(prev);
-            SelAddress.Text = string.Format("0x" + (address + (int)hexBox.SelectionStart).ToString("X8"));
         }
         #endregion
 
@@ -430,6 +503,30 @@ namespace PeekPoker
                 searchRangeResultListView.Items.Add(new ListViewItem(data));
             }
         }
+        //Refresh the values of Search Results
+        private void RefreshSearchRangeListViewList()
+        {
+            //IList or represents a collection of objects(String)
+            if (searchRangeResultListView.InvokeRequired)
+                //lambda expression empty delegate that calls a recursive function if InvokeRequired
+                searchRangeResultListView.Invoke((MethodInvoker)(() => RefreshSearchRangeListViewList()));
+            else
+            {
+                int x = 0;
+                foreach (ListViewItem _item in searchRangeResultListView.Items)
+                {
+                    peekPokeAddressTextBox.Text = "0x" + _item.SubItems[1].Text;
+                    string _length = (searchRangeValueTextBox.Text.Length / 2).ToString("X");
+                    string retvalue = _rtm.Peek("0x" + _item.SubItems[1].Text, _length, "0x" + _item.SubItems[1].Text, _length);
+                    _item.SubItems[2].Text = retvalue;
+
+                    UpdateProgressbar(0, searchRangeResultListView.Items.Count, x);
+                    x++;
+                }
+                searchRangeResultListView.Refresh();
+                UpdateProgressbar(0, 100, 0, "idle");
+            }
+        }
         private void SearchRangeListViewListClean()
         {
             if (searchRangeResultListView.InvokeRequired)
@@ -439,7 +536,7 @@ namespace PeekPoker
         }
 
         //Progressbar Delegates
-        internal void UpdateProgressbar(int min, int max, int value, string text)
+        internal void UpdateProgressbar(int min, int max, int value, string text = "Idle")
         {
             if (statusStrip1.InvokeRequired)
             {

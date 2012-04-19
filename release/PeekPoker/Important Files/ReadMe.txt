@@ -72,3 +72,11 @@ added events to _rtm(in the MainForm.cs) and readWriter(in RealTimeMemory.cs) va
 added KeyUp event to the searchRangeValueTextBox to handle enter/return keys 
 set the combobox selectedindex for the 2 comboboxes (search tab)
 also corrected the range canlculation for the Range/length textbox (search tab)
+
+- changes 20/04/12
+added experimental search function (its faster... but the performance depends on the search pattern)
+expanded the result listview with the values
+	(the values are only shown if the experimental search is used didn't have the time to add it to the defualt search funtion)
+added refresh button to the search tab it will refresh the values in the result list
+changed the lick event for the listview it now add "0x" to the string
+added new file in the Functions Folder... this file will contain List types atm it contains only one type though

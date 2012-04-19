@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functions\Functions.cs" />
+    <Compile Include="Functions\Types.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -65,12 +65,14 @@
             this.searchRangeResultListView = new System.Windows.Forms.ListView();
             this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.offsetHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.valueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SearchRangeEndTypeCB = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.SearchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
             this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
+            this.EXsearchRangeButton = new System.Windows.Forms.Button();
             this.searchRangeButton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -98,6 +100,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.ResultRefresh = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -469,11 +472,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ResultRefresh);
             this.groupBox2.Controls.Add(this.searchRangeResultListView);
             this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(89, 125);
+            this.groupBox2.Location = new System.Drawing.Point(10, 125);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(499, 195);
+            this.groupBox2.Size = new System.Drawing.Size(674, 195);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Result/s";
@@ -482,13 +486,14 @@
             // 
             this.searchRangeResultListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.numberColumn,
-            this.offsetHeader});
+            this.offsetHeader,
+            this.valueHeader});
             this.searchRangeResultListView.FullRowSelect = true;
             this.searchRangeResultListView.GridLines = true;
             this.searchRangeResultListView.Location = new System.Drawing.Point(6, 21);
             this.searchRangeResultListView.MultiSelect = false;
             this.searchRangeResultListView.Name = "searchRangeResultListView";
-            this.searchRangeResultListView.Size = new System.Drawing.Size(229, 167);
+            this.searchRangeResultListView.Size = new System.Drawing.Size(424, 167);
             this.searchRangeResultListView.TabIndex = 11;
             this.searchRangeResultListView.UseCompatibleStateImageBehavior = false;
             this.searchRangeResultListView.View = System.Windows.Forms.View.Details;
@@ -497,18 +502,23 @@
             // numberColumn
             // 
             this.numberColumn.Text = "Number";
-            this.numberColumn.Width = 58;
+            this.numberColumn.Width = 70;
             // 
             // offsetHeader
             // 
             this.offsetHeader.Text = "Offset";
-            this.offsetHeader.Width = 166;
+            this.offsetHeader.Width = 108;
+            // 
+            // valueHeader
+            // 
+            this.valueHeader.Text = "Value";
+            this.valueHeader.Width = 212;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(250, 89);
+            this.label14.Location = new System.Drawing.Point(446, 83);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(222, 30);
             this.label14.TabIndex = 12;
@@ -520,15 +530,16 @@
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.SearchRangeBaseValueTypeCB);
             this.groupBox1.Controls.Add(this.startRangeAddressTextBox);
+            this.groupBox1.Controls.Add(this.EXsearchRangeButton);
             this.groupBox1.Controls.Add(this.searchRangeButton);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
             this.groupBox1.Controls.Add(this.endRangeAddressTextBox);
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Location = new System.Drawing.Point(79, 6);
+            this.groupBox1.Location = new System.Drawing.Point(16, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(520, 113);
+            this.groupBox1.Size = new System.Drawing.Size(668, 113);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Range Selection Options";
@@ -540,16 +551,16 @@
             this.SearchRangeEndTypeCB.Items.AddRange(new object[] {
             "Length",
             "Offset"});
-            this.SearchRangeEndTypeCB.Location = new System.Drawing.Point(364, 21);
+            this.SearchRangeEndTypeCB.Location = new System.Drawing.Point(400, 20);
             this.SearchRangeEndTypeCB.Name = "SearchRangeEndTypeCB";
-            this.SearchRangeEndTypeCB.Size = new System.Drawing.Size(57, 23);
+            this.SearchRangeEndTypeCB.Size = new System.Drawing.Size(93, 23);
             this.SearchRangeEndTypeCB.TabIndex = 17;
             this.toolTips.SetToolTip(this.SearchRangeEndTypeCB, "use offset or length");
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 24);
+            this.label16.Location = new System.Drawing.Point(7, 23);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(75, 15);
             this.label16.TabIndex = 16;
@@ -562,7 +573,7 @@
             this.SearchRangeBaseValueTypeCB.Items.AddRange(new object[] {
             "Hex",
             "Dec"});
-            this.SearchRangeBaseValueTypeCB.Location = new System.Drawing.Point(87, 21);
+            this.SearchRangeBaseValueTypeCB.Location = new System.Drawing.Point(87, 20);
             this.SearchRangeBaseValueTypeCB.Name = "SearchRangeBaseValueTypeCB";
             this.SearchRangeBaseValueTypeCB.Size = new System.Drawing.Size(57, 23);
             this.SearchRangeBaseValueTypeCB.TabIndex = 15;
@@ -572,15 +583,25 @@
             // 
             this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.startRangeAddressTextBox.Location = new System.Drawing.Point(234, 21);
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(230, 20);
             this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
-            this.startRangeAddressTextBox.Size = new System.Drawing.Size(86, 22);
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(126, 22);
             this.startRangeAddressTextBox.TabIndex = 5;
             this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
+            // EXsearchRangeButton
+            // 
+            this.EXsearchRangeButton.Location = new System.Drawing.Point(441, 76);
+            this.EXsearchRangeButton.Name = "EXsearchRangeButton";
+            this.EXsearchRangeButton.Size = new System.Drawing.Size(221, 31);
+            this.EXsearchRangeButton.TabIndex = 9;
+            this.EXsearchRangeButton.Text = "(Experimental) Search Hex Value";
+            this.EXsearchRangeButton.UseVisualStyleBackColor = true;
+            this.EXsearchRangeButton.Click += new System.EventHandler(this.EXSearchRangeButtonClick);
+            // 
             // searchRangeButton
             // 
-            this.searchRangeButton.Location = new System.Drawing.Point(175, 76);
+            this.searchRangeButton.Location = new System.Drawing.Point(87, 76);
             this.searchRangeButton.Name = "searchRangeButton";
             this.searchRangeButton.Size = new System.Drawing.Size(183, 31);
             this.searchRangeButton.TabIndex = 9;
@@ -600,7 +621,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(150, 24);
+            this.label6.Location = new System.Drawing.Point(146, 23);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(78, 15);
             this.label6.TabIndex = 0;
@@ -612,7 +633,7 @@
             this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchRangeValueTextBox.Location = new System.Drawing.Point(87, 48);
             this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(422, 22);
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(575, 22);
             this.searchRangeValueTextBox.TabIndex = 8;
             this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.searchRangeValueTextBox_KeyUp);
             // 
@@ -620,16 +641,16 @@
             // 
             this.endRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.endRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.endRangeAddressTextBox.Location = new System.Drawing.Point(427, 20);
+            this.endRangeAddressTextBox.Location = new System.Drawing.Point(499, 20);
             this.endRangeAddressTextBox.Name = "endRangeAddressTextBox";
-            this.endRangeAddressTextBox.Size = new System.Drawing.Size(82, 22);
+            this.endRangeAddressTextBox.Size = new System.Drawing.Size(163, 22);
             this.endRangeAddressTextBox.TabIndex = 7;
             this.endRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(326, 23);
+            this.label12.Location = new System.Drawing.Point(362, 23);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(32, 15);
             this.label12.TabIndex = 6;
@@ -835,6 +856,16 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.aboutToolStripMenuItem.Text = "Select Game";
             // 
+            // ResultRefresh
+            // 
+            this.ResultRefresh.Location = new System.Drawing.Point(436, 157);
+            this.ResultRefresh.Name = "ResultRefresh";
+            this.ResultRefresh.Size = new System.Drawing.Size(76, 31);
+            this.ResultRefresh.TabIndex = 13;
+            this.ResultRefresh.Text = "Refresh";
+            this.ResultRefresh.UseVisualStyleBackColor = true;
+            this.ResultRefresh.Click += new System.EventHandler(this.ResultRefresh_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -952,6 +983,9 @@
         private System.Windows.Forms.ComboBox SearchRangeEndTypeCB;
         private System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.ToolStripProgressBar StatusProgressBar;
+        private System.Windows.Forms.Button EXsearchRangeButton;
+        private System.Windows.Forms.ColumnHeader valueHeader;
+        private System.Windows.Forms.Button ResultRefresh;
 
     }
 }

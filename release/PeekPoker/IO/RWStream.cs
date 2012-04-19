@@ -169,6 +169,56 @@ namespace PeekPoker
                 throw new Exception(exception.Message);
             }
         }
+        public List<Types.SearchResults> ExSearchHexString(string data, uint _startDumpOffset, bool firstFind)
+        {
+            try
+            {
+                //location of the value/s
+                List<Types.SearchResults> locations = new List<Types.SearchResults>();
+                long index;
+                int prev = (int)Position;
+                byte[] _buffer = ReadBytes((int)Length, _isBigEndian);
+                Position = prev;
+                
+                for (index = Position; index < Length; index = Position)
+                {
+                    if (!firstFind)
+                        ReportProgress(prev, (int)Length, (int)index, "Searching...");
+
+                    byte _value = Functions.HexToBytes(data.Substring(0, 2))[0];
+                    int ind = (Array.IndexOf(_buffer, _value, (int)Position));
+
+                    if (ind == -1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Position = ind;
+
+                        string buffer = Functions.ToHexString(ReadBytes(data.Length / 2, _isBigEndian));
+                        if (data != buffer)
+                        {
+                            Position = ind + 1;
+                            continue;
+                        }
+                        Types.SearchResults resulst = new Types.SearchResults();
+                        resulst.Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)ind));
+                        resulst.Value = buffer;
+
+                        locations.Add(resulst);
+                        if (firstFind) break;
+                    }
+                    index = Position;
+
+                }
+                return locations;
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }
         #endregion
 
         #region Writer

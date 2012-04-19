@@ -220,6 +220,67 @@ namespace PeekPoker
                 _memexValidConnection = false;
             }
         }
+        // Experimental
+        public List<Types.SearchResults> ExFindHexOffset(string pointer)
+        {
+            if (!Functions.IsHex(pointer))
+                throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
+            if (!Connect()) return null; //Call function - If not connected return
+            if (!GetMeMex()) return null; //call function - If not connected or if somethign wrong return
+
+            try
+            {
+                //LENGTH or Szie = Length of the dump
+                var size = _startDumpLength;
+                var readWriter = new RWStream();
+                readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
+                var data = new byte[1026]; //byte chuncks
+
+                //Writing each byte chuncks========
+                //No need to mess with it :D
+                for (var i = 0; i < size / 1024; i++)
+                {
+                    _tcp.Client.Receive(data);
+                    readWriter.WriteBytes(data, 2, 1024);
+                    ReportProgress(0, (int)(size / 1024), (i + 1), "Reading Dump...");
+                }
+                //Write whatever is left
+                var extra = (int)(size % 1024);
+                if (extra > 0)
+                {
+                    _tcp.Client.Receive(data);
+                    readWriter.WriteBytes(data, 2, extra);
+                }
+                readWriter.Flush();
+                //===================================
+                //===================================
+                readWriter.Position = 0;
+                //using the Experimental search Function
+                List<Types.SearchResults> values = readWriter.ExSearchHexString(pointer, _startDumpOffset, false);
+                
+                /*
+                for (int i = 0; i < values.Count; i++)
+                {
+                    string offset = values[i].Offset;
+                    values[i].Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + Functions.BytesToUInt32(Functions.HexToBytes(offset))));
+                    ReportProgress(0, values.Count, i, "Add Results to list");
+                }
+                */
+                
+                readWriter.Close();
+                return values;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _tcp.Close(); //close connection
+                _connected = false;
+                _memexValidConnection = false;
+            }
+        }
 
         #region Private
         private void WriteMemory(uint address, string data)
