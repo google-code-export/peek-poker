@@ -80,3 +80,10 @@ expanded the result listview with the values
 added refresh button to the search tab it will refresh the values in the result list
 changed the lick event for the listview it now add "0x" to the string
 added new file in the Functions Folder... this file will contain List types atm it contains only one type though
+
+- changes 24/04/12
+added feature requested by fairchild - reading the ip address from the registry if it does exist
+	- though it will look up the value only if the sdk is installed and it will save the ip to the text file
+	- and it will prefer the ip from the text file
+added new experimental search function "Ex2SearchHexString" which is set as a default when you press the experimental button
+added color change for the values that were changes after pressing the refresh button in the search tab

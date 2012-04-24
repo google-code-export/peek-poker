@@ -62,10 +62,6 @@
             this.peekPokeAddressTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.searchRangeResultListView = new System.Windows.Forms.ListView();
-            this.numberColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.offsetHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.valueHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SearchRangeEndTypeCB = new System.Windows.Forms.ComboBox();
@@ -101,6 +97,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.ResultRefresh = new System.Windows.Forms.Button();
+            this.ResultGrid = new System.Windows.Forms.DataGridView();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -116,6 +113,7 @@
             this.groupBox4.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -257,7 +255,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(74, 19);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(94, 17);
+            this.isSigned.Size = new System.Drawing.Size(109, 19);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -472,47 +470,15 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ResultGrid);
             this.groupBox2.Controls.Add(this.ResultRefresh);
-            this.groupBox2.Controls.Add(this.searchRangeResultListView);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Location = new System.Drawing.Point(10, 125);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(674, 195);
+            this.groupBox2.Size = new System.Drawing.Size(674, 204);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Result/s";
-            // 
-            // searchRangeResultListView
-            // 
-            this.searchRangeResultListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.numberColumn,
-            this.offsetHeader,
-            this.valueHeader});
-            this.searchRangeResultListView.FullRowSelect = true;
-            this.searchRangeResultListView.GridLines = true;
-            this.searchRangeResultListView.Location = new System.Drawing.Point(6, 21);
-            this.searchRangeResultListView.MultiSelect = false;
-            this.searchRangeResultListView.Name = "searchRangeResultListView";
-            this.searchRangeResultListView.Size = new System.Drawing.Size(424, 167);
-            this.searchRangeResultListView.TabIndex = 11;
-            this.searchRangeResultListView.UseCompatibleStateImageBehavior = false;
-            this.searchRangeResultListView.View = System.Windows.Forms.View.Details;
-            this.searchRangeResultListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SearchRangeResultListViewMouseClick);
-            // 
-            // numberColumn
-            // 
-            this.numberColumn.Text = "Number";
-            this.numberColumn.Width = 70;
-            // 
-            // offsetHeader
-            // 
-            this.offsetHeader.Text = "Offset";
-            this.offsetHeader.Width = 108;
-            // 
-            // valueHeader
-            // 
-            this.valueHeader.Text = "Value";
-            this.valueHeader.Width = 212;
             // 
             // label14
             // 
@@ -858,13 +824,32 @@
             // 
             // ResultRefresh
             // 
-            this.ResultRefresh.Location = new System.Drawing.Point(436, 157);
+            this.ResultRefresh.Location = new System.Drawing.Point(436, 161);
             this.ResultRefresh.Name = "ResultRefresh";
             this.ResultRefresh.Size = new System.Drawing.Size(76, 31);
             this.ResultRefresh.TabIndex = 13;
             this.ResultRefresh.Text = "Refresh";
             this.ResultRefresh.UseVisualStyleBackColor = true;
             this.ResultRefresh.Click += new System.EventHandler(this.ResultRefresh_Click);
+            // 
+            // ResultGrid
+            // 
+            this.ResultGrid.AllowUserToAddRows = false;
+            this.ResultGrid.AllowUserToDeleteRows = false;
+            this.ResultGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ResultGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.ResultGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ResultGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ResultGrid.Location = new System.Drawing.Point(6, 18);
+            this.ResultGrid.MultiSelect = false;
+            this.ResultGrid.Name = "ResultGrid";
+            this.ResultGrid.ReadOnly = true;
+            this.ResultGrid.RowHeadersVisible = false;
+            this.ResultGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ResultGrid.Size = new System.Drawing.Size(424, 174);
+            this.ResultGrid.TabIndex = 14;
+            this.ResultGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResultGrid_CellValueChanged);
+            this.ResultGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SearchRangeResultListViewMouseClick);
             // 
             // MainForm
             // 
@@ -908,6 +893,7 @@
             this.tabPage4.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -936,9 +922,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ListView searchRangeResultListView;
-        private System.Windows.Forms.ColumnHeader numberColumn;
-        private System.Windows.Forms.ColumnHeader offsetHeader;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox searchRangeValueTextBox;
         private System.Windows.Forms.Button searchRangeButton;
@@ -984,8 +967,8 @@
         private System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.ToolStripProgressBar StatusProgressBar;
         private System.Windows.Forms.Button EXsearchRangeButton;
-        private System.Windows.Forms.ColumnHeader valueHeader;
         private System.Windows.Forms.Button ResultRefresh;
+        private System.Windows.Forms.DataGridView ResultGrid;
 
     }
 }

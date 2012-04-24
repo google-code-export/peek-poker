@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace PeekPoker
 {
@@ -18,6 +20,7 @@ namespace PeekPoker
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
         private uint _searchRangeDumpLength;
         private List<string> _offsets;
+        internal BindingList<Types.SearchResults> SearchResult = new BindingList<Types.SearchResults>();
         #endregion
 
         public MainForm()
@@ -27,12 +30,17 @@ namespace PeekPoker
             //Set comboboxes correctly - need to be here for some reason... or it won't work...
             SearchRangeBaseValueTypeCB.SelectedIndex = 0;
             SearchRangeEndTypeCB.SelectedIndex = 0;
+            ResultGrid.DataSource = SearchResult;
         }
         private void Form1Load(Object sender, EventArgs e)
         {
+            //feature suggested by fairchild
+            string xboxname = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound");
+            if (xboxname != "NotFound")
+                ipAddressTextBox.Text = xboxname;
             //This is for handling automatic loading of the IP address and txt file creation. -8Ball
-            if (!File.Exists(_filepath)) File.Create(_filepath).Dispose();
-            else ipAddressTextBox.Text = File.ReadAllText(_filepath);
+            //Changed a bit to only check if it does exist creation and fill code is in the same place now - sam
+            if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
 
             //Set correct max. min values for the numeric fields
             changeNumericMaxMin();
@@ -42,14 +50,17 @@ namespace PeekPoker
         //When you click on the connect button
         private void ConnectButtonClick(object sender, EventArgs e)
         {
-            _rtm = new RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
-            _rtm.ReportProgress += new UpdateProgressBarHandler(UpdateProgressbar);
             try
             {
+                _rtm = new RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
+                _rtm.ReportProgress += new UpdateProgressBarHandler(UpdateProgressbar);
+
                 if (!_rtm.Connect()) throw new Exception("Connection Failed!");
                 peeknpoke.Enabled = true;
                 statusStripLabel.Text = String.Format("Connected");
                 MessageBox.Show(this, String.Format("Connected"), String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (!File.Exists(_filepath)) File.Create(_filepath).Dispose(); //Create the file if it doesn't exist
                 var objWriter = new StreamWriter(_filepath); //Writer Declaration
                 objWriter.Write(ipAddressTextBox.Text); //Writes IP address to text file
                 objWriter.Close(); //Close Writer
@@ -166,20 +177,33 @@ namespace PeekPoker
         private void SearchRangeResultListViewMouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return; //if its not a left click return
-
-            peekPokeAddressTextBox.Text = "0x" + searchRangeResultListView.FocusedItem.SubItems[1].Text;
+            peekPokeAddressTextBox.Text = "0x" + ResultGrid.Rows[ResultGrid.SelectedRows[0].Index].Cells[1].Value;
+        }
+        private void ResultGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridCell cell = (DataGridCell)sender;
+            if (ResultGrid.Rows[cell.RowNumber].Cells[2].Value != null)
+                ResultGrid.Rows[cell.RowNumber].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
         }
         // Refresh results
         private void ResultRefresh_Click(object sender, EventArgs e)
         {
-            if (searchRangeResultListView.Items.Count > 0)
+            try
             {
-                var oThread = new Thread(RefreshSearchRangeListViewList);
-                oThread.Start();
+                if (SearchResult.Count > 0)
+                {
+                    Thread thread = new Thread(RefreshResultList);
+                    thread.Name = "RefreshResultsList";
+                    thread.Start();
+                }
+                else
+                {
+                    ShowMessageBox("Can not refresh! \r\n Resultlist empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ShowMessageBox("Can not refresh! \r\n Resultlist empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -265,7 +289,7 @@ namespace PeekPoker
                 _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
                 _rtm.DumpLength = _searchRangeDumpLength;
 
-                SearchRangeListViewListClean();//Clean list view
+                ResultGridClean();//Clean list view
 
                 //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
                 _offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
@@ -283,14 +307,16 @@ namespace PeekPoker
                 var i = 0; //The index number
                 foreach (var offset in _offsets)
                 {
-                    //Collection initializer or use array either will do
-                    //put the numnber @index 0
-                    //put the hex offset @index 1
-                    var newOffset = new[] { i.ToString(), offset };
-                    //send the newOffset details to safe thread which adds to listview
-                    SearchRangeListViewListUpdate(newOffset);
+                    //create a new variable of the SearchResult type and set the variables
+                    Types.SearchResults results = new Types.SearchResults();
+                    results.Offset = offset;
+                    results.ID = i.ToString();
+                    //add the new variable to the result list
+                    SearchResult.Add(results);
+
                     i++;
                 }
+                ResultGridUpdate();
             }
             catch (Exception e)
             {
@@ -308,10 +334,10 @@ namespace PeekPoker
                 _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
                 _rtm.DumpLength = _searchRangeDumpLength;
 
-                SearchRangeListViewListClean();//Clean list view
+                ResultGridClean();//Clean list view
 
-                //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
-                List<Types.SearchResults>  _results = _rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+                //The ExFindHexOffset function is a Experimental search function
+                BindingList<Types.SearchResults> _results = _rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
 
                 if (_results.Count < 1)
                 {
@@ -324,23 +350,38 @@ namespace PeekPoker
                 //Reset the progressbar...
                 UpdateProgressbar(0, 100, 0, "Idle");
 
-                var i = 0; //The index number
-                foreach (Types.SearchResults result in _results)
-                {
-                    //Collection initializer or use array either will do
-                    //put the numnber @index 0
-                    //put the hex offset @index 1
-                    var newOffset = new[] { i.ToString(), result.Offset, result.Value};
-                    //send the newOffset details to safe thread which adds to listview
-                    SearchRangeListViewListUpdate(newOffset);
-                    i++;
-                }
+                SearchResult = _results;
+
+                ResultGridUpdate();
             }
             catch (Exception e)
             {
                 ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
 
+        }
+        private void RefreshResultList()
+        {
+            int x = 0;
+            foreach (Types.SearchResults _item in SearchResult)
+            {
+                UpdateProgressbar(0, SearchResult.Count, x, "Refreshing...");
+                x++;
+
+                //peekPokeAddressTextBox.Text = "0x" + _item.Offset;
+                string _length = (_item.Value.Length / 2).ToString("X");
+                string retvalue = _rtm.Peek("0x" + _item.Offset, _length, "0x" + _item.Offset, _length);
+
+                if (_item.Value == retvalue)
+                    continue;
+
+                ResultGrid.Rows[x - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+                _item.Value = retvalue;
+            }
+
+            ResultGridUpdate();
+            UpdateProgressbar(0, 100, 0, "idle");
         }
         //When you select an offset on the hexbox
         private void ChangeNumericValue()
@@ -492,47 +533,26 @@ namespace PeekPoker
                 Invoke((MethodInvoker)(() => ShowMessageBox(text, caption, buttons, icon)));
             else MessageBox.Show(this, text, caption, buttons, icon);
         }
-        private void SearchRangeListViewListUpdate(string[] data)
-        {
-            //IList or represents a collection of objects(String)
-            if (searchRangeResultListView.InvokeRequired)
-                //lambda expression empty delegate that calls a recursive function if InvokeRequired
-                searchRangeResultListView.Invoke((MethodInvoker)(() => SearchRangeListViewListUpdate(data)));
-            else
-            {
-                searchRangeResultListView.Items.Add(new ListViewItem(data));
-            }
-        }
-        //Refresh the values of Search Results
-        private void RefreshSearchRangeListViewList()
-        {
-            //IList or represents a collection of objects(String)
-            if (searchRangeResultListView.InvokeRequired)
-                //lambda expression empty delegate that calls a recursive function if InvokeRequired
-                searchRangeResultListView.Invoke((MethodInvoker)(() => RefreshSearchRangeListViewList()));
-            else
-            {
-                int x = 0;
-                foreach (ListViewItem _item in searchRangeResultListView.Items)
-                {
-                    peekPokeAddressTextBox.Text = "0x" + _item.SubItems[1].Text;
-                    string _length = (searchRangeValueTextBox.Text.Length / 2).ToString("X");
-                    string retvalue = _rtm.Peek("0x" + _item.SubItems[1].Text, _length, "0x" + _item.SubItems[1].Text, _length);
-                    _item.SubItems[2].Text = retvalue;
 
-                    UpdateProgressbar(0, searchRangeResultListView.Items.Count, x);
-                    x++;
-                }
-                searchRangeResultListView.Refresh();
-                UpdateProgressbar(0, 100, 0, "idle");
-            }
-        }
-        private void SearchRangeListViewListClean()
+        //Refresh the values of Search Results
+        private void ResultGridClean()
         {
-            if (searchRangeResultListView.InvokeRequired)
-                searchRangeResultListView.Invoke((MethodInvoker)(SearchRangeListViewListClean));
+            if (ResultGrid.InvokeRequired)
+                ResultGrid.Invoke((MethodInvoker)(ResultGridClean));
             else
-                searchRangeResultListView.Items.Clear();
+                ResultGrid.Rows.Clear();
+        }
+        private void ResultGridUpdate()
+        {
+            //IList or represents a collection of objects(String)
+            if (ResultGrid.InvokeRequired)
+                //lambda expression empty delegate that calls a recursive function if InvokeRequired
+                ResultGrid.Invoke((MethodInvoker)(() => ResultGridUpdate()));
+            else
+            {
+                ResultGrid.DataSource = SearchResult;
+                ResultGrid.Refresh();
+            }
         }
 
         //Progressbar Delegates

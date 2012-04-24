@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Diagnostics;
+using System.Globalization;
+using System.ComponentModel;
 namespace PeekPoker
 {
     /// <summary>Real Time Memory Access Class using xbdm
@@ -168,7 +170,7 @@ namespace PeekPoker
             if (!Functions.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
             if (!Connect()) return null; //Call function - If not connected return
-             if (!GetMeMex()) return null; //call function - If not connected or if somethign wrong return
+            if (!GetMeMex()) return null; //call function - If not connected or if somethign wrong return
 
             try
             {
@@ -221,7 +223,7 @@ namespace PeekPoker
             }
         }
         // Experimental
-        public List<Types.SearchResults> ExFindHexOffset(string pointer)
+        public BindingList<Types.SearchResults> ExFindHexOffset(string pointer)
         {
             if (!Functions.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
@@ -255,18 +257,11 @@ namespace PeekPoker
                 //===================================
                 //===================================
                 readWriter.Position = 0;
+
                 //using the Experimental search Function
-                List<Types.SearchResults> values = readWriter.ExSearchHexString(pointer, _startDumpOffset, false);
-                
-                /*
-                for (int i = 0; i < values.Count; i++)
-                {
-                    string offset = values[i].Offset;
-                    values[i].Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + Functions.BytesToUInt32(Functions.HexToBytes(offset))));
-                    ReportProgress(0, values.Count, i, "Add Results to list");
-                }
-                */
-                
+                //List<Types.SearchResults> values = readWriter.ExSearchHexString(pointer, _startDumpOffset, false);
+                BindingList<Types.SearchResults> values = readWriter.Ex2SearchHexString(Functions.StringToByteArray(pointer), _startDumpOffset);
+
                 readWriter.Close();
                 return values;
             }

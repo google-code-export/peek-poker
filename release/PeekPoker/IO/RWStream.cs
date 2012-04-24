@@ -1,6 +1,8 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.ComponentModel;
 
 namespace PeekPoker
 {
@@ -179,7 +181,9 @@ namespace PeekPoker
                 int prev = (int)Position;
                 byte[] _buffer = ReadBytes((int)Length, _isBigEndian);
                 Position = prev;
-                
+
+                System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
+
                 for (index = Position; index < Length; index = Position)
                 {
                     if (!firstFind)
@@ -202,22 +206,55 @@ namespace PeekPoker
                             Position = ind + 1;
                             continue;
                         }
-                        Types.SearchResults resulst = new Types.SearchResults();
-                        resulst.Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)ind));
-                        resulst.Value = buffer;
+                        Types.SearchResults results = new Types.SearchResults();
+                        results.Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)ind));
+                        results.Value = buffer;
 
-                        locations.Add(resulst);
+                        locations.Add(results);
                         if (firstFind) break;
                     }
                     index = Position;
-
                 }
+                watch.Stop();
+                Console.WriteLine("Parallel for - Search: Seconds Elapsed: " + watch.Elapsed.Seconds);
                 return locations;
             }
             catch (Exception exception)
             {
                 throw new Exception(exception.Message);
             }
+        }
+        public BindingList<Types.SearchResults> Ex2SearchHexString(byte[] pattern, uint _startDumpOffset)
+        {
+            byte[] buffer = ReadBytes((int)Length, _isBigEndian);
+            BindingList<Types.SearchResults> positions = new BindingList<Types.SearchResults>();
+            int startIndex = 0;
+            int i = Array.IndexOf<byte>(buffer, pattern[0], startIndex);
+            int x = 1;
+            while (i >= 0 && i <= buffer.Length - pattern.Length)
+            {
+                ReportProgress(0, (int)buffer.Length, (int)i, "Searching...");
+
+                byte[] segment = new byte[pattern.Length];
+                Buffer.BlockCopy(buffer, i, segment, 0, pattern.Length);
+                if (segment.SequenceEqual<byte>(pattern))
+                {
+                    Types.SearchResults results = new Types.SearchResults();
+                    results.Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)i));
+                    results.Value = Functions.ByteArrayToString(segment);
+                    results.ID = x.ToString();
+                    positions.Add(results);
+                    i = Array.IndexOf<byte>(buffer, pattern[0], i + pattern.Length);
+                    x++;
+                }
+                else 
+                {
+                    i = Array.IndexOf<byte>(buffer, pattern[0], i + 1);
+                }
+                
+
+            }
+            return positions;
         }
         #endregion
 
