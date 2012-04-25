@@ -1,6 +1,5 @@
-﻿Last Update - 17/04/12 by 8Ball
+﻿Last Update - 25/04/12 by PureIso
 ==============================================================
-NB: Make sure the ISOLib DLL is in the Important Files Folder.
 NB: Update source file before you commit.
 ==============================================================
 Revision 6
@@ -87,3 +86,10 @@ added feature requested by fairchild - reading the ip address from the registry 
 	- and it will prefer the ip from the text file
 added new experimental search function "Ex2SearchHexString" which is set as a default when you press the experimental button
 added color change for the values that were changes after pressing the refresh button in the search tab
+
+-Changes 25/04/12
+added Resident evil - select game
+added stop search function
+fixed - threading problems. I tested most of teh functions
+Bug - The refresh button seems to return null value for Item value
+

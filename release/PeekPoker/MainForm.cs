@@ -1,10 +1,19 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
+
+//=====================================================
+// Namespaces        -> PascalCased                  //
+// Class names       -> PascalCased                  //
+// Private Variables -> _carmelCased + Underscore    //
+// Public Variables  -> PascalCased                  //
+// Local Variables   -> carmelCased                  //
+//=====================================================
 
 namespace PeekPoker
 {
@@ -15,12 +24,12 @@ namespace PeekPoker
     public partial class MainForm : Form
     {
         #region global varibales
-        private RealTimeMemory _rtm;//DLL is now in the Important File Folder
+        private RealTimeMemory.RealTimeMemory _rtm;//DLL is now in the Important File Folder
         private readonly AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
         private uint _searchRangeDumpLength;
         private List<string> _offsets;
-        internal BindingList<Types.SearchResults> SearchResult = new BindingList<Types.SearchResults>();
+        private BindingList<Types.SearchResults> _searchResult = new BindingList<Types.SearchResults>();
         #endregion
 
         public MainForm()
@@ -28,14 +37,18 @@ namespace PeekPoker
             InitializeComponent();
 
             //Set comboboxes correctly - need to be here for some reason... or it won't work...
-            SearchRangeBaseValueTypeCB.SelectedIndex = 0;
-            SearchRangeEndTypeCB.SelectedIndex = 0;
-            ResultGrid.DataSource = SearchResult;
+            searchRangeBaseValueTypeCB.SelectedIndex = 0;
+            searchRangeEndTypeCB.SelectedIndex = 0;
+            resultGrid.DataSource = _searchResult;
+        }
+        private void MainFormFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();//Immidiable stop the process
         }
         private void Form1Load(Object sender, EventArgs e)
         {
             //feature suggested by fairchild
-            string xboxname = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound");
+            var xboxname = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound");
             if (xboxname != "NotFound")
                 ipAddressTextBox.Text = xboxname;
             //This is for handling automatic loading of the IP address and txt file creation. -8Ball
@@ -43,7 +56,7 @@ namespace PeekPoker
             if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
 
             //Set correct max. min values for the numeric fields
-            changeNumericMaxMin();
+            ChangeNumericMaxMin();
         }
 
         #region button clicks
@@ -52,8 +65,8 @@ namespace PeekPoker
         {
             try
             {
-                _rtm = new RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
-                _rtm.ReportProgress += new UpdateProgressBarHandler(UpdateProgressbar);
+                _rtm = new RealTimeMemory.RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
+                _rtm.ReportProgress += UpdateProgressbar;
 
                 if (!_rtm.Connect()) throw new Exception("Connection Failed!");
                 peeknpoke.Enabled = true;
@@ -121,7 +134,7 @@ namespace PeekPoker
         //When you click on the www.360haven.com
         private void ToolStripStatusLabel2Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("www.360haven.com");
+            Process.Start("www.360haven.com");
         }
 
         //When you click on the new button
@@ -133,30 +146,24 @@ namespace PeekPoker
         //When you click on the search range button - Search Range Tab
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
-            try
+            if (searchRangeEndTypeCB.SelectedIndex == 1)
             {
-                if (SearchRangeEndTypeCB.SelectedIndex == 1)
-                {
-                    _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
-                }
-                else
-                {
-                    _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
-                }
-                var oThread = new Thread(SearchRange);
-                oThread.Start();
+                _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
             }
-            catch (Exception ex)
+            else
             {
-                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
             }
+            var oThread = new Thread(SearchRange);
+            oThread.Start();
         }
+
         //Experimental search Button
-        private void EXSearchRangeButtonClick(object sender, EventArgs e)
+        private void ExSearchRangeButtonClick(object sender, EventArgs e)
         {
             try
             {
-                if (SearchRangeEndTypeCB.SelectedIndex == 1)
+                if (searchRangeEndTypeCB.SelectedIndex == 1)
                 {
                     _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
                 }
@@ -177,34 +184,34 @@ namespace PeekPoker
         private void SearchRangeResultListViewMouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return; //if its not a left click return
-            peekPokeAddressTextBox.Text = "0x" + ResultGrid.Rows[ResultGrid.SelectedRows[0].Index].Cells[1].Value;
+            peekPokeAddressTextBox.Text = string.Format("0x" + resultGrid.Rows[resultGrid.SelectedRows[0].Index].Cells[1].Value);
         }
-        private void ResultGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void ResultGridCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridCell cell = (DataGridCell)sender;
-            if (ResultGrid.Rows[cell.RowNumber].Cells[2].Value != null)
-                ResultGrid.Rows[cell.RowNumber].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+            var cell = (DataGridCell)sender;
+            if (resultGrid.Rows[cell.RowNumber].Cells[2].Value != null)
+                resultGrid.Rows[cell.RowNumber].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
         }
+
         // Refresh results
-        private void ResultRefresh_Click(object sender, EventArgs e)
+        private void ResultRefreshClick(object sender, EventArgs e)
         {
-            try
+            if (_searchResult.Count > 0)
             {
-                if (SearchResult.Count > 0)
-                {
-                    Thread thread = new Thread(RefreshResultList);
-                    thread.Name = "RefreshResultsList";
-                    thread.Start();
-                }
-                else
-                {
-                    ShowMessageBox("Can not refresh! \r\n Resultlist empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                var thread = new Thread(RefreshResultList);
+                //thread.Name = "RefreshResultsList";
+                thread.Start();
             }
-            catch (Exception ex)
+            else
             {
-                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessageBox("Can not refresh! \r\n Resultlist empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        //stop the search
+        private void StopSearchButtonClick(object sender, EventArgs e)
+        {
+            _rtm.StopSearch = true; 
         }
         #endregion
         
@@ -219,10 +226,10 @@ namespace PeekPoker
         }
         private void IsSignedCheckedChanged(object sender, EventArgs e)
         {
-            changeNumericMaxMin();
+            ChangeNumericMaxMin();
             ChangeNumericValue();
         }
-        private void NumericInt_KeyPress(object sender, KeyPressEventArgs e)
+        private void NumericIntKeyPress(object sender, KeyPressEventArgs e)
         {
             if (hexBox.ByteProvider != null)
             {
@@ -230,31 +237,25 @@ namespace PeekPoker
             }
         }
         #endregion
+        
         #region Search Tab Events
-        private void searchRangeValueTextBox_KeyUp(object sender, KeyEventArgs e)
+        private void SearchRangeValueTextBoxKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Return && searchRangeValueTextBox.Focused)
+            if (e.KeyCode != Keys.Return || !searchRangeValueTextBox.Focused) return;
+
+            if (searchRangeEndTypeCB.SelectedIndex == 1)
             {
-                try
-                {
-                    if (SearchRangeEndTypeCB.SelectedIndex == 1)
-                    {
-                        _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
-                    }
-                    else
-                    {
-                        _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
-                    }
-                    var oThread = new Thread(SearchRange);
-                    oThread.Start();
-                }
-                catch (Exception ex)
-                {
-                    ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                e.Handled = true;
-                searchRangeButton.Focus();
+                _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
             }
+            else
+            {
+                _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
+            }
+            
+            var oThread = new Thread(SearchRange);
+            oThread.Start();
+            e.Handled = true;
+            searchRangeButton.Focus();
         }
         #endregion
 
@@ -279,196 +280,73 @@ namespace PeekPoker
                     _data.Add(peekPokeAddressTextBox.Text);
             }
         }
-        //Search the memory for the specified value
-        private void SearchRange()
-        {
-            try
-            {
-                //You can always use: 
-                //CheckForIllegalCrossThreadCalls = false; when dealing with threads
-                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
-                _rtm.DumpLength = _searchRangeDumpLength;
-
-                ResultGridClean();//Clean list view
-
-                //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
-                _offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
-                if (_offsets.Count < 1)
-                {
-                    //Reset the progressbar...
-                    UpdateProgressbar(0, 100, 0, "Idle");
-
-                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return; //We don't want it to continue
-                }
-                //Reset the progressbar...
-                UpdateProgressbar(0, 100, 0, "Idle");
-
-                var i = 0; //The index number
-                foreach (var offset in _offsets)
-                {
-                    //create a new variable of the SearchResult type and set the variables
-                    Types.SearchResults results = new Types.SearchResults();
-                    results.Offset = offset;
-                    results.ID = i.ToString();
-                    //add the new variable to the result list
-                    SearchResult.Add(results);
-
-                    i++;
-                }
-                ResultGridUpdate();
-            }
-            catch (Exception e)
-            {
-                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-        //Searches the memory for the specified value (Experimental)
-        private void ExSearchRange()
-        {
-            try
-            {
-                //You can always use: 
-                //CheckForIllegalCrossThreadCalls = false; when dealing with threads
-                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
-                _rtm.DumpLength = _searchRangeDumpLength;
-
-                ResultGridClean();//Clean list view
-
-                //The ExFindHexOffset function is a Experimental search function
-                BindingList<Types.SearchResults> _results = _rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
-
-                if (_results.Count < 1)
-                {
-                    //Reset the progressbar...
-                    UpdateProgressbar(0, 100, 0, "Idle");
-
-                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return; //We don't want it to continue
-                }
-                //Reset the progressbar...
-                UpdateProgressbar(0, 100, 0, "Idle");
-
-                SearchResult = _results;
-
-                ResultGridUpdate();
-            }
-            catch (Exception e)
-            {
-                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-
-        }
-        private void RefreshResultList()
-        {
-            int x = 0;
-            foreach (Types.SearchResults _item in SearchResult)
-            {
-                UpdateProgressbar(0, SearchResult.Count, x, "Refreshing...");
-                x++;
-
-                //peekPokeAddressTextBox.Text = "0x" + _item.Offset;
-                string _length = (_item.Value.Length / 2).ToString("X");
-                string retvalue = _rtm.Peek("0x" + _item.Offset, _length, "0x" + _item.Offset, _length);
-
-                if (_item.Value == retvalue)
-                    continue;
-
-                ResultGrid.Rows[x - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
-                _item.Value = retvalue;
-            }
-
-            ResultGridUpdate();
-            UpdateProgressbar(0, 100, 0, "idle");
-        }
+        
         //When you select an offset on the hexbox
         private void ChangeNumericValue()
         {
-            if (hexBox.ByteProvider != null)
+            if (hexBox.ByteProvider == null) return;
+            var buffer = hexBox.ByteProvider.Bytes;
+            if (isSigned.Checked)
             {
-                List<byte> buffer = hexBox.ByteProvider.Bytes;
-                if (isSigned.Checked)
-                {
-                    NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ? 
-                        Functions.ByteToSByte(hexBox.ByteProvider.ReadByte(hexBox.SelectionStart)) : 0;
-                    NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ?
-                        Functions.BytesToInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
-                    NumericInt32.Value = (buffer.Count - hexBox.SelectionStart) > 3 ?
-                        Functions.BytesToInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
-                }
-                else
-                {
-                    NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ?
-                        buffer[(int)hexBox.SelectionStart] : 0;
-                    NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ? 
-                        Functions.BytesToUInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
-                    NumericInt32.Value = (buffer.Count - hexBox.SelectionStart) > 3 ?
-                        Functions.BytesToUInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
-                }
-                byte[] _prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
-                int _address = Functions.BytesToInt32(_prev);
-                SelAddress.Text = string.Format("0x" + (_address + (int)hexBox.SelectionStart).ToString("X8"));
+                NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ? 
+                    Functions.ByteToSByte(hexBox.ByteProvider.ReadByte(hexBox.SelectionStart)) : 0;
+                NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ?
+                    Functions.BytesToInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
+                NumericInt32.Value = (buffer.Count - hexBox.SelectionStart) > 3 ?
+                    Functions.BytesToInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
             }
+            else
+            {
+                NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ?
+                    buffer[(int)hexBox.SelectionStart] : 0;
+                NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ? 
+                    Functions.BytesToUInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
+                NumericInt32.Value = (buffer.Count - hexBox.SelectionStart) > 3 ?
+                    Functions.BytesToUInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
+            }
+            var prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
+            var address = Functions.BytesToInt32(prev);
+            SelAddress.Text = string.Format("0x" + (address + (int)hexBox.SelectionStart).ToString("X8"));
         }
         private void ChangedNumericValue(object sender)
         {
-            if (hexBox.SelectionStart < hexBox.ByteProvider.Bytes.Count)
+            if (hexBox.SelectionStart >= hexBox.ByteProvider.Bytes.Count) return;
+            var numeric = (NumericUpDown)sender;
+            switch (numeric.Name)
             {
-                NumericUpDown numeric = (NumericUpDown)sender;
-                switch (numeric.Name)
-                {
-                    case "NumericInt8":
-                        if (isSigned.Checked)
-                        {
-                            Console.WriteLine(((sbyte)numeric.Value).ToString("X2"));
-                            hexBox.ByteProvider.WriteByte(hexBox.SelectionStart,
-                                Functions.HexToBytes(((sbyte)numeric.Value).ToString("X2"))[0]);
-                        }
-                        else
-                        {
-                            hexBox.ByteProvider.WriteByte(hexBox.SelectionStart,
-                                System.Convert.ToByte((byte)numeric.Value));
-                        }
-                        break;
-                    case "NumericInt16":
-                        for (int i = 0; i < 2; i++)
-                        {
-                            if (isSigned.Checked)
-                            {
-                                hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,
-                                    Functions.Int16ToBytes((short)numeric.Value)[i]);
-                            }
-                            else
-                            {
-                                hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,
-                                    Functions.UInt16ToBytes((ushort)numeric.Value)[i]);
-                            }
-                        }
-                        break;
-                    case "NumericInt32":
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if (isSigned.Checked)
-                            {
-                                hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,
-                                    Functions.Int32ToBytes((int)numeric.Value)[i]);
-                            }
-                            else
-                            {
-                                hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,
-                                    Functions.UInt32ToBytes((uint)numeric.Value)[i]);
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                hexBox.Refresh();
+                case "NumericInt8":
+                    if (isSigned.Checked)
+                    {
+                        Console.WriteLine(((sbyte)numeric.Value).ToString("X2"));
+                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart,
+                                                      Functions.HexToBytes(((sbyte)numeric.Value).ToString("X2"))[0]);
+                    }
+                    else
+                    {
+                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart,
+                                                      Convert.ToByte((byte)numeric.Value));
+                    }
+                    break;
+                case "NumericInt16":
+                    for (var i = 0; i < 2; i++)
+                    {
+                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,isSigned.Checked
+                                                                                    ? Functions.Int16ToBytes((short) numeric.Value)[i]
+                                                                                    : Functions.UInt16ToBytes((ushort) numeric.Value)[i]);
+                    }
+                    break;
+                case "NumericInt32":
+                    for (var i = 0; i < 4; i++)
+                    {
+                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,isSigned.Checked
+                                                                                    ? Functions.Int32ToBytes((int) numeric.Value)[i]
+                                                                                    : Functions.UInt32ToBytes((uint) numeric.Value)[i]);
+                    }
+                    break;
             }
+            hexBox.Refresh();
         }
-        private void changeNumericMaxMin()
+        private void ChangeNumericMaxMin()
         {
             if (isSigned.Checked)
             {
@@ -491,6 +369,128 @@ namespace PeekPoker
         }
         #endregion
 
+        #region Thread Functions
+        //Refresh results Thread
+        private void RefreshResultList()
+        {
+            try
+            {
+                var value = 0;
+                foreach (var item in _searchResult)
+                {
+                    UpdateProgressbar(0, _searchResult.Count, value, "Refreshing...");
+                    value++;
+
+                    //peekPokeAddressTextBox.Text = "0x" + _item.Offset;
+                    var length = (item.Value.Length / 2).ToString("X");
+                    var retvalue = _rtm.Peek("0x" + item.Offset, length, "0x" + item.Offset, length);
+
+                    if (item.Value == retvalue) continue;//if value hasn't change continue foreach loop
+
+                    GridRowColours(value);
+                    item.Value = retvalue;
+                }
+
+                ResultGridUpdate();
+                UpdateProgressbar(0, 100, 0, "idle");
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Thread.CurrentThread.Abort();
+            }
+        }
+        //Search the memory for the specified value
+        private void SearchRange()
+        {
+            try
+            {
+                CheckForIllegalCrossThreadCalls = false; //line 463 grid cross thread error
+                EnableExSearchRangeButton(false);
+                EnableStopSearchButton(true);
+                EnableSearchRangeButton(false);
+                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
+                _rtm.DumpLength = _searchRangeDumpLength;
+                ResultGridClean();//Clean list view
+
+                //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
+                _offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+                //Reset the progressbar...
+                UpdateProgressbar(0, 100, 0);
+
+                if (_offsets.Count < 1)
+                {
+                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return; //We don't want it to continue
+                }
+
+                var i = 0; //The index number
+                foreach (var offset in _offsets)
+                {
+                    //create a new variable of the SearchResult type and set the variables
+                    var results = new Types.SearchResults { Offset = offset, ID = i.ToString() };
+                    //add the new variable to the result list
+                    _searchResult.Add(results);
+                    i++;
+                }
+                ResultGridUpdate();
+            }
+            catch (Exception e)
+            {
+                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                EnableExSearchRangeButton(true);
+                EnableSearchRangeButton(true);
+                EnableStopSearchButton(false);
+                Thread.CurrentThread.Abort();
+            }
+        }
+        //Searches the memory for the specified value (Experimental)
+        private void ExSearchRange()
+        {
+            try
+            {
+                CheckForIllegalCrossThreadCalls = false; //line 476 grid cross thread error
+                EnableSearchRangeButton(false);
+                EnableExSearchRangeButton(false);
+                EnableStopSearchButton(true);
+                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
+                _rtm.DumpLength = _searchRangeDumpLength;
+
+                ResultGridClean();//Clean list view
+
+                //The ExFindHexOffset function is a Experimental search function
+                var results = _rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+                //Reset the progressbar...
+                UpdateProgressbar(0, 100, 0);
+
+                if (results.Count < 1)
+                {
+                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return; //We don't want it to continue
+                }
+                _searchResult = results;
+                ResultGridUpdate();
+            }
+            catch (Exception e)
+            {
+                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                EnableExSearchRangeButton(true);
+                EnableSearchRangeButton(true);
+                EnableStopSearchButton(false);
+                Thread.CurrentThread.Abort();
+            }
+        }
+        #endregion
+
         #region safeThreadingProperties
         //==================================================================
         // This method demonstrates a pattern for making thread-safe
@@ -506,6 +506,7 @@ namespace PeekPoker
         //Reference: http://msdn.microsoft.com/en-us/library/ms171728.aspx
         //===================================================================
 
+        //Get and Set values
         private String GetSearchRangeValueTextBoxText()//Get the value from the textbox - safe
         {
             //recursion
@@ -526,6 +527,27 @@ namespace PeekPoker
                 return Functions.Convert(startRangeAddressTextBox.Text);
             return returnVal;
         }
+        private void EnableStopSearchButton(bool value)
+        {
+            if (stopSearchButton.InvokeRequired)
+                stopSearchButton.Invoke((MethodInvoker)delegate { EnableStopSearchButton(value); });
+            else
+                stopSearchButton.Enabled = value;
+        }
+        private void EnableSearchRangeButton(bool value)
+        {
+            if (searchRangeButton.InvokeRequired)
+                searchRangeButton.Invoke((MethodInvoker)delegate { EnableSearchRangeButton(value); });
+            else
+                searchRangeButton.Enabled = value;
+        }
+        private void EnableExSearchRangeButton(bool value)
+        {
+            if (EXsearchRangeButton.InvokeRequired)
+                EXsearchRangeButton.Invoke((MethodInvoker)delegate { EnableExSearchRangeButton(value); });
+            else
+                EXsearchRangeButton.Enabled = value;
+        }
         private void ShowMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
             //Using lambda express - I believe its slower - Just an example
@@ -534,29 +556,38 @@ namespace PeekPoker
             else MessageBox.Show(this, text, caption, buttons, icon);
         }
 
+        //Control changes
+        private void GridRowColours(int value)
+        {
+            if (resultGrid.InvokeRequired)
+                resultGrid.Invoke((MethodInvoker)delegate { GridRowColours(value); });
+            else
+                resultGrid.Rows[value - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+        }
+
         //Refresh the values of Search Results
         private void ResultGridClean()
         {
-            if (ResultGrid.InvokeRequired)
-                ResultGrid.Invoke((MethodInvoker)(ResultGridClean));
+            if (resultGrid.InvokeRequired)
+                resultGrid.Invoke((MethodInvoker)(ResultGridClean));
             else
-                ResultGrid.Rows.Clear();
+                resultGrid.Rows.Clear();
         }
         private void ResultGridUpdate()
         {
             //IList or represents a collection of objects(String)
-            if (ResultGrid.InvokeRequired)
+            if (resultGrid.InvokeRequired)
                 //lambda expression empty delegate that calls a recursive function if InvokeRequired
-                ResultGrid.Invoke((MethodInvoker)(() => ResultGridUpdate()));
+                resultGrid.Invoke((MethodInvoker)(ResultGridUpdate));
             else
             {
-                ResultGrid.DataSource = SearchResult;
-                ResultGrid.Refresh();
+                resultGrid.DataSource = _searchResult;
+                resultGrid.Refresh();
             }
         }
 
         //Progressbar Delegates
-        internal void UpdateProgressbar(int min, int max, int value, string text = "Idle")
+        private void UpdateProgressbar(int min, int max, int value, string text = "Idle")
         {
             if (statusStrip1.InvokeRequired)
             {
@@ -564,9 +595,12 @@ namespace PeekPoker
             }
             else
             {
-                StatusProgressBar.ProgressBar.Maximum = max;
-                StatusProgressBar.ProgressBar.Minimum = min;
-                StatusProgressBar.ProgressBar.Value = value;
+                if (StatusProgressBar.ProgressBar != null)
+                {
+                    StatusProgressBar.ProgressBar.Maximum = max;
+                    StatusProgressBar.ProgressBar.Minimum = min;
+                    StatusProgressBar.ProgressBar.Value = value;
+                }
                 statusStripLabel.Text = text;
             }
             
@@ -642,5 +676,29 @@ namespace PeekPoker
             }
         }
         #endregion
+
+        private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor"));
+            stringBuilder.AppendLine(string.Format("By"));
+            stringBuilder.AppendLine(string.Format("Cybersam"));
+            stringBuilder.AppendLine(string.Format("8Balls"));
+            stringBuilder.AppendLine(string.Format("PureIso"));
+            stringBuilder.AppendLine(string.Format("Special Thanks"));
+            stringBuilder.AppendLine(string.Format("Mojobojo"));
+            stringBuilder.AppendLine(string.Format("fairchild"));
+            stringBuilder.AppendLine(string.Format("360Haven"));
+            ShowMessageBox(stringBuilder.ToString(),string.Format("Peek Poker"),MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void CurrentXpToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            searchRangeBaseValueTypeCB.Text = string.Format("Hex");
+            searchRangeEndTypeCB.Text = string.Format("Length");
+            searchRangeValueTextBox.Text = string.Format("8211EF4C5C242888000000030000000000000000");
+            startRangeAddressTextBox.Text = string.Format("0xDA1D0000");
+            endRangeAddressTextBox.Text = string.Format("0xFFFF");
+        }
     }
 }

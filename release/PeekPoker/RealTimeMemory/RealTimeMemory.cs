@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
-using System.Diagnostics;
-using System.Globalization;
 using System.ComponentModel;
-namespace PeekPoker
+
+namespace PeekPoker.RealTimeMemory
 {
     /// <summary>Real Time Memory Access Class using xbdm
     /// NB: Large dump speed depends on the version of xbdm you have</summary>
@@ -20,7 +19,9 @@ namespace PeekPoker
         private bool _memexValidConnection;
         private uint _startDumpOffset;
         private uint _startDumpLength;
+        private bool _stopSearch;
         private TcpClient _tcp;
+        private RWStream _readWriter;
 
         #region Constructor
         /// <summary>RealTimeMemory constructor Example: Default start dump = 0xC0000000 and length = 0x1FFFFFFF</summary>
@@ -176,8 +177,8 @@ namespace PeekPoker
             {
                     //LENGTH or Szie = Length of the dump
                     var size = _startDumpLength;
-                    var readWriter = new RWStream();
-                    readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
+                    _readWriter = new RWStream();
+                    _readWriter.ReportProgress += ReportProgress;
                     var data = new byte[1026]; //byte chuncks
 
                     //Writing each byte chuncks========
@@ -185,7 +186,7 @@ namespace PeekPoker
                     for (var i = 0; i < size / 1024; i++)
                     {
                         _tcp.Client.Receive(data);
-                        readWriter.WriteBytes(data, 2, 1024);
+                        _readWriter.WriteBytes(data, 2, 1024);
                         ReportProgress(0, (int)(size / 1024), (i + 1), "Reading Dump...");
                     }
                     //Write whatever is left
@@ -193,13 +194,13 @@ namespace PeekPoker
                     if (extra > 0)
                     {
                         _tcp.Client.Receive(data);
-                        readWriter.WriteBytes(data, 2, extra);
+                        _readWriter.WriteBytes(data, 2, extra);
                     }
-                    readWriter.Flush();
+                    _readWriter.Flush();
                     //===================================
                     //===================================
-                    readWriter.Position = 0;
-                    var values = readWriter.SearchHexString(pointer, false);
+                    _readWriter.Position = 0;
+                    var values = _readWriter.SearchHexString(pointer, false);
                     var addresses = new List<string>(values.Length);
                     int x = 0;
                     foreach (var value in values)
@@ -208,7 +209,7 @@ namespace PeekPoker
                         ReportProgress(0, values.Length, x, "Add Results to list");
                         x++;
                     }
-                    readWriter.Close();
+                    _readWriter.Close();
                     return new List<string>(addresses.ToArray());
             }
             catch (Exception ex)
@@ -234,8 +235,8 @@ namespace PeekPoker
             {
                 //LENGTH or Szie = Length of the dump
                 var size = _startDumpLength;
-                var readWriter = new RWStream();
-                readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
+                _readWriter = new RWStream();
+                _readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
                 var data = new byte[1026]; //byte chuncks
 
                 //Writing each byte chuncks========
@@ -243,7 +244,7 @@ namespace PeekPoker
                 for (var i = 0; i < size / 1024; i++)
                 {
                     _tcp.Client.Receive(data);
-                    readWriter.WriteBytes(data, 2, 1024);
+                    _readWriter.WriteBytes(data, 2, 1024);
                     ReportProgress(0, (int)(size / 1024), (i + 1), "Reading Dump...");
                 }
                 //Write whatever is left
@@ -251,18 +252,18 @@ namespace PeekPoker
                 if (extra > 0)
                 {
                     _tcp.Client.Receive(data);
-                    readWriter.WriteBytes(data, 2, extra);
+                    _readWriter.WriteBytes(data, 2, extra);
                 }
-                readWriter.Flush();
+                _readWriter.Flush();
                 //===================================
                 //===================================
-                readWriter.Position = 0;
+                _readWriter.Position = 0;
 
                 //using the Experimental search Function
                 //List<Types.SearchResults> values = readWriter.ExSearchHexString(pointer, _startDumpOffset, false);
-                BindingList<Types.SearchResults> values = readWriter.Ex2SearchHexString(Functions.StringToByteArray(pointer), _startDumpOffset);
+                var values = _readWriter.Ex2SearchHexString(Functions.StringToByteArray(pointer), _startDumpOffset);
 
-                readWriter.Close();
+                _readWriter.Close();
                 return values;
             }
             catch (Exception ex)
@@ -331,6 +332,21 @@ namespace PeekPoker
         public uint DumpLength
         {
             set { _startDumpLength = value; }
+        }
+        public bool StopSearch
+        {
+            get
+            {
+                if (!_readWriter.Accessed)
+                    return false;
+                return _readWriter.StopSearch;
+            }
+            set
+            {
+                if (!_readWriter.Accessed)
+                    return;
+                    _readWriter.StopSearch = value;
+            }
         }
 
         #endregion

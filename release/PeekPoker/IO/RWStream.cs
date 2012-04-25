@@ -19,6 +19,7 @@ namespace PeekPoker
         private string _fileName;
         private Stream _fStream;
         private readonly bool _isBigEndian;
+        private bool _stopSearch;
 
         #region RwStream Constructors
         /// <summary>Makes a temporary file Stream</summary>
@@ -32,6 +33,7 @@ namespace PeekPoker
                 _bWriter = new BinaryWriter(_fStream);
                 _isBigEndian = true;
                 _accessed = true;
+                _stopSearch = false;
             }
             catch (Exception e)
             {
@@ -150,9 +152,10 @@ namespace PeekPoker
                 //location of the value/s
                 var locations = new List<long>();
                 long index;
-                int prev = (int)Position;
+                var prev = (int)Position;
                 for (index = Position; index < Length; index++)
                 {
+                    if (_stopSearch) return locations.ToArray(); //so users can stop the search
                     Position = index;
 
                     if (!firstFind)
@@ -216,7 +219,7 @@ namespace PeekPoker
                     index = Position;
                 }
                 watch.Stop();
-                Console.WriteLine("Parallel for - Search: Seconds Elapsed: " + watch.Elapsed.Seconds);
+                Console.WriteLine(string.Format("Parallel for - Search: Seconds Elapsed: " + watch.Elapsed.Seconds));
                 return locations;
             }
             catch (Exception exception)
@@ -224,35 +227,33 @@ namespace PeekPoker
                 throw new Exception(exception.Message);
             }
         }
-        public BindingList<Types.SearchResults> Ex2SearchHexString(byte[] pattern, uint _startDumpOffset)
+        public BindingList<Types.SearchResults> Ex2SearchHexString(byte[] pattern, uint startDumpOffset)
         {
             byte[] buffer = ReadBytes((int)Length, _isBigEndian);
-            BindingList<Types.SearchResults> positions = new BindingList<Types.SearchResults>();
-            int startIndex = 0;
-            int i = Array.IndexOf<byte>(buffer, pattern[0], startIndex);
+            var positions = new BindingList<Types.SearchResults>();
+            var i = Array.IndexOf(buffer, pattern[0], 0);
             int x = 1;
             while (i >= 0 && i <= buffer.Length - pattern.Length)
             {
+                if (_stopSearch) return positions; //so users can stop the search
                 ReportProgress(0, (int)buffer.Length, (int)i, "Searching...");
 
-                byte[] segment = new byte[pattern.Length];
+                var segment = new byte[pattern.Length];
                 Buffer.BlockCopy(buffer, i, segment, 0, pattern.Length);
-                if (segment.SequenceEqual<byte>(pattern))
+                if (segment.SequenceEqual(pattern))
                 {
-                    Types.SearchResults results = new Types.SearchResults();
-                    results.Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)i));
+                    var results = new Types.SearchResults();
+                    results.Offset = Functions.ToHexString(Functions.UInt32ToBytes(startDumpOffset + (uint)i));
                     results.Value = Functions.ByteArrayToString(segment);
                     results.ID = x.ToString();
                     positions.Add(results);
-                    i = Array.IndexOf<byte>(buffer, pattern[0], i + pattern.Length);
+                    i = Array.IndexOf(buffer, pattern[0], i + pattern.Length);
                     x++;
                 }
                 else 
                 {
-                    i = Array.IndexOf<byte>(buffer, pattern[0], i + 1);
+                    i = Array.IndexOf(buffer, pattern[0], i + 1);
                 }
-                
-
             }
             return positions;
         }
@@ -325,6 +326,15 @@ namespace PeekPoker
                     throw new Exception(exception.Message);
                 }
             }
+        }
+        public bool Accessed
+        {
+            get { return _accessed; }
+        }
+        public bool StopSearch
+        {
+            get { return _stopSearch; }
+            set { _stopSearch = value; }
         }
         #endregion
     }
