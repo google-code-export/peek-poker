@@ -669,9 +669,19 @@ namespace PeekPoker
         {
             if (hexcalcbox.Focused) //Prevents chaos via triggering both textchange events
             {
-                if (System.Text.RegularExpressions.Regex.IsMatch(hexcalcbox.Text, @"^[A-Fa-f0-9]*$")) //Prevents error via random nonsense
+                string Hexycalc;
+                if (hexcalcbox.Text.StartsWith("0x"))
                 {
-                    decimalbox.Text = Convert.ToInt32(hexcalcbox.Text, 16).ToString(); //Basic Hex > Decimal Conversion
+                    Hexycalc = hexcalcbox.Text.Substring(2);
+                }
+                else { Hexycalc = hexcalcbox.Text; }
+                if (System.Text.RegularExpressions.Regex.IsMatch(Hexycalc, @"\A\b[0-9a-fA-F]+\b\Z")) //Prevents error via random nonsense @"^[A-Fa-f0-9]*$"
+                {
+                    try
+                    {
+                        decimalbox.Text = Convert.ToInt32(hexcalcbox.Text, 16).ToString(); //Basic Hex > Decimal Conversion
+                    }
+                    catch { }
                 }
             }
         }
@@ -683,7 +693,7 @@ namespace PeekPoker
             stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor"));
             stringBuilder.AppendLine(string.Format("By"));
             stringBuilder.AppendLine(string.Format("Cybersam"));
-            stringBuilder.AppendLine(string.Format("8Balls"));
+            stringBuilder.AppendLine(string.Format("8Ball"));
             stringBuilder.AppendLine(string.Format("PureIso"));
             stringBuilder.AppendLine(string.Format("Special Thanks"));
             stringBuilder.AppendLine(string.Format("Mojobojo"));

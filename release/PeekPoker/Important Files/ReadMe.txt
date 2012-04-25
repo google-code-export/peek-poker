@@ -1,4 +1,4 @@
-﻿Last Update - 25/04/12 by PureIso
+﻿Last Update - 25/04/12 by 8Ball
 ==============================================================
 NB: Update source file before you commit.
 ==============================================================
@@ -92,4 +92,4 @@ added Resident evil - select game
 added stop search function
 fixed - threading problems. I tested most of teh functions
 Bug - The refresh button seems to return null value for Item value
-
+Repaired hex2dec, now actually works.
