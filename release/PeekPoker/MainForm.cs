@@ -58,6 +58,30 @@ namespace PeekPoker
             //Set correct max. min values for the numeric fields
             ChangeNumericMaxMin();
         }
+        private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor"));
+            stringBuilder.AppendLine(string.Format("By"));
+            stringBuilder.AppendLine(string.Format("Cybersam"));
+            stringBuilder.AppendLine(string.Format("8Ball"));
+            stringBuilder.AppendLine(string.Format("PureIso"));
+            stringBuilder.AppendLine(string.Format("cornnatron"));
+            stringBuilder.AppendLine(string.Format("Special Thanks"));
+            stringBuilder.AppendLine(string.Format("Mojobojo"));
+            stringBuilder.AppendLine(string.Format("fairchild"));
+            stringBuilder.AppendLine(string.Format("360Haven"));
+            ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void HowToUseToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine(string.Format("Select a game stores offsets / pointer information."));
+            stringBuilder.AppendLine(string.Format("Select a game and naviagte to the options"));
+            stringBuilder.AppendLine(string.Format("Options with [P] = search range pointer info"));
+            stringBuilder.AppendLine(string.Format("Options with [A] = Address of the actual value"));
+            stringBuilder.AppendLine(string.Format("NB: This is still work in progress."));
+        }
 
         #region button clicks
         //When you click on the connect button
@@ -65,13 +89,19 @@ namespace PeekPoker
         {
             try
             {
+                SetLogText("Connecting to: " + ipAddressTextBox.Text);
                 _rtm = new RealTimeMemory.RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
                 _rtm.ReportProgress += UpdateProgressbar;
 
-                if (!_rtm.Connect()) throw new Exception("Connection Failed!");
+                if (!_rtm.Connect())
+                {
+                    SetLogText("Connecting to " + ipAddressTextBox.Text+" Failed.");
+                    throw new Exception("Connection Failed!");
+                }
                 peeknpoke.Enabled = true;
                 statusStripLabel.Text = String.Format("Connected");
                 MessageBox.Show(this, String.Format("Connected"), String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SetLogText("Connected to " + ipAddressTextBox.Text);
 
                 if (!File.Exists(_filepath)) File.Create(_filepath).Dispose(); //Create the file if it doesn't exist
                 var objWriter = new StreamWriter(_filepath); //Writer Declaration
@@ -81,6 +111,7 @@ namespace PeekPoker
             }
             catch (Exception ex)
             {
+                SetLogText("Error: " + ex.Message);
                 MessageBox.Show(this, ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
@@ -105,6 +136,7 @@ namespace PeekPoker
             }
             catch (Exception ex)
             {
+                SetLogText("Error: " + ex.Message);
                 MessageBox.Show(this, ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
@@ -127,6 +159,7 @@ namespace PeekPoker
             }
             catch (Exception ex)
             {
+                SetLogText("Error: " + ex.Message);
                 MessageBox.Show(this, ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -134,6 +167,7 @@ namespace PeekPoker
         //When you click on the www.360haven.com
         private void ToolStripStatusLabel2Click(object sender, EventArgs e)
         {
+            SetLogText("URL connection to www.360haven.com");
             Process.Start("www.360haven.com");
         }
 
@@ -548,6 +582,16 @@ namespace PeekPoker
             else
                 EXsearchRangeButton.Enabled = value;
         }
+        private void SetLogText(string value)
+        {
+            if(logTextBox.InvokeRequired)
+                Invoke((MethodInvoker)(() => SetLogText(value)));
+            else
+            {
+                var m = DateTime.Now.ToString("HH:mm:ss tt") + " " + value + Environment.NewLine;
+                logTextBox.Text += m;
+            }
+        }
         private void ShowMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
             //Using lambda express - I believe its slower - Just an example
@@ -656,7 +700,7 @@ namespace PeekPoker
                 if (!System.Text.RegularExpressions.Regex.IsMatch(decimalbox.Text.ToUpper(), "[A-Z]")) //Checks for alpha characters, we don't like those
                 {
                     Int32 number;
-                    bool result = Int32.TryParse(decimalbox.Text, out number); //Stops things like a single "-" causing errors
+                    var result = Int32.TryParse(decimalbox.Text, out number); //Stops things like a single "-" causing errors
                     if (result)
                     {
                         string hex = number.ToString("X4"); //x is for hex and 4 is padding to a 4 digit value, uppercases.
@@ -667,43 +711,23 @@ namespace PeekPoker
         }
         private void Hex2Dec(object sender, EventArgs e)
         {
-            if (hexcalcbox.Focused) //Prevents chaos via triggering both textchange events
+            if (!hexcalcbox.Focused) return;
+            var hexycalc = hexcalcbox.Text.StartsWith("0x") ? hexcalcbox.Text.Substring(2) : hexcalcbox.Text;
+            if (System.Text.RegularExpressions.Regex.IsMatch(hexycalc, @"\A\b[0-9a-fA-F]+\b\Z")) //Prevents error via random nonsense @"^[A-Fa-f0-9]*$"
             {
-                string Hexycalc;
-                if (hexcalcbox.Text.StartsWith("0x"))
+                try
                 {
-                    Hexycalc = hexcalcbox.Text.Substring(2);
+                    decimalbox.Text = Convert.ToInt32(hexcalcbox.Text, 16).ToString(); //Basic Hex > Decimal Conversion
                 }
-                else { Hexycalc = hexcalcbox.Text; }
-                if (System.Text.RegularExpressions.Regex.IsMatch(Hexycalc, @"\A\b[0-9a-fA-F]+\b\Z")) //Prevents error via random nonsense @"^[A-Fa-f0-9]*$"
-                {
-                    try
-                    {
-                        decimalbox.Text = Convert.ToInt32(hexcalcbox.Text, 16).ToString(); //Basic Hex > Decimal Conversion
-                    }
-                    catch { }
-                }
+                catch { }
             }
         }
         #endregion
 
-        private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor"));
-            stringBuilder.AppendLine(string.Format("By"));
-            stringBuilder.AppendLine(string.Format("Cybersam"));
-            stringBuilder.AppendLine(string.Format("8Ball"));
-            stringBuilder.AppendLine(string.Format("PureIso"));
-            stringBuilder.AppendLine(string.Format("Special Thanks"));
-            stringBuilder.AppendLine(string.Format("Mojobojo"));
-            stringBuilder.AppendLine(string.Format("fairchild"));
-            stringBuilder.AppendLine(string.Format("360Haven"));
-            ShowMessageBox(stringBuilder.ToString(),string.Format("Peek Poker"),MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
+        //Resident Evil ORC - current xp
         private void CurrentXpToolStripMenuItemClick(object sender, EventArgs e)
         {
+            SetLogText("#select game# Resident Evil ORC - current xp - selected");
             searchRangeBaseValueTypeCB.Text = string.Format("Hex");
             searchRangeEndTypeCB.Text = string.Format("Length");
             searchRangeValueTextBox.Text = string.Format("8211EF4C5C242888000000030000000000000000");
@@ -711,16 +735,31 @@ namespace PeekPoker
             endRangeAddressTextBox.Text = string.Format("0xFFFF");
         }
 
-        private void currentXpToolStripMenuItem1_Click(object sender, EventArgs e)
+        //Prototype 2 - current xp
+        private void CurrentXpToolStripMenuItem1Click(object sender, EventArgs e)
         {
+            SetLogText("#select game# Prototype 2 - current xp - selected");
             peekPokeAddressTextBox.Text = string.Format("0xc33BE970");
             peekLengthTextBox.Text = string.Format("4");
         }
 
-        private void currentBloodToolStripMenuItem_Click(object sender, EventArgs e)
+        //BloodForge - current blood
+        private void CurrentBloodToolStripMenuItemClick(object sender, EventArgs e)
         {
+            SetLogText("#select game# BloodForge - current blood - selected");
             peekPokeAddressTextBox.Text = string.Format("0xcF4D3130");
             peekLengthTextBox.Text = string.Format("4");
+        }
+
+        //UFC 3 - attributes
+        private void PAttributeToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            SetLogText("#select game# UFC3 - attribute - selected");
+            searchRangeBaseValueTypeCB.Text = string.Format("Hex");
+            searchRangeEndTypeCB.Text = string.Format("Length");
+            searchRangeValueTextBox.Text = string.Format("82010480");
+            startRangeAddressTextBox.Text = string.Format("0xC7897000");
+            endRangeAddressTextBox.Text = string.Format("0xFFF");
         }
     }
 }

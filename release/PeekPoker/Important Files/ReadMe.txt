@@ -1,4 +1,4 @@
-﻿Last Update - 25/04/12 by 8Ball
+﻿Last Update - 29/04/12 by PureIso
 ==============================================================
 NB: Update source file before you commit.
 ==============================================================
@@ -93,3 +93,7 @@ added stop search function
 fixed - threading problems. I tested most of teh functions
 Bug - The refresh button seems to return null value for Item value
 Repaired hex2dec, now actually works.
+
+-Change 29/04/12
+Added log tho the pplication
+Removed Dumbing tab

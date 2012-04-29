@@ -38,7 +38,53 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ipAddressTextBox = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.residentEvilORCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentXPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prototype2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentXpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uFC3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pAttributeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.searchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
+            this.searchRangeEndTypeCB = new System.Windows.Forms.ComboBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.decimalbox = new System.Windows.Forms.TextBox();
+            this.hexcalcbox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.resultGrid = new System.Windows.Forms.DataGridView();
+            this.ResultRefresh = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.stopSearchButton = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
+            this.EXsearchRangeButton = new System.Windows.Forms.Button();
+            this.searchRangeButton = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
+            this.endRangeAddressTextBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.peeknpoke = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -60,67 +106,25 @@
             this.peekButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.peekPokeAddressTextBox = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.resultGrid = new System.Windows.Forms.DataGridView();
-            this.ResultRefresh = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.stopSearchButton = new System.Windows.Forms.Button();
-            this.searchRangeEndTypeCB = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.searchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
-            this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
-            this.EXsearchRangeButton = new System.Windows.Forms.Button();
-            this.searchRangeButton = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
-            this.endRangeAddressTextBox = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.decimalbox = new System.Windows.Forms.TextBox();
-            this.hexcalcbox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.residentEvilORCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentXPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.prototype2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentXpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.currentBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logTextBox = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.peeknpoke.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -194,17 +198,469 @@
             this.connectButton.UseVisualStyleBackColor = true;
             this.connectButton.Click += new System.EventHandler(this.ConnectButtonClick);
             // 
-            // tabControl1
+            // menuStrip1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(0, 58);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(700, 363);
-            this.tabControl1.TabIndex = 13;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.aboutToolStripMenuItem,
+            this.aboutToolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(700, 24);
+            this.menuStrip1.TabIndex = 14;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.residentEvilORCToolStripMenuItem,
+            this.prototype2ToolStripMenuItem,
+            this.bToolStripMenuItem,
+            this.uFC3ToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.howToUseToolStripMenuItem});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.aboutToolStripMenuItem.Text = "Select Game";
+            // 
+            // residentEvilORCToolStripMenuItem
+            // 
+            this.residentEvilORCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.currentXPToolStripMenuItem});
+            this.residentEvilORCToolStripMenuItem.Name = "residentEvilORCToolStripMenuItem";
+            this.residentEvilORCToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.residentEvilORCToolStripMenuItem.Text = "Resident Evil - ORC";
+            // 
+            // currentXPToolStripMenuItem
+            // 
+            this.currentXPToolStripMenuItem.Name = "currentXPToolStripMenuItem";
+            this.currentXPToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.currentXPToolStripMenuItem.Text = "[P] Current XP";
+            this.currentXPToolStripMenuItem.Click += new System.EventHandler(this.CurrentXpToolStripMenuItemClick);
+            // 
+            // prototype2ToolStripMenuItem
+            // 
+            this.prototype2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.currentXpToolStripMenuItem1});
+            this.prototype2ToolStripMenuItem.Name = "prototype2ToolStripMenuItem";
+            this.prototype2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.prototype2ToolStripMenuItem.Text = "Prototype 2";
+            // 
+            // currentXpToolStripMenuItem1
+            // 
+            this.currentXpToolStripMenuItem1.Name = "currentXpToolStripMenuItem1";
+            this.currentXpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.currentXpToolStripMenuItem1.Text = "[A] Current XP";
+            this.currentXpToolStripMenuItem1.Click += new System.EventHandler(this.CurrentXpToolStripMenuItem1Click);
+            // 
+            // bToolStripMenuItem
+            // 
+            this.bToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.currentBloodToolStripMenuItem});
+            this.bToolStripMenuItem.Name = "bToolStripMenuItem";
+            this.bToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.bToolStripMenuItem.Text = "Bloodforge";
+            // 
+            // currentBloodToolStripMenuItem
+            // 
+            this.currentBloodToolStripMenuItem.Name = "currentBloodToolStripMenuItem";
+            this.currentBloodToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.currentBloodToolStripMenuItem.Text = "[A] Current Blood";
+            this.currentBloodToolStripMenuItem.Click += new System.EventHandler(this.CurrentBloodToolStripMenuItemClick);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            // 
+            // howToUseToolStripMenuItem
+            // 
+            this.howToUseToolStripMenuItem.Name = "howToUseToolStripMenuItem";
+            this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.howToUseToolStripMenuItem.Text = "How To Use";
+            this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.HowToUseToolStripMenuItemClick);
+            // 
+            // uFC3ToolStripMenuItem
+            // 
+            this.uFC3ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pAttributeToolStripMenuItem});
+            this.uFC3ToolStripMenuItem.Name = "uFC3ToolStripMenuItem";
+            this.uFC3ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.uFC3ToolStripMenuItem.Text = "UFC 3";
+            // 
+            // pAttributeToolStripMenuItem
+            // 
+            this.pAttributeToolStripMenuItem.Name = "pAttributeToolStripMenuItem";
+            this.pAttributeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pAttributeToolStripMenuItem.Text = "[P] Attribute";
+            this.pAttributeToolStripMenuItem.Click += new System.EventHandler(this.PAttributeToolStripMenuItemClick);
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
+            // 
+            // searchRangeBaseValueTypeCB
+            // 
+            this.searchRangeBaseValueTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchRangeBaseValueTypeCB.FormattingEnabled = true;
+            this.searchRangeBaseValueTypeCB.Items.AddRange(new object[] {
+            "Hex",
+            "Dec"});
+            this.searchRangeBaseValueTypeCB.Location = new System.Drawing.Point(87, 20);
+            this.searchRangeBaseValueTypeCB.Name = "searchRangeBaseValueTypeCB";
+            this.searchRangeBaseValueTypeCB.Size = new System.Drawing.Size(57, 23);
+            this.searchRangeBaseValueTypeCB.TabIndex = 15;
+            this.toolTips.SetToolTip(this.searchRangeBaseValueTypeCB, "Insert your values in hex or dec");
+            // 
+            // searchRangeEndTypeCB
+            // 
+            this.searchRangeEndTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchRangeEndTypeCB.FormattingEnabled = true;
+            this.searchRangeEndTypeCB.Items.AddRange(new object[] {
+            "Length",
+            "Offset"});
+            this.searchRangeEndTypeCB.Location = new System.Drawing.Point(400, 20);
+            this.searchRangeEndTypeCB.Name = "searchRangeEndTypeCB";
+            this.searchRangeEndTypeCB.Size = new System.Drawing.Size(93, 23);
+            this.searchRangeEndTypeCB.TabIndex = 17;
+            this.toolTips.SetToolTip(this.searchRangeEndTypeCB, "use offset or length");
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(692, 335);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Calculator";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Controls.Add(this.decimalbox);
+            this.groupBox4.Controls.Add(this.hexcalcbox);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Location = new System.Drawing.Point(95, 17);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(507, 63);
+            this.groupBox4.TabIndex = 15;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Converter";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Decimal:";
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(232, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = ">>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            // 
+            // decimalbox
+            // 
+            this.decimalbox.Location = new System.Drawing.Point(81, 20);
+            this.decimalbox.MaxLength = 3276700;
+            this.decimalbox.Name = "decimalbox";
+            this.decimalbox.Size = new System.Drawing.Size(145, 22);
+            this.decimalbox.TabIndex = 1;
+            this.decimalbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.decimalbox.TextChanged += new System.EventHandler(this.Dec2Hex);
+            // 
+            // hexcalcbox
+            // 
+            this.hexcalcbox.Location = new System.Drawing.Point(340, 20);
+            this.hexcalcbox.Name = "hexcalcbox";
+            this.hexcalcbox.Size = new System.Drawing.Size(145, 22);
+            this.hexcalcbox.TabIndex = 4;
+            this.hexcalcbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hexcalcbox.TextChanged += new System.EventHandler(this.Hex2Dec);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(300, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 15);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Hex:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(307, 95);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(104, 15);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "Work In Progress";
+            this.label17.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(246, 172);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 15);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Long:";
+            this.label11.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(246, 144);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 15);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Short:";
+            this.label10.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(246, 120);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 15);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Byte:";
+            this.label9.Visible = false;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(286, 169);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(145, 22);
+            this.textBox3.TabIndex = 8;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.Visible = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(286, 141);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(145, 22);
+            this.textBox2.TabIndex = 7;
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(286, 113);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(145, 22);
+            this.textBox1.TabIndex = 6;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox1.Visible = false;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.groupBox2);
+            this.tabPage3.Controls.Add(this.groupBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(692, 335);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Search Range";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.resultGrid);
+            this.groupBox2.Controls.Add(this.ResultRefresh);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Location = new System.Drawing.Point(10, 125);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(674, 204);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Result/s";
+            // 
+            // resultGrid
+            // 
+            this.resultGrid.AllowUserToAddRows = false;
+            this.resultGrid.AllowUserToDeleteRows = false;
+            this.resultGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.resultGrid.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.resultGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.resultGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resultGrid.Location = new System.Drawing.Point(6, 18);
+            this.resultGrid.MultiSelect = false;
+            this.resultGrid.Name = "resultGrid";
+            this.resultGrid.ReadOnly = true;
+            this.resultGrid.RowHeadersVisible = false;
+            this.resultGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.resultGrid.Size = new System.Drawing.Size(424, 174);
+            this.resultGrid.TabIndex = 14;
+            this.resultGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResultGridCellValueChanged);
+            this.resultGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SearchRangeResultListViewMouseClick);
+            // 
+            // ResultRefresh
+            // 
+            this.ResultRefresh.Location = new System.Drawing.Point(436, 161);
+            this.ResultRefresh.Name = "ResultRefresh";
+            this.ResultRefresh.Size = new System.Drawing.Size(76, 31);
+            this.ResultRefresh.TabIndex = 13;
+            this.ResultRefresh.Text = "Refresh";
+            this.ResultRefresh.UseVisualStyleBackColor = true;
+            this.ResultRefresh.Click += new System.EventHandler(this.ResultRefreshClick);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(446, 83);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(222, 30);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "*NB: The larger the range the longer \r\nthe search will take";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.stopSearchButton);
+            this.groupBox1.Controls.Add(this.searchRangeEndTypeCB);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.searchRangeBaseValueTypeCB);
+            this.groupBox1.Controls.Add(this.startRangeAddressTextBox);
+            this.groupBox1.Controls.Add(this.EXsearchRangeButton);
+            this.groupBox1.Controls.Add(this.searchRangeButton);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
+            this.groupBox1.Controls.Add(this.endRangeAddressTextBox);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Location = new System.Drawing.Point(16, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(668, 113);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search Range Selection Options";
+            // 
+            // stopSearchButton
+            // 
+            this.stopSearchButton.Enabled = false;
+            this.stopSearchButton.Location = new System.Drawing.Point(310, 76);
+            this.stopSearchButton.Name = "stopSearchButton";
+            this.stopSearchButton.Size = new System.Drawing.Size(94, 31);
+            this.stopSearchButton.TabIndex = 18;
+            this.stopSearchButton.Text = "Stop Search";
+            this.stopSearchButton.UseVisualStyleBackColor = true;
+            this.stopSearchButton.Click += new System.EventHandler(this.StopSearchButtonClick);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(7, 23);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(75, 15);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Value Base:";
+            // 
+            // startRangeAddressTextBox
+            // 
+            this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(230, 20);
+            this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(126, 22);
+            this.startRangeAddressTextBox.TabIndex = 5;
+            this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
+            // 
+            // EXsearchRangeButton
+            // 
+            this.EXsearchRangeButton.Location = new System.Drawing.Point(441, 76);
+            this.EXsearchRangeButton.Name = "EXsearchRangeButton";
+            this.EXsearchRangeButton.Size = new System.Drawing.Size(221, 31);
+            this.EXsearchRangeButton.TabIndex = 9;
+            this.EXsearchRangeButton.Text = "(Experimental) Search Hex Value";
+            this.EXsearchRangeButton.UseVisualStyleBackColor = true;
+            this.EXsearchRangeButton.Click += new System.EventHandler(this.ExSearchRangeButtonClick);
+            // 
+            // searchRangeButton
+            // 
+            this.searchRangeButton.Location = new System.Drawing.Point(87, 76);
+            this.searchRangeButton.Name = "searchRangeButton";
+            this.searchRangeButton.Size = new System.Drawing.Size(183, 31);
+            this.searchRangeButton.TabIndex = 9;
+            this.searchRangeButton.Text = "Search Hex Value";
+            this.searchRangeButton.UseVisualStyleBackColor = true;
+            this.searchRangeButton.Click += new System.EventHandler(this.SearchRangeButtonClick);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 51);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(74, 15);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Search for :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(146, 23);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 15);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Start Offset:";
+            // 
+            // searchRangeValueTextBox
+            // 
+            this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.searchRangeValueTextBox.Location = new System.Drawing.Point(87, 48);
+            this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(575, 22);
+            this.searchRangeValueTextBox.TabIndex = 8;
+            this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchRangeValueTextBoxKeyUp);
+            // 
+            // endRangeAddressTextBox
+            // 
+            this.endRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.endRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.endRangeAddressTextBox.Location = new System.Drawing.Point(499, 20);
+            this.endRangeAddressTextBox.Name = "endRangeAddressTextBox";
+            this.endRangeAddressTextBox.Size = new System.Drawing.Size(163, 22);
+            this.endRangeAddressTextBox.TabIndex = 7;
+            this.endRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(362, 23);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(32, 15);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "End:";
             // 
             // tabPage1
             // 
@@ -261,7 +717,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(74, 19);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(94, 17);
+            this.isSigned.Size = new System.Drawing.Size(109, 19);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -462,460 +918,39 @@
             this.peekPokeAddressTextBox.TabIndex = 2;
             this.peekPokeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
-            // tabPage3
+            // tabControl1
             // 
-            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage3.Controls.Add(this.groupBox2);
-            this.tabPage3.Controls.Add(this.groupBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(692, 335);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Search Range";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.resultGrid);
-            this.groupBox2.Controls.Add(this.ResultRefresh);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(10, 125);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(674, 204);
-            this.groupBox2.TabIndex = 17;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Result/s";
-            // 
-            // resultGrid
-            // 
-            this.resultGrid.AllowUserToAddRows = false;
-            this.resultGrid.AllowUserToDeleteRows = false;
-            this.resultGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.resultGrid.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.resultGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.resultGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.resultGrid.Location = new System.Drawing.Point(6, 18);
-            this.resultGrid.MultiSelect = false;
-            this.resultGrid.Name = "resultGrid";
-            this.resultGrid.ReadOnly = true;
-            this.resultGrid.RowHeadersVisible = false;
-            this.resultGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.resultGrid.Size = new System.Drawing.Size(424, 174);
-            this.resultGrid.TabIndex = 14;
-            this.resultGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResultGridCellValueChanged);
-            this.resultGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SearchRangeResultListViewMouseClick);
-            // 
-            // ResultRefresh
-            // 
-            this.ResultRefresh.Location = new System.Drawing.Point(436, 161);
-            this.ResultRefresh.Name = "ResultRefresh";
-            this.ResultRefresh.Size = new System.Drawing.Size(76, 31);
-            this.ResultRefresh.TabIndex = 13;
-            this.ResultRefresh.Text = "Refresh";
-            this.ResultRefresh.UseVisualStyleBackColor = true;
-            this.ResultRefresh.Click += new System.EventHandler(this.ResultRefreshClick);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(446, 83);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(222, 30);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "*NB: The larger the range the longer \r\nthe search will take";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.stopSearchButton);
-            this.groupBox1.Controls.Add(this.searchRangeEndTypeCB);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.searchRangeBaseValueTypeCB);
-            this.groupBox1.Controls.Add(this.startRangeAddressTextBox);
-            this.groupBox1.Controls.Add(this.EXsearchRangeButton);
-            this.groupBox1.Controls.Add(this.searchRangeButton);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
-            this.groupBox1.Controls.Add(this.endRangeAddressTextBox);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Location = new System.Drawing.Point(16, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(668, 113);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Range Selection Options";
-            // 
-            // stopSearchButton
-            // 
-            this.stopSearchButton.Enabled = false;
-            this.stopSearchButton.Location = new System.Drawing.Point(310, 76);
-            this.stopSearchButton.Name = "stopSearchButton";
-            this.stopSearchButton.Size = new System.Drawing.Size(94, 31);
-            this.stopSearchButton.TabIndex = 18;
-            this.stopSearchButton.Text = "Stop Search";
-            this.stopSearchButton.UseVisualStyleBackColor = true;
-            this.stopSearchButton.Click += new System.EventHandler(this.StopSearchButtonClick);
-            // 
-            // searchRangeEndTypeCB
-            // 
-            this.searchRangeEndTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchRangeEndTypeCB.FormattingEnabled = true;
-            this.searchRangeEndTypeCB.Items.AddRange(new object[] {
-            "Length",
-            "Offset"});
-            this.searchRangeEndTypeCB.Location = new System.Drawing.Point(400, 20);
-            this.searchRangeEndTypeCB.Name = "searchRangeEndTypeCB";
-            this.searchRangeEndTypeCB.Size = new System.Drawing.Size(93, 23);
-            this.searchRangeEndTypeCB.TabIndex = 17;
-            this.toolTips.SetToolTip(this.searchRangeEndTypeCB, "use offset or length");
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 23);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(75, 15);
-            this.label16.TabIndex = 16;
-            this.label16.Text = "Value Base:";
-            // 
-            // searchRangeBaseValueTypeCB
-            // 
-            this.searchRangeBaseValueTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchRangeBaseValueTypeCB.FormattingEnabled = true;
-            this.searchRangeBaseValueTypeCB.Items.AddRange(new object[] {
-            "Hex",
-            "Dec"});
-            this.searchRangeBaseValueTypeCB.Location = new System.Drawing.Point(87, 20);
-            this.searchRangeBaseValueTypeCB.Name = "searchRangeBaseValueTypeCB";
-            this.searchRangeBaseValueTypeCB.Size = new System.Drawing.Size(57, 23);
-            this.searchRangeBaseValueTypeCB.TabIndex = 15;
-            this.toolTips.SetToolTip(this.searchRangeBaseValueTypeCB, "Insert your values in hex or dec");
-            // 
-            // startRangeAddressTextBox
-            // 
-            this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.startRangeAddressTextBox.Location = new System.Drawing.Point(230, 20);
-            this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
-            this.startRangeAddressTextBox.Size = new System.Drawing.Size(126, 22);
-            this.startRangeAddressTextBox.TabIndex = 5;
-            this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
-            // 
-            // EXsearchRangeButton
-            // 
-            this.EXsearchRangeButton.Location = new System.Drawing.Point(441, 76);
-            this.EXsearchRangeButton.Name = "EXsearchRangeButton";
-            this.EXsearchRangeButton.Size = new System.Drawing.Size(221, 31);
-            this.EXsearchRangeButton.TabIndex = 9;
-            this.EXsearchRangeButton.Text = "(Experimental) Search Hex Value";
-            this.EXsearchRangeButton.UseVisualStyleBackColor = true;
-            this.EXsearchRangeButton.Click += new System.EventHandler(this.ExSearchRangeButtonClick);
-            // 
-            // searchRangeButton
-            // 
-            this.searchRangeButton.Location = new System.Drawing.Point(87, 76);
-            this.searchRangeButton.Name = "searchRangeButton";
-            this.searchRangeButton.Size = new System.Drawing.Size(183, 31);
-            this.searchRangeButton.TabIndex = 9;
-            this.searchRangeButton.Text = "Search Hex Value";
-            this.searchRangeButton.UseVisualStyleBackColor = true;
-            this.searchRangeButton.Click += new System.EventHandler(this.SearchRangeButtonClick);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 51);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(74, 15);
-            this.label13.TabIndex = 10;
-            this.label13.Text = "Search for :";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(146, 23);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Start Offset:";
-            // 
-            // searchRangeValueTextBox
-            // 
-            this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchRangeValueTextBox.Location = new System.Drawing.Point(87, 48);
-            this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(575, 22);
-            this.searchRangeValueTextBox.TabIndex = 8;
-            this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchRangeValueTextBoxKeyUp);
-            // 
-            // endRangeAddressTextBox
-            // 
-            this.endRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.endRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.endRangeAddressTextBox.Location = new System.Drawing.Point(499, 20);
-            this.endRangeAddressTextBox.Name = "endRangeAddressTextBox";
-            this.endRangeAddressTextBox.Size = new System.Drawing.Size(163, 22);
-            this.endRangeAddressTextBox.TabIndex = 7;
-            this.endRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(362, 23);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(32, 15);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "End:";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(692, 335);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Calculator";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.button1);
-            this.groupBox4.Controls.Add(this.decimalbox);
-            this.groupBox4.Controls.Add(this.hexcalcbox);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Location = new System.Drawing.Point(95, 17);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(507, 63);
-            this.groupBox4.TabIndex = 15;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Converter";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Decimal:";
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(232, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = ">>";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            // 
-            // decimalbox
-            // 
-            this.decimalbox.Location = new System.Drawing.Point(81, 20);
-            this.decimalbox.MaxLength = 3276700;
-            this.decimalbox.Name = "decimalbox";
-            this.decimalbox.Size = new System.Drawing.Size(145, 22);
-            this.decimalbox.TabIndex = 1;
-            this.decimalbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.decimalbox.TextChanged += new System.EventHandler(this.Dec2Hex);
-            // 
-            // hexcalcbox
-            // 
-            this.hexcalcbox.Location = new System.Drawing.Point(340, 20);
-            this.hexcalcbox.Name = "hexcalcbox";
-            this.hexcalcbox.Size = new System.Drawing.Size(145, 22);
-            this.hexcalcbox.TabIndex = 4;
-            this.hexcalcbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hexcalcbox.TextChanged += new System.EventHandler(this.Hex2Dec);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(300, 23);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 15);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Hex:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(307, 95);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(104, 15);
-            this.label17.TabIndex = 14;
-            this.label17.Text = "Work In Progress";
-            this.label17.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(246, 172);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 15);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Long:";
-            this.label11.Visible = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(246, 144);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 15);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Short:";
-            this.label10.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(246, 120);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 15);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "Byte:";
-            this.label9.Visible = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(286, 169);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(145, 22);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.Visible = false;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(286, 141);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(145, 22);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(286, 113);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 22);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.Visible = false;
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(0, 58);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(700, 363);
+            this.tabControl1.TabIndex = 13;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.label8);
+            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.logTextBox);
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(692, 335);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Dumping";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Text = "Home";
             // 
-            // label8
+            // logTextBox
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(189, 158);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(99, 15);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Made you look!";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.aboutToolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(700, 24);
-            this.menuStrip1.TabIndex = 14;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.residentEvilORCToolStripMenuItem,
-            this.prototype2ToolStripMenuItem,
-            this.bToolStripMenuItem});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
-            this.aboutToolStripMenuItem.Text = "Select Game";
-            // 
-            // residentEvilORCToolStripMenuItem
-            // 
-            this.residentEvilORCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.currentXPToolStripMenuItem});
-            this.residentEvilORCToolStripMenuItem.Name = "residentEvilORCToolStripMenuItem";
-            this.residentEvilORCToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.residentEvilORCToolStripMenuItem.Text = "Resident Evil - ORC";
-            // 
-            // currentXPToolStripMenuItem
-            // 
-            this.currentXPToolStripMenuItem.Name = "currentXPToolStripMenuItem";
-            this.currentXPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.currentXPToolStripMenuItem.Text = "Current XP";
-            this.currentXPToolStripMenuItem.Click += new System.EventHandler(this.CurrentXpToolStripMenuItemClick);
-            // 
-            // aboutToolStripMenuItem1
-            // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem1.Text = "About";
-            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
-            // 
-            // prototype2ToolStripMenuItem
-            // 
-            this.prototype2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.currentXpToolStripMenuItem1});
-            this.prototype2ToolStripMenuItem.Name = "prototype2ToolStripMenuItem";
-            this.prototype2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.prototype2ToolStripMenuItem.Text = "[Prototype2]";
-            // 
-            // currentXpToolStripMenuItem1
-            // 
-            this.currentXpToolStripMenuItem1.Name = "currentXpToolStripMenuItem1";
-            this.currentXpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.currentXpToolStripMenuItem1.Text = " Current XP";
-            this.currentXpToolStripMenuItem1.Click += new System.EventHandler(this.currentXpToolStripMenuItem1_Click);
-            // 
-            // bToolStripMenuItem
-            // 
-            this.bToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.currentBloodToolStripMenuItem});
-            this.bToolStripMenuItem.Name = "bToolStripMenuItem";
-            this.bToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.bToolStripMenuItem.Text = "Bloodforge";
-            // 
-            // currentBloodToolStripMenuItem
-            // 
-            this.currentBloodToolStripMenuItem.Name = "currentBloodToolStripMenuItem";
-            this.currentBloodToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.currentBloodToolStripMenuItem.Text = "Current Blood";
-            this.currentBloodToolStripMenuItem.Click += new System.EventHandler(this.currentBloodToolStripMenuItem_Click);
+            this.logTextBox.BackColor = System.Drawing.SystemColors.InfoText;
+            this.logTextBox.ForeColor = System.Drawing.SystemColors.Info;
+            this.logTextBox.Location = new System.Drawing.Point(3, 3);
+            this.logTextBox.Multiline = true;
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.logTextBox.Size = new System.Drawing.Size(531, 329);
+            this.logTextBox.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -938,7 +973,18 @@
             this.Load += new System.EventHandler(this.Form1Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.peeknpoke.ResumeLayout(false);
             this.peeknpoke.PerformLayout();
@@ -947,20 +993,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -975,67 +1010,11 @@
         private System.Windows.Forms.TextBox ipAddressTextBox;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button pokeButton;
-        private System.Windows.Forms.Panel peeknpoke;
-        private System.Windows.Forms.Button newPeekButton;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox peekLengthTextBox;
-        private System.Windows.Forms.Button peekButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox peekPokeAddressTextBox;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox searchRangeValueTextBox;
-        private System.Windows.Forms.Button searchRangeButton;
-        private System.Windows.Forms.TextBox endRangeAddressTextBox;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox startRangeAddressTextBox;
-        private System.Windows.Forms.Label label6;
-        private Be.Windows.Forms.HexBox hexBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox hexcalcbox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox decimalbox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label labelSelAddress;
-        private System.Windows.Forms.TextBox SelAddress;
-        private System.Windows.Forms.NumericUpDown NumericInt32;
-        private System.Windows.Forms.NumericUpDown NumericInt16;
-        private System.Windows.Forms.Label LabelInt32;
-        private System.Windows.Forms.NumericUpDown NumericInt8;
-        private System.Windows.Forms.Label LabelInt16;
-        private System.Windows.Forms.Label LabelInt8;
-        private System.Windows.Forms.CheckBox isSigned;
-        private System.Windows.Forms.ComboBox searchRangeBaseValueTypeCB;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ToolTip toolTips;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox searchRangeEndTypeCB;
-        private System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.ToolStripProgressBar StatusProgressBar;
-        private System.Windows.Forms.Button EXsearchRangeButton;
-        private System.Windows.Forms.Button ResultRefresh;
-        private System.Windows.Forms.DataGridView resultGrid;
-        private System.Windows.Forms.Button stopSearchButton;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem residentEvilORCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentXPToolStripMenuItem;
@@ -1043,6 +1022,66 @@
         private System.Windows.Forms.ToolStripMenuItem currentXpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem bToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentBloodToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem howToUseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uFC3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pAttributeToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox decimalbox;
+        private System.Windows.Forms.TextBox hexcalcbox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridView resultGrid;
+        private System.Windows.Forms.Button ResultRefresh;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button stopSearchButton;
+        private System.Windows.Forms.ComboBox searchRangeEndTypeCB;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox searchRangeBaseValueTypeCB;
+        private System.Windows.Forms.TextBox startRangeAddressTextBox;
+        private System.Windows.Forms.Button EXsearchRangeButton;
+        private System.Windows.Forms.Button searchRangeButton;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox searchRangeValueTextBox;
+        private System.Windows.Forms.TextBox endRangeAddressTextBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Panel peeknpoke;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox isSigned;
+        private System.Windows.Forms.Label LabelInt8;
+        private System.Windows.Forms.Label LabelInt16;
+        private System.Windows.Forms.NumericUpDown NumericInt32;
+        private System.Windows.Forms.NumericUpDown NumericInt8;
+        private System.Windows.Forms.NumericUpDown NumericInt16;
+        private System.Windows.Forms.Label LabelInt32;
+        private System.Windows.Forms.Label labelSelAddress;
+        private System.Windows.Forms.TextBox SelAddress;
+        private Be.Windows.Forms.HexBox hexBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button newPeekButton;
+        private System.Windows.Forms.Button pokeButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox peekLengthTextBox;
+        private System.Windows.Forms.Button peekButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox peekPokeAddressTextBox;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox logTextBox;
 
     }
 }
