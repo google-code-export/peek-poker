@@ -710,5 +710,17 @@ namespace PeekPoker
             startRangeAddressTextBox.Text = string.Format("0xDA1D0000");
             endRangeAddressTextBox.Text = string.Format("0xFFFF");
         }
+
+        private void currentXpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            peekPokeAddressTextBox.Text = string.Format("0xc33BE970");
+            peekLengthTextBox.Text = string.Format("4");
+        }
+
+        private void currentBloodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            peekPokeAddressTextBox.Text = string.Format("0xcF4D3130");
+            peekLengthTextBox.Text = string.Format("4");
+        }
     }
 }

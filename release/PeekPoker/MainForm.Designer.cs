@@ -101,6 +101,10 @@
             this.currentXPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.prototype2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentXpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -257,7 +261,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(74, 19);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(109, 19);
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -854,7 +858,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.residentEvilORCToolStripMenuItem});
+            this.residentEvilORCToolStripMenuItem,
+            this.prototype2ToolStripMenuItem,
+            this.bToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.aboutToolStripMenuItem.Text = "Select Game";
@@ -870,7 +876,7 @@
             // currentXPToolStripMenuItem
             // 
             this.currentXPToolStripMenuItem.Name = "currentXPToolStripMenuItem";
-            this.currentXPToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.currentXPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.currentXPToolStripMenuItem.Text = "Current XP";
             this.currentXPToolStripMenuItem.Click += new System.EventHandler(this.CurrentXpToolStripMenuItemClick);
             // 
@@ -880,6 +886,36 @@
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
+            // 
+            // prototype2ToolStripMenuItem
+            // 
+            this.prototype2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.currentXpToolStripMenuItem1});
+            this.prototype2ToolStripMenuItem.Name = "prototype2ToolStripMenuItem";
+            this.prototype2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.prototype2ToolStripMenuItem.Text = "[Prototype2]";
+            // 
+            // currentXpToolStripMenuItem1
+            // 
+            this.currentXpToolStripMenuItem1.Name = "currentXpToolStripMenuItem1";
+            this.currentXpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.currentXpToolStripMenuItem1.Text = " Current XP";
+            this.currentXpToolStripMenuItem1.Click += new System.EventHandler(this.currentXpToolStripMenuItem1_Click);
+            // 
+            // bToolStripMenuItem
+            // 
+            this.bToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.currentBloodToolStripMenuItem});
+            this.bToolStripMenuItem.Name = "bToolStripMenuItem";
+            this.bToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.bToolStripMenuItem.Text = "Bloodforge";
+            // 
+            // currentBloodToolStripMenuItem
+            // 
+            this.currentBloodToolStripMenuItem.Name = "currentBloodToolStripMenuItem";
+            this.currentBloodToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.currentBloodToolStripMenuItem.Text = "Current Blood";
+            this.currentBloodToolStripMenuItem.Click += new System.EventHandler(this.currentBloodToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1003,6 +1039,10 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem residentEvilORCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentXPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem prototype2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentXpToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem bToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentBloodToolStripMenuItem;
 
     }
 }
