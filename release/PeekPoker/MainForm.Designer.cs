@@ -47,10 +47,15 @@
             this.currentXpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentBloodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uFC3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pAttributeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.skyrimToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.titleUpdate5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infSprintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infMagickaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.searchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
@@ -203,6 +208,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.aboutToolStripMenuItem,
+            this.trainersToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -255,7 +261,7 @@
             // currentXpToolStripMenuItem1
             // 
             this.currentXpToolStripMenuItem1.Name = "currentXpToolStripMenuItem1";
-            this.currentXpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.currentXpToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
             this.currentXpToolStripMenuItem1.Text = "[A] Current XP";
             this.currentXpToolStripMenuItem1.Click += new System.EventHandler(this.CurrentXpToolStripMenuItem1Click);
             // 
@@ -274,6 +280,21 @@
             this.currentBloodToolStripMenuItem.Text = "[A] Current Blood";
             this.currentBloodToolStripMenuItem.Click += new System.EventHandler(this.CurrentBloodToolStripMenuItemClick);
             // 
+            // uFC3ToolStripMenuItem
+            // 
+            this.uFC3ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pAttributeToolStripMenuItem});
+            this.uFC3ToolStripMenuItem.Name = "uFC3ToolStripMenuItem";
+            this.uFC3ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.uFC3ToolStripMenuItem.Text = "UFC 3";
+            // 
+            // pAttributeToolStripMenuItem
+            // 
+            this.pAttributeToolStripMenuItem.Name = "pAttributeToolStripMenuItem";
+            this.pAttributeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.pAttributeToolStripMenuItem.Text = "[P] Attribute";
+            this.pAttributeToolStripMenuItem.Click += new System.EventHandler(this.PAttributeToolStripMenuItemClick);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -286,20 +307,44 @@
             this.howToUseToolStripMenuItem.Text = "How To Use";
             this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.HowToUseToolStripMenuItemClick);
             // 
-            // uFC3ToolStripMenuItem
+            // trainersToolStripMenuItem
             // 
-            this.uFC3ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pAttributeToolStripMenuItem});
-            this.uFC3ToolStripMenuItem.Name = "uFC3ToolStripMenuItem";
-            this.uFC3ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.uFC3ToolStripMenuItem.Text = "UFC 3";
+            this.trainersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.skyrimToolStripMenuItem});
+            this.trainersToolStripMenuItem.Name = "trainersToolStripMenuItem";
+            this.trainersToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.trainersToolStripMenuItem.Text = "Trainers";
             // 
-            // pAttributeToolStripMenuItem
+            // skyrimToolStripMenuItem
             // 
-            this.pAttributeToolStripMenuItem.Name = "pAttributeToolStripMenuItem";
-            this.pAttributeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pAttributeToolStripMenuItem.Text = "[P] Attribute";
-            this.pAttributeToolStripMenuItem.Click += new System.EventHandler(this.PAttributeToolStripMenuItemClick);
+            this.skyrimToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.titleUpdate5ToolStripMenuItem});
+            this.skyrimToolStripMenuItem.Name = "skyrimToolStripMenuItem";
+            this.skyrimToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.skyrimToolStripMenuItem.Text = "Skyrim";
+            // 
+            // titleUpdate5ToolStripMenuItem
+            // 
+            this.titleUpdate5ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.infSprintToolStripMenuItem,
+            this.infMagickaToolStripMenuItem});
+            this.titleUpdate5ToolStripMenuItem.Name = "titleUpdate5ToolStripMenuItem";
+            this.titleUpdate5ToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.titleUpdate5ToolStripMenuItem.Text = "Title Update #4/5";
+            // 
+            // infSprintToolStripMenuItem
+            // 
+            this.infSprintToolStripMenuItem.Name = "infSprintToolStripMenuItem";
+            this.infSprintToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infSprintToolStripMenuItem.Text = "Inf Sprint";
+            this.infSprintToolStripMenuItem.Click += new System.EventHandler(this.Skyrim_infSprint);
+            // 
+            // infMagickaToolStripMenuItem
+            // 
+            this.infMagickaToolStripMenuItem.Name = "infMagickaToolStripMenuItem";
+            this.infMagickaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infMagickaToolStripMenuItem.Text = "Inf Magicka";
+            this.infMagickaToolStripMenuItem.Click += new System.EventHandler(this.Skyrim_infMagicka);
             // 
             // aboutToolStripMenuItem1
             // 
@@ -717,7 +762,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(74, 19);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(109, 19);
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1082,6 +1127,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TextBox logTextBox;
+        private System.Windows.Forms.ToolStripMenuItem trainersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem skyrimToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem titleUpdate5ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infSprintToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem infMagickaToolStripMenuItem;
 
     }
 }

@@ -1,4 +1,4 @@
-﻿Last Update - 29/04/12 by PureIso
+﻿Last Update - 1/05/12 by 8Ball
 ==============================================================
 NB: Update source file before you commit.
 ==============================================================
@@ -95,5 +95,14 @@ Bug - The refresh button seems to return null value for Item value
 Repaired hex2dec, now actually works.
 
 -Change 29/04/12
-Added log tho the pplication
-Removed Dumbing tab
+Added log to the application
+Removed Dumping tab
+
+-Changes 1/05/12
+[8Ball]
+Created Trainer menuitem
+Added some Skyrim trainer codes for testing - [complete success]
+Changed Writememory to public void to accomodate trainers.
+
+NB: Nice log.
+[/8Ball]

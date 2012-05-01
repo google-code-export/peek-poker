@@ -723,7 +723,8 @@ namespace PeekPoker
             }
         }
         #endregion
-
+        
+        #region Games
         //Resident Evil ORC - current xp
         private void CurrentXpToolStripMenuItemClick(object sender, EventArgs e)
         {
@@ -760,6 +761,25 @@ namespace PeekPoker
             searchRangeValueTextBox.Text = string.Format("82010480");
             startRangeAddressTextBox.Text = string.Format("0xC7897000");
             endRangeAddressTextBox.Text = string.Format("0xFFF");
+        }
+#endregion
+        #region Trainers
+        //Skyrim TU#5
+        private void Skyrim_infSprint(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Skyrim - TU4/5 - Infinite Sprint - Sent");
+            _rtm.WriteMemory(0x834F9890, "00000000"); //Modifies player's stamina cost to 0
+             _rtm.WriteMemory(0x834F9650, "00000000");
+             _rtm.WriteMemory(0x834FB234, "00000000");
+             _rtm.WriteMemory(0x834FB24C, "00000000"); 
+        }
+#endregion
+
+        private void Skyrim_infMagicka(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Skyrim - TU4/5 - Infinite Stamina - Sent");
+            _rtm.WriteMemory(0x834FB234, "00000000");  // Modifies player's mana cost to 0       
+                     
         }
     }
 }

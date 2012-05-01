@@ -279,7 +279,7 @@ namespace PeekPoker.RealTimeMemory
         }
 
         #region Private
-        private void WriteMemory(uint address, string data)
+        public void WriteMemory(uint address, string data)
         {
             // Send the setmem command
             _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("SETMEM ADDR=0x{0} DATA={1}\r\n", address.ToString("X2"), data)));
