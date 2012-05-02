@@ -24,11 +24,11 @@ namespace PeekPoker
     public partial class MainForm : Form
     {
         #region global varibales
-        private RealTimeMemory.RealTimeMemory _rtm;//DLL is now in the Important File Folder
+        public RealTimeMemory.RealTimeMemory _rtm;//DLL is now in the Important File Folder
         private readonly AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
         private uint _searchRangeDumpLength;
-        private List<string> _offsets;
+        public List<string> _offsets;
         private BindingList<Types.SearchResults> _searchResult = new BindingList<Types.SearchResults>();
         #endregion
 
@@ -723,8 +723,9 @@ namespace PeekPoker
             }
         }
         #endregion
-        
+       
         #region Games
+        #region Select_Games
         //Resident Evil ORC - current xp
         private void CurrentXpToolStripMenuItemClick(object sender, EventArgs e)
         {
@@ -764,22 +765,163 @@ namespace PeekPoker
         }
 #endregion
         #region Trainers
-        //Skyrim TU#5
+//Recommend moving this to it's own class, could get messy -8Ball
+        #region Skyrim
+//Skyrim TU#4/5
+  // Inf Stamina
         private void Skyrim_infSprint(object sender, EventArgs e)
         {
-            SetLogText("#Trainers# Skyrim - TU4/5 - Infinite Sprint - Sent");
-            _rtm.WriteMemory(0x834F9890, "00000000"); //Modifies player's stamina cost to 0
+            SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Sprint - Sent");
+            try
+            {_rtm.WriteMemory(0x834F9890, "00000000"); 
              _rtm.WriteMemory(0x834F9650, "00000000");
              _rtm.WriteMemory(0x834FB234, "00000000");
-             _rtm.WriteMemory(0x834FB24C, "00000000"); 
+             _rtm.WriteMemory(0x834FB24C, "00000000");
+            }
+            catch { SetLogText("Error! Could not poke code."); } 
         }
-#endregion
-
+  // Inf Mana  
         private void Skyrim_infMagicka(object sender, EventArgs e)
         {
-            SetLogText("#Trainers# Skyrim - TU4/5 - Infinite Stamina - Sent");
-            _rtm.WriteMemory(0x834FB234, "00000000");  // Modifies player's mana cost to 0       
-                     
+            SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Stamina - Sent");
+            try
+            { _rtm.WriteMemory(0x834FB234, "00000000");}
+            catch { SetLogText("Error! Could not poke code."); }             
         }
+#endregion
+        #region DarkSouls
+//Dark Souls TU#0/1
+  // Max Level
+        private void DS0_MaxLevel(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Level - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A2108, "000002C8");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Souls 
+        private void DS0_MaxSouls(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Souls - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A210C, "3B9AC9FF");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Humanity 
+        private void DS0_Humanity(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Humanity - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20FC, "00000063");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Vitality           
+        private void DS0_Vitality(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Vitality - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20B8, "00000063");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Attunement
+        private void DS0_Attunement(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Attunement - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20C0, "00000063");} 
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Intelligence
+        private void DS0_Intelligence(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Intelligence- Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20E0, "00000063");} 
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Resistance 
+        private void DS0_Resistance(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Resistance - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A2100, "00000063");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Dexterity
+        private void DS0_Dexterity(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Dexterity - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20D8, "00000063");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Faith  
+        private void DS0_Faith(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Faith - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20E8, "00000063");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Stamina 
+        private void DS0_Stamina(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Stamina  - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20B0, "000000A0");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Stamina 1 Million 
+        private void DS0_MillionStamina(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - 1 Million Stamina  - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20B0, "3B9ACA00");}
+            catch { SetLogText("Error! Could not poke code.");}
+        }
+  // Max Strength  
+        private void DS0_Strength(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Strength  - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20D0, "00000063");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Max Endurance 
+        private void DS0_Endurance(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Endurance  - Sent");
+            try
+            {_rtm.WriteMemory(0xC95A20C8, "00000063");}
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+  // Endurance 1 Million
+        private void DS0_MillionEndurance(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Dark Souls - TU#0/1 - 1 Million Endurance  - Sent");
+            try
+            {
+            _rtm.WriteMemory(0xC95A20C8, "3B9ACA00");
+            }
+            catch { SetLogText("Error! Could not poke code."); }
+        }
+       private void DS0_All(object sender, EventArgs e)
+        {
+                DS0_MaxLevel(DS0MaxLevel, System.EventArgs.Empty);
+                DS0_MaxSouls(DS0MaxSouls, System.EventArgs.Empty);
+                DS0_Vitality(DS0MaxVit, System.EventArgs.Empty);
+                DS0_Endurance(DS0MaxEnd, System.EventArgs.Empty);
+                DS0_Attunement(DS0MaxAtt, System.EventArgs.Empty);
+                DS0_Strength(DS0MaxStr, System.EventArgs.Empty);
+                DS0_Dexterity(DS0MaxDex, System.EventArgs.Empty);
+                DS0_Resistance(DS0MaxRes, System.EventArgs.Empty);
+                DS0_Intelligence(DS0MaxInt, System.EventArgs.Empty); 
+                DS0_Faith(DS0MaxFaith, System.EventArgs.Empty);
+                DS0_Humanity(DS0MaxHum, System.EventArgs.Empty);
+                DS0_Stamina(DS0MaxStam, System.EventArgs.Empty);
+         }
+        #endregion
+        #endregion
+        #endregion
     }
 }
