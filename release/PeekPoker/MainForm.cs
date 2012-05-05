@@ -590,6 +590,8 @@ namespace PeekPoker
             {
                 var m = DateTime.Now.ToString("HH:mm:ss tt") + " " + value + Environment.NewLine;
                 logTextBox.Text += m;
+                logTextBox.Select(logTextBox.Text.Length, 0); // set the cursor to end of textbox
+                logTextBox.ScrollToCaret();                     // scroll down to the cursor position
             }
         }
         private void ShowMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
@@ -763,9 +765,26 @@ namespace PeekPoker
             startRangeAddressTextBox.Text = string.Format("0xC7897000");
             endRangeAddressTextBox.Text = string.Format("0xFFF");
         }
+
+        private void ResonanceOfFateMenuItemClick(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+            
+            try
+            {
+                var oThread = new Thread(ExROF);
+                oThread.Start(menu.Tag);
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 #endregion
         #region Trainers
-//Recommend moving this to it's own class, could get messy -8Ball
+        //Recommend moving this to it's own class, could get messy -8Ball
+        // - not really just have to pass some more variables to that class
+        // - and it would make thing more organized ^_^ - Sam
         #region Skyrim
 //Skyrim TU#4/5
   // Inf Stamina
@@ -920,6 +939,192 @@ namespace PeekPoker
                 DS0_Humanity(DS0MaxHum, System.EventArgs.Empty);
                 DS0_Stamina(DS0MaxStam, System.EventArgs.Empty);
          }
+        #endregion
+
+        #region Resonce Of Fate
+       private void ExROF(object sets)
+       {
+           List<string> _poke;
+           #region List Values
+           List<string> WhiteHex = new List<string>();
+           List<string> ColorHex = new List<string>();
+           List<string> HexStations = new List<string>();
+           List<string> WeaponSet1 = new List<string>();
+           List<string> WeaponSet2 = new List<string>();
+           List<string> WeaponDebugSet = new List<string>();
+           List<string> ItemSpecialSet1 = new List<string>();
+           List<string> ItemSpecialSet2 = new List<string>();
+
+           #region White Hex
+           WhiteHex.Add("0001010000000001000003E7000003E700000000");
+           WhiteHex.Add("0002010000000001000003E7000003E700000000");
+           WhiteHex.Add("0003010000000001000003E7000003E700000000");
+           WhiteHex.Add("0004010000000001000003E7000003E700000000");
+           WhiteHex.Add("0005010000000001000003E7000003E700000000");
+           WhiteHex.Add("0006010000000001000003E7000003E700000000");
+           WhiteHex.Add("0007010000000001000003E7000003E700000000");
+           WhiteHex.Add("0008010000000001000003E7000003E700000000");
+           WhiteHex.Add("0009010000000001000003E7000003E700000000");
+           WhiteHex.Add("000A010000000001000003E7000003E700000000");
+           #endregion
+           #region Colored Hex
+           ColorHex.Add("000B010000000001000003E7000003E700000000");
+           ColorHex.Add("0010010000000001000003E7000003E700000000");
+           ColorHex.Add("0015010000000001000003E7000003E700000000");
+           ColorHex.Add("001A010000000001000003E7000003E700000000");
+           ColorHex.Add("001F010000000001000003E7000003E700000000");
+           ColorHex.Add("0024010000000001000003E7000003E700000000");
+           ColorHex.Add("0029010000000001000003E7000003E700000000");
+           ColorHex.Add("002E010000000001000003E7000003E700000000");
+           ColorHex.Add("0033010000000001000003E7000003E700000000");
+           ColorHex.Add("0038010000000001000003E7000003E700000000");
+           ColorHex.Add("003D010000000001000003E7000003E700000000");
+           ColorHex.Add("003E010000000001000003E7000003E700000000");
+           #endregion
+           #region Hex Stations
+           HexStations.Add("0042010000000001000003E7000003E700000000");
+           HexStations.Add("0043010000000001000003E7000003E700000000");
+           HexStations.Add("0044010000000001000003E7000003E700000000");
+           HexStations.Add("0045010000000001000003E7000003E700000000");
+           HexStations.Add("0046010000000001000003E7000003E700000000");
+           HexStations.Add("0047010000000001000003E7000003E700000000");
+           HexStations.Add("0048010000000001000003E7000003E700000000");
+           HexStations.Add("0049010000000001000003E7000003E700000000");
+           HexStations.Add("004A010000000001000003E7000003E700000000");
+           HexStations.Add("004B010000000001000003E7000003E700000000");
+           HexStations.Add("004C010000000001000003E7000003E700000000");
+           #endregion
+           #region Weapon Set 1
+           WeaponSet1.Add("03F0010000000001000003E7000003E700000000");
+           WeaponSet1.Add("03F1010000000001000003E7000003E700000000");
+           WeaponSet1.Add("03F2010000000001000003E7000003E700000000");
+           WeaponSet1.Add("03F3010000000001000003E7000003E700000000");
+           WeaponSet1.Add("03F4010000000001000003E7000003E700000000");
+           WeaponSet1.Add("03F5010000000001000003E7000003E700000000");
+           WeaponSet1.Add("03F6010000000001000003E7000003E700000000");
+           WeaponSet1.Add("03F7010000000001000003E7000003E700000000");
+           #endregion
+           #region Weapon Set 2
+           WeaponSet2.Add("03FE010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0400010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0401010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0402010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0403010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0404010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0405010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0406010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0407010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0408010000000001000003E7000003E700000000");
+           WeaponSet2.Add("0409010000000001000003E7000003E700000000");
+           #endregion
+           #region Weapon Debug Set
+           WeaponDebugSet.Add("03F8010000000001000003E7000003E700000000");
+           WeaponDebugSet.Add("03F9010000000001000003E7000003E700000000");
+           WeaponDebugSet.Add("03FA010000000001000003E7000003E700000000");
+           #endregion
+           #region Item Special Set 1
+           ItemSpecialSet1.Add("0528010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("0471010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("046B010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("046A010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07F0010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07F1010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07F2010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07F8010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07F9010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07FA010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("0464010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07FB010000000001000003E7000003E700000000");
+           ItemSpecialSet1.Add("07F3010000000001000003E7000003E700000000");
+           #endregion
+           #region Item Special Set 2
+           ItemSpecialSet2.Add("0566010000000001000003E7000003E700000000");
+           ItemSpecialSet2.Add("0567010000000001000003E7000003E700000000");
+           ItemSpecialSet2.Add("0562010000000001000003E7000003E700000000");
+           ItemSpecialSet2.Add("07FC010000000001000003E7000003E700000000");
+           ItemSpecialSet2.Add("07FD010000000001000003E7000003E700000000");
+           ItemSpecialSet2.Add("03F4010000000001000003E7000003E700000000");
+           ItemSpecialSet2.Add("0561010000000001000003E7000003E700000000");
+           ItemSpecialSet2.Add("04E0010000000001000003E7000003E700000000");
+           #endregion
+           #endregion
+           #region Switch
+           switch ((string)sets)
+           {
+               case "WhiteHex":
+                   _poke = WhiteHex;
+                   break;
+               case "ColorHex":
+                   _poke = ColorHex;
+                   break;
+               case "HexStations":
+                   _poke = HexStations;
+                   break;
+               case "WeaponSet1":
+                   _poke = WeaponSet1;
+                   break;
+               case "WeaponSet2":
+                   _poke = WeaponSet2;
+                   break;
+               case "WeaponDebugSet":
+                   _poke = WeaponDebugSet;
+                   break;
+               case "ItemSpecialSet1":
+                   _poke = ItemSpecialSet1;
+                   break;
+               case "ItemSpecialSet2":
+                   _poke = ItemSpecialSet2;
+                   break;
+                   
+               default:
+                   _poke = WhiteHex;
+                   break;
+           }
+           #endregion
+
+           #region Dump/Search and Poke
+           try
+           {
+               CheckForIllegalCrossThreadCalls = false; //line 476 grid cross thread error
+               _rtm.DumpOffset = 0xCD500000;
+               _rtm.DumpLength = 0x500000;
+
+               SetLogText("#Trainers# Resonance Of Fate Dumping & Searching ...");
+               //The ExFindHexOffset function is a Experimental search function
+               var results = _rtm.ExFindHexOffset("04B10100000003E8");
+               //Reset the progressbar...
+               UpdateProgressbar(0, 100, 0);
+
+               if (results.Count < 1)
+               {
+                   ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   return; //We don't want it to continue
+               }
+
+               UpdateProgressbar(0, 100, 0, "Poking");
+               SetLogText("#Trainers# Resonance Of Fate Poking ...");
+
+               for (int i = 0; i < _poke.Count; i++)
+               {
+                   uint offsets = Functions.BytesToUInt32(Functions.HexToBytes(results[0].Offset)) + (uint)(i * 0x14);
+
+                   SetLogText(_poke[i]);
+                   _rtm.Poke(offsets, _poke[i]);
+               }
+               SetLogText("#Trainers# Resonance Of Fate Done... Buy the items");
+
+               UpdateProgressbar(0, 100, 0);
+           }
+           catch (Exception e)
+           {
+               ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+           }
+           finally
+           {
+               Thread.CurrentThread.Abort();
+           }
+           #endregion
+       }
         #endregion
         #endregion
         #endregion

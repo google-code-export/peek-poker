@@ -76,7 +76,7 @@ namespace PeekPoker.RealTimeMemory
         /// <summary>Poke the Memory</summary>
         /// <param name="memoryAddress">The memory addess to Poke Example:0xCEADEADE - Uses *.FindOffset</param>
         /// <param name="value">The value to poke Example:000032FF (hex string)</param>
-        private void Poke(uint memoryAddress, string value)
+        public void Poke(uint memoryAddress, string value)
         {
             if (!Functions.IsHex(value))
                 throw new Exception("Not a valid Hex String!");

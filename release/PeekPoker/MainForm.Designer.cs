@@ -54,18 +54,23 @@
             this.trainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkSoulsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tU01ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DS0MaxLevel = new System.Windows.Forms.ToolStripMenuItem();
             this.DS0MaxSouls = new System.Windows.Forms.ToolStripMenuItem();
             this.DS0MaxHum = new System.Windows.Forms.ToolStripMenuItem();
+            this.DS0MaxAtt = new System.Windows.Forms.ToolStripMenuItem();
+            this.DS0MaxStr = new System.Windows.Forms.ToolStripMenuItem();
             this.DS0MaxVit = new System.Windows.Forms.ToolStripMenuItem();
+            this.DS0MaxDex = new System.Windows.Forms.ToolStripMenuItem();
             this.DS0MaxRes = new System.Windows.Forms.ToolStripMenuItem();
-            this.maxEnduranceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DS0MaxEnd = new System.Windows.Forms.ToolStripMenuItem();
-            this.DS0MillEnd = new System.Windows.Forms.ToolStripMenuItem();
+            this.DS0MaxInt = new System.Windows.Forms.ToolStripMenuItem();
+            this.DS0MaxFaith = new System.Windows.Forms.ToolStripMenuItem();
             this.staminaCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DS0MaxStam = new System.Windows.Forms.ToolStripMenuItem();
             this.DS0MillStam = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.maxEnduranceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DS0MaxEnd = new System.Windows.Forms.ToolStripMenuItem();
+            this.DS0MillEnd = new System.Windows.Forms.ToolStripMenuItem();
             this.thanksDS0 = new System.Windows.Forms.ToolStripMenuItem();
             this.skyrimToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.titleUpdate5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,11 +135,16 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.logTextBox = new System.Windows.Forms.TextBox();
-            this.DS0MaxStr = new System.Windows.Forms.ToolStripMenuItem();
-            this.DS0MaxInt = new System.Windows.Forms.ToolStripMenuItem();
-            this.DS0MaxFaith = new System.Windows.Forms.ToolStripMenuItem();
-            this.DS0MaxDex = new System.Windows.Forms.ToolStripMenuItem();
-            this.DS0MaxAtt = new System.Windows.Forms.ToolStripMenuItem();
+            this.resonanceOfFateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buyMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buyWhiteHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.coloredHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hexStationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.weaponSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.weaponSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.weaponDebugSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemSpecialSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemSpecialSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -332,7 +342,8 @@
             // 
             this.trainersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.darkSoulsToolStripMenuItem,
-            this.skyrimToolStripMenuItem});
+            this.skyrimToolStripMenuItem,
+            this.resonanceOfFateToolStripMenuItem});
             this.trainersToolStripMenuItem.Name = "trainersToolStripMenuItem";
             this.trainersToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.trainersToolStripMenuItem.Text = "Trainers";
@@ -342,7 +353,7 @@
             this.darkSoulsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tU01ToolStripMenuItem});
             this.darkSoulsToolStripMenuItem.Name = "darkSoulsToolStripMenuItem";
-            this.darkSoulsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.darkSoulsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.darkSoulsToolStripMenuItem.Text = "Dark Souls";
             // 
             // tU01ToolStripMenuItem
@@ -363,8 +374,15 @@
             this.maxEnduranceToolStripMenuItem,
             this.thanksDS0});
             this.tU01ToolStripMenuItem.Name = "tU01ToolStripMenuItem";
-            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.tU01ToolStripMenuItem.Text = "TU# 0/1";
+            // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.allToolStripMenuItem.Text = "Max All";
+            this.allToolStripMenuItem.Click += new System.EventHandler(this.DS0_All);
             // 
             // DS0MaxLevel
             // 
@@ -387,12 +405,33 @@
             this.DS0MaxHum.Text = "Max Humanity";
             this.DS0MaxHum.Click += new System.EventHandler(this.DS0_Humanity);
             // 
+            // DS0MaxAtt
+            // 
+            this.DS0MaxAtt.Name = "DS0MaxAtt";
+            this.DS0MaxAtt.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxAtt.Text = "Max Attunement";
+            this.DS0MaxAtt.Click += new System.EventHandler(this.DS0_Attunement);
+            // 
+            // DS0MaxStr
+            // 
+            this.DS0MaxStr.Name = "DS0MaxStr";
+            this.DS0MaxStr.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxStr.Text = "Max Strength";
+            this.DS0MaxStr.Click += new System.EventHandler(this.DS0_Strength);
+            // 
             // DS0MaxVit
             // 
             this.DS0MaxVit.Name = "DS0MaxVit";
             this.DS0MaxVit.Size = new System.Drawing.Size(166, 22);
             this.DS0MaxVit.Text = "Max Vitality";
             this.DS0MaxVit.Click += new System.EventHandler(this.DS0_Vitality);
+            // 
+            // DS0MaxDex
+            // 
+            this.DS0MaxDex.Name = "DS0MaxDex";
+            this.DS0MaxDex.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxDex.Text = "Max Dexterity";
+            this.DS0MaxDex.Click += new System.EventHandler(this.DS0_Dexterity);
             // 
             // DS0MaxRes
             // 
@@ -401,28 +440,19 @@
             this.DS0MaxRes.Text = "Max Resistance";
             this.DS0MaxRes.Click += new System.EventHandler(this.DS0_Resistance);
             // 
-            // maxEnduranceToolStripMenuItem
+            // DS0MaxInt
             // 
-            this.maxEnduranceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DS0MaxEnd,
-            this.DS0MillEnd});
-            this.maxEnduranceToolStripMenuItem.Name = "maxEnduranceToolStripMenuItem";
-            this.maxEnduranceToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.maxEnduranceToolStripMenuItem.Text = "Endurance Codes";
+            this.DS0MaxInt.Name = "DS0MaxInt";
+            this.DS0MaxInt.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxInt.Text = "Max Intelligence";
+            this.DS0MaxInt.Click += new System.EventHandler(this.DS0_Intelligence);
             // 
-            // DS0MaxEnd
+            // DS0MaxFaith
             // 
-            this.DS0MaxEnd.Name = "DS0MaxEnd";
-            this.DS0MaxEnd.Size = new System.Drawing.Size(179, 22);
-            this.DS0MaxEnd.Text = "Max Endurance";
-            this.DS0MaxEnd.Click += new System.EventHandler(this.DS0_Endurance);
-            // 
-            // DS0MillEnd
-            // 
-            this.DS0MillEnd.Name = "DS0MillEnd";
-            this.DS0MillEnd.Size = new System.Drawing.Size(179, 22);
-            this.DS0MillEnd.Text = "1 Million Endurance";
-            this.DS0MillEnd.Click += new System.EventHandler(this.DS0_MillionEndurance);
+            this.DS0MaxFaith.Name = "DS0MaxFaith";
+            this.DS0MaxFaith.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxFaith.Text = "Max Faith";
+            this.DS0MaxFaith.Click += new System.EventHandler(this.DS0_Faith);
             // 
             // staminaCodesToolStripMenuItem
             // 
@@ -447,12 +477,28 @@
             this.DS0MillStam.Text = "1 Million Stamina";
             this.DS0MillStam.Click += new System.EventHandler(this.DS0_MillionStamina);
             // 
-            // allToolStripMenuItem
+            // maxEnduranceToolStripMenuItem
             // 
-            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.allToolStripMenuItem.Text = "Max All";
-            this.allToolStripMenuItem.Click += new System.EventHandler(this.DS0_All);
+            this.maxEnduranceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DS0MaxEnd,
+            this.DS0MillEnd});
+            this.maxEnduranceToolStripMenuItem.Name = "maxEnduranceToolStripMenuItem";
+            this.maxEnduranceToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.maxEnduranceToolStripMenuItem.Text = "Endurance Codes";
+            // 
+            // DS0MaxEnd
+            // 
+            this.DS0MaxEnd.Name = "DS0MaxEnd";
+            this.DS0MaxEnd.Size = new System.Drawing.Size(179, 22);
+            this.DS0MaxEnd.Text = "Max Endurance";
+            this.DS0MaxEnd.Click += new System.EventHandler(this.DS0_Endurance);
+            // 
+            // DS0MillEnd
+            // 
+            this.DS0MillEnd.Name = "DS0MillEnd";
+            this.DS0MillEnd.Size = new System.Drawing.Size(179, 22);
+            this.DS0MillEnd.Text = "1 Million Endurance";
+            this.DS0MillEnd.Click += new System.EventHandler(this.DS0_MillionEndurance);
             // 
             // thanksDS0
             // 
@@ -465,7 +511,7 @@
             this.skyrimToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.titleUpdate5ToolStripMenuItem});
             this.skyrimToolStripMenuItem.Name = "skyrimToolStripMenuItem";
-            this.skyrimToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.skyrimToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.skyrimToolStripMenuItem.Text = "Skyrim";
             // 
             // titleUpdate5ToolStripMenuItem
@@ -914,7 +960,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(74, 19);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(94, 17);
+            this.isSigned.Size = new System.Drawing.Size(109, 19);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1149,40 +1195,92 @@
             this.logTextBox.Size = new System.Drawing.Size(531, 329);
             this.logTextBox.TabIndex = 0;
             // 
-            // DS0MaxStr
+            // resonanceOfFateToolStripMenuItem
             // 
-            this.DS0MaxStr.Name = "DS0MaxStr";
-            this.DS0MaxStr.Size = new System.Drawing.Size(166, 22);
-            this.DS0MaxStr.Text = "Max Strength";
-            this.DS0MaxStr.Click += new System.EventHandler(this.DS0_Strength);
+            this.resonanceOfFateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buyMenuToolStripMenuItem});
+            this.resonanceOfFateToolStripMenuItem.Name = "resonanceOfFateToolStripMenuItem";
+            this.resonanceOfFateToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.resonanceOfFateToolStripMenuItem.Text = "Resonance of Fate";
             // 
-            // DS0MaxInt
+            // buyMenuToolStripMenuItem
             // 
-            this.DS0MaxInt.Name = "DS0MaxInt";
-            this.DS0MaxInt.Size = new System.Drawing.Size(166, 22);
-            this.DS0MaxInt.Text = "Max Intelligence";
-            this.DS0MaxInt.Click += new System.EventHandler(this.DS0_Intelligence);
+            this.buyMenuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buyWhiteHexToolStripMenuItem,
+            this.coloredHexToolStripMenuItem,
+            this.hexStationsToolStripMenuItem,
+            this.weaponSet1ToolStripMenuItem,
+            this.weaponSet2ToolStripMenuItem,
+            this.weaponDebugSetToolStripMenuItem,
+            this.itemSpecialSet1ToolStripMenuItem,
+            this.itemSpecialSet2ToolStripMenuItem});
+            this.buyMenuToolStripMenuItem.Name = "buyMenuToolStripMenuItem";
+            this.buyMenuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buyMenuToolStripMenuItem.Text = "Buy Menu";
             // 
-            // DS0MaxFaith
+            // buyWhiteHexToolStripMenuItem
             // 
-            this.DS0MaxFaith.Name = "DS0MaxFaith";
-            this.DS0MaxFaith.Size = new System.Drawing.Size(166, 22);
-            this.DS0MaxFaith.Text = "Max Faith";
-            this.DS0MaxFaith.Click += new System.EventHandler(this.DS0_Faith);
+            this.buyWhiteHexToolStripMenuItem.Name = "buyWhiteHexToolStripMenuItem";
+            this.buyWhiteHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.buyWhiteHexToolStripMenuItem.Tag = "WhiteHex";
+            this.buyWhiteHexToolStripMenuItem.Text = "White Hex";
+            this.buyWhiteHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
             // 
-            // DS0MaxDex
+            // coloredHexToolStripMenuItem
             // 
-            this.DS0MaxDex.Name = "DS0MaxDex";
-            this.DS0MaxDex.Size = new System.Drawing.Size(166, 22);
-            this.DS0MaxDex.Text = "Max Dexterity";
-            this.DS0MaxDex.Click += new System.EventHandler(this.DS0_Dexterity);
+            this.coloredHexToolStripMenuItem.Name = "coloredHexToolStripMenuItem";
+            this.coloredHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.coloredHexToolStripMenuItem.Tag = "ColoredHex";
+            this.coloredHexToolStripMenuItem.Text = "Colored Hex";
+            this.coloredHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
             // 
-            // DS0MaxAtt
+            // hexStationsToolStripMenuItem
             // 
-            this.DS0MaxAtt.Name = "DS0MaxAtt";
-            this.DS0MaxAtt.Size = new System.Drawing.Size(166, 22);
-            this.DS0MaxAtt.Text = "Max Attunement";
-            this.DS0MaxAtt.Click += new System.EventHandler(this.DS0_Attunement);
+            this.hexStationsToolStripMenuItem.Name = "hexStationsToolStripMenuItem";
+            this.hexStationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.hexStationsToolStripMenuItem.Tag = "HexStations";
+            this.hexStationsToolStripMenuItem.Text = "Hex Stations";
+            this.hexStationsToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // weaponSet1ToolStripMenuItem
+            // 
+            this.weaponSet1ToolStripMenuItem.Name = "weaponSet1ToolStripMenuItem";
+            this.weaponSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponSet1ToolStripMenuItem.Tag = "WeaponSet1";
+            this.weaponSet1ToolStripMenuItem.Text = "Weapon Set 1";
+            this.weaponSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // weaponSet2ToolStripMenuItem
+            // 
+            this.weaponSet2ToolStripMenuItem.Name = "weaponSet2ToolStripMenuItem";
+            this.weaponSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponSet2ToolStripMenuItem.Tag = "WeaponSet2";
+            this.weaponSet2ToolStripMenuItem.Text = "Weapon Set 2";
+            this.weaponSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // weaponDebugSetToolStripMenuItem
+            // 
+            this.weaponDebugSetToolStripMenuItem.Name = "weaponDebugSetToolStripMenuItem";
+            this.weaponDebugSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponDebugSetToolStripMenuItem.Tag = "WeaponDebugSet";
+            this.weaponDebugSetToolStripMenuItem.Text = "Weapon Debug Set";
+            this.weaponDebugSetToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // itemSpecialSet1ToolStripMenuItem
+            // 
+            this.itemSpecialSet1ToolStripMenuItem.Name = "itemSpecialSet1ToolStripMenuItem";
+            this.itemSpecialSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.itemSpecialSet1ToolStripMenuItem.Tag = "ItemSpecialSet1";
+            this.itemSpecialSet1ToolStripMenuItem.Text = "Item Special Set 1";
+            this.itemSpecialSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // itemSpecialSet2ToolStripMenuItem
+            // 
+            this.itemSpecialSet2ToolStripMenuItem.Name = "itemSpecialSet2ToolStripMenuItem";
+            this.itemSpecialSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.itemSpecialSet2ToolStripMenuItem.Tag = "ItemSpecialSet2";
+            this.itemSpecialSet2ToolStripMenuItem.Text = "Item Special Set 2";
+            this.itemSpecialSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
             // 
             // MainForm
             // 
@@ -1340,6 +1438,16 @@
         private System.Windows.Forms.ToolStripMenuItem DS0MaxInt;
         private System.Windows.Forms.ToolStripMenuItem DS0MaxFaith;
         private System.Windows.Forms.ToolStripMenuItem DS0MaxAtt;
+        private System.Windows.Forms.ToolStripMenuItem resonanceOfFateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buyMenuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buyWhiteHexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem coloredHexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hexStationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem weaponSet1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem weaponSet2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem weaponDebugSetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemSpecialSet1ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemSpecialSet2ToolStripMenuItem;
 
     }
 }
