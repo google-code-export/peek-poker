@@ -1230,7 +1230,7 @@
             // 
             this.coloredHexToolStripMenuItem.Name = "coloredHexToolStripMenuItem";
             this.coloredHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.coloredHexToolStripMenuItem.Tag = "ColoredHex";
+            this.coloredHexToolStripMenuItem.Tag = "ColorHex";
             this.coloredHexToolStripMenuItem.Text = "Colored Hex";
             this.coloredHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
             // 

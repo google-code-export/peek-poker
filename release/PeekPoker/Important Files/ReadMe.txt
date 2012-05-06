@@ -107,9 +107,12 @@ Changed Writememory to public void to accomodate trainers.
 NB: Nice log.
 [/8Ball]
 
-- changes 05/05/15
+- changes 05/05/12
 added Resonance of Fate trainer editing the Buy Menu (thanks to mariokart64n's research in for this)
 	- just open the buy menu ingame and then select the option you want to add
 	- wait till it's done and refresh the screen by scrolling down (ingame) to see what items are in the buy menu now (amount is set to 999 and price to 1)
 	- buy or leave the menu to select another option
 added scrollability to the logbox.. so now it will always scroll to the newest entry on update
+
+- chagnes 06/05/12
+fixed - Resoncance of fate trainer whne pressing on the colored hex option it didn't choose the right code
