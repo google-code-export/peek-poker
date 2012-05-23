@@ -77,6 +77,16 @@
             this.infSprintToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infMagickaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thanks8BallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resonanceOfFateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buyMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buyWhiteHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.coloredHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hexStationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.weaponSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.weaponSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.weaponDebugSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemSpecialSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemSpecialSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.searchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
@@ -135,16 +145,21 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.logTextBox = new System.Windows.Forms.TextBox();
-            this.resonanceOfFateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buyMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buyWhiteHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.coloredHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hexStationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.weaponSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.weaponSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.weaponDebugSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemSpecialSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemSpecialSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.createtrainerbutton = new System.Windows.Forms.Button();
+            this.addcodebutton = new System.Windows.Forms.Button();
+            this.codeaddressbox = new System.Windows.Forms.TextBox();
+            this.codevaluebox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.combocodetype = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.TrainerTextBox = new System.Windows.Forms.TextBox();
+            this.opentrainerbutton = new System.Windows.Forms.Button();
+            this.codenamebox = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.newcodebutton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -161,6 +176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt16)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -200,8 +216,8 @@
             // 
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(64, 19);
-            this.toolStripStatusLabel1.Text = "Revision 6";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(73, 19);
+            this.toolStripStatusLabel1.Text = "Revision 6.1";
             // 
             // StatusProgressBar
             // 
@@ -374,7 +390,7 @@
             this.maxEnduranceToolStripMenuItem,
             this.thanksDS0});
             this.tU01ToolStripMenuItem.Name = "tU01ToolStripMenuItem";
-            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tU01ToolStripMenuItem.Text = "TU# 0/1";
             // 
             // allToolStripMenuItem
@@ -544,6 +560,93 @@
             this.thanks8BallToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.thanks8BallToolStripMenuItem.Text = "Thanks: 8Ball";
             // 
+            // resonanceOfFateToolStripMenuItem
+            // 
+            this.resonanceOfFateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buyMenuToolStripMenuItem});
+            this.resonanceOfFateToolStripMenuItem.Name = "resonanceOfFateToolStripMenuItem";
+            this.resonanceOfFateToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.resonanceOfFateToolStripMenuItem.Text = "Resonance of Fate";
+            // 
+            // buyMenuToolStripMenuItem
+            // 
+            this.buyMenuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buyWhiteHexToolStripMenuItem,
+            this.coloredHexToolStripMenuItem,
+            this.hexStationsToolStripMenuItem,
+            this.weaponSet1ToolStripMenuItem,
+            this.weaponSet2ToolStripMenuItem,
+            this.weaponDebugSetToolStripMenuItem,
+            this.itemSpecialSet1ToolStripMenuItem,
+            this.itemSpecialSet2ToolStripMenuItem});
+            this.buyMenuToolStripMenuItem.Name = "buyMenuToolStripMenuItem";
+            this.buyMenuToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.buyMenuToolStripMenuItem.Text = "Buy Menu";
+            // 
+            // buyWhiteHexToolStripMenuItem
+            // 
+            this.buyWhiteHexToolStripMenuItem.Name = "buyWhiteHexToolStripMenuItem";
+            this.buyWhiteHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.buyWhiteHexToolStripMenuItem.Tag = "WhiteHex";
+            this.buyWhiteHexToolStripMenuItem.Text = "White Hex";
+            this.buyWhiteHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // coloredHexToolStripMenuItem
+            // 
+            this.coloredHexToolStripMenuItem.Name = "coloredHexToolStripMenuItem";
+            this.coloredHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.coloredHexToolStripMenuItem.Tag = "ColorHex";
+            this.coloredHexToolStripMenuItem.Text = "Colored Hex";
+            this.coloredHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // hexStationsToolStripMenuItem
+            // 
+            this.hexStationsToolStripMenuItem.Name = "hexStationsToolStripMenuItem";
+            this.hexStationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.hexStationsToolStripMenuItem.Tag = "HexStations";
+            this.hexStationsToolStripMenuItem.Text = "Hex Stations";
+            this.hexStationsToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // weaponSet1ToolStripMenuItem
+            // 
+            this.weaponSet1ToolStripMenuItem.Name = "weaponSet1ToolStripMenuItem";
+            this.weaponSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponSet1ToolStripMenuItem.Tag = "WeaponSet1";
+            this.weaponSet1ToolStripMenuItem.Text = "Weapon Set 1";
+            this.weaponSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // weaponSet2ToolStripMenuItem
+            // 
+            this.weaponSet2ToolStripMenuItem.Name = "weaponSet2ToolStripMenuItem";
+            this.weaponSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponSet2ToolStripMenuItem.Tag = "WeaponSet2";
+            this.weaponSet2ToolStripMenuItem.Text = "Weapon Set 2";
+            this.weaponSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // weaponDebugSetToolStripMenuItem
+            // 
+            this.weaponDebugSetToolStripMenuItem.Name = "weaponDebugSetToolStripMenuItem";
+            this.weaponDebugSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponDebugSetToolStripMenuItem.Tag = "WeaponDebugSet";
+            this.weaponDebugSetToolStripMenuItem.Text = "Weapon Debug Set";
+            this.weaponDebugSetToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // itemSpecialSet1ToolStripMenuItem
+            // 
+            this.itemSpecialSet1ToolStripMenuItem.Name = "itemSpecialSet1ToolStripMenuItem";
+            this.itemSpecialSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.itemSpecialSet1ToolStripMenuItem.Tag = "ItemSpecialSet1";
+            this.itemSpecialSet1ToolStripMenuItem.Text = "Item Special Set 1";
+            this.itemSpecialSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // itemSpecialSet2ToolStripMenuItem
+            // 
+            this.itemSpecialSet2ToolStripMenuItem.Name = "itemSpecialSet2ToolStripMenuItem";
+            this.itemSpecialSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.itemSpecialSet2ToolStripMenuItem.Tag = "ItemSpecialSet2";
+            this.itemSpecialSet2ToolStripMenuItem.Text = "Item Special Set 2";
+            this.itemSpecialSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
@@ -591,7 +694,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(692, 335);
+            this.tabPage2.Size = new System.Drawing.Size(687, 335);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Calculator";
             // 
@@ -732,7 +835,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(692, 335);
+            this.tabPage3.Size = new System.Drawing.Size(687, 335);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Search Range";
             // 
@@ -912,7 +1015,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(692, 335);
+            this.tabPage1.Size = new System.Drawing.Size(687, 335);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Peek & Poke";
             // 
@@ -936,7 +1039,7 @@
             this.peeknpoke.Enabled = false;
             this.peeknpoke.Location = new System.Drawing.Point(3, 3);
             this.peeknpoke.Name = "peeknpoke";
-            this.peeknpoke.Size = new System.Drawing.Size(686, 329);
+            this.peeknpoke.Size = new System.Drawing.Size(681, 329);
             this.peeknpoke.TabIndex = 12;
             // 
             // groupBox3
@@ -1167,10 +1270,12 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 58);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.HotTrack = true;
+            this.tabControl1.Location = new System.Drawing.Point(3, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(700, 363);
+            this.tabControl1.Size = new System.Drawing.Size(695, 363);
             this.tabControl1.TabIndex = 13;
             // 
             // tabPage4
@@ -1180,7 +1285,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(692, 335);
+            this.tabPage4.Size = new System.Drawing.Size(687, 335);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Home";
             // 
@@ -1192,95 +1297,190 @@
             this.logTextBox.Multiline = true;
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.logTextBox.Size = new System.Drawing.Size(531, 329);
+            this.logTextBox.Size = new System.Drawing.Size(681, 329);
             this.logTextBox.TabIndex = 0;
             // 
-            // resonanceOfFateToolStripMenuItem
+            // tabPage5
             // 
-            this.resonanceOfFateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buyMenuToolStripMenuItem});
-            this.resonanceOfFateToolStripMenuItem.Name = "resonanceOfFateToolStripMenuItem";
-            this.resonanceOfFateToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.resonanceOfFateToolStripMenuItem.Text = "Resonance of Fate";
+            this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage5.Controls.Add(this.newcodebutton);
+            this.tabPage5.Controls.Add(this.label19);
+            this.tabPage5.Controls.Add(this.codenamebox);
+            this.tabPage5.Controls.Add(this.opentrainerbutton);
+            this.tabPage5.Controls.Add(this.TrainerTextBox);
+            this.tabPage5.Controls.Add(this.label18);
+            this.tabPage5.Controls.Add(this.combocodetype);
+            this.tabPage5.Controls.Add(this.label15);
+            this.tabPage5.Controls.Add(this.label8);
+            this.tabPage5.Controls.Add(this.codevaluebox);
+            this.tabPage5.Controls.Add(this.codeaddressbox);
+            this.tabPage5.Controls.Add(this.addcodebutton);
+            this.tabPage5.Controls.Add(this.createtrainerbutton);
+            this.tabPage5.Location = new System.Drawing.Point(4, 24);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(687, 335);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Trainer Utility";
             // 
-            // buyMenuToolStripMenuItem
+            // createtrainerbutton
             // 
-            this.buyMenuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buyWhiteHexToolStripMenuItem,
-            this.coloredHexToolStripMenuItem,
-            this.hexStationsToolStripMenuItem,
-            this.weaponSet1ToolStripMenuItem,
-            this.weaponSet2ToolStripMenuItem,
-            this.weaponDebugSetToolStripMenuItem,
-            this.itemSpecialSet1ToolStripMenuItem,
-            this.itemSpecialSet2ToolStripMenuItem});
-            this.buyMenuToolStripMenuItem.Name = "buyMenuToolStripMenuItem";
-            this.buyMenuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.buyMenuToolStripMenuItem.Text = "Buy Menu";
+            this.createtrainerbutton.Location = new System.Drawing.Point(117, 6);
+            this.createtrainerbutton.Name = "createtrainerbutton";
+            this.createtrainerbutton.Size = new System.Drawing.Size(106, 23);
+            this.createtrainerbutton.TabIndex = 0;
+            this.createtrainerbutton.Text = "Create Trainer";
+            this.createtrainerbutton.UseVisualStyleBackColor = true;
+            this.createtrainerbutton.Click += new System.EventHandler(this.createtrainerbutton_Click);
             // 
-            // buyWhiteHexToolStripMenuItem
+            // addcodebutton
             // 
-            this.buyWhiteHexToolStripMenuItem.Name = "buyWhiteHexToolStripMenuItem";
-            this.buyWhiteHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.buyWhiteHexToolStripMenuItem.Tag = "WhiteHex";
-            this.buyWhiteHexToolStripMenuItem.Text = "White Hex";
-            this.buyWhiteHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.addcodebutton.Location = new System.Drawing.Point(592, 43);
+            this.addcodebutton.Name = "addcodebutton";
+            this.addcodebutton.Size = new System.Drawing.Size(85, 23);
+            this.addcodebutton.TabIndex = 16;
+            this.addcodebutton.Text = "Cont. Code";
+            this.addcodebutton.UseVisualStyleBackColor = true;
+            this.addcodebutton.Click += new System.EventHandler(this.addcodebutton_Click);
             // 
-            // coloredHexToolStripMenuItem
+            // codeaddressbox
             // 
-            this.coloredHexToolStripMenuItem.Name = "coloredHexToolStripMenuItem";
-            this.coloredHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.coloredHexToolStripMenuItem.Tag = "ColorHex";
-            this.coloredHexToolStripMenuItem.Text = "Colored Hex";
-            this.coloredHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.codeaddressbox.Location = new System.Drawing.Point(340, 44);
+            this.codeaddressbox.Name = "codeaddressbox";
+            this.codeaddressbox.Size = new System.Drawing.Size(100, 22);
+            this.codeaddressbox.TabIndex = 17;
             // 
-            // hexStationsToolStripMenuItem
+            // codevaluebox
             // 
-            this.hexStationsToolStripMenuItem.Name = "hexStationsToolStripMenuItem";
-            this.hexStationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.hexStationsToolStripMenuItem.Tag = "HexStations";
-            this.hexStationsToolStripMenuItem.Text = "Hex Stations";
-            this.hexStationsToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.codevaluebox.Location = new System.Drawing.Point(492, 44);
+            this.codevaluebox.Name = "codevaluebox";
+            this.codevaluebox.Size = new System.Drawing.Size(90, 22);
+            this.codevaluebox.TabIndex = 18;
             // 
-            // weaponSet1ToolStripMenuItem
+            // label8
             // 
-            this.weaponSet1ToolStripMenuItem.Name = "weaponSet1ToolStripMenuItem";
-            this.weaponSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.weaponSet1ToolStripMenuItem.Tag = "WeaponSet1";
-            this.weaponSet1ToolStripMenuItem.Text = "Weapon Set 1";
-            this.weaponSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(279, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 15);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Address";
             // 
-            // weaponSet2ToolStripMenuItem
+            // label15
             // 
-            this.weaponSet2ToolStripMenuItem.Name = "weaponSet2ToolStripMenuItem";
-            this.weaponSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.weaponSet2ToolStripMenuItem.Tag = "WeaponSet2";
-            this.weaponSet2ToolStripMenuItem.Text = "Weapon Set 2";
-            this.weaponSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(446, 47);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(40, 15);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Value";
             // 
-            // weaponDebugSetToolStripMenuItem
+            // splitter1
             // 
-            this.weaponDebugSetToolStripMenuItem.Name = "weaponDebugSetToolStripMenuItem";
-            this.weaponDebugSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.weaponDebugSetToolStripMenuItem.Tag = "WeaponDebugSet";
-            this.weaponDebugSetToolStripMenuItem.Text = "Weapon Debug Set";
-            this.weaponDebugSetToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.splitter1.Location = new System.Drawing.Point(0, 24);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 402);
+            this.splitter1.TabIndex = 15;
+            this.splitter1.TabStop = false;
             // 
-            // itemSpecialSet1ToolStripMenuItem
+            // combocodetype
             // 
-            this.itemSpecialSet1ToolStripMenuItem.Name = "itemSpecialSet1ToolStripMenuItem";
-            this.itemSpecialSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.itemSpecialSet1ToolStripMenuItem.Tag = "ItemSpecialSet1";
-            this.itemSpecialSet1ToolStripMenuItem.Text = "Item Special Set 1";
-            this.itemSpecialSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.combocodetype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combocodetype.FormattingEnabled = true;
+            this.combocodetype.Items.AddRange(new object[] {
+            " 0 = 8 bit write",
+            " 1 = 16 bit write",
+            " 2 = 32 bit write",
+            " 3 = 8 bit And",
+            " 4 = 16 bit And",
+            " 5 = 32 bit And",
+            " 6 = 8 bit Or",
+            " 7 = 16 bit Or",
+            " 8 = 32 bit Or",
+            " 9 = 8 bit Xor",
+            " A = 16 bit Xor",
+            " B = 32 bit Xor",
+            " C = 8 bit Increment",
+            " D = 16 bit Increment",
+            " E = 32 bit Increment",
+            " F = 8 bit Decrement",
+            "10 = 16 bit Decrement",
+            "11 = 32 bit Decrement",
+            "12 = 8 bit Equal",
+            "13 = 16 bit Equal",
+            "14 = 32 bit Equal",
+            "15 = 8 bit Not Equal",
+            "16 = 16 bit Not Equal",
+            "17 = 32 bit Not Equal",
+            "18 = 8 bit Greater Than",
+            "19 = 16 bit Greater Than",
+            "1A = 32 bit Greater Than",
+            "1B = 8 bit Less Than",
+            "1C = 16 bit Less Than",
+            "1D = 32 bit Less Than",
+            "1E = 8 bit Less Than",
+            "1F = 16 bit Less Than",
+            "20 = 32 bit Less Than"});
+            this.combocodetype.Location = new System.Drawing.Point(89, 43);
+            this.combocodetype.Name = "combocodetype";
+            this.combocodetype.Size = new System.Drawing.Size(184, 23);
+            this.combocodetype.TabIndex = 21;
             // 
-            // itemSpecialSet2ToolStripMenuItem
+            // label18
             // 
-            this.itemSpecialSet2ToolStripMenuItem.Name = "itemSpecialSet2ToolStripMenuItem";
-            this.itemSpecialSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.itemSpecialSet2ToolStripMenuItem.Tag = "ItemSpecialSet2";
-            this.itemSpecialSet2ToolStripMenuItem.Text = "Item Special Set 2";
-            this.itemSpecialSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(12, 47);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(67, 15);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "CodeType";
+            // 
+            // TrainerTextBox
+            // 
+            this.TrainerTextBox.BackColor = System.Drawing.Color.White;
+            this.TrainerTextBox.ForeColor = System.Drawing.Color.Black;
+            this.TrainerTextBox.Location = new System.Drawing.Point(6, 72);
+            this.TrainerTextBox.Multiline = true;
+            this.TrainerTextBox.Name = "TrainerTextBox";
+            this.TrainerTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TrainerTextBox.Size = new System.Drawing.Size(671, 260);
+            this.TrainerTextBox.TabIndex = 23;
+            // 
+            // opentrainerbutton
+            // 
+            this.opentrainerbutton.Location = new System.Drawing.Point(5, 6);
+            this.opentrainerbutton.Name = "opentrainerbutton";
+            this.opentrainerbutton.Size = new System.Drawing.Size(106, 23);
+            this.opentrainerbutton.TabIndex = 24;
+            this.opentrainerbutton.Text = "Open Trainer";
+            this.opentrainerbutton.UseVisualStyleBackColor = true;
+            this.opentrainerbutton.Click += new System.EventHandler(this.scanTrainerCodes);
+            // 
+            // codenamebox
+            // 
+            this.codenamebox.Location = new System.Drawing.Point(340, 16);
+            this.codenamebox.Name = "codenamebox";
+            this.codenamebox.Size = new System.Drawing.Size(242, 22);
+            this.codenamebox.TabIndex = 25;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(258, 19);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(76, 15);
+            this.label19.TabIndex = 26;
+            this.label19.Text = "Code Name";
+            // 
+            // newcodebutton
+            // 
+            this.newcodebutton.Location = new System.Drawing.Point(592, 15);
+            this.newcodebutton.Name = "newcodebutton";
+            this.newcodebutton.Size = new System.Drawing.Size(85, 23);
+            this.newcodebutton.TabIndex = 27;
+            this.newcodebutton.Text = "New Code";
+            this.newcodebutton.UseVisualStyleBackColor = true;
+            this.newcodebutton.Click += new System.EventHandler(this.newcodebutton_Click);
             // 
             // MainForm
             // 
@@ -1288,6 +1488,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(700, 450);
+            this.Controls.Add(this.splitter1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.label2);
@@ -1326,6 +1527,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1448,6 +1651,21 @@
         private System.Windows.Forms.ToolStripMenuItem weaponDebugSetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemSpecialSet1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemSpecialSet2ToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button createtrainerbutton;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox codevaluebox;
+        private System.Windows.Forms.TextBox codeaddressbox;
+        private System.Windows.Forms.Button addcodebutton;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox combocodetype;
+        private System.Windows.Forms.TextBox TrainerTextBox;
+        private System.Windows.Forms.Button opentrainerbutton;
+        private System.Windows.Forms.Button newcodebutton;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox codenamebox;
 
     }
 }

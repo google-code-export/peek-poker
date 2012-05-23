@@ -30,6 +30,7 @@ namespace PeekPoker
         private uint _searchRangeDumpLength;
         public List<string> _offsets;
         private BindingList<Types.SearchResults> _searchResult = new BindingList<Types.SearchResults>();
+        private string _filepath2 = null; //Trainer Scanner
         #endregion
 
         public MainForm()
@@ -40,6 +41,7 @@ namespace PeekPoker
             searchRangeBaseValueTypeCB.SelectedIndex = 0;
             searchRangeEndTypeCB.SelectedIndex = 0;
             resultGrid.DataSource = _searchResult;
+            combocodetype.SelectedIndex = 0;
         }
         private void MainFormFormClosing(object sender, FormClosingEventArgs e)
         {
@@ -782,9 +784,6 @@ namespace PeekPoker
         }
 #endregion
         #region Trainers
-        //Recommend moving this to it's own class, could get messy -8Ball
-        // - not really just have to pass some more variables to that class
-        // - and it would make thing more organized ^_^ - Sam
         #region Skyrim
 //Skyrim TU#4/5
   // Inf Stamina
@@ -940,7 +939,6 @@ namespace PeekPoker
                 DS0_Stamina(DS0MaxStam, System.EventArgs.Empty);
          }
         #endregion
-
         #region Resonce Of Fate
        private void ExROF(object sets)
        {
@@ -1126,7 +1124,69 @@ namespace PeekPoker
            #endregion
        }
         #endregion
+
+        #region Trainer-Utility
+       private void scanTrainerCodes(object sender, EventArgs e) //Opens a trainers txt file to read its codes
+       {
+           SetLogText("#Trainers# Activating Trainer Scanner");
+           try
+           {
+               OpenFileDialog Open = new OpenFileDialog();
+               Open.Filter = "GAME_ID.txt|*.txt";
+               Open.Title = "Open Trainer Code File";
+               Open.ShowDialog();
+               _filepath2 = Open.FileName;
+               if (!File.Exists(_filepath2)) return;
+               Application.DoEvents();
+               ReadFile(_filepath2);
+            }
+           catch (Exception ex){MessageBox.Show(ex.Message);}
+       }
+       public void ReadFile(string _filepath2)
+       {   try
+       {
+           TrainerTextBox.Text = File.ReadAllText(_filepath2);
+               SetLogText("#Trainers# Opening Trainer, Game ID:" + _filepath2.Substring(_filepath2.Length - 12, 8)); //GAMEID Extraction from filepath
+          
+       }
+           catch (Exception ex){MessageBox.Show(ex.Message);}
+        }
+     
+        //Save TrainerTextBox contents to file of users choice.
+       private void createtrainerbutton_Click(object sender, EventArgs e) 
+
+       {
+           SetLogText("#Trainers# Saving Trainer");
+           SaveFileDialog Save = new SaveFileDialog();
+           Save.Filter = "*.txt|*.txt";
+           Save.Title = "Save Trainer Code File";
+           Save.ShowDialog();
+           if (Save.FileName != "")
+           {
+               System.IO.StreamWriter file = new System.IO.StreamWriter(Save.FileName);
+               file.Write(TrainerTextBox.Text);
+               file.Close();
+               SetLogText("#Trainers# Saved Trainer to " + Save.FileName);
+       }}
+
+     //Appends a blank line and regains focus to trainerbox
+       private void newcodebutton_Click(object sender, EventArgs e)
+       {   
+           TrainerTextBox.AppendText(Environment.NewLine);
+           TrainerTextBox.AppendText((Environment.NewLine) + "#" + codenamebox.Text);
+           TrainerTextBox.AppendText((Environment.NewLine) + combocodetype.SelectedIndex.ToString("X") + " " + codeaddressbox.Text + " " + codevaluebox.Text);
+           TrainerTextBox.Focus();
+       }
+           
+     //Appends code to list, includes codename, type, address and value
+       private void addcodebutton_Click(object sender, EventArgs e) //Appends code to TrainerTextBox.
+       {
+           TrainerTextBox.AppendText((Environment.NewLine) + combocodetype.SelectedIndex.ToString("X") + " " + codeaddressbox.Text + " " + codevaluebox.Text);
+           TrainerTextBox.Focus();
+       }
         #endregion
         #endregion
+        #endregion
+
     }
 }

@@ -1,4 +1,4 @@
-﻿Last Update - 1/05/12 by 8Ball
+﻿Last Update - 23/05/12 by 8Ball
 ==============================================================
 NB: Update source file before you commit.
 ==============================================================
@@ -114,5 +114,12 @@ added Resonance of Fate trainer editing the Buy Menu (thanks to mariokart64n's r
 	- buy or leave the menu to select another option
 added scrollability to the logbox.. so now it will always scroll to the newest entry on update
 
-- chagnes 06/05/12
+- changes 06/05/12
 fixed - Resoncance of fate trainer whne pressing on the colored hex option it didn't choose the right code
+
+- changes 23/05/12
+Added trainer utility for managing trainer files.
+TODO:
+-Scan trainer files and add their codes to the list.
+-Improve utility 'idiot proofing' and general features.
+-Add game id recognition to help user name trainer file correctly
