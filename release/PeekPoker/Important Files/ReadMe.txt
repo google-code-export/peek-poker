@@ -1,4 +1,4 @@
-﻿Last Update - 23/05/12 by 8Ball
+﻿Last Update - 25/05/12 by PureIso
 ==============================================================
 NB: Update source file before you commit.
 ==============================================================
@@ -119,7 +119,11 @@ fixed - Resoncance of fate trainer whne pressing on the colored hex option it di
 
 - changes 23/05/12
 Added trainer utility for managing trainer files.
+
+- changes 25/05/12
+Fix - Select Game - How to use, now displays messagebox.
 TODO:
 -Scan trainer files and add their codes to the list.
 -Improve utility 'idiot proofing' and general features.
 -Add game id recognition to help user name trainer file correctly
+-More Testing and UI fixing

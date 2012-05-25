@@ -24,11 +24,11 @@ namespace PeekPoker
     public partial class MainForm : Form
     {
         #region global varibales
-        public RealTimeMemory.RealTimeMemory _rtm;//DLL is now in the Important File Folder
+        public RealTimeMemory.RealTimeMemory Rtm;//DLL is now in the Important File Folder
         private readonly AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
         private uint _searchRangeDumpLength;
-        public List<string> _offsets;
+        public List<string> Offsets;
         private BindingList<Types.SearchResults> _searchResult = new BindingList<Types.SearchResults>();
         private string _filepath2 = null; //Trainer Scanner
         #endregion
@@ -83,6 +83,7 @@ namespace PeekPoker
             stringBuilder.AppendLine(string.Format("Options with [P] = search range pointer info"));
             stringBuilder.AppendLine(string.Format("Options with [A] = Address of the actual value"));
             stringBuilder.AppendLine(string.Format("NB: This is still work in progress."));
+            ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #region button clicks
@@ -92,10 +93,10 @@ namespace PeekPoker
             try
             {
                 SetLogText("Connecting to: " + ipAddressTextBox.Text);
-                _rtm = new RealTimeMemory.RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
-                _rtm.ReportProgress += UpdateProgressbar;
+                Rtm = new RealTimeMemory.RealTimeMemory(ipAddressTextBox.Text, 0, 0);//initialize real time memory
+                Rtm.ReportProgress += UpdateProgressbar;
 
-                if (!_rtm.Connect())
+                if (!Rtm.Connect())
                 {
                     SetLogText("Connecting to " + ipAddressTextBox.Text+" Failed.");
                     throw new Exception("Connection Failed!");
@@ -127,7 +128,7 @@ namespace PeekPoker
             {
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text))
                     throw new Exception("Invalide peek length!");
-                var retValue = Functions.StringToByteArray(_rtm.Peek(peekPokeAddressTextBox.Text, peekLengthTextBox.Text, peekPokeAddressTextBox.Text, peekLengthTextBox.Text));
+                var retValue = Functions.StringToByteArray(Rtm.Peek(peekPokeAddressTextBox.Text, peekLengthTextBox.Text, peekPokeAddressTextBox.Text, peekLengthTextBox.Text));
                 var buffer = new Be.Windows.Forms.DynamicByteProvider(retValue) {IsWriteByte = true}; //object initilizer 
                 hexBox.ByteProvider = buffer;
                 hexBox.Refresh();
@@ -150,13 +151,13 @@ namespace PeekPoker
             AutoComplete(); //run function
             try
             {
-                _rtm.DumpOffset = Functions.Convert(peekPokeAddressTextBox.Text);//Set the dump offset
-                _rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
+                Rtm.DumpOffset = Functions.Convert(peekPokeAddressTextBox.Text);//Set the dump offset
+                Rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
 
                 var buffer = (Be.Windows.Forms.DynamicByteProvider)hexBox.ByteProvider;
 
                 Console.WriteLine(Functions.ByteArrayToString(buffer.Bytes.ToArray()));//?????
-                _rtm.Poke(peekPokeAddressTextBox.Text, Functions.ByteArrayToString(buffer.Bytes.ToArray()));
+                Rtm.Poke(peekPokeAddressTextBox.Text, Functions.ByteArrayToString(buffer.Bytes.ToArray()));
                 MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -247,7 +248,7 @@ namespace PeekPoker
         //stop the search
         private void StopSearchButtonClick(object sender, EventArgs e)
         {
-            _rtm.StopSearch = true; 
+            Rtm.StopSearch = true; 
         }
         #endregion
         
@@ -419,7 +420,7 @@ namespace PeekPoker
 
                     //peekPokeAddressTextBox.Text = "0x" + _item.Offset;
                     var length = (item.Value.Length / 2).ToString("X");
-                    var retvalue = _rtm.Peek("0x" + item.Offset, length, "0x" + item.Offset, length);
+                    var retvalue = Rtm.Peek("0x" + item.Offset, length, "0x" + item.Offset, length);
 
                     if (item.Value == retvalue) continue;//if value hasn't change continue foreach loop
 
@@ -448,23 +449,23 @@ namespace PeekPoker
                 EnableExSearchRangeButton(false);
                 EnableStopSearchButton(true);
                 EnableSearchRangeButton(false);
-                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
-                _rtm.DumpLength = _searchRangeDumpLength;
+                Rtm.DumpOffset = GetStartRangeAddressTextBoxText();
+                Rtm.DumpLength = _searchRangeDumpLength;
                 ResultGridClean();//Clean list view
 
                 //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
-                _offsets = _rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+                Offsets = Rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
                 //Reset the progressbar...
                 UpdateProgressbar(0, 100, 0);
 
-                if (_offsets.Count < 1)
+                if (Offsets.Count < 1)
                 {
                     ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return; //We don't want it to continue
                 }
 
                 var i = 0; //The index number
-                foreach (var offset in _offsets)
+                foreach (var offset in Offsets)
                 {
                     //create a new variable of the SearchResult type and set the variables
                     var results = new Types.SearchResults { Offset = offset, ID = i.ToString() };
@@ -495,13 +496,13 @@ namespace PeekPoker
                 EnableSearchRangeButton(false);
                 EnableExSearchRangeButton(false);
                 EnableStopSearchButton(true);
-                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
-                _rtm.DumpLength = _searchRangeDumpLength;
+                Rtm.DumpOffset = GetStartRangeAddressTextBoxText();
+                Rtm.DumpLength = _searchRangeDumpLength;
 
                 ResultGridClean();//Clean list view
 
                 //The ExFindHexOffset function is a Experimental search function
-                var results = _rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+                var results = Rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
                 //Reset the progressbar...
                 UpdateProgressbar(0, 100, 0);
 
@@ -791,10 +792,10 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Sprint - Sent");
             try
-            {_rtm.WriteMemory(0x834F9890, "00000000"); 
-             _rtm.WriteMemory(0x834F9650, "00000000");
-             _rtm.WriteMemory(0x834FB234, "00000000");
-             _rtm.WriteMemory(0x834FB24C, "00000000");
+            {Rtm.WriteMemory(0x834F9890, "00000000"); 
+             Rtm.WriteMemory(0x834F9650, "00000000");
+             Rtm.WriteMemory(0x834FB234, "00000000");
+             Rtm.WriteMemory(0x834FB24C, "00000000");
             }
             catch { SetLogText("Error! Could not poke code."); } 
         }
@@ -803,7 +804,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Stamina - Sent");
             try
-            { _rtm.WriteMemory(0x834FB234, "00000000");}
+            { Rtm.WriteMemory(0x834FB234, "00000000");}
             catch { SetLogText("Error! Could not poke code."); }             
         }
 #endregion
@@ -814,7 +815,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Level - Sent");
             try
-            {_rtm.WriteMemory(0xC95A2108, "000002C8");}
+            {Rtm.WriteMemory(0xC95A2108, "000002C8");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Souls 
@@ -822,7 +823,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Souls - Sent");
             try
-            {_rtm.WriteMemory(0xC95A210C, "3B9AC9FF");}
+            {Rtm.WriteMemory(0xC95A210C, "3B9AC9FF");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Humanity 
@@ -830,7 +831,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Humanity - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20FC, "00000063");}
+            {Rtm.WriteMemory(0xC95A20FC, "00000063");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Vitality           
@@ -838,7 +839,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Vitality - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20B8, "00000063");}
+            {Rtm.WriteMemory(0xC95A20B8, "00000063");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Attunement
@@ -846,7 +847,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Attunement - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20C0, "00000063");} 
+            {Rtm.WriteMemory(0xC95A20C0, "00000063");} 
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Intelligence
@@ -854,7 +855,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Intelligence- Sent");
             try
-            {_rtm.WriteMemory(0xC95A20E0, "00000063");} 
+            {Rtm.WriteMemory(0xC95A20E0, "00000063");} 
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Resistance 
@@ -862,7 +863,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Resistance - Sent");
             try
-            {_rtm.WriteMemory(0xC95A2100, "00000063");}
+            {Rtm.WriteMemory(0xC95A2100, "00000063");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Dexterity
@@ -870,7 +871,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Dexterity - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20D8, "00000063");}
+            {Rtm.WriteMemory(0xC95A20D8, "00000063");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Faith  
@@ -878,7 +879,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Faith - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20E8, "00000063");}
+            {Rtm.WriteMemory(0xC95A20E8, "00000063");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Stamina 
@@ -886,7 +887,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Stamina  - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20B0, "000000A0");}
+            {Rtm.WriteMemory(0xC95A20B0, "000000A0");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Stamina 1 Million 
@@ -894,7 +895,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - 1 Million Stamina  - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20B0, "3B9ACA00");}
+            {Rtm.WriteMemory(0xC95A20B0, "3B9ACA00");}
             catch { SetLogText("Error! Could not poke code.");}
         }
   // Max Strength  
@@ -902,7 +903,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Strength  - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20D0, "00000063");}
+            {Rtm.WriteMemory(0xC95A20D0, "00000063");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Max Endurance 
@@ -910,7 +911,7 @@ namespace PeekPoker
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Endurance  - Sent");
             try
-            {_rtm.WriteMemory(0xC95A20C8, "00000063");}
+            {Rtm.WriteMemory(0xC95A20C8, "00000063");}
             catch { SetLogText("Error! Could not poke code."); }
         }
   // Endurance 1 Million
@@ -919,7 +920,7 @@ namespace PeekPoker
             SetLogText("#Trainers# Dark Souls - TU#0/1 - 1 Million Endurance  - Sent");
             try
             {
-            _rtm.WriteMemory(0xC95A20C8, "3B9ACA00");
+            Rtm.WriteMemory(0xC95A20C8, "3B9ACA00");
             }
             catch { SetLogText("Error! Could not poke code."); }
         }
@@ -1084,12 +1085,12 @@ namespace PeekPoker
            try
            {
                CheckForIllegalCrossThreadCalls = false; //line 476 grid cross thread error
-               _rtm.DumpOffset = 0xCD500000;
-               _rtm.DumpLength = 0x500000;
+               Rtm.DumpOffset = 0xCD500000;
+               Rtm.DumpLength = 0x500000;
 
                SetLogText("#Trainers# Resonance Of Fate Dumping & Searching ...");
                //The ExFindHexOffset function is a Experimental search function
-               var results = _rtm.ExFindHexOffset("04B10100000003E8");
+               var results = Rtm.ExFindHexOffset("04B10100000003E8");
                //Reset the progressbar...
                UpdateProgressbar(0, 100, 0);
 
@@ -1107,7 +1108,7 @@ namespace PeekPoker
                    uint offsets = Functions.BytesToUInt32(Functions.HexToBytes(results[0].Offset)) + (uint)(i * 0x14);
 
                    SetLogText(_poke[i]);
-                   _rtm.Poke(offsets, _poke[i]);
+                   Rtm.Poke(offsets, _poke[i]);
                }
                SetLogText("#Trainers# Resonance Of Fate Done... Buy the items");
 
