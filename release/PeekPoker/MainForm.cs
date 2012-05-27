@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Microsoft.VisualBasic;
 
 //=====================================================
 // Namespaces        -> PascalCased                  //
@@ -27,10 +28,11 @@ namespace PeekPoker
         public RealTimeMemory.RealTimeMemory Rtm;//DLL is now in the Important File Folder
         private readonly AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
+        private readonly string _trainerdottext = (Application.StartupPath + "\\Trainers.txt"); //Stores trainer codes in friendly format
         private uint _searchRangeDumpLength;
         public List<string> Offsets;
         private BindingList<Types.SearchResults> _searchResult = new BindingList<Types.SearchResults>();
-        private string _filepath2 = null; //Trainer Scanner
+
         #endregion
 
         public MainForm()
@@ -41,7 +43,7 @@ namespace PeekPoker
             searchRangeBaseValueTypeCB.SelectedIndex = 0;
             searchRangeEndTypeCB.SelectedIndex = 0;
             resultGrid.DataSource = _searchResult;
-            combocodetype.SelectedIndex = 0;
+            combocodetype.SelectedIndex = 2;
         }
         private void MainFormFormClosing(object sender, FormClosingEventArgs e)
         {
@@ -56,9 +58,11 @@ namespace PeekPoker
             //This is for handling automatic loading of the IP address and txt file creation. -8Ball
             //Changed a bit to only check if it does exist creation and fill code is in the same place now - sam
             if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
-
+            
             //Set correct max. min values for the numeric fields
             ChangeNumericMaxMin();
+
+            if (File.Exists(_trainerdottext)) injectcodes(); //loads trainers.txt
         }
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
@@ -98,7 +102,7 @@ namespace PeekPoker
 
                 if (!Rtm.Connect())
                 {
-                    SetLogText("Connecting to " + ipAddressTextBox.Text+" Failed.");
+                    SetLogText("Connecting to " + ipAddressTextBox.Text + " Failed.");
                     throw new Exception("Connection Failed!");
                 }
                 peeknpoke.Enabled = true;
@@ -111,6 +115,8 @@ namespace PeekPoker
                 objWriter.Write(ipAddressTextBox.Text); //Writes IP address to text file
                 objWriter.Close(); //Close Writer
                 connectButton.Text = String.Format("Re-Connect");
+                aboutToolStripMenuItem.Enabled = true;
+                trainersToolStripMenuItem.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -129,7 +135,7 @@ namespace PeekPoker
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text))
                     throw new Exception("Invalide peek length!");
                 var retValue = Functions.StringToByteArray(Rtm.Peek(peekPokeAddressTextBox.Text, peekLengthTextBox.Text, peekPokeAddressTextBox.Text, peekLengthTextBox.Text));
-                var buffer = new Be.Windows.Forms.DynamicByteProvider(retValue) {IsWriteByte = true}; //object initilizer 
+                var buffer = new Be.Windows.Forms.DynamicByteProvider(retValue) { IsWriteByte = true }; //object initilizer 
                 hexBox.ByteProvider = buffer;
                 hexBox.Refresh();
                 // the changed are handled automatically with my modifications of Be.HexBox
@@ -248,10 +254,10 @@ namespace PeekPoker
         //stop the search
         private void StopSearchButtonClick(object sender, EventArgs e)
         {
-            Rtm.StopSearch = true; 
+            Rtm.StopSearch = true;
         }
         #endregion
-        
+
         #region HexBox Events
         private void HexBoxSelectionStartChanged(object sender, EventArgs e)
         {
@@ -274,7 +280,7 @@ namespace PeekPoker
             }
         }
         #endregion
-        
+
         #region Search Tab Events
         private void SearchRangeValueTextBoxKeyUp(object sender, KeyEventArgs e)
         {
@@ -288,7 +294,7 @@ namespace PeekPoker
             {
                 _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
             }
-            
+
             var oThread = new Thread(SearchRange);
             oThread.Start();
             e.Handled = true;
@@ -317,7 +323,7 @@ namespace PeekPoker
                     _data.Add(peekPokeAddressTextBox.Text);
             }
         }
-        
+
         //When you select an offset on the hexbox
         private void ChangeNumericValue()
         {
@@ -325,7 +331,7 @@ namespace PeekPoker
             var buffer = hexBox.ByteProvider.Bytes;
             if (isSigned.Checked)
             {
-                NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ? 
+                NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ?
                     Functions.ByteToSByte(hexBox.ByteProvider.ReadByte(hexBox.SelectionStart)) : 0;
                 NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ?
                     Functions.BytesToInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
@@ -336,7 +342,7 @@ namespace PeekPoker
             {
                 NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ?
                     buffer[(int)hexBox.SelectionStart] : 0;
-                NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ? 
+                NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ?
                     Functions.BytesToUInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
                 NumericInt32.Value = (buffer.Count - hexBox.SelectionStart) > 3 ?
                     Functions.BytesToUInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
@@ -367,17 +373,17 @@ namespace PeekPoker
                 case "NumericInt16":
                     for (var i = 0; i < 2; i++)
                     {
-                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,isSigned.Checked
-                                                                                    ? Functions.Int16ToBytes((short) numeric.Value)[i]
-                                                                                    : Functions.UInt16ToBytes((ushort) numeric.Value)[i]);
+                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i, isSigned.Checked
+                                                                                    ? Functions.Int16ToBytes((short)numeric.Value)[i]
+                                                                                    : Functions.UInt16ToBytes((ushort)numeric.Value)[i]);
                     }
                     break;
                 case "NumericInt32":
                     for (var i = 0; i < 4; i++)
                     {
-                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i,isSigned.Checked
-                                                                                    ? Functions.Int32ToBytes((int) numeric.Value)[i]
-                                                                                    : Functions.UInt32ToBytes((uint) numeric.Value)[i]);
+                        hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i, isSigned.Checked
+                                                                                    ? Functions.Int32ToBytes((int)numeric.Value)[i]
+                                                                                    : Functions.UInt32ToBytes((uint)numeric.Value)[i]);
                     }
                     break;
             }
@@ -587,7 +593,7 @@ namespace PeekPoker
         }
         private void SetLogText(string value)
         {
-            if(logTextBox.InvokeRequired)
+            if (logTextBox.InvokeRequired)
                 Invoke((MethodInvoker)(() => SetLogText(value)));
             else
             {
@@ -652,8 +658,8 @@ namespace PeekPoker
                 }
                 statusStripLabel.Text = text;
             }
-            
-                
+
+
         }
         #endregion
 
@@ -728,7 +734,7 @@ namespace PeekPoker
             }
         }
         #endregion
-       
+
         #region Games
         #region Select_Games
         //Resident Evil ORC - current xp
@@ -772,7 +778,7 @@ namespace PeekPoker
         private void ResonanceOfFateMenuItemClick(object sender, EventArgs e)
         {
             ToolStripMenuItem menu = (ToolStripMenuItem)sender;
-            
+
             try
             {
                 var oThread = new Thread(ExROF);
@@ -783,411 +789,559 @@ namespace PeekPoker
                 ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-#endregion
+        #endregion
         #region Trainers
         #region Skyrim
-//Skyrim TU#4/5
-  // Inf Stamina
+        //Skyrim TU#4/5
+        // Inf Stamina
         private void Skyrim_infSprint(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Sprint - Sent");
             try
-            {Rtm.WriteMemory(0x834F9890, "00000000"); 
-             Rtm.WriteMemory(0x834F9650, "00000000");
-             Rtm.WriteMemory(0x834FB234, "00000000");
-             Rtm.WriteMemory(0x834FB24C, "00000000");
+            {
+                Rtm.WriteMemory(0x834F9890, "00000000");
+                Rtm.WriteMemory(0x834F9650, "00000000");
+                Rtm.WriteMemory(0x834FB234, "00000000");
+                Rtm.WriteMemory(0x834FB24C, "00000000");
             }
-            catch { SetLogText("Error! Could not poke code."); } 
+            catch { SetLogText("Error! Could not poke code."); }
         }
-  // Inf Mana  
+        // Inf Mana  
         private void Skyrim_infMagicka(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Stamina - Sent");
             try
-            { Rtm.WriteMemory(0x834FB234, "00000000");}
-            catch { SetLogText("Error! Could not poke code."); }             
+            { Rtm.WriteMemory(0x834FB234, "00000000"); }
+            catch { SetLogText("Error! Could not poke code."); }
         }
-#endregion
+        #endregion
         #region DarkSouls
-//Dark Souls TU#0/1
-  // Max Level
+        //Dark Souls TU#0/1
+        // Max Level
         private void DS0_MaxLevel(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Level - Sent");
             try
-            {Rtm.WriteMemory(0xC95A2108, "000002C8");}
+            { Rtm.WriteMemory(0xC95A2108, "000002C8"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Souls 
+        // Max Souls 
         private void DS0_MaxSouls(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Souls - Sent");
             try
-            {Rtm.WriteMemory(0xC95A210C, "3B9AC9FF");}
+            { Rtm.WriteMemory(0xC95A210C, "3B9AC9FF"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Humanity 
+        // Max Humanity 
         private void DS0_Humanity(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Humanity - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20FC, "00000063");}
+            { Rtm.WriteMemory(0xC95A20FC, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Vitality           
+        // Max Vitality           
         private void DS0_Vitality(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Vitality - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20B8, "00000063");}
+            { Rtm.WriteMemory(0xC95A20B8, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Attunement
+        // Max Attunement
         private void DS0_Attunement(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Attunement - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20C0, "00000063");} 
+            { Rtm.WriteMemory(0xC95A20C0, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Intelligence
+        // Max Intelligence
         private void DS0_Intelligence(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Intelligence- Sent");
             try
-            {Rtm.WriteMemory(0xC95A20E0, "00000063");} 
+            { Rtm.WriteMemory(0xC95A20E0, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Resistance 
+        // Max Resistance 
         private void DS0_Resistance(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Resistance - Sent");
             try
-            {Rtm.WriteMemory(0xC95A2100, "00000063");}
+            { Rtm.WriteMemory(0xC95A2100, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Dexterity
+        // Max Dexterity
         private void DS0_Dexterity(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Dexterity - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20D8, "00000063");}
+            { Rtm.WriteMemory(0xC95A20D8, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Faith  
+        // Max Faith  
         private void DS0_Faith(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Faith - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20E8, "00000063");}
+            { Rtm.WriteMemory(0xC95A20E8, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Stamina 
+        // Max Stamina 
         private void DS0_Stamina(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Stamina  - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20B0, "000000A0");}
+            { Rtm.WriteMemory(0xC95A20B0, "000000A0"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Stamina 1 Million 
+        // Stamina 1 Million 
         private void DS0_MillionStamina(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - 1 Million Stamina  - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20B0, "3B9ACA00");}
-            catch { SetLogText("Error! Could not poke code.");}
+            { Rtm.WriteMemory(0xC95A20B0, "3B9ACA00"); }
+            catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Strength  
+        // Max Strength  
         private void DS0_Strength(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Strength  - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20D0, "00000063");}
+            { Rtm.WriteMemory(0xC95A20D0, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Max Endurance 
+        // Max Endurance 
         private void DS0_Endurance(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Endurance  - Sent");
             try
-            {Rtm.WriteMemory(0xC95A20C8, "00000063");}
+            { Rtm.WriteMemory(0xC95A20C8, "00000063"); }
             catch { SetLogText("Error! Could not poke code."); }
         }
-  // Endurance 1 Million
+        // Endurance 1 Million
         private void DS0_MillionEndurance(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - 1 Million Endurance  - Sent");
             try
             {
-            Rtm.WriteMemory(0xC95A20C8, "3B9ACA00");
+                Rtm.WriteMemory(0xC95A20C8, "3B9ACA00");
             }
             catch { SetLogText("Error! Could not poke code."); }
         }
-       private void DS0_All(object sender, EventArgs e)
+        private void DS0_All(object sender, EventArgs e)
         {
-                DS0_MaxLevel(DS0MaxLevel, System.EventArgs.Empty);
-                DS0_MaxSouls(DS0MaxSouls, System.EventArgs.Empty);
-                DS0_Vitality(DS0MaxVit, System.EventArgs.Empty);
-                DS0_Endurance(DS0MaxEnd, System.EventArgs.Empty);
-                DS0_Attunement(DS0MaxAtt, System.EventArgs.Empty);
-                DS0_Strength(DS0MaxStr, System.EventArgs.Empty);
-                DS0_Dexterity(DS0MaxDex, System.EventArgs.Empty);
-                DS0_Resistance(DS0MaxRes, System.EventArgs.Empty);
-                DS0_Intelligence(DS0MaxInt, System.EventArgs.Empty); 
-                DS0_Faith(DS0MaxFaith, System.EventArgs.Empty);
-                DS0_Humanity(DS0MaxHum, System.EventArgs.Empty);
-                DS0_Stamina(DS0MaxStam, System.EventArgs.Empty);
-         }
+            DS0_MaxLevel(DS0MaxLevel, System.EventArgs.Empty);
+            DS0_MaxSouls(DS0MaxSouls, System.EventArgs.Empty);
+            DS0_Vitality(DS0MaxVit, System.EventArgs.Empty);
+            DS0_Endurance(DS0MaxEnd, System.EventArgs.Empty);
+            DS0_Attunement(DS0MaxAtt, System.EventArgs.Empty);
+            DS0_Strength(DS0MaxStr, System.EventArgs.Empty);
+            DS0_Dexterity(DS0MaxDex, System.EventArgs.Empty);
+            DS0_Resistance(DS0MaxRes, System.EventArgs.Empty);
+            DS0_Intelligence(DS0MaxInt, System.EventArgs.Empty);
+            DS0_Faith(DS0MaxFaith, System.EventArgs.Empty);
+            DS0_Humanity(DS0MaxHum, System.EventArgs.Empty);
+            DS0_Stamina(DS0MaxStam, System.EventArgs.Empty);
+        }
         #endregion
         #region Resonce Of Fate
-       private void ExROF(object sets)
-       {
-           List<string> _poke;
-           #region List Values
-           List<string> WhiteHex = new List<string>();
-           List<string> ColorHex = new List<string>();
-           List<string> HexStations = new List<string>();
-           List<string> WeaponSet1 = new List<string>();
-           List<string> WeaponSet2 = new List<string>();
-           List<string> WeaponDebugSet = new List<string>();
-           List<string> ItemSpecialSet1 = new List<string>();
-           List<string> ItemSpecialSet2 = new List<string>();
+        private void ExROF(object sets)
+        {
+            List<string> _poke;
+            #region List Values
+            List<string> WhiteHex = new List<string>();
+            List<string> ColorHex = new List<string>();
+            List<string> HexStations = new List<string>();
+            List<string> WeaponSet1 = new List<string>();
+            List<string> WeaponSet2 = new List<string>();
+            List<string> WeaponDebugSet = new List<string>();
+            List<string> ItemSpecialSet1 = new List<string>();
+            List<string> ItemSpecialSet2 = new List<string>();
 
-           #region White Hex
-           WhiteHex.Add("0001010000000001000003E7000003E700000000");
-           WhiteHex.Add("0002010000000001000003E7000003E700000000");
-           WhiteHex.Add("0003010000000001000003E7000003E700000000");
-           WhiteHex.Add("0004010000000001000003E7000003E700000000");
-           WhiteHex.Add("0005010000000001000003E7000003E700000000");
-           WhiteHex.Add("0006010000000001000003E7000003E700000000");
-           WhiteHex.Add("0007010000000001000003E7000003E700000000");
-           WhiteHex.Add("0008010000000001000003E7000003E700000000");
-           WhiteHex.Add("0009010000000001000003E7000003E700000000");
-           WhiteHex.Add("000A010000000001000003E7000003E700000000");
-           #endregion
-           #region Colored Hex
-           ColorHex.Add("000B010000000001000003E7000003E700000000");
-           ColorHex.Add("0010010000000001000003E7000003E700000000");
-           ColorHex.Add("0015010000000001000003E7000003E700000000");
-           ColorHex.Add("001A010000000001000003E7000003E700000000");
-           ColorHex.Add("001F010000000001000003E7000003E700000000");
-           ColorHex.Add("0024010000000001000003E7000003E700000000");
-           ColorHex.Add("0029010000000001000003E7000003E700000000");
-           ColorHex.Add("002E010000000001000003E7000003E700000000");
-           ColorHex.Add("0033010000000001000003E7000003E700000000");
-           ColorHex.Add("0038010000000001000003E7000003E700000000");
-           ColorHex.Add("003D010000000001000003E7000003E700000000");
-           ColorHex.Add("003E010000000001000003E7000003E700000000");
-           #endregion
-           #region Hex Stations
-           HexStations.Add("0042010000000001000003E7000003E700000000");
-           HexStations.Add("0043010000000001000003E7000003E700000000");
-           HexStations.Add("0044010000000001000003E7000003E700000000");
-           HexStations.Add("0045010000000001000003E7000003E700000000");
-           HexStations.Add("0046010000000001000003E7000003E700000000");
-           HexStations.Add("0047010000000001000003E7000003E700000000");
-           HexStations.Add("0048010000000001000003E7000003E700000000");
-           HexStations.Add("0049010000000001000003E7000003E700000000");
-           HexStations.Add("004A010000000001000003E7000003E700000000");
-           HexStations.Add("004B010000000001000003E7000003E700000000");
-           HexStations.Add("004C010000000001000003E7000003E700000000");
-           #endregion
-           #region Weapon Set 1
-           WeaponSet1.Add("03F0010000000001000003E7000003E700000000");
-           WeaponSet1.Add("03F1010000000001000003E7000003E700000000");
-           WeaponSet1.Add("03F2010000000001000003E7000003E700000000");
-           WeaponSet1.Add("03F3010000000001000003E7000003E700000000");
-           WeaponSet1.Add("03F4010000000001000003E7000003E700000000");
-           WeaponSet1.Add("03F5010000000001000003E7000003E700000000");
-           WeaponSet1.Add("03F6010000000001000003E7000003E700000000");
-           WeaponSet1.Add("03F7010000000001000003E7000003E700000000");
-           #endregion
-           #region Weapon Set 2
-           WeaponSet2.Add("03FE010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0400010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0401010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0402010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0403010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0404010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0405010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0406010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0407010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0408010000000001000003E7000003E700000000");
-           WeaponSet2.Add("0409010000000001000003E7000003E700000000");
-           #endregion
-           #region Weapon Debug Set
-           WeaponDebugSet.Add("03F8010000000001000003E7000003E700000000");
-           WeaponDebugSet.Add("03F9010000000001000003E7000003E700000000");
-           WeaponDebugSet.Add("03FA010000000001000003E7000003E700000000");
-           #endregion
-           #region Item Special Set 1
-           ItemSpecialSet1.Add("0528010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("0471010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("046B010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("046A010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07F0010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07F1010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07F2010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07F8010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07F9010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07FA010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("0464010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07FB010000000001000003E7000003E700000000");
-           ItemSpecialSet1.Add("07F3010000000001000003E7000003E700000000");
-           #endregion
-           #region Item Special Set 2
-           ItemSpecialSet2.Add("0566010000000001000003E7000003E700000000");
-           ItemSpecialSet2.Add("0567010000000001000003E7000003E700000000");
-           ItemSpecialSet2.Add("0562010000000001000003E7000003E700000000");
-           ItemSpecialSet2.Add("07FC010000000001000003E7000003E700000000");
-           ItemSpecialSet2.Add("07FD010000000001000003E7000003E700000000");
-           ItemSpecialSet2.Add("03F4010000000001000003E7000003E700000000");
-           ItemSpecialSet2.Add("0561010000000001000003E7000003E700000000");
-           ItemSpecialSet2.Add("04E0010000000001000003E7000003E700000000");
-           #endregion
-           #endregion
-           #region Switch
-           switch ((string)sets)
-           {
-               case "WhiteHex":
-                   _poke = WhiteHex;
-                   break;
-               case "ColorHex":
-                   _poke = ColorHex;
-                   break;
-               case "HexStations":
-                   _poke = HexStations;
-                   break;
-               case "WeaponSet1":
-                   _poke = WeaponSet1;
-                   break;
-               case "WeaponSet2":
-                   _poke = WeaponSet2;
-                   break;
-               case "WeaponDebugSet":
-                   _poke = WeaponDebugSet;
-                   break;
-               case "ItemSpecialSet1":
-                   _poke = ItemSpecialSet1;
-                   break;
-               case "ItemSpecialSet2":
-                   _poke = ItemSpecialSet2;
-                   break;
-                   
-               default:
-                   _poke = WhiteHex;
-                   break;
-           }
-           #endregion
+            #region White Hex
+            WhiteHex.Add("0001010000000001000003E7000003E700000000");
+            WhiteHex.Add("0002010000000001000003E7000003E700000000");
+            WhiteHex.Add("0003010000000001000003E7000003E700000000");
+            WhiteHex.Add("0004010000000001000003E7000003E700000000");
+            WhiteHex.Add("0005010000000001000003E7000003E700000000");
+            WhiteHex.Add("0006010000000001000003E7000003E700000000");
+            WhiteHex.Add("0007010000000001000003E7000003E700000000");
+            WhiteHex.Add("0008010000000001000003E7000003E700000000");
+            WhiteHex.Add("0009010000000001000003E7000003E700000000");
+            WhiteHex.Add("000A010000000001000003E7000003E700000000");
+            #endregion
+            #region Colored Hex
+            ColorHex.Add("000B010000000001000003E7000003E700000000");
+            ColorHex.Add("0010010000000001000003E7000003E700000000");
+            ColorHex.Add("0015010000000001000003E7000003E700000000");
+            ColorHex.Add("001A010000000001000003E7000003E700000000");
+            ColorHex.Add("001F010000000001000003E7000003E700000000");
+            ColorHex.Add("0024010000000001000003E7000003E700000000");
+            ColorHex.Add("0029010000000001000003E7000003E700000000");
+            ColorHex.Add("002E010000000001000003E7000003E700000000");
+            ColorHex.Add("0033010000000001000003E7000003E700000000");
+            ColorHex.Add("0038010000000001000003E7000003E700000000");
+            ColorHex.Add("003D010000000001000003E7000003E700000000");
+            ColorHex.Add("003E010000000001000003E7000003E700000000");
+            #endregion
+            #region Hex Stations
+            HexStations.Add("0042010000000001000003E7000003E700000000");
+            HexStations.Add("0043010000000001000003E7000003E700000000");
+            HexStations.Add("0044010000000001000003E7000003E700000000");
+            HexStations.Add("0045010000000001000003E7000003E700000000");
+            HexStations.Add("0046010000000001000003E7000003E700000000");
+            HexStations.Add("0047010000000001000003E7000003E700000000");
+            HexStations.Add("0048010000000001000003E7000003E700000000");
+            HexStations.Add("0049010000000001000003E7000003E700000000");
+            HexStations.Add("004A010000000001000003E7000003E700000000");
+            HexStations.Add("004B010000000001000003E7000003E700000000");
+            HexStations.Add("004C010000000001000003E7000003E700000000");
+            #endregion
+            #region Weapon Set 1
+            WeaponSet1.Add("03F0010000000001000003E7000003E700000000");
+            WeaponSet1.Add("03F1010000000001000003E7000003E700000000");
+            WeaponSet1.Add("03F2010000000001000003E7000003E700000000");
+            WeaponSet1.Add("03F3010000000001000003E7000003E700000000");
+            WeaponSet1.Add("03F4010000000001000003E7000003E700000000");
+            WeaponSet1.Add("03F5010000000001000003E7000003E700000000");
+            WeaponSet1.Add("03F6010000000001000003E7000003E700000000");
+            WeaponSet1.Add("03F7010000000001000003E7000003E700000000");
+            #endregion
+            #region Weapon Set 2
+            WeaponSet2.Add("03FE010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0400010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0401010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0402010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0403010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0404010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0405010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0406010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0407010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0408010000000001000003E7000003E700000000");
+            WeaponSet2.Add("0409010000000001000003E7000003E700000000");
+            #endregion
+            #region Weapon Debug Set
+            WeaponDebugSet.Add("03F8010000000001000003E7000003E700000000");
+            WeaponDebugSet.Add("03F9010000000001000003E7000003E700000000");
+            WeaponDebugSet.Add("03FA010000000001000003E7000003E700000000");
+            #endregion
+            #region Item Special Set 1
+            ItemSpecialSet1.Add("0528010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("0471010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("046B010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("046A010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07F0010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07F1010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07F2010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07F8010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07F9010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07FA010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("0464010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07FB010000000001000003E7000003E700000000");
+            ItemSpecialSet1.Add("07F3010000000001000003E7000003E700000000");
+            #endregion
+            #region Item Special Set 2
+            ItemSpecialSet2.Add("0566010000000001000003E7000003E700000000");
+            ItemSpecialSet2.Add("0567010000000001000003E7000003E700000000");
+            ItemSpecialSet2.Add("0562010000000001000003E7000003E700000000");
+            ItemSpecialSet2.Add("07FC010000000001000003E7000003E700000000");
+            ItemSpecialSet2.Add("07FD010000000001000003E7000003E700000000");
+            ItemSpecialSet2.Add("03F4010000000001000003E7000003E700000000");
+            ItemSpecialSet2.Add("0561010000000001000003E7000003E700000000");
+            ItemSpecialSet2.Add("04E0010000000001000003E7000003E700000000");
+            #endregion
+            #endregion
+            #region Switch
+            switch ((string)sets)
+            {
+                case "WhiteHex":
+                    _poke = WhiteHex;
+                    break;
+                case "ColorHex":
+                    _poke = ColorHex;
+                    break;
+                case "HexStations":
+                    _poke = HexStations;
+                    break;
+                case "WeaponSet1":
+                    _poke = WeaponSet1;
+                    break;
+                case "WeaponSet2":
+                    _poke = WeaponSet2;
+                    break;
+                case "WeaponDebugSet":
+                    _poke = WeaponDebugSet;
+                    break;
+                case "ItemSpecialSet1":
+                    _poke = ItemSpecialSet1;
+                    break;
+                case "ItemSpecialSet2":
+                    _poke = ItemSpecialSet2;
+                    break;
 
-           #region Dump/Search and Poke
-           try
-           {
-               CheckForIllegalCrossThreadCalls = false; //line 476 grid cross thread error
-               Rtm.DumpOffset = 0xCD500000;
-               Rtm.DumpLength = 0x500000;
+                default:
+                    _poke = WhiteHex;
+                    break;
+            }
+            #endregion
 
-               SetLogText("#Trainers# Resonance Of Fate Dumping & Searching ...");
-               //The ExFindHexOffset function is a Experimental search function
-               var results = Rtm.ExFindHexOffset("04B10100000003E8");
-               //Reset the progressbar...
-               UpdateProgressbar(0, 100, 0);
+            #region Dump/Search and Poke
+            try
+            {
+                CheckForIllegalCrossThreadCalls = false; //line 476 grid cross thread error
+                Rtm.DumpOffset = 0xCD500000;
+                Rtm.DumpLength = 0x500000;
 
-               if (results.Count < 1)
-               {
-                   ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                   return; //We don't want it to continue
-               }
+                SetLogText("#Trainers# Resonance Of Fate Dumping & Searching ...");
+                //The ExFindHexOffset function is a Experimental search function
+                var results = Rtm.ExFindHexOffset("04B10100000003E8");
+                //Reset the progressbar...
+                UpdateProgressbar(0, 100, 0);
 
-               UpdateProgressbar(0, 100, 0, "Poking");
-               SetLogText("#Trainers# Resonance Of Fate Poking ...");
+                if (results.Count < 1)
+                {
+                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return; //We don't want it to continue
+                }
 
-               for (int i = 0; i < _poke.Count; i++)
-               {
-                   uint offsets = Functions.BytesToUInt32(Functions.HexToBytes(results[0].Offset)) + (uint)(i * 0x14);
+                UpdateProgressbar(0, 100, 0, "Poking");
+                SetLogText("#Trainers# Resonance Of Fate Poking ...");
 
-                   SetLogText(_poke[i]);
-                   Rtm.Poke(offsets, _poke[i]);
-               }
-               SetLogText("#Trainers# Resonance Of Fate Done... Buy the items");
+                for (int i = 0; i < _poke.Count; i++)
+                {
+                    uint offsets = Functions.BytesToUInt32(Functions.HexToBytes(results[0].Offset)) + (uint)(i * 0x14);
 
-               UpdateProgressbar(0, 100, 0);
-           }
-           catch (Exception e)
-           {
-               ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-           }
-           finally
-           {
-               Thread.CurrentThread.Abort();
-           }
-           #endregion
-       }
+                    SetLogText(_poke[i]);
+                    Rtm.Poke(offsets, _poke[i]);
+                }
+                SetLogText("#Trainers# Resonance Of Fate Done... Buy the items");
+
+                UpdateProgressbar(0, 100, 0);
+            }
+            catch (Exception e)
+            {
+                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Thread.CurrentThread.Abort();
+            }
+            #endregion
+        }
         #endregion
 
         #region Trainer-Utility
-       private void scanTrainerCodes(object sender, EventArgs e) //Opens a trainers txt file to read its codes
-       {
-           SetLogText("#Trainers# Activating Trainer Scanner");
-           try
-           {
-               OpenFileDialog Open = new OpenFileDialog();
-               Open.Filter = "GAME_ID.txt|*.txt";
-               Open.Title = "Open Trainer Code File";
-               Open.ShowDialog();
-               _filepath2 = Open.FileName;
-               if (!File.Exists(_filepath2)) return;
-               Application.DoEvents();
-               ReadFile(_filepath2);
+        private void scanTrainerCodes(object sender, EventArgs e) //Opens a trainers txt file to read its codes
+        {
+            string _filepath2;
+            SetLogText("#Trainers# Activating Trainer Scanner");
+            try
+            {
+                OpenFileDialog Open = new OpenFileDialog();
+                Open.Filter = "GAME_ID.txt|*.txt";
+                Open.Title = "Open Trainer Code File";
+                Open.ShowDialog();
+                _filepath2 = Open.FileName;
+                if (!File.Exists(_filepath2)) return;
+                Application.DoEvents();
+                ReadFile(_filepath2);
             }
-           catch (Exception ex){MessageBox.Show(ex.Message);}
-       }
-       public void ReadFile(string _filepath2)
-       {   try
-       {
-           TrainerTextBox.Text = File.ReadAllText(_filepath2);
-               SetLogText("#Trainers# Opening Trainer, Game ID:" + _filepath2.Substring(_filepath2.Length - 12, 8)); //GAMEID Extraction from filepath
-          
-       }
-           catch (Exception ex){MessageBox.Show(ex.Message);}
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-     
+        public void ReadFile(string _filepath2)
+        {
+            try
+            {
+                TrainerTextBox.Text = File.ReadAllText(_filepath2);
+                SetLogText("#Trainers# Opening Trainer, Game ID:" + _filepath2.Substring(_filepath2.Length - 12, 8)); //GAMEID Extraction from filepath
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
         //Save TrainerTextBox contents to file of users choice.
-       private void createtrainerbutton_Click(object sender, EventArgs e) 
+        private void createtrainerbutton_Click(object sender, EventArgs e)
+        {
+            SetLogText("#Trainers# Saving Trainer");
+            SaveFileDialog Save = new SaveFileDialog();
+            Save.Filter = "*.txt|*.txt";
+            Save.Title = "Save Trainer Code File";
+            Save.ShowDialog();
+            if (Save.FileName != "")
+            {
+                System.IO.StreamWriter file = new System.IO.StreamWriter(Save.FileName);
+                file.Write(TrainerTextBox.Text);
+                file.Close();
+                SetLogText("#Trainers# Saved Trainer to " + Save.FileName);
+            }
+        }
 
-       {
-           SetLogText("#Trainers# Saving Trainer");
-           SaveFileDialog Save = new SaveFileDialog();
-           Save.Filter = "*.txt|*.txt";
-           Save.Title = "Save Trainer Code File";
-           Save.ShowDialog();
-           if (Save.FileName != "")
-           {
-               System.IO.StreamWriter file = new System.IO.StreamWriter(Save.FileName);
-               file.Write(TrainerTextBox.Text);
-               file.Close();
-               SetLogText("#Trainers# Saved Trainer to " + Save.FileName);
-       }}
-
-     //Appends a blank line and regains focus to trainerbox
-       private void newcodebutton_Click(object sender, EventArgs e)
-       {   
-           TrainerTextBox.AppendText(Environment.NewLine);
-           TrainerTextBox.AppendText((Environment.NewLine) + "#" + codenamebox.Text);
-           TrainerTextBox.AppendText((Environment.NewLine) + combocodetype.SelectedIndex.ToString("X") + " " + codeaddressbox.Text + " " + codevaluebox.Text);
-           TrainerTextBox.Focus();
-       }
-           
-     //Appends code to list, includes codename, type, address and value
-       private void addcodebutton_Click(object sender, EventArgs e) //Appends code to TrainerTextBox.
-       {
-           TrainerTextBox.AppendText((Environment.NewLine) + combocodetype.SelectedIndex.ToString("X") + " " + codeaddressbox.Text + " " + codevaluebox.Text);
-           TrainerTextBox.Focus();
-       }
+        //Appends a blank line and regains focus to trainerbox
+        private void newcodebutton_Click(object sender, EventArgs e)
+        {
+            if (codenamebox.Text != "")
+            {
+                if (codeaddressbox.Text.Length == 8)
+                {
+                    if (codevaluebox.Text.Length >= 2)
+                    {
+                        TrainerTextBox.AppendText(Environment.NewLine);
+                        TrainerTextBox.AppendText((Environment.NewLine) + "#" + codenamebox.Text);
+                        TrainerTextBox.AppendText((Environment.NewLine) + combocodetype.SelectedIndex.ToString("X") + " " + codeaddressbox.Text + " " + codevaluebox.Text);
+                        TrainerTextBox.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Value must be hexadecimal!",
+                            "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation,
+                            MessageBoxDefaultButton.Button1);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The address must be 4 bytes long!",
+             "Error",
+             MessageBoxButtons.OK,
+             MessageBoxIcon.Exclamation,
+             MessageBoxDefaultButton.Button1);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please name the code!",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+        }
+        //Appends code to list, includes codename, type, address and value
+        private void addcodebutton_Click(object sender, EventArgs e) //Appends code to TrainerTextBox.
+        {
+            if (codeaddressbox.Text.Length == 8)
+            {
+                if (codevaluebox.Text.Length >= 2)
+                {
+                    TrainerTextBox.AppendText((Environment.NewLine) + combocodetype.SelectedIndex.ToString("X") + " " + codeaddressbox.Text + " " + codevaluebox.Text);
+                    TrainerTextBox.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Value must be hexadecimal!",
+                        "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button1);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("The address must be 4 bytes long!",
+         "Error",
+         MessageBoxButtons.OK,
+         MessageBoxIcon.Exclamation,
+         MessageBoxDefaultButton.Button1);
+                return;
+            }
+        }
         #endregion
         #endregion
         #endregion
+        private void injectcodes() 
+        {
+            if (File.Exists(_trainerdottext))
+            {
+                try
+                {
+                    string trainerinjectorcode;
+                    //trainersToolStripMenuItem.DropDownItems.Add(k);
 
+                    trainerinjectorcode = File.ReadAllText(_trainerdottext);
+                    StringReader trainereader = new System.IO.StringReader(trainerinjectorcode);
+
+                    //Read Game Name
+                    string name = trainereader.ReadLine();
+                    do
+	                {
+                        if (name == "#")
+                            break;
+
+                        ToolStripMenuItem k = new ToolStripMenuItem();
+                        k.Text = name.Substring(1, (name.Length - 1));
+                        
+                        string ID = trainereader.ReadLine();
+                        string TitleUpdate = trainereader.ReadLine();
+
+                        string code = trainereader.ReadLine();
+                        do
+                        {
+                            if (code.Substring(0, 1) == "#")
+                                break;
+                            if (name == "#")
+                                break;
+
+                            ToolStripMenuItem j = new ToolStripMenuItem();
+                            List<Types.CodeList> codes = new List<Types.CodeList>();
+                            string CLine = trainereader.ReadLine();
+                            do
+                            {
+                                if (CLine.Substring(0, 1) == "#")
+                                    break;
+                                if (name == "#")
+                                    break;
+
+                                Types.CodeList NCode = new Types.CodeList();
+                                NCode.Name = code.Substring(1, (code.Length - 1));
+                                NCode.Type = Convert.ToInt32(CLine.Substring(0, 1));
+                                NCode.Adress = Functions.BytesToUInt32(Functions.StringToByteArray(CLine.Substring(2, 8)));
+                                NCode.Code = Functions.BytesToUInt32(Functions.StringToByteArray(CLine.Substring(11, 8)));
+                                codes.Add(NCode);
+
+                                CLine = trainereader.ReadLine();
+                            } while (CLine.Substring(0, 1) != "$");
+
+                            j.Text = code.Substring(1, (code.Length - 1));
+                            j.Tag = codes;
+                            j.Click += new System.EventHandler(this.codesmith); //Event adder
+                            k.DropDownItems.Add(j);
+                            code = CLine;
+
+                        } while (code.Substring(0, 1) == "$");
+                        
+                        trainersToolStripMenuItem.DropDownItems.Add(k);
+                        name = code;
+
+                        k = null;
+                        if (name == "#")
+                            break;
+
+                    } while (name.Substring(0, 1) == "#");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        private void codesmith(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;             // get the menu item
+            List<Types.CodeList> Codes = (List<Types.CodeList>)item.Tag;    // get the code list
+
+            // read each entry and write the code to memory
+            foreach (Types.CodeList code in Codes)
+            {
+                uint currentaddress = code.Adress;
+                string currentvalue = Functions.ToHexString(Functions.UInt32ToBytes(code.Code));
+                Rtm.WriteMemory(currentaddress, currentvalue);
+            }
+        }
     }
 }

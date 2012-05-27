@@ -61,6 +61,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Important Files\Be.Windows.Forms.HexBox.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -105,6 +106,9 @@
     <Content Include="Important Files\Be.Windows.Forms.HexBox.dll" />
     <Content Include="Important Files\ReadMe.txt" />
     <Content Include="Important Files\xbox360.ico" />
+    <Content Include="Trainers.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

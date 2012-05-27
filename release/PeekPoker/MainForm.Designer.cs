@@ -91,6 +91,13 @@
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.searchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
             this.searchRangeEndTypeCB = new System.Windows.Forms.ComboBox();
+            this.newcodebutton = new System.Windows.Forms.Button();
+            this.addcodebutton = new System.Windows.Forms.Button();
+            this.opentrainerbutton = new System.Windows.Forms.Button();
+            this.combocodetype = new System.Windows.Forms.ComboBox();
+            this.codevaluebox = new System.Windows.Forms.TextBox();
+            this.codeaddressbox = new System.Windows.Forms.TextBox();
+            this.createtrainerbutton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -146,20 +153,13 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.logTextBox = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.createtrainerbutton = new System.Windows.Forms.Button();
-            this.addcodebutton = new System.Windows.Forms.Button();
-            this.codeaddressbox = new System.Windows.Forms.TextBox();
-            this.codevaluebox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.combocodetype = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.TrainerTextBox = new System.Windows.Forms.TextBox();
-            this.opentrainerbutton = new System.Windows.Forms.Button();
-            this.codenamebox = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.newcodebutton = new System.Windows.Forms.Button();
+            this.codenamebox = new System.Windows.Forms.TextBox();
+            this.TrainerTextBox = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -217,7 +217,7 @@
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(73, 19);
-            this.toolStripStatusLabel1.Text = "Revision 6.1";
+            this.toolStripStatusLabel1.Text = "Revision 6.4";
             // 
             // StatusProgressBar
             // 
@@ -278,6 +278,7 @@
             this.uFC3ToolStripMenuItem,
             this.toolStripSeparator1,
             this.howToUseToolStripMenuItem});
+            this.aboutToolStripMenuItem.Enabled = false;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.aboutToolStripMenuItem.Text = "Select Game";
@@ -360,6 +361,7 @@
             this.darkSoulsToolStripMenuItem,
             this.skyrimToolStripMenuItem,
             this.resonanceOfFateToolStripMenuItem});
+            this.trainersToolStripMenuItem.Enabled = false;
             this.trainersToolStripMenuItem.Name = "trainersToolStripMenuItem";
             this.trainersToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.trainersToolStripMenuItem.Text = "Trainers";
@@ -390,7 +392,7 @@
             this.maxEnduranceToolStripMenuItem,
             this.thanksDS0});
             this.tU01ToolStripMenuItem.Name = "tU01ToolStripMenuItem";
-            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.tU01ToolStripMenuItem.Text = "TU# 0/1";
             // 
             // allToolStripMenuItem
@@ -679,6 +681,110 @@
             this.searchRangeEndTypeCB.Size = new System.Drawing.Size(93, 23);
             this.searchRangeEndTypeCB.TabIndex = 17;
             this.toolTips.SetToolTip(this.searchRangeEndTypeCB, "use offset or length");
+            // 
+            // newcodebutton
+            // 
+            this.newcodebutton.Location = new System.Drawing.Point(592, 15);
+            this.newcodebutton.Name = "newcodebutton";
+            this.newcodebutton.Size = new System.Drawing.Size(85, 23);
+            this.newcodebutton.TabIndex = 27;
+            this.newcodebutton.Text = "New Code";
+            this.toolTips.SetToolTip(this.newcodebutton, "Begins a new code.");
+            this.newcodebutton.UseVisualStyleBackColor = true;
+            this.newcodebutton.Click += new System.EventHandler(this.newcodebutton_Click);
+            // 
+            // addcodebutton
+            // 
+            this.addcodebutton.Location = new System.Drawing.Point(592, 43);
+            this.addcodebutton.Name = "addcodebutton";
+            this.addcodebutton.Size = new System.Drawing.Size(85, 23);
+            this.addcodebutton.TabIndex = 16;
+            this.addcodebutton.Text = "Cont. Code";
+            this.toolTips.SetToolTip(this.addcodebutton, "Adds another line to current code.");
+            this.addcodebutton.UseVisualStyleBackColor = true;
+            this.addcodebutton.Click += new System.EventHandler(this.addcodebutton_Click);
+            // 
+            // opentrainerbutton
+            // 
+            this.opentrainerbutton.Location = new System.Drawing.Point(5, 6);
+            this.opentrainerbutton.Name = "opentrainerbutton";
+            this.opentrainerbutton.Size = new System.Drawing.Size(106, 23);
+            this.opentrainerbutton.TabIndex = 24;
+            this.opentrainerbutton.Text = "Open Trainer";
+            this.toolTips.SetToolTip(this.opentrainerbutton, "Open a trainer\'s codelist.");
+            this.opentrainerbutton.UseVisualStyleBackColor = true;
+            this.opentrainerbutton.Click += new System.EventHandler(this.scanTrainerCodes);
+            // 
+            // combocodetype
+            // 
+            this.combocodetype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combocodetype.FormattingEnabled = true;
+            this.combocodetype.Items.AddRange(new object[] {
+            " 0 = 8 bit write",
+            " 1 = 16 bit write",
+            " 2 = 32 bit write",
+            " 3 = 8 bit And",
+            " 4 = 16 bit And",
+            " 5 = 32 bit And",
+            " 6 = 8 bit Or",
+            " 7 = 16 bit Or",
+            " 8 = 32 bit Or",
+            " 9 = 8 bit Xor",
+            " A = 16 bit Xor",
+            " B = 32 bit Xor",
+            " C = 8 bit Increment",
+            " D = 16 bit Increment",
+            " E = 32 bit Increment",
+            " F = 8 bit Decrement",
+            "10 = 16 bit Decrement",
+            "11 = 32 bit Decrement",
+            "12 = 8 bit Equal",
+            "13 = 16 bit Equal",
+            "14 = 32 bit Equal",
+            "15 = 8 bit Not Equal",
+            "16 = 16 bit Not Equal",
+            "17 = 32 bit Not Equal",
+            "18 = 8 bit Greater Than",
+            "19 = 16 bit Greater Than",
+            "1A = 32 bit Greater Than",
+            "1B = 8 bit Less Than",
+            "1C = 16 bit Less Than",
+            "1D = 32 bit Less Than",
+            "1E = 8 bit Less Than",
+            "1F = 16 bit Less Than",
+            "20 = 32 bit Less Than"});
+            this.combocodetype.Location = new System.Drawing.Point(89, 43);
+            this.combocodetype.Name = "combocodetype";
+            this.combocodetype.Size = new System.Drawing.Size(184, 23);
+            this.combocodetype.TabIndex = 21;
+            this.toolTips.SetToolTip(this.combocodetype, "Tells the trainer how to handle value.");
+            // 
+            // codevaluebox
+            // 
+            this.codevaluebox.Location = new System.Drawing.Point(492, 44);
+            this.codevaluebox.Name = "codevaluebox";
+            this.codevaluebox.Size = new System.Drawing.Size(90, 22);
+            this.codevaluebox.TabIndex = 18;
+            this.toolTips.SetToolTip(this.codevaluebox, "Offset\'s value. Check codetype.");
+            // 
+            // codeaddressbox
+            // 
+            this.codeaddressbox.Location = new System.Drawing.Point(340, 44);
+            this.codeaddressbox.Name = "codeaddressbox";
+            this.codeaddressbox.Size = new System.Drawing.Size(100, 22);
+            this.codeaddressbox.TabIndex = 17;
+            this.toolTips.SetToolTip(this.codeaddressbox, "Code offset. Do not add \'0x\'!");
+            // 
+            // createtrainerbutton
+            // 
+            this.createtrainerbutton.Location = new System.Drawing.Point(117, 6);
+            this.createtrainerbutton.Name = "createtrainerbutton";
+            this.createtrainerbutton.Size = new System.Drawing.Size(106, 23);
+            this.createtrainerbutton.TabIndex = 0;
+            this.createtrainerbutton.Text = "Save Trainer";
+            this.toolTips.SetToolTip(this.createtrainerbutton, "Save the trainer codelist.");
+            this.createtrainerbutton.UseVisualStyleBackColor = true;
+            this.createtrainerbutton.Click += new System.EventHandler(this.createtrainerbutton_Click);
             // 
             // tabPage2
             // 
@@ -1063,7 +1169,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(74, 19);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(109, 19);
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1323,117 +1429,21 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Trainer Utility";
             // 
-            // createtrainerbutton
+            // label19
             // 
-            this.createtrainerbutton.Location = new System.Drawing.Point(117, 6);
-            this.createtrainerbutton.Name = "createtrainerbutton";
-            this.createtrainerbutton.Size = new System.Drawing.Size(106, 23);
-            this.createtrainerbutton.TabIndex = 0;
-            this.createtrainerbutton.Text = "Create Trainer";
-            this.createtrainerbutton.UseVisualStyleBackColor = true;
-            this.createtrainerbutton.Click += new System.EventHandler(this.createtrainerbutton_Click);
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(258, 19);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(76, 15);
+            this.label19.TabIndex = 26;
+            this.label19.Text = "Code Name";
             // 
-            // addcodebutton
+            // codenamebox
             // 
-            this.addcodebutton.Location = new System.Drawing.Point(592, 43);
-            this.addcodebutton.Name = "addcodebutton";
-            this.addcodebutton.Size = new System.Drawing.Size(85, 23);
-            this.addcodebutton.TabIndex = 16;
-            this.addcodebutton.Text = "Cont. Code";
-            this.addcodebutton.UseVisualStyleBackColor = true;
-            this.addcodebutton.Click += new System.EventHandler(this.addcodebutton_Click);
-            // 
-            // codeaddressbox
-            // 
-            this.codeaddressbox.Location = new System.Drawing.Point(340, 44);
-            this.codeaddressbox.Name = "codeaddressbox";
-            this.codeaddressbox.Size = new System.Drawing.Size(100, 22);
-            this.codeaddressbox.TabIndex = 17;
-            // 
-            // codevaluebox
-            // 
-            this.codevaluebox.Location = new System.Drawing.Point(492, 44);
-            this.codevaluebox.Name = "codevaluebox";
-            this.codevaluebox.Size = new System.Drawing.Size(90, 22);
-            this.codevaluebox.TabIndex = 18;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(279, 47);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 15);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "Address";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(446, 47);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(40, 15);
-            this.label15.TabIndex = 20;
-            this.label15.Text = "Value";
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(0, 24);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 402);
-            this.splitter1.TabIndex = 15;
-            this.splitter1.TabStop = false;
-            // 
-            // combocodetype
-            // 
-            this.combocodetype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combocodetype.FormattingEnabled = true;
-            this.combocodetype.Items.AddRange(new object[] {
-            " 0 = 8 bit write",
-            " 1 = 16 bit write",
-            " 2 = 32 bit write",
-            " 3 = 8 bit And",
-            " 4 = 16 bit And",
-            " 5 = 32 bit And",
-            " 6 = 8 bit Or",
-            " 7 = 16 bit Or",
-            " 8 = 32 bit Or",
-            " 9 = 8 bit Xor",
-            " A = 16 bit Xor",
-            " B = 32 bit Xor",
-            " C = 8 bit Increment",
-            " D = 16 bit Increment",
-            " E = 32 bit Increment",
-            " F = 8 bit Decrement",
-            "10 = 16 bit Decrement",
-            "11 = 32 bit Decrement",
-            "12 = 8 bit Equal",
-            "13 = 16 bit Equal",
-            "14 = 32 bit Equal",
-            "15 = 8 bit Not Equal",
-            "16 = 16 bit Not Equal",
-            "17 = 32 bit Not Equal",
-            "18 = 8 bit Greater Than",
-            "19 = 16 bit Greater Than",
-            "1A = 32 bit Greater Than",
-            "1B = 8 bit Less Than",
-            "1C = 16 bit Less Than",
-            "1D = 32 bit Less Than",
-            "1E = 8 bit Less Than",
-            "1F = 16 bit Less Than",
-            "20 = 32 bit Less Than"});
-            this.combocodetype.Location = new System.Drawing.Point(89, 43);
-            this.combocodetype.Name = "combocodetype";
-            this.combocodetype.Size = new System.Drawing.Size(184, 23);
-            this.combocodetype.TabIndex = 21;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(12, 47);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(67, 15);
-            this.label18.TabIndex = 22;
-            this.label18.Text = "CodeType";
+            this.codenamebox.Location = new System.Drawing.Point(340, 16);
+            this.codenamebox.Name = "codenamebox";
+            this.codenamebox.Size = new System.Drawing.Size(242, 22);
+            this.codenamebox.TabIndex = 25;
             // 
             // TrainerTextBox
             // 
@@ -1446,41 +1456,40 @@
             this.TrainerTextBox.Size = new System.Drawing.Size(671, 260);
             this.TrainerTextBox.TabIndex = 23;
             // 
-            // opentrainerbutton
+            // label18
             // 
-            this.opentrainerbutton.Location = new System.Drawing.Point(5, 6);
-            this.opentrainerbutton.Name = "opentrainerbutton";
-            this.opentrainerbutton.Size = new System.Drawing.Size(106, 23);
-            this.opentrainerbutton.TabIndex = 24;
-            this.opentrainerbutton.Text = "Open Trainer";
-            this.opentrainerbutton.UseVisualStyleBackColor = true;
-            this.opentrainerbutton.Click += new System.EventHandler(this.scanTrainerCodes);
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(12, 47);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(67, 15);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "CodeType";
             // 
-            // codenamebox
+            // label15
             // 
-            this.codenamebox.Location = new System.Drawing.Point(340, 16);
-            this.codenamebox.Name = "codenamebox";
-            this.codenamebox.Size = new System.Drawing.Size(242, 22);
-            this.codenamebox.TabIndex = 25;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(446, 47);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(40, 15);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Value";
             // 
-            // label19
+            // label8
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(258, 19);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(76, 15);
-            this.label19.TabIndex = 26;
-            this.label19.Text = "Code Name";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(279, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 15);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Address";
             // 
-            // newcodebutton
+            // splitter1
             // 
-            this.newcodebutton.Location = new System.Drawing.Point(592, 15);
-            this.newcodebutton.Name = "newcodebutton";
-            this.newcodebutton.Size = new System.Drawing.Size(85, 23);
-            this.newcodebutton.TabIndex = 27;
-            this.newcodebutton.Text = "New Code";
-            this.newcodebutton.UseVisualStyleBackColor = true;
-            this.newcodebutton.Click += new System.EventHandler(this.newcodebutton_Click);
+            this.splitter1.Location = new System.Drawing.Point(0, 24);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 402);
+            this.splitter1.TabIndex = 15;
+            this.splitter1.TabStop = false;
             // 
             // MainForm
             // 

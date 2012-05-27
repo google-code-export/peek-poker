@@ -1,4 +1,4 @@
-﻿Last Update - 25/05/12 by PureIso
+﻿Last Update - 27/05/12 by 8Ball
 ==============================================================
 NB: Update source file before you commit.
 ==============================================================
@@ -122,8 +122,12 @@ Added trainer utility for managing trainer files.
 
 - changes 25/05/12
 Fix - Select Game - How to use, now displays messagebox.
-TODO:
+
+- changes 27/05/12
+Added:
 -Scan trainer files and add their codes to the list.
 -Improve utility 'idiot proofing' and general features.
+
+TODO:
 -Add game id recognition to help user name trainer file correctly
 -More Testing and UI fixing
