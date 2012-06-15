@@ -100,18 +100,11 @@
             this.createtrainerbutton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.decimalbox = new System.Windows.Forms.TextBox();
-            this.hexcalcbox = new System.Windows.Forms.TextBox();
+            this.integer32CalculatorTextBox = new System.Windows.Forms.TextBox();
+            this.hexCalculatorTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.resultGrid = new System.Windows.Forms.DataGridView();
@@ -160,6 +153,13 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.label22 = new System.Windows.Forms.Label();
+            this.integer8CalculatorTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.integer16CalculatorTextBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.floatCalculatorTextBox = new System.Windows.Forms.TextBox();
+            this.converterClearButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -217,7 +217,7 @@
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(73, 19);
-            this.toolStripStatusLabel1.Text = "Revision 6.4";
+            this.toolStripStatusLabel1.Text = "Revision 6.5";
             // 
             // StatusProgressBar
             // 
@@ -790,13 +790,6 @@
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.textBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -806,132 +799,70 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.converterClearButton);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.floatCalculatorTextBox);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.integer16CalculatorTextBox);
+            this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.button1);
-            this.groupBox4.Controls.Add(this.decimalbox);
-            this.groupBox4.Controls.Add(this.hexcalcbox);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.integer32CalculatorTextBox);
+            this.groupBox4.Controls.Add(this.hexCalculatorTextBox);
+            this.groupBox4.Controls.Add(this.integer8CalculatorTextBox);
             this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Location = new System.Drawing.Point(95, 17);
+            this.groupBox4.Location = new System.Drawing.Point(75, 17);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(507, 63);
+            this.groupBox4.Size = new System.Drawing.Size(527, 173);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Converter";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(261, 69);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(47, 15);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "<<  >>";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 23);
+            this.label4.Location = new System.Drawing.Point(41, 84);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 15);
+            this.label4.Size = new System.Drawing.Size(63, 15);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Decimal:";
+            this.label4.Text = "Int32/Int:";
             // 
-            // button1
+            // integer32CalculatorTextBox
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(232, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = ">>";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
+            this.integer32CalculatorTextBox.Location = new System.Drawing.Point(110, 81);
+            this.integer32CalculatorTextBox.MaxLength = 3276700;
+            this.integer32CalculatorTextBox.Name = "integer32CalculatorTextBox";
+            this.integer32CalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.integer32CalculatorTextBox.TabIndex = 1;
+            this.integer32CalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.integer32CalculatorTextBox.TextChanged += new System.EventHandler(this.Int32ToHex);
             // 
-            // decimalbox
+            // hexCalculatorTextBox
             // 
-            this.decimalbox.Location = new System.Drawing.Point(81, 20);
-            this.decimalbox.MaxLength = 3276700;
-            this.decimalbox.Name = "decimalbox";
-            this.decimalbox.Size = new System.Drawing.Size(145, 22);
-            this.decimalbox.TabIndex = 1;
-            this.decimalbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.decimalbox.TextChanged += new System.EventHandler(this.Dec2Hex);
-            // 
-            // hexcalcbox
-            // 
-            this.hexcalcbox.Location = new System.Drawing.Point(340, 20);
-            this.hexcalcbox.Name = "hexcalcbox";
-            this.hexcalcbox.Size = new System.Drawing.Size(145, 22);
-            this.hexcalcbox.TabIndex = 4;
-            this.hexcalcbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hexcalcbox.TextChanged += new System.EventHandler(this.Hex2Dec);
+            this.hexCalculatorTextBox.Location = new System.Drawing.Point(364, 66);
+            this.hexCalculatorTextBox.Name = "hexCalculatorTextBox";
+            this.hexCalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.hexCalculatorTextBox.TabIndex = 4;
+            this.hexCalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.hexCalculatorTextBox.TextChanged += new System.EventHandler(this.HexToInt32);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(300, 23);
+            this.label5.Location = new System.Drawing.Point(314, 69);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 15);
             this.label5.TabIndex = 5;
             this.label5.Text = "Hex:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(307, 95);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(104, 15);
-            this.label17.TabIndex = 14;
-            this.label17.Text = "Work In Progress";
-            this.label17.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(246, 172);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 15);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Long:";
-            this.label11.Visible = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(246, 144);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 15);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Short:";
-            this.label10.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(246, 120);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 15);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "Byte:";
-            this.label9.Visible = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(286, 169);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(145, 22);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.Visible = false;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(286, 141);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(145, 22);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(286, 113);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 22);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.Visible = false;
             // 
             // tabPage3
             // 
@@ -1169,7 +1100,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(74, 19);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(94, 17);
+            this.isSigned.Size = new System.Drawing.Size(109, 19);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1491,6 +1422,73 @@
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(38, 26);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(66, 15);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "Int8/Byte:";
+            // 
+            // integer8CalculatorTextBox
+            // 
+            this.integer8CalculatorTextBox.Location = new System.Drawing.Point(110, 23);
+            this.integer8CalculatorTextBox.MaxLength = 3276700;
+            this.integer8CalculatorTextBox.Name = "integer8CalculatorTextBox";
+            this.integer8CalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.integer8CalculatorTextBox.TabIndex = 7;
+            this.integer8CalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.integer8CalculatorTextBox.TextChanged += new System.EventHandler(this.Int8ToHex);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(25, 56);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 15);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Int16/Short:";
+            // 
+            // integer16CalculatorTextBox
+            // 
+            this.integer16CalculatorTextBox.Location = new System.Drawing.Point(110, 51);
+            this.integer16CalculatorTextBox.MaxLength = 3276700;
+            this.integer16CalculatorTextBox.Name = "integer16CalculatorTextBox";
+            this.integer16CalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.integer16CalculatorTextBox.TabIndex = 10;
+            this.integer16CalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.integer16CalculatorTextBox.TextChanged += new System.EventHandler(this.Int16ToHex);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(63, 112);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 15);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Float:";
+            // 
+            // floatCalculatorTextBox
+            // 
+            this.floatCalculatorTextBox.Location = new System.Drawing.Point(110, 109);
+            this.floatCalculatorTextBox.MaxLength = 3276700;
+            this.floatCalculatorTextBox.Name = "floatCalculatorTextBox";
+            this.floatCalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.floatCalculatorTextBox.TabIndex = 12;
+            this.floatCalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.floatCalculatorTextBox.TextChanged += new System.EventHandler(this.FloatToHex);
+            // 
+            // converterClearButton
+            // 
+            this.converterClearButton.Location = new System.Drawing.Point(434, 144);
+            this.converterClearButton.Name = "converterClearButton";
+            this.converterClearButton.Size = new System.Drawing.Size(75, 23);
+            this.converterClearButton.TabIndex = 14;
+            this.converterClearButton.Text = "Clear";
+            this.converterClearButton.UseVisualStyleBackColor = true;
+            this.converterClearButton.Click += new System.EventHandler(this.ConverterClearButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1516,7 +1514,6 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -1571,17 +1568,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox decimalbox;
-        private System.Windows.Forms.TextBox hexcalcbox;
+        private System.Windows.Forms.TextBox integer32CalculatorTextBox;
+        private System.Windows.Forms.TextBox hexCalculatorTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView resultGrid;
@@ -1675,6 +1664,14 @@
         private System.Windows.Forms.Button newcodebutton;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox codenamebox;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox integer8CalculatorTextBox;
+        private System.Windows.Forms.Button converterClearButton;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox floatCalculatorTextBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox integer16CalculatorTextBox;
 
     }
 }

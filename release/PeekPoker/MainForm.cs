@@ -6,7 +6,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Microsoft.VisualBasic;
 
 //=====================================================
 // Namespaces        -> PascalCased                  //
@@ -14,6 +13,7 @@ using Microsoft.VisualBasic;
 // Private Variables -> _carmelCased + Underscore    //
 // Public Variables  -> PascalCased                  //
 // Local Variables   -> carmelCased                  //
+// Function Names    -> PascalCased                  //
 //=====================================================
 
 namespace PeekPoker
@@ -62,7 +62,7 @@ namespace PeekPoker
             //Set correct max. min values for the numeric fields
             ChangeNumericMaxMin();
 
-            if (File.Exists(_trainerdottext)) injectcodes(); //loads trainers.txt
+            if (File.Exists(_trainerdottext)) Injectcodes(); //loads trainers.txt
         }
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
@@ -88,6 +88,15 @@ namespace PeekPoker
             stringBuilder.AppendLine(string.Format("Options with [A] = Address of the actual value"));
             stringBuilder.AppendLine(string.Format("NB: This is still work in progress."));
             ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void ConverterClearButtonClick(object sender, EventArgs e)
+        {
+            integer8CalculatorTextBox.Clear();
+            integer16CalculatorTextBox.Clear();
+            integer32CalculatorTextBox.Clear();
+            floatCalculatorTextBox.Clear();
+            hexCalculatorTextBox.Clear();
+            SetLogText("Conversion Texts Cleared");
         }
 
         #region button clicks
@@ -704,33 +713,95 @@ namespace PeekPoker
         #endregion
 
         #region Autocalculation
-        private void Dec2Hex(object sender, EventArgs e)
+        private void Int32ToHex(object sender, EventArgs e)
         {
-            if (decimalbox.Focused) //Prevents chaos via triggering both textchange events
+            if (!integer32CalculatorTextBox.Focused) return; //if the integer textbox isn't selected return
+            if (System.Text.RegularExpressions.Regex.IsMatch(integer32CalculatorTextBox.Text.ToUpper(), "[A-Z]")) return; //if we have characters return
+
+            Int32 number;
+            var validResult = Int32.TryParse(integer32CalculatorTextBox.Text, out number); //Stops things like a single "-" causing errors
+            if (!validResult) return;
+
+            var hex = number.ToString("X4"); //x is for hex and 4 is padding to a 4 digit value, uppercases.
+            hexCalculatorTextBox.Text = (string.Format("0x" + hex)); //Formats string, adds 0x
+        }
+
+        private void Int8ToHex(object sender, EventArgs e)
+        {
+            if (!integer8CalculatorTextBox.Focused) return; //if the integer textbox isn't selected return
+            if (System.Text.RegularExpressions.Regex.IsMatch(integer8CalculatorTextBox.Text.ToUpper(), "[A-Z]")) return; //if we have characters return
+            
+            byte number;
+            var validResult = byte.TryParse(integer8CalculatorTextBox.Text, out number);
+            if (!validResult) return;
+
+            var hex = number.ToString("X2"); //x is for hex and 2 is padding to a 2 digit value, uppercases.
+            hexCalculatorTextBox.Text = (string.Format("0x" + hex)); //Formats string, adds 0x
+        }
+
+        private void Int16ToHex(object sender, EventArgs e)
+        {
+            if (!integer16CalculatorTextBox.Focused) return; //if the integer textbox isn't selected return
+            if (System.Text.RegularExpressions.Regex.IsMatch(integer16CalculatorTextBox.Text.ToUpper(), "[A-Z]")) return; //if we have characters return
+            
+            short number;
+            var validResult = short.TryParse(integer16CalculatorTextBox.Text, out number);
+            if (!validResult) return;
+
+            var hex = number.ToString("X3");
+            hexCalculatorTextBox.Text = (string.Format("0x" + hex));
+        }
+
+        private void FloatToHex(object sender, EventArgs e)
+        {
+            if (!floatCalculatorTextBox.Focused) return; //if the integer textbox isn't selected return
+            if (System.Text.RegularExpressions.Regex.IsMatch(floatCalculatorTextBox.Text.ToUpper(), "[A-Z]")) return; //if we have characters return
+
+            float number;
+            var validResult = float.TryParse(floatCalculatorTextBox.Text, out number);
+            if (!validResult) return;
+
+            var buffer = BitConverter.GetBytes(number);
+            Array.Reverse(buffer);
+
+            var hex = BitConverter.ToString(buffer).Replace("-", "");
+            hexCalculatorTextBox.Text = (string.Format("0x" + hex));
+        }
+
+        private void HexToInt32(object sender, EventArgs e)
+        {
+            if (!hexCalculatorTextBox.Focused) return;
+            var hexycalc = hexCalculatorTextBox.Text.StartsWith("0x") ? hexCalculatorTextBox.Text.Substring(2) : hexCalculatorTextBox.Text;
+            
+            if (!System.Text.RegularExpressions.Regex.IsMatch(hexycalc, @"\A\b[0-9a-fA-F]+\b\Z")) return;
+            try
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(decimalbox.Text.ToUpper(), "[A-Z]")) //Checks for alpha characters, we don't like those
-                {
-                    Int32 number;
-                    var result = Int32.TryParse(decimalbox.Text, out number); //Stops things like a single "-" causing errors
-                    if (result)
+                if (hexycalc.Length >= 0 && hexycalc.Length <= 2)
+                    integer8CalculatorTextBox.Text = Convert.ToSByte(hexCalculatorTextBox.Text, 16).ToString();
+                if (hexycalc.Length >= 2 && hexycalc.Length <= 4)
+                    integer16CalculatorTextBox.Text = Convert.ToInt16(hexCalculatorTextBox.Text, 16).ToString();
+                if (hexycalc.Length >= 8)
+                {    
+                    integer32CalculatorTextBox.Text = Convert.ToInt32(hexCalculatorTextBox.Text, 16).ToString();
+                    
+                    //=====================Not Working===============================
+                    var input = hexCalculatorTextBox.Text;
+                    var output = new byte[(input.Length / 2)];
+
+                    if ((input.Length % 2) != 0) input = "0" + input;
+                    int index;
+                    for (index = 0; index < output.Length; index++)
                     {
-                        string hex = number.ToString("X4"); //x is for hex and 4 is padding to a 4 digit value, uppercases.
-                        hexcalcbox.Text = (string.Format("0x" + hex)); //Formats string, adds 0x
+                        output[index] = Convert.ToByte(input.Substring((index * 2), 2), 16);
                     }
+                    Array.Reverse(output);
+                    floatCalculatorTextBox.Text = BitConverter.ToSingle(output, 0).ToString();
+                    //==============================================================================
                 }
             }
-        }
-        private void Hex2Dec(object sender, EventArgs e)
-        {
-            if (!hexcalcbox.Focused) return;
-            var hexycalc = hexcalcbox.Text.StartsWith("0x") ? hexcalcbox.Text.Substring(2) : hexcalcbox.Text;
-            if (System.Text.RegularExpressions.Regex.IsMatch(hexycalc, @"\A\b[0-9a-fA-F]+\b\Z")) //Prevents error via random nonsense @"^[A-Fa-f0-9]*$"
+            catch(Exception ex)
             {
-                try
-                {
-                    decimalbox.Text = Convert.ToInt32(hexcalcbox.Text, 16).ToString(); //Basic Hex > Decimal Conversion
-                }
-                catch { }
+                SetLogText("Suppressed Conversion Error: " + ex.Message);
             }
         }
         #endregion
@@ -1254,83 +1325,82 @@ namespace PeekPoker
         #endregion
         #endregion
         #endregion
-        private void injectcodes() 
+
+        private void Injectcodes()
         {
-            if (File.Exists(_trainerdottext))
+            if (!File.Exists(_trainerdottext)) return;
+            try
             {
-                try
+                //trainersToolStripMenuItem.DropDownItems.Add(k);
+
+                string trainerinjectorcode = File.ReadAllText(_trainerdottext);
+                var trainereader = new StringReader(trainerinjectorcode);
+
+                //Read Game Name
+                string name = trainereader.ReadLine();
+                do
                 {
-                    string trainerinjectorcode;
-                    //trainersToolStripMenuItem.DropDownItems.Add(k);
+                    if (name == "#")
+                        break;
 
-                    trainerinjectorcode = File.ReadAllText(_trainerdottext);
-                    StringReader trainereader = new System.IO.StringReader(trainerinjectorcode);
+                    var k = new ToolStripMenuItem();
+                    if (name != null) k.Text = name.Substring(1, (name.Length - 1));
 
-                    //Read Game Name
-                    string name = trainereader.ReadLine();
+                    string id = trainereader.ReadLine();
+                    string titleUpdate = trainereader.ReadLine();
+
+                    string code = trainereader.ReadLine();
                     do
-	                {
+                    {
+                        if (code != null && code.Substring(0, 1) == "#")
+                            break;
                         if (name == "#")
                             break;
 
-                        ToolStripMenuItem k = new ToolStripMenuItem();
-                        k.Text = name.Substring(1, (name.Length - 1));
-                        
-                        string ID = trainereader.ReadLine();
-                        string TitleUpdate = trainereader.ReadLine();
-
-                        string code = trainereader.ReadLine();
+                        var j = new ToolStripMenuItem();
+                        var codes = new List<Types.CodeList>();
+                        var cLine = trainereader.ReadLine();
                         do
                         {
-                            if (code.Substring(0, 1) == "#")
+                            if (cLine != null && cLine.Substring(0, 1) == "#")
                                 break;
                             if (name == "#")
                                 break;
 
-                            ToolStripMenuItem j = new ToolStripMenuItem();
-                            List<Types.CodeList> codes = new List<Types.CodeList>();
-                            string CLine = trainereader.ReadLine();
-                            do
-                            {
-                                if (CLine.Substring(0, 1) == "#")
-                                    break;
-                                if (name == "#")
-                                    break;
+                            Types.CodeList NCode = new Types.CodeList();
+                            NCode.Name = code.Substring(1, (code.Length - 1));
+                            NCode.Type = Convert.ToInt32(cLine.Substring(0, 1));
+                            NCode.Adress = Functions.BytesToUInt32(Functions.StringToByteArray(cLine.Substring(2, 8)));
+                            NCode.Code = Functions.BytesToUInt32(Functions.StringToByteArray(cLine.Substring(11, 8)));
+                            codes.Add(NCode);
 
-                                Types.CodeList NCode = new Types.CodeList();
-                                NCode.Name = code.Substring(1, (code.Length - 1));
-                                NCode.Type = Convert.ToInt32(CLine.Substring(0, 1));
-                                NCode.Adress = Functions.BytesToUInt32(Functions.StringToByteArray(CLine.Substring(2, 8)));
-                                NCode.Code = Functions.BytesToUInt32(Functions.StringToByteArray(CLine.Substring(11, 8)));
-                                codes.Add(NCode);
+                            cLine = trainereader.ReadLine();
+                        } while (cLine.Substring(0, 1) != "$");
 
-                                CLine = trainereader.ReadLine();
-                            } while (CLine.Substring(0, 1) != "$");
+                        j.Text = code.Substring(1, (code.Length - 1));
+                        j.Tag = codes;
+                        j.Click += Codesmith; //Event adder
+                        k.DropDownItems.Add(j);
+                        code = cLine;
 
-                            j.Text = code.Substring(1, (code.Length - 1));
-                            j.Tag = codes;
-                            j.Click += new System.EventHandler(this.codesmith); //Event adder
-                            k.DropDownItems.Add(j);
-                            code = CLine;
-
-                        } while (code.Substring(0, 1) == "$");
+                    } while (code.Substring(0, 1) == "$");
                         
-                        trainersToolStripMenuItem.DropDownItems.Add(k);
-                        name = code;
+                    trainersToolStripMenuItem.DropDownItems.Add(k);
+                    name = code;
 
-                        k = null;
-                        if (name == "#")
-                            break;
+                    if (name == "#")
+                        break;
 
-                    } while (name.Substring(0, 1) == "#");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                } while (name.Substring(0, 1) == "#");
+            }
+            catch (Exception ex)
+            {
+                SetLogText("Inject Code error: " + ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
-        private void codesmith(object sender, EventArgs e)
+
+        private void Codesmith(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;             // get the menu item
             List<Types.CodeList> Codes = (List<Types.CodeList>)item.Tag;    // get the code list

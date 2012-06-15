@@ -128,6 +128,11 @@ Added:
 -Scan trainer files and add their codes to the list.
 -Improve utility 'idiot proofing' and general features.
 
+-changes 15/06/12
+Added: 
+-Conversion code
+
 TODO:
 -Add game id recognition to help user name trainer file correctly
 -More Testing and UI fixing
+-Fix hex to float conversion
