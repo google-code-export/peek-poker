@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -38,7 +39,9 @@ namespace PeekPoker
         public MainForm()
         {
             InitializeComponent();
-
+            SetLogText("Welcome to Peek Poker.");
+            SetLogText("Please make sure you have the xbdm xbox 360 plugin.");
+            SetLogText("All the information provided on this site are for educational purposes only. The site is no way responsible for any misuse of the information.");
             //Set comboboxes correctly - need to be here for some reason... or it won't work...
             searchRangeBaseValueTypeCB.SelectedIndex = 0;
             searchRangeEndTypeCB.SelectedIndex = 0;
@@ -722,6 +725,16 @@ namespace PeekPoker
             var validResult = Int32.TryParse(integer32CalculatorTextBox.Text, out number); //Stops things like a single "-" causing errors
             if (!validResult) return;
 
+            
+            if (!BigEndianRadioButton.Checked)
+            {
+                var num = number & 0xff;
+                var num2 = (number >> 8) & 0xff;
+                var num3 = (number >> 0x10) & 0xff;
+                var num4 = (number >> 0x18) & 0xff;
+                number = ((((num << 0x18) | (num2 << 0x10)) | (num3 << 8)) | num4);
+            }
+
             var hex = number.ToString("X4"); //x is for hex and 4 is padding to a 4 digit value, uppercases.
             hexCalculatorTextBox.Text = (string.Format("0x" + hex)); //Formats string, adds 0x
         }
@@ -748,8 +761,13 @@ namespace PeekPoker
             var validResult = short.TryParse(integer16CalculatorTextBox.Text, out number);
             if (!validResult) return;
 
-            var hex = number.ToString("X3");
-            hexCalculatorTextBox.Text = (string.Format("0x" + hex));
+            if (!BigEndianRadioButton.Checked)
+            {
+                var num = number & 0xff;
+                var num2 = (number >> 8) & 0xff;
+                number = (short)((num << 8) | num2);
+            }
+            hexCalculatorTextBox.Text = (string.Format("0x" + number.ToString("X3")));
         }
 
         private void FloatToHex(object sender, EventArgs e)
@@ -761,14 +779,14 @@ namespace PeekPoker
             var validResult = float.TryParse(floatCalculatorTextBox.Text, out number);
             if (!validResult) return;
 
-            var buffer = BitConverter.GetBytes(number);
-            Array.Reverse(buffer);
+            var buffer = BitConverter.GetBytes(number);//comes out as little endian
+            if (BigEndianRadioButton.Checked) Array.Reverse(buffer);
 
             var hex = BitConverter.ToString(buffer).Replace("-", "");
             hexCalculatorTextBox.Text = (string.Format("0x" + hex));
         }
 
-        private void HexToInt32(object sender, EventArgs e)
+        private void HexToInt(object sender, EventArgs e)
         {
             if (!hexCalculatorTextBox.Focused) return;
             var hexycalc = hexCalculatorTextBox.Text.StartsWith("0x") ? hexCalculatorTextBox.Text.Substring(2) : hexCalculatorTextBox.Text;
@@ -777,14 +795,39 @@ namespace PeekPoker
             try
             {
                 if (hexycalc.Length >= 0 && hexycalc.Length <= 2)
+                {
                     integer8CalculatorTextBox.Text = Convert.ToSByte(hexCalculatorTextBox.Text, 16).ToString();
+                    integer16CalculatorTextBox.Clear();
+                    integer32CalculatorTextBox.Clear();
+                    floatCalculatorTextBox.Clear();
+                }
                 if (hexycalc.Length >= 2 && hexycalc.Length <= 4)
-                    integer16CalculatorTextBox.Text = Convert.ToInt16(hexCalculatorTextBox.Text, 16).ToString();
+                {
+                    var number = Convert.ToInt16(hexCalculatorTextBox.Text, 16);
+                    if (!BigEndianRadioButton.Checked)
+                    {
+                        var num = number & 0xff;
+                        var num2 = (number >> 8) & 0xff;
+                        number = (short)((num << 8) | num2);
+                    }
+
+                    integer16CalculatorTextBox.Text = number.ToString();
+                    integer32CalculatorTextBox.Clear();
+                    floatCalculatorTextBox.Clear();
+                }
                 if (hexycalc.Length >= 8)
-                {    
-                    integer32CalculatorTextBox.Text = Convert.ToInt32(hexCalculatorTextBox.Text, 16).ToString();
-                    
-                    //=====================Not Working===============================
+                {
+                    var number = Convert.ToInt32(hexCalculatorTextBox.Text, 16);
+                    if (!BigEndianRadioButton.Checked)
+                    {
+                        var num = number & 0xff;
+                        var num2 = (number >> 8) & 0xff;
+                        var num3 = (number >> 0x10) & 0xff;
+                        var num4 = (number >> 0x18) & 0xff;
+                        number = ((((num << 0x18) | (num2 << 0x10)) | (num3 << 8)) | num4);
+                    }
+                    integer32CalculatorTextBox.Text = number.ToString();
+
                     var input = hexCalculatorTextBox.Text;
                     var output = new byte[(input.Length / 2)];
 
@@ -796,7 +839,6 @@ namespace PeekPoker
                     }
                     Array.Reverse(output);
                     floatCalculatorTextBox.Text = BitConverter.ToSingle(output, 0).ToString();
-                    //==============================================================================
                 }
             }
             catch(Exception ex)

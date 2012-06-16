@@ -100,10 +100,20 @@
             this.createtrainerbutton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.endianTypeGroupBox = new System.Windows.Forms.GroupBox();
+            this.littleEndianRadioButton = new System.Windows.Forms.RadioButton();
+            this.BigEndianRadioButton = new System.Windows.Forms.RadioButton();
+            this.converterClearButton = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.floatCalculatorTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.integer16CalculatorTextBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.integer32CalculatorTextBox = new System.Windows.Forms.TextBox();
             this.hexCalculatorTextBox = new System.Windows.Forms.TextBox();
+            this.integer8CalculatorTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -153,17 +163,11 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.label22 = new System.Windows.Forms.Label();
-            this.integer8CalculatorTextBox = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.integer16CalculatorTextBox = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.floatCalculatorTextBox = new System.Windows.Forms.TextBox();
-            this.converterClearButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.endianTypeGroupBox.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
@@ -200,7 +204,7 @@
             // 
             this.statusStripLabel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabel.Name = "statusStripLabel";
-            this.statusStripLabel.Size = new System.Drawing.Size(30, 19);
+            this.statusStripLabel.Size = new System.Drawing.Size(29, 19);
             this.statusStripLabel.Text = "Idle";
             // 
             // toolStripStatusLabel2
@@ -208,7 +212,7 @@
             this.toolStripStatusLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel2.IsLink = true;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(118, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(110, 19);
             this.toolStripStatusLabel2.Text = "www.360haven.com";
             this.toolStripStatusLabel2.Click += new System.EventHandler(this.ToolStripStatusLabel2Click);
             // 
@@ -216,7 +220,7 @@
             // 
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(73, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(70, 19);
             this.toolStripStatusLabel1.Text = "Revision 6.5";
             // 
             // StatusProgressBar
@@ -266,7 +270,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // aboutToolStripMenuItem
@@ -280,7 +284,7 @@
             this.howToUseToolStripMenuItem});
             this.aboutToolStripMenuItem.Enabled = false;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.aboutToolStripMenuItem.Text = "Select Game";
             // 
             // residentEvilORCToolStripMenuItem
@@ -288,13 +292,13 @@
             this.residentEvilORCToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentXPToolStripMenuItem});
             this.residentEvilORCToolStripMenuItem.Name = "residentEvilORCToolStripMenuItem";
-            this.residentEvilORCToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.residentEvilORCToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.residentEvilORCToolStripMenuItem.Text = "Resident Evil - ORC";
             // 
             // currentXPToolStripMenuItem
             // 
             this.currentXPToolStripMenuItem.Name = "currentXPToolStripMenuItem";
-            this.currentXPToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.currentXPToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.currentXPToolStripMenuItem.Text = "[P] Current XP";
             this.currentXPToolStripMenuItem.Click += new System.EventHandler(this.CurrentXpToolStripMenuItemClick);
             // 
@@ -303,13 +307,13 @@
             this.prototype2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentXpToolStripMenuItem1});
             this.prototype2ToolStripMenuItem.Name = "prototype2ToolStripMenuItem";
-            this.prototype2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.prototype2ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.prototype2ToolStripMenuItem.Text = "Prototype 2";
             // 
             // currentXpToolStripMenuItem1
             // 
             this.currentXpToolStripMenuItem1.Name = "currentXpToolStripMenuItem1";
-            this.currentXpToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
+            this.currentXpToolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
             this.currentXpToolStripMenuItem1.Text = "[A] Current XP";
             this.currentXpToolStripMenuItem1.Click += new System.EventHandler(this.CurrentXpToolStripMenuItem1Click);
             // 
@@ -318,13 +322,13 @@
             this.bToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentBloodToolStripMenuItem});
             this.bToolStripMenuItem.Name = "bToolStripMenuItem";
-            this.bToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.bToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.bToolStripMenuItem.Text = "Bloodforge";
             // 
             // currentBloodToolStripMenuItem
             // 
             this.currentBloodToolStripMenuItem.Name = "currentBloodToolStripMenuItem";
-            this.currentBloodToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.currentBloodToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.currentBloodToolStripMenuItem.Text = "[A] Current Blood";
             this.currentBloodToolStripMenuItem.Click += new System.EventHandler(this.CurrentBloodToolStripMenuItemClick);
             // 
@@ -333,25 +337,25 @@
             this.uFC3ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pAttributeToolStripMenuItem});
             this.uFC3ToolStripMenuItem.Name = "uFC3ToolStripMenuItem";
-            this.uFC3ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.uFC3ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.uFC3ToolStripMenuItem.Text = "UFC 3";
             // 
             // pAttributeToolStripMenuItem
             // 
             this.pAttributeToolStripMenuItem.Name = "pAttributeToolStripMenuItem";
-            this.pAttributeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.pAttributeToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.pAttributeToolStripMenuItem.Text = "[P] Attribute";
             this.pAttributeToolStripMenuItem.Click += new System.EventHandler(this.PAttributeToolStripMenuItemClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(175, 6);
             // 
             // howToUseToolStripMenuItem
             // 
             this.howToUseToolStripMenuItem.Name = "howToUseToolStripMenuItem";
-            this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.howToUseToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.howToUseToolStripMenuItem.Text = "How To Use";
             this.howToUseToolStripMenuItem.Click += new System.EventHandler(this.HowToUseToolStripMenuItemClick);
             // 
@@ -363,7 +367,7 @@
             this.resonanceOfFateToolStripMenuItem});
             this.trainersToolStripMenuItem.Enabled = false;
             this.trainersToolStripMenuItem.Name = "trainersToolStripMenuItem";
-            this.trainersToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.trainersToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.trainersToolStripMenuItem.Text = "Trainers";
             // 
             // darkSoulsToolStripMenuItem
@@ -371,7 +375,7 @@
             this.darkSoulsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tU01ToolStripMenuItem});
             this.darkSoulsToolStripMenuItem.Name = "darkSoulsToolStripMenuItem";
-            this.darkSoulsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.darkSoulsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.darkSoulsToolStripMenuItem.Text = "Dark Souls";
             // 
             // tU01ToolStripMenuItem
@@ -392,83 +396,83 @@
             this.maxEnduranceToolStripMenuItem,
             this.thanksDS0});
             this.tU01ToolStripMenuItem.Name = "tU01ToolStripMenuItem";
-            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.tU01ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.tU01ToolStripMenuItem.Text = "TU# 0/1";
             // 
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.allToolStripMenuItem.Text = "Max All";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.DS0_All);
             // 
             // DS0MaxLevel
             // 
             this.DS0MaxLevel.Name = "DS0MaxLevel";
-            this.DS0MaxLevel.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxLevel.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxLevel.Text = "Max Level";
             this.DS0MaxLevel.Click += new System.EventHandler(this.DS0_MaxLevel);
             // 
             // DS0MaxSouls
             // 
             this.DS0MaxSouls.Name = "DS0MaxSouls";
-            this.DS0MaxSouls.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxSouls.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxSouls.Text = "Max Souls";
             this.DS0MaxSouls.Click += new System.EventHandler(this.DS0_MaxSouls);
             // 
             // DS0MaxHum
             // 
             this.DS0MaxHum.Name = "DS0MaxHum";
-            this.DS0MaxHum.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxHum.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxHum.Text = "Max Humanity";
             this.DS0MaxHum.Click += new System.EventHandler(this.DS0_Humanity);
             // 
             // DS0MaxAtt
             // 
             this.DS0MaxAtt.Name = "DS0MaxAtt";
-            this.DS0MaxAtt.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxAtt.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxAtt.Text = "Max Attunement";
             this.DS0MaxAtt.Click += new System.EventHandler(this.DS0_Attunement);
             // 
             // DS0MaxStr
             // 
             this.DS0MaxStr.Name = "DS0MaxStr";
-            this.DS0MaxStr.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxStr.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxStr.Text = "Max Strength";
             this.DS0MaxStr.Click += new System.EventHandler(this.DS0_Strength);
             // 
             // DS0MaxVit
             // 
             this.DS0MaxVit.Name = "DS0MaxVit";
-            this.DS0MaxVit.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxVit.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxVit.Text = "Max Vitality";
             this.DS0MaxVit.Click += new System.EventHandler(this.DS0_Vitality);
             // 
             // DS0MaxDex
             // 
             this.DS0MaxDex.Name = "DS0MaxDex";
-            this.DS0MaxDex.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxDex.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxDex.Text = "Max Dexterity";
             this.DS0MaxDex.Click += new System.EventHandler(this.DS0_Dexterity);
             // 
             // DS0MaxRes
             // 
             this.DS0MaxRes.Name = "DS0MaxRes";
-            this.DS0MaxRes.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxRes.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxRes.Text = "Max Resistance";
             this.DS0MaxRes.Click += new System.EventHandler(this.DS0_Resistance);
             // 
             // DS0MaxInt
             // 
             this.DS0MaxInt.Name = "DS0MaxInt";
-            this.DS0MaxInt.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxInt.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxInt.Text = "Max Intelligence";
             this.DS0MaxInt.Click += new System.EventHandler(this.DS0_Intelligence);
             // 
             // DS0MaxFaith
             // 
             this.DS0MaxFaith.Name = "DS0MaxFaith";
-            this.DS0MaxFaith.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxFaith.Size = new System.Drawing.Size(169, 22);
             this.DS0MaxFaith.Text = "Max Faith";
             this.DS0MaxFaith.Click += new System.EventHandler(this.DS0_Faith);
             // 
@@ -478,20 +482,20 @@
             this.DS0MaxStam,
             this.DS0MillStam});
             this.staminaCodesToolStripMenuItem.Name = "staminaCodesToolStripMenuItem";
-            this.staminaCodesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.staminaCodesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.staminaCodesToolStripMenuItem.Text = "Stamina Codes";
             // 
             // DS0MaxStam
             // 
             this.DS0MaxStam.Name = "DS0MaxStam";
-            this.DS0MaxStam.Size = new System.Drawing.Size(166, 22);
+            this.DS0MaxStam.Size = new System.Drawing.Size(163, 22);
             this.DS0MaxStam.Text = "Max Stamina";
             this.DS0MaxStam.Click += new System.EventHandler(this.DS0_Stamina);
             // 
             // DS0MillStam
             // 
             this.DS0MillStam.Name = "DS0MillStam";
-            this.DS0MillStam.Size = new System.Drawing.Size(166, 22);
+            this.DS0MillStam.Size = new System.Drawing.Size(163, 22);
             this.DS0MillStam.Text = "1 Million Stamina";
             this.DS0MillStam.Click += new System.EventHandler(this.DS0_MillionStamina);
             // 
@@ -501,27 +505,27 @@
             this.DS0MaxEnd,
             this.DS0MillEnd});
             this.maxEnduranceToolStripMenuItem.Name = "maxEnduranceToolStripMenuItem";
-            this.maxEnduranceToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.maxEnduranceToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.maxEnduranceToolStripMenuItem.Text = "Endurance Codes";
             // 
             // DS0MaxEnd
             // 
             this.DS0MaxEnd.Name = "DS0MaxEnd";
-            this.DS0MaxEnd.Size = new System.Drawing.Size(179, 22);
+            this.DS0MaxEnd.Size = new System.Drawing.Size(176, 22);
             this.DS0MaxEnd.Text = "Max Endurance";
             this.DS0MaxEnd.Click += new System.EventHandler(this.DS0_Endurance);
             // 
             // DS0MillEnd
             // 
             this.DS0MillEnd.Name = "DS0MillEnd";
-            this.DS0MillEnd.Size = new System.Drawing.Size(179, 22);
+            this.DS0MillEnd.Size = new System.Drawing.Size(176, 22);
             this.DS0MillEnd.Text = "1 Million Endurance";
             this.DS0MillEnd.Click += new System.EventHandler(this.DS0_MillionEndurance);
             // 
             // thanksDS0
             // 
             this.thanksDS0.Name = "thanksDS0";
-            this.thanksDS0.Size = new System.Drawing.Size(166, 22);
+            this.thanksDS0.Size = new System.Drawing.Size(169, 22);
             this.thanksDS0.Text = "Thanks: T3CH";
             // 
             // skyrimToolStripMenuItem
@@ -529,7 +533,7 @@
             this.skyrimToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.titleUpdate5ToolStripMenuItem});
             this.skyrimToolStripMenuItem.Name = "skyrimToolStripMenuItem";
-            this.skyrimToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.skyrimToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.skyrimToolStripMenuItem.Text = "Skyrim";
             // 
             // titleUpdate5ToolStripMenuItem
@@ -539,27 +543,27 @@
             this.infMagickaToolStripMenuItem,
             this.thanks8BallToolStripMenuItem});
             this.titleUpdate5ToolStripMenuItem.Name = "titleUpdate5ToolStripMenuItem";
-            this.titleUpdate5ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.titleUpdate5ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.titleUpdate5ToolStripMenuItem.Text = "TU# 4/5";
             // 
             // infSprintToolStripMenuItem
             // 
             this.infSprintToolStripMenuItem.Name = "infSprintToolStripMenuItem";
-            this.infSprintToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.infSprintToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.infSprintToolStripMenuItem.Text = "Inf Sprint";
             this.infSprintToolStripMenuItem.Click += new System.EventHandler(this.Skyrim_infSprint);
             // 
             // infMagickaToolStripMenuItem
             // 
             this.infMagickaToolStripMenuItem.Name = "infMagickaToolStripMenuItem";
-            this.infMagickaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.infMagickaToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.infMagickaToolStripMenuItem.Text = "Inf Magicka";
             this.infMagickaToolStripMenuItem.Click += new System.EventHandler(this.Skyrim_infMagicka);
             // 
             // thanks8BallToolStripMenuItem
             // 
             this.thanks8BallToolStripMenuItem.Name = "thanks8BallToolStripMenuItem";
-            this.thanks8BallToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.thanks8BallToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.thanks8BallToolStripMenuItem.Text = "Thanks: 8Ball";
             // 
             // resonanceOfFateToolStripMenuItem
@@ -567,7 +571,7 @@
             this.resonanceOfFateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buyMenuToolStripMenuItem});
             this.resonanceOfFateToolStripMenuItem.Name = "resonanceOfFateToolStripMenuItem";
-            this.resonanceOfFateToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.resonanceOfFateToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.resonanceOfFateToolStripMenuItem.Text = "Resonance of Fate";
             // 
             // buyMenuToolStripMenuItem
@@ -582,13 +586,13 @@
             this.itemSpecialSet1ToolStripMenuItem,
             this.itemSpecialSet2ToolStripMenuItem});
             this.buyMenuToolStripMenuItem.Name = "buyMenuToolStripMenuItem";
-            this.buyMenuToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.buyMenuToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.buyMenuToolStripMenuItem.Text = "Buy Menu";
             // 
             // buyWhiteHexToolStripMenuItem
             // 
             this.buyWhiteHexToolStripMenuItem.Name = "buyWhiteHexToolStripMenuItem";
-            this.buyWhiteHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.buyWhiteHexToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.buyWhiteHexToolStripMenuItem.Tag = "WhiteHex";
             this.buyWhiteHexToolStripMenuItem.Text = "White Hex";
             this.buyWhiteHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -596,7 +600,7 @@
             // coloredHexToolStripMenuItem
             // 
             this.coloredHexToolStripMenuItem.Name = "coloredHexToolStripMenuItem";
-            this.coloredHexToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.coloredHexToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.coloredHexToolStripMenuItem.Tag = "ColorHex";
             this.coloredHexToolStripMenuItem.Text = "Colored Hex";
             this.coloredHexToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -604,7 +608,7 @@
             // hexStationsToolStripMenuItem
             // 
             this.hexStationsToolStripMenuItem.Name = "hexStationsToolStripMenuItem";
-            this.hexStationsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.hexStationsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.hexStationsToolStripMenuItem.Tag = "HexStations";
             this.hexStationsToolStripMenuItem.Text = "Hex Stations";
             this.hexStationsToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -612,7 +616,7 @@
             // weaponSet1ToolStripMenuItem
             // 
             this.weaponSet1ToolStripMenuItem.Name = "weaponSet1ToolStripMenuItem";
-            this.weaponSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponSet1ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.weaponSet1ToolStripMenuItem.Tag = "WeaponSet1";
             this.weaponSet1ToolStripMenuItem.Text = "Weapon Set 1";
             this.weaponSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -620,7 +624,7 @@
             // weaponSet2ToolStripMenuItem
             // 
             this.weaponSet2ToolStripMenuItem.Name = "weaponSet2ToolStripMenuItem";
-            this.weaponSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponSet2ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.weaponSet2ToolStripMenuItem.Tag = "WeaponSet2";
             this.weaponSet2ToolStripMenuItem.Text = "Weapon Set 2";
             this.weaponSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -628,7 +632,7 @@
             // weaponDebugSetToolStripMenuItem
             // 
             this.weaponDebugSetToolStripMenuItem.Name = "weaponDebugSetToolStripMenuItem";
-            this.weaponDebugSetToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.weaponDebugSetToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.weaponDebugSetToolStripMenuItem.Tag = "WeaponDebugSet";
             this.weaponDebugSetToolStripMenuItem.Text = "Weapon Debug Set";
             this.weaponDebugSetToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -636,7 +640,7 @@
             // itemSpecialSet1ToolStripMenuItem
             // 
             this.itemSpecialSet1ToolStripMenuItem.Name = "itemSpecialSet1ToolStripMenuItem";
-            this.itemSpecialSet1ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.itemSpecialSet1ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.itemSpecialSet1ToolStripMenuItem.Tag = "ItemSpecialSet1";
             this.itemSpecialSet1ToolStripMenuItem.Text = "Item Special Set 1";
             this.itemSpecialSet1ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -644,7 +648,7 @@
             // itemSpecialSet2ToolStripMenuItem
             // 
             this.itemSpecialSet2ToolStripMenuItem.Name = "itemSpecialSet2ToolStripMenuItem";
-            this.itemSpecialSet2ToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.itemSpecialSet2ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.itemSpecialSet2ToolStripMenuItem.Tag = "ItemSpecialSet2";
             this.itemSpecialSet2ToolStripMenuItem.Text = "Item Special Set 2";
             this.itemSpecialSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
@@ -652,7 +656,7 @@
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(48, 20);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
             // 
@@ -799,6 +803,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.endianTypeGroupBox);
             this.groupBox4.Controls.Add(this.converterClearButton);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.floatCalculatorTextBox);
@@ -813,10 +818,91 @@
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Location = new System.Drawing.Point(75, 17);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(527, 173);
+            this.groupBox4.Size = new System.Drawing.Size(527, 148);
             this.groupBox4.TabIndex = 15;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Converter";
+            // 
+            // endianTypeGroupBox
+            // 
+            this.endianTypeGroupBox.Controls.Add(this.littleEndianRadioButton);
+            this.endianTypeGroupBox.Controls.Add(this.BigEndianRadioButton);
+            this.endianTypeGroupBox.Location = new System.Drawing.Point(364, 23);
+            this.endianTypeGroupBox.Name = "endianTypeGroupBox";
+            this.endianTypeGroupBox.Size = new System.Drawing.Size(145, 38);
+            this.endianTypeGroupBox.TabIndex = 15;
+            this.endianTypeGroupBox.TabStop = false;
+            this.endianTypeGroupBox.Text = "Endian Type";
+            // 
+            // littleEndianRadioButton
+            // 
+            this.littleEndianRadioButton.AutoSize = true;
+            this.littleEndianRadioButton.Location = new System.Drawing.Point(75, 15);
+            this.littleEndianRadioButton.Name = "littleEndianRadioButton";
+            this.littleEndianRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.littleEndianRadioButton.TabIndex = 1;
+            this.littleEndianRadioButton.Text = "Little";
+            this.littleEndianRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // BigEndianRadioButton
+            // 
+            this.BigEndianRadioButton.AutoSize = true;
+            this.BigEndianRadioButton.Checked = true;
+            this.BigEndianRadioButton.Location = new System.Drawing.Point(6, 15);
+            this.BigEndianRadioButton.Name = "BigEndianRadioButton";
+            this.BigEndianRadioButton.Size = new System.Drawing.Size(40, 17);
+            this.BigEndianRadioButton.TabIndex = 0;
+            this.BigEndianRadioButton.TabStop = true;
+            this.BigEndianRadioButton.Text = "Big";
+            this.BigEndianRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // converterClearButton
+            // 
+            this.converterClearButton.Location = new System.Drawing.Point(434, 108);
+            this.converterClearButton.Name = "converterClearButton";
+            this.converterClearButton.Size = new System.Drawing.Size(75, 23);
+            this.converterClearButton.TabIndex = 14;
+            this.converterClearButton.Text = "Clear";
+            this.converterClearButton.UseVisualStyleBackColor = true;
+            this.converterClearButton.Click += new System.EventHandler(this.ConverterClearButtonClick);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(63, 112);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 15);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Float:";
+            // 
+            // floatCalculatorTextBox
+            // 
+            this.floatCalculatorTextBox.Location = new System.Drawing.Point(110, 109);
+            this.floatCalculatorTextBox.MaxLength = 3276700;
+            this.floatCalculatorTextBox.Name = "floatCalculatorTextBox";
+            this.floatCalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.floatCalculatorTextBox.TabIndex = 12;
+            this.floatCalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.floatCalculatorTextBox.TextChanged += new System.EventHandler(this.FloatToHex);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(25, 56);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 15);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Int16/Short:";
+            // 
+            // integer16CalculatorTextBox
+            // 
+            this.integer16CalculatorTextBox.Location = new System.Drawing.Point(110, 51);
+            this.integer16CalculatorTextBox.MaxLength = 3276700;
+            this.integer16CalculatorTextBox.Name = "integer16CalculatorTextBox";
+            this.integer16CalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.integer16CalculatorTextBox.TabIndex = 10;
+            this.integer16CalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.integer16CalculatorTextBox.TextChanged += new System.EventHandler(this.Int16ToHex);
             // 
             // label20
             // 
@@ -836,6 +922,15 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Int32/Int:";
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(38, 26);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(66, 15);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "Int8/Byte:";
+            // 
             // integer32CalculatorTextBox
             // 
             this.integer32CalculatorTextBox.Location = new System.Drawing.Point(110, 81);
@@ -853,7 +948,17 @@
             this.hexCalculatorTextBox.Size = new System.Drawing.Size(145, 22);
             this.hexCalculatorTextBox.TabIndex = 4;
             this.hexCalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.hexCalculatorTextBox.TextChanged += new System.EventHandler(this.HexToInt32);
+            this.hexCalculatorTextBox.TextChanged += new System.EventHandler(this.HexToInt);
+            // 
+            // integer8CalculatorTextBox
+            // 
+            this.integer8CalculatorTextBox.Location = new System.Drawing.Point(110, 23);
+            this.integer8CalculatorTextBox.MaxLength = 3276700;
+            this.integer8CalculatorTextBox.Name = "integer8CalculatorTextBox";
+            this.integer8CalculatorTextBox.Size = new System.Drawing.Size(145, 22);
+            this.integer8CalculatorTextBox.TabIndex = 7;
+            this.integer8CalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.integer8CalculatorTextBox.TextChanged += new System.EventHandler(this.Int8ToHex);
             // 
             // label5
             // 
@@ -1098,9 +1203,9 @@
             // isSigned
             // 
             this.isSigned.AutoSize = true;
-            this.isSigned.Location = new System.Drawing.Point(74, 19);
+            this.isSigned.Location = new System.Drawing.Point(71, 21);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(109, 19);
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1207,7 +1312,7 @@
             this.SelAddress.Location = new System.Drawing.Point(564, 6);
             this.SelAddress.Name = "SelAddress";
             this.SelAddress.ReadOnly = true;
-            this.SelAddress.Size = new System.Drawing.Size(116, 22);
+            this.SelAddress.Size = new System.Drawing.Size(112, 22);
             this.SelAddress.TabIndex = 19;
             // 
             // hexBox
@@ -1422,73 +1527,6 @@
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(38, 26);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(66, 15);
-            this.label22.TabIndex = 8;
-            this.label22.Text = "Int8/Byte:";
-            // 
-            // integer8CalculatorTextBox
-            // 
-            this.integer8CalculatorTextBox.Location = new System.Drawing.Point(110, 23);
-            this.integer8CalculatorTextBox.MaxLength = 3276700;
-            this.integer8CalculatorTextBox.Name = "integer8CalculatorTextBox";
-            this.integer8CalculatorTextBox.Size = new System.Drawing.Size(145, 22);
-            this.integer8CalculatorTextBox.TabIndex = 7;
-            this.integer8CalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.integer8CalculatorTextBox.TextChanged += new System.EventHandler(this.Int8ToHex);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 56);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(79, 15);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Int16/Short:";
-            // 
-            // integer16CalculatorTextBox
-            // 
-            this.integer16CalculatorTextBox.Location = new System.Drawing.Point(110, 51);
-            this.integer16CalculatorTextBox.MaxLength = 3276700;
-            this.integer16CalculatorTextBox.Name = "integer16CalculatorTextBox";
-            this.integer16CalculatorTextBox.Size = new System.Drawing.Size(145, 22);
-            this.integer16CalculatorTextBox.TabIndex = 10;
-            this.integer16CalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.integer16CalculatorTextBox.TextChanged += new System.EventHandler(this.Int16ToHex);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(63, 112);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 15);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Float:";
-            // 
-            // floatCalculatorTextBox
-            // 
-            this.floatCalculatorTextBox.Location = new System.Drawing.Point(110, 109);
-            this.floatCalculatorTextBox.MaxLength = 3276700;
-            this.floatCalculatorTextBox.Name = "floatCalculatorTextBox";
-            this.floatCalculatorTextBox.Size = new System.Drawing.Size(145, 22);
-            this.floatCalculatorTextBox.TabIndex = 12;
-            this.floatCalculatorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.floatCalculatorTextBox.TextChanged += new System.EventHandler(this.FloatToHex);
-            // 
-            // converterClearButton
-            // 
-            this.converterClearButton.Location = new System.Drawing.Point(434, 144);
-            this.converterClearButton.Name = "converterClearButton";
-            this.converterClearButton.Size = new System.Drawing.Size(75, 23);
-            this.converterClearButton.TabIndex = 14;
-            this.converterClearButton.Text = "Clear";
-            this.converterClearButton.UseVisualStyleBackColor = true;
-            this.converterClearButton.Click += new System.EventHandler(this.ConverterClearButtonClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1516,6 +1554,8 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.endianTypeGroupBox.ResumeLayout(false);
+            this.endianTypeGroupBox.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -1672,6 +1712,9 @@
         private System.Windows.Forms.TextBox floatCalculatorTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox integer16CalculatorTextBox;
+        private System.Windows.Forms.GroupBox endianTypeGroupBox;
+        private System.Windows.Forms.RadioButton littleEndianRadioButton;
+        private System.Windows.Forms.RadioButton BigEndianRadioButton;
 
     }
 }
