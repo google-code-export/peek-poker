@@ -141,93 +141,7 @@ namespace PeekPoker
             }
         }
 
-        /// <summary>Search the file stream for a specified Hex String</summary>
-        /// <param name="data">The data you want to search for</param>
-        /// <param name="firstFind">If you want to only search for the first location</param>
-        /// <returns>The long offset</returns>
-        public long[] SearchHexString(string data, bool firstFind)
-        {
-            try
-            {
-                //location of the value/s
-                var locations = new List<long>();
-                long index;
-                var prev = (int)Position;
-                for (index = Position; index < Length; index++)
-                {
-                    if (_stopSearch) return locations.ToArray(); //so users can stop the search
-                    Position = index;
-
-                    if (!firstFind)
-                        ReportProgress(prev, (int)Length, (int)index, "Searching...");
-
-                    var buffer = ReadBytes(data.Length/2, _isBigEndian);
-                    if (data != Functions.ToHexString(buffer)) continue;
-                    locations.Add(index);
-
-                    if (firstFind)break;
-                }
-                return locations.ToArray();
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message);
-            }
-        }
-        public List<Types.SearchResults> ExSearchHexString(string data, uint _startDumpOffset, bool firstFind)
-        {
-            try
-            {
-                //location of the value/s
-                List<Types.SearchResults> locations = new List<Types.SearchResults>();
-                long index;
-                int prev = (int)Position;
-                byte[] _buffer = ReadBytes((int)Length, _isBigEndian);
-                Position = prev;
-
-                System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
-
-                for (index = Position; index < Length; index = Position)
-                {
-                    if (!firstFind)
-                        ReportProgress(prev, (int)Length, (int)index, "Searching...");
-
-                    byte _value = Functions.HexToBytes(data.Substring(0, 2))[0];
-                    int ind = (Array.IndexOf(_buffer, _value, (int)Position));
-
-                    if (ind == -1)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Position = ind;
-
-                        string buffer = Functions.ToHexString(ReadBytes(data.Length / 2, _isBigEndian));
-                        if (data != buffer)
-                        {
-                            Position = ind + 1;
-                            continue;
-                        }
-                        Types.SearchResults results = new Types.SearchResults();
-                        results.Offset = Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)ind));
-                        results.Value = buffer;
-
-                        locations.Add(results);
-                        if (firstFind) break;
-                    }
-                    index = Position;
-                }
-                watch.Stop();
-                Console.WriteLine(string.Format("Parallel for - Search: Seconds Elapsed: " + watch.Elapsed.Seconds));
-                return locations;
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message);
-            }
-        }
-        public BindingList<Types.SearchResults> Ex2SearchHexString(byte[] pattern, uint startDumpOffset)
+        public BindingList<Types.SearchResults> SearchHexString(byte[] pattern, uint startDumpOffset)
         {
             byte[] buffer = ReadBytes((int)Length, _isBigEndian);
             var positions = new BindingList<Types.SearchResults>();
@@ -235,8 +149,8 @@ namespace PeekPoker
             int x = 1;
             while (i >= 0 && i <= buffer.Length - pattern.Length)
             {
-                if (_stopSearch) return positions; //so users can stop the search
-                ReportProgress(0, (int)buffer.Length, (int)i, "Searching...");
+                if (_stopSearch) return positions;
+                ReportProgress(0, buffer.Length, i, "Searching...");
 
                 var segment = new byte[pattern.Length];
                 Buffer.BlockCopy(buffer, i, segment, 0, pattern.Length);
@@ -254,6 +168,7 @@ namespace PeekPoker
                 {
                     i = Array.IndexOf(buffer, pattern[0], i + 1);
                 }
+                if (_stopSearch) return positions;
             }
             return positions;
         }

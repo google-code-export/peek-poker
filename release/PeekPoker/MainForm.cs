@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -198,23 +197,8 @@ namespace PeekPoker
             NewPeek();
         }
 
-        //When you click on the search range button - Search Range Tab
-        private void SearchRangeButtonClick(object sender, EventArgs e)
-        {
-            if (searchRangeEndTypeCB.SelectedIndex == 1)
-            {
-                _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
-            }
-            else
-            {
-                _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
-            }
-            var oThread = new Thread(SearchRange);
-            oThread.Start();
-        }
-
         //Experimental search Button
-        private void ExSearchRangeButtonClick(object sender, EventArgs e)
+        private void SearchRangeButtonClick(object sender, EventArgs e)
         {
             try
             {
@@ -226,7 +210,7 @@ namespace PeekPoker
                 {
                     _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
                 }
-                var oThread = new Thread(ExSearchRange);
+                var oThread = new Thread(SearchRange);
                 oThread.Start();
             }
             catch (Exception ex)
@@ -458,55 +442,9 @@ namespace PeekPoker
                 Thread.CurrentThread.Abort();
             }
         }
-        //Search the memory for the specified value
-        private void SearchRange()
-        {
-            try
-            {
-                CheckForIllegalCrossThreadCalls = false; //line 463 grid cross thread error
-                EnableExSearchRangeButton(false);
-                EnableStopSearchButton(true);
-                EnableSearchRangeButton(false);
-                Rtm.DumpOffset = GetStartRangeAddressTextBoxText();
-                Rtm.DumpLength = _searchRangeDumpLength;
-                ResultGridClean();//Clean list view
 
-                //The FindHexOffset function is slow in searching - I might use Mojo's algorithm
-                Offsets = Rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
-                //Reset the progressbar...
-                UpdateProgressbar(0, 100, 0);
-
-                if (Offsets.Count < 1)
-                {
-                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return; //We don't want it to continue
-                }
-
-                var i = 0; //The index number
-                foreach (var offset in Offsets)
-                {
-                    //create a new variable of the SearchResult type and set the variables
-                    var results = new Types.SearchResults { Offset = offset, ID = i.ToString() };
-                    //add the new variable to the result list
-                    _searchResult.Add(results);
-                    i++;
-                }
-                ResultGridUpdate();
-            }
-            catch (Exception e)
-            {
-                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                EnableExSearchRangeButton(true);
-                EnableSearchRangeButton(true);
-                EnableStopSearchButton(false);
-                Thread.CurrentThread.Abort();
-            }
-        }
         //Searches the memory for the specified value (Experimental)
-        private void ExSearchRange()
+        private void SearchRange()
         {
             try
             {
@@ -520,7 +458,7 @@ namespace PeekPoker
                 ResultGridClean();//Clean list view
 
                 //The ExFindHexOffset function is a Experimental search function
-                var results = Rtm.ExFindHexOffset(GetSearchRangeValueTextBoxText());//pointer
+                var results = Rtm.FindHexOffset(GetSearchRangeValueTextBoxText());//pointer
                 //Reset the progressbar...
                 UpdateProgressbar(0, 100, 0);
 
@@ -598,10 +536,10 @@ namespace PeekPoker
         }
         private void EnableExSearchRangeButton(bool value)
         {
-            if (EXsearchRangeButton.InvokeRequired)
-                EXsearchRangeButton.Invoke((MethodInvoker)delegate { EnableExSearchRangeButton(value); });
+            if (searchRangeButton.InvokeRequired)
+                searchRangeButton.Invoke((MethodInvoker)delegate { EnableExSearchRangeButton(value); });
             else
-                EXsearchRangeButton.Enabled = value;
+                searchRangeButton.Enabled = value;
         }
         private void SetLogText(string value)
         {
@@ -1210,7 +1148,7 @@ namespace PeekPoker
 
                 SetLogText("#Trainers# Resonance Of Fate Dumping & Searching ...");
                 //The ExFindHexOffset function is a Experimental search function
-                var results = Rtm.ExFindHexOffset("04B10100000003E8");
+                var results = Rtm.FindHexOffset("04B10100000003E8");
                 //Reset the progressbar...
                 UpdateProgressbar(0, 100, 0);
 

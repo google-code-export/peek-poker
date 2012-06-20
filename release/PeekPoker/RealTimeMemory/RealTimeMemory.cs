@@ -19,7 +19,6 @@ namespace PeekPoker.RealTimeMemory
         private bool _memexValidConnection;
         private uint _startDumpOffset;
         private uint _startDumpLength;
-        private bool _stopSearch;
         private TcpClient _tcp;
         private RWStream _readWriter;
 
@@ -162,69 +161,8 @@ namespace PeekPoker.RealTimeMemory
                 _memexValidConnection = false;
             }
         }
-
-        /// <summary>Find the address of a pointer from the start dump offset</summary>
-        /// <param name="pointer">The hex string of the pointer Example: 821122114455EEFF000000</param>
-        /// <returns>Returns and array of the address or all address where the pointer was found</returns>
-        public List<string> FindHexOffset(string pointer)
-        {
-            if (!Functions.IsHex(pointer))
-                throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
-            if (!Connect()) return null; //Call function - If not connected return
-            if (!GetMeMex()) return null; //call function - If not connected or if somethign wrong return
-
-            try
-            {
-                    //LENGTH or Szie = Length of the dump
-                    var size = _startDumpLength;
-                    _readWriter = new RWStream();
-                    _readWriter.ReportProgress += ReportProgress;
-                    var data = new byte[1026]; //byte chuncks
-
-                    //Writing each byte chuncks========
-                    //No need to mess with it :D
-                    for (var i = 0; i < size / 1024; i++)
-                    {
-                        _tcp.Client.Receive(data);
-                        _readWriter.WriteBytes(data, 2, 1024);
-                        ReportProgress(0, (int)(size / 1024), (i + 1), "Reading Dump...");
-                    }
-                    //Write whatever is left
-                    var extra = (int)(size % 1024);
-                    if (extra > 0)
-                    {
-                        _tcp.Client.Receive(data);
-                        _readWriter.WriteBytes(data, 2, extra);
-                    }
-                    _readWriter.Flush();
-                    //===================================
-                    //===================================
-                    _readWriter.Position = 0;
-                    var values = _readWriter.SearchHexString(pointer, false);
-                    var addresses = new List<string>(values.Length);
-                    int x = 0;
-                    foreach (var value in values)
-                    {
-                        addresses.Add(Functions.ToHexString(Functions.UInt32ToBytes(_startDumpOffset + (uint)value)));
-                        ReportProgress(0, values.Length, x, "Add Results to list");
-                        x++;
-                    }
-                    _readWriter.Close();
-                    return new List<string>(addresses.ToArray());
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                _tcp.Close(); //close connection
-                _connected = false;
-                _memexValidConnection = false;
-            }
-        }
-        // Experimental
-        public BindingList<Types.SearchResults> ExFindHexOffset(string pointer)
+        
+        public BindingList<Types.SearchResults> FindHexOffset(string pointer)
         {
             if (!Functions.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
@@ -245,7 +183,7 @@ namespace PeekPoker.RealTimeMemory
                 {
                     _tcp.Client.Receive(data);
                     _readWriter.WriteBytes(data, 2, 1024);
-                    ReportProgress(0, (int)(size / 1024), (i + 1), "Reading Dump...");
+                    ReportProgress(0, (int)(size / 1024), (i + 1), "Dumping Memory...");
                 }
                 //Write whatever is left
                 var extra = (int)(size % 1024);
@@ -258,12 +196,7 @@ namespace PeekPoker.RealTimeMemory
                 //===================================
                 //===================================
                 _readWriter.Position = 0;
-
-                //using the Experimental search Function
-                //List<Types.SearchResults> values = readWriter.ExSearchHexString(pointer, _startDumpOffset, false);
-                var values = _readWriter.Ex2SearchHexString(Functions.StringToByteArray(pointer), _startDumpOffset);
-
-                _readWriter.Close();
+                var values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer), _startDumpOffset);
                 return values;
             }
             catch (Exception ex)
@@ -272,6 +205,7 @@ namespace PeekPoker.RealTimeMemory
             }
             finally
             {
+                _readWriter.Close();
                 _tcp.Close(); //close connection
                 _connected = false;
                 _memexValidConnection = false;
@@ -337,8 +271,7 @@ namespace PeekPoker.RealTimeMemory
         {
             get
             {
-                if (!_readWriter.Accessed)
-                    return false;
+                if (!_readWriter.Accessed)return false;
                 return _readWriter.StopSearch;
             }
             set

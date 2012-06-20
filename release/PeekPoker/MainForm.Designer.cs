@@ -123,9 +123,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.stopSearchButton = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
-            this.EXsearchRangeButton = new System.Windows.Forms.Button();
             this.searchRangeButton = new System.Windows.Forms.Button();
+            this.startRangeAddressTextBox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
@@ -827,9 +826,9 @@
             // 
             this.endianTypeGroupBox.Controls.Add(this.littleEndianRadioButton);
             this.endianTypeGroupBox.Controls.Add(this.BigEndianRadioButton);
-            this.endianTypeGroupBox.Location = new System.Drawing.Point(364, 23);
+            this.endianTypeGroupBox.Location = new System.Drawing.Point(349, 14);
             this.endianTypeGroupBox.Name = "endianTypeGroupBox";
-            this.endianTypeGroupBox.Size = new System.Drawing.Size(145, 38);
+            this.endianTypeGroupBox.Size = new System.Drawing.Size(172, 47);
             this.endianTypeGroupBox.TabIndex = 15;
             this.endianTypeGroupBox.TabStop = false;
             this.endianTypeGroupBox.Text = "Endian Type";
@@ -837,9 +836,9 @@
             // littleEndianRadioButton
             // 
             this.littleEndianRadioButton.AutoSize = true;
-            this.littleEndianRadioButton.Location = new System.Drawing.Point(75, 15);
+            this.littleEndianRadioButton.Location = new System.Drawing.Point(85, 21);
             this.littleEndianRadioButton.Name = "littleEndianRadioButton";
-            this.littleEndianRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.littleEndianRadioButton.Size = new System.Drawing.Size(54, 19);
             this.littleEndianRadioButton.TabIndex = 1;
             this.littleEndianRadioButton.Text = "Little";
             this.littleEndianRadioButton.UseVisualStyleBackColor = true;
@@ -848,9 +847,9 @@
             // 
             this.BigEndianRadioButton.AutoSize = true;
             this.BigEndianRadioButton.Checked = true;
-            this.BigEndianRadioButton.Location = new System.Drawing.Point(6, 15);
+            this.BigEndianRadioButton.Location = new System.Drawing.Point(6, 21);
             this.BigEndianRadioButton.Name = "BigEndianRadioButton";
-            this.BigEndianRadioButton.Size = new System.Drawing.Size(40, 17);
+            this.BigEndianRadioButton.Size = new System.Drawing.Size(43, 19);
             this.BigEndianRadioButton.TabIndex = 0;
             this.BigEndianRadioButton.TabStop = true;
             this.BigEndianRadioButton.Text = "Big";
@@ -1037,10 +1036,9 @@
             this.groupBox1.Controls.Add(this.stopSearchButton);
             this.groupBox1.Controls.Add(this.searchRangeEndTypeCB);
             this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.searchRangeButton);
             this.groupBox1.Controls.Add(this.searchRangeBaseValueTypeCB);
             this.groupBox1.Controls.Add(this.startRangeAddressTextBox);
-            this.groupBox1.Controls.Add(this.EXsearchRangeButton);
-            this.groupBox1.Controls.Add(this.searchRangeButton);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
@@ -1056,9 +1054,9 @@
             // stopSearchButton
             // 
             this.stopSearchButton.Enabled = false;
-            this.stopSearchButton.Location = new System.Drawing.Point(310, 76);
+            this.stopSearchButton.Location = new System.Drawing.Point(330, 76);
             this.stopSearchButton.Name = "stopSearchButton";
-            this.stopSearchButton.Size = new System.Drawing.Size(94, 31);
+            this.stopSearchButton.Size = new System.Drawing.Size(126, 31);
             this.stopSearchButton.TabIndex = 18;
             this.stopSearchButton.Text = "Stop Search";
             this.stopSearchButton.UseVisualStyleBackColor = true;
@@ -1073,6 +1071,16 @@
             this.label16.TabIndex = 16;
             this.label16.Text = "Value Base:";
             // 
+            // searchRangeButton
+            // 
+            this.searchRangeButton.Location = new System.Drawing.Point(198, 76);
+            this.searchRangeButton.Name = "searchRangeButton";
+            this.searchRangeButton.Size = new System.Drawing.Size(126, 31);
+            this.searchRangeButton.TabIndex = 9;
+            this.searchRangeButton.Text = "Search Hex Value";
+            this.searchRangeButton.UseVisualStyleBackColor = true;
+            this.searchRangeButton.Click += new System.EventHandler(this.SearchRangeButtonClick);
+            // 
             // startRangeAddressTextBox
             // 
             this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
@@ -1082,26 +1090,6 @@
             this.startRangeAddressTextBox.Size = new System.Drawing.Size(126, 22);
             this.startRangeAddressTextBox.TabIndex = 5;
             this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
-            // 
-            // EXsearchRangeButton
-            // 
-            this.EXsearchRangeButton.Location = new System.Drawing.Point(441, 76);
-            this.EXsearchRangeButton.Name = "EXsearchRangeButton";
-            this.EXsearchRangeButton.Size = new System.Drawing.Size(221, 31);
-            this.EXsearchRangeButton.TabIndex = 9;
-            this.EXsearchRangeButton.Text = "(Experimental) Search Hex Value";
-            this.EXsearchRangeButton.UseVisualStyleBackColor = true;
-            this.EXsearchRangeButton.Click += new System.EventHandler(this.ExSearchRangeButtonClick);
-            // 
-            // searchRangeButton
-            // 
-            this.searchRangeButton.Location = new System.Drawing.Point(87, 76);
-            this.searchRangeButton.Name = "searchRangeButton";
-            this.searchRangeButton.Size = new System.Drawing.Size(183, 31);
-            this.searchRangeButton.TabIndex = 9;
-            this.searchRangeButton.Text = "Search Hex Value";
-            this.searchRangeButton.UseVisualStyleBackColor = true;
-            this.searchRangeButton.Click += new System.EventHandler(this.SearchRangeButtonClick);
             // 
             // label13
             // 
@@ -1622,7 +1610,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox searchRangeBaseValueTypeCB;
         private System.Windows.Forms.TextBox startRangeAddressTextBox;
-        private System.Windows.Forms.Button EXsearchRangeButton;
         private System.Windows.Forms.Button searchRangeButton;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label6;
