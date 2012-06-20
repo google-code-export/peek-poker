@@ -828,8 +828,7 @@ namespace PeekPoker
 
         private void ResonanceOfFateMenuItemClick(object sender, EventArgs e)
         {
-            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
-
+            var menu = (ToolStripMenuItem)sender;
             try
             {
                 var oThread = new Thread(ExROF);
@@ -845,7 +844,7 @@ namespace PeekPoker
         #region Skyrim
         //Skyrim TU#4/5
         // Inf Stamina
-        private void Skyrim_infSprint(object sender, EventArgs e)
+        private void SkyrimInfSprint(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Sprint - Sent");
             try
@@ -858,7 +857,7 @@ namespace PeekPoker
             catch { SetLogText("Error! Could not poke code."); }
         }
         // Inf Mana  
-        private void Skyrim_infMagicka(object sender, EventArgs e)
+        private void SkyrimInfMagicka(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Skyrim - TU#4/5 - Infinite Stamina - Sent");
             try
@@ -869,7 +868,7 @@ namespace PeekPoker
         #region DarkSouls
         //Dark Souls TU#0/1
         // Max Level
-        private void DS0_MaxLevel(object sender, EventArgs e)
+        private void Ds0MaxLevel(object sender, EventArgs e)
         {
             SetLogText("#Trainers# Dark Souls - TU#0/1 - Max Level - Sent");
             try
@@ -984,7 +983,7 @@ namespace PeekPoker
         }
         private void DS0_All(object sender, EventArgs e)
         {
-            DS0_MaxLevel(DS0MaxLevel, System.EventArgs.Empty);
+            Ds0MaxLevel(DS0MaxLevel, System.EventArgs.Empty);
             DS0_MaxSouls(DS0MaxSouls, System.EventArgs.Empty);
             DS0_Vitality(DS0MaxVit, System.EventArgs.Empty);
             DS0_Endurance(DS0MaxEnd, System.EventArgs.Empty);

@@ -1,8 +1,8 @@
-﻿Last Update - 27/05/12 by 8Ball
+﻿Last Update - 20/06/12 by 8Ball
 ==============================================================
 NB: Update source file before you commit.
 ==============================================================
-Revision 6
+Revision 7
 Release date: Unreleased
 
 
@@ -132,7 +132,10 @@ Added:
 Added: 
 -Conversion code
 
+-changes 20/06/12
+Added: 
+-Added Dump Tab with controls
+
 TODO:
 -Add game id recognition to help user name trainer file correctly
--More Testing and UI fixing
--Fix hex to float conversion
+-Code Dump
