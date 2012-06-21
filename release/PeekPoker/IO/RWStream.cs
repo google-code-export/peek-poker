@@ -39,11 +39,31 @@ namespace PeekPoker
                 throw new Exception(e.Message);
             }
         }
+
+        public RWStream(string filename)
+        {
+            try
+            {
+                _fileName = filename;
+                _fStream = new FileStream(_fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                _bReader = new BinaryReader(_fStream);
+                _bWriter = new BinaryWriter(_fStream);
+                _isBigEndian = true;
+                _accessed = true;
+                _stopSearch = false;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         #endregion
 
         #region Methods
+
         /// <summary>Clears buffer by Flushing and Closes theI/O Stream</summary>
-        public void Close()
+        /// <param name="delete">Delete file </param>
+        public void Close(bool delete)
         {
             try
             {
@@ -59,7 +79,7 @@ namespace PeekPoker
                     _accessed = false;
                     if (_fileName != null)
                     {
-                        File.Delete(_fileName);
+                        if(delete)File.Delete(_fileName);
                         _fileName = null;
                     }
                         Dispose();

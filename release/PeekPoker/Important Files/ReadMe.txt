@@ -129,13 +129,20 @@ Added:
 -Improve utility 'idiot proofing' and general features.
 
 -changes 15/06/12
+[PureIso]
 Added: 
 -Conversion code
 
 -changes 20/06/12
+[PurIso]
 Added: 
 -Added Dump Tab with controls
 
+-changes 21/06/12
+[PurIso]
+Finished the dump coding and added some log text
+UI clean up, Games removed(Full trainer left)
+
 TODO:
 -Add game id recognition to help user name trainer file correctly
--Code Dump
+-Add trainer plugin so people can create game trainers

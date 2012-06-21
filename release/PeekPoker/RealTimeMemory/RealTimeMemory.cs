@@ -18,6 +18,7 @@ namespace PeekPoker.RealTimeMemory
         private bool _memexValidConnection;
         private uint _startDumpOffset;
         private uint _startDumpLength;
+        private bool _stopSearch;
         private TcpClient _tcp;
         private RWStream _readWriter;
 
@@ -121,33 +122,28 @@ namespace PeekPoker.RealTimeMemory
             if (!Connect()) return null; //Call function - If not connected return
             if (!GetMeMex(startDumpAddress, dumpLength)) return null; //call function - If not connected or if somethign wrong return
 
+            var readWriter = new RWStream();
             try
             {
-
-                    var readWriter = new RWStream();
-                    var data = new byte[1026]; //byte chuncks
-
-                    //Writing each byte chuncks========
-                    //No need to mess with it :D
-                    for (var i = 0; i < dumpLength / 1024; i++)
-                    {
-                        _tcp.Client.Receive(data);
-                        readWriter.WriteBytes(data, 2, 1024);
-                    }
-                    //Write whatever is left
-                    var extra = (int)(dumpLength % 1024);
-                    if (extra > 0)
-                    {
-                        _tcp.Client.Receive(data);
-                        readWriter.WriteBytes(data, 2, extra);
-                    }
-                    readWriter.Flush();
-                    //===================================
-                    //===================================
-                    readWriter.Position = total;
-                    var value = readWriter.ReadBytes(peekSize);
-                    readWriter.Close();
-                    return Functions.ToHexString(value);
+                var data = new byte[1026]; //byte chuncks
+                
+                //Writing each byte chuncks========
+                for (var i = 0; i < dumpLength / 1024; i++)
+                {
+                    _tcp.Client.Receive(data);
+                    readWriter.WriteBytes(data, 2, 1024);
+                }
+                //Write whatever is left
+                var extra = (int)(dumpLength % 1024);
+                if (extra > 0)
+                {
+                    _tcp.Client.Receive(data);
+                    readWriter.WriteBytes(data, 2, extra);
+                }
+                readWriter.Flush();
+                readWriter.Position = total;
+                var value = readWriter.ReadBytes(peekSize);
+                return Functions.ToHexString(value);
             }
             catch (Exception ex)
             {
@@ -155,6 +151,7 @@ namespace PeekPoker.RealTimeMemory
             }
             finally
             {
+                readWriter.Close(true);
                 _tcp.Close(); //close connection
                 _connected = false;
                 _memexValidConnection = false;
@@ -170,7 +167,7 @@ namespace PeekPoker.RealTimeMemory
 
             try
             {
-                //LENGTH or Szie = Length of the dump
+                //LENGTH or Size = Length of the dump
                 var size = _startDumpLength;
                 _readWriter = new RWStream();
                 _readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
@@ -180,6 +177,7 @@ namespace PeekPoker.RealTimeMemory
                 //No need to mess with it :D
                 for (var i = 0; i < size / 1024; i++)
                 {
+                    if (_stopSearch) return null;
                     _tcp.Client.Receive(data);
                     _readWriter.WriteBytes(data, 2, 1024);
                     ReportProgress(0, (int)(size / 1024), (i + 1), "Dumping Memory...");
@@ -204,11 +202,56 @@ namespace PeekPoker.RealTimeMemory
             }
             finally
             {
-                _readWriter.Close();
+                _readWriter.Close(true);
                 _tcp.Close(); //close connection
                 _connected = false;
                 _memexValidConnection = false;
             }
+        }
+
+        public void Dump(string filename, string startDumpAddress, string dumpLength)
+        {
+            Dump(filename, Functions.Convert(startDumpAddress), Functions.Convert(dumpLength));
+        }
+
+        private void Dump(string filename, uint startDumpAddress, uint dumpLength)
+        {
+            if (!Connect()) return; //Call function - If not connected return
+            if (!GetMeMex(startDumpAddress, dumpLength)) return; //call function - If not connected or if somethign wrong return
+
+            var readWriter = new RWStream(filename);
+            _readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
+            try
+            {
+                var data = new byte[1026]; //byte chuncks
+                //Writing each byte chuncks========
+                for (var i = 0; i < dumpLength / 1024; i++)
+                {
+                    _tcp.Client.Receive(data);
+                    readWriter.WriteBytes(data, 2, 1024);
+                    ReportProgress(0, (int)(dumpLength / 1024), (i + 1), "Dumping Memory...");
+                }
+                //Write whatever is left
+                var extra = (int)(dumpLength % 1024);
+                if (extra > 0)
+                {
+                    _tcp.Client.Receive(data);
+                    readWriter.WriteBytes(data, 2, extra);
+                }
+                readWriter.Flush();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                readWriter.Close(false);
+                _tcp.Close(); //close connection
+                _connected = false;
+                _memexValidConnection = false;
+            }
+
         }
 
         #region Private
@@ -265,6 +308,7 @@ namespace PeekPoker.RealTimeMemory
         public uint DumpLength
         {
             set { _startDumpLength = value; }
+            get { return _startDumpLength; }
         }
         public bool StopSearch
         {
@@ -275,9 +319,9 @@ namespace PeekPoker.RealTimeMemory
             }
             set
             {
-                if (!_readWriter.Accessed)
-                    return;
-                    _readWriter.StopSearch = value;
+                if (!_readWriter.Accessed)return;
+                _readWriter.StopSearch = value;
+                _stopSearch = value;
             }
         }
 
