@@ -75,6 +75,7 @@
             this.weaponDebugSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemSpecialSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemSpecialSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.newcodebutton = new System.Windows.Forms.Button();
@@ -104,7 +105,7 @@
             this.integer8CalculatorTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.searchNdumpTab = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.searchAndDumpControl = new System.Windows.Forms.TabControl();
             this.searchTab = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.resultGrid = new System.Windows.Forms.DataGridView();
@@ -130,7 +131,6 @@
             this.dumpMemoryButton = new System.Windows.Forms.Button();
             this.peekNpokeTab = new System.Windows.Forms.TabPage();
             this.peeknpoke = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.isSigned = new System.Windows.Forms.CheckBox();
             this.LabelInt8 = new System.Windows.Forms.Label();
@@ -161,14 +161,13 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.calculatorTab.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.endianTypeGroupBox.SuspendLayout();
             this.searchNdumpTab.SuspendLayout();
-            this.tabControl2.SuspendLayout();
+            this.searchAndDumpControl.SuspendLayout();
             this.searchTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
@@ -496,7 +495,7 @@
             this.itemSpecialSet1ToolStripMenuItem,
             this.itemSpecialSet2ToolStripMenuItem});
             this.buyMenuToolStripMenuItem.Name = "buyMenuToolStripMenuItem";
-            this.buyMenuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buyMenuToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.buyMenuToolStripMenuItem.Text = "Buy Menu";
             // 
             // buyWhiteHexToolStripMenuItem
@@ -562,6 +561,11 @@
             this.itemSpecialSet2ToolStripMenuItem.Tag = "ItemSpecialSet2";
             this.itemSpecialSet2ToolStripMenuItem.Text = "Item Special Set 2";
             this.itemSpecialSet2ToolStripMenuItem.Click += new System.EventHandler(this.ResonanceOfFateMenuItemClick);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -882,7 +886,7 @@
             // searchNdumpTab
             // 
             this.searchNdumpTab.BackColor = System.Drawing.SystemColors.Control;
-            this.searchNdumpTab.Controls.Add(this.tabControl2);
+            this.searchNdumpTab.Controls.Add(this.searchAndDumpControl);
             this.searchNdumpTab.Location = new System.Drawing.Point(4, 24);
             this.searchNdumpTab.Name = "searchNdumpTab";
             this.searchNdumpTab.Padding = new System.Windows.Forms.Padding(3);
@@ -890,15 +894,16 @@
             this.searchNdumpTab.TabIndex = 2;
             this.searchNdumpTab.Text = "Search / Dump";
             // 
-            // tabControl2
+            // searchAndDumpControl
             // 
-            this.tabControl2.Controls.Add(this.searchTab);
-            this.tabControl2.Controls.Add(this.dumpTab);
-            this.tabControl2.Location = new System.Drawing.Point(0, 4);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(684, 328);
-            this.tabControl2.TabIndex = 0;
+            this.searchAndDumpControl.Controls.Add(this.searchTab);
+            this.searchAndDumpControl.Controls.Add(this.dumpTab);
+            this.searchAndDumpControl.Enabled = false;
+            this.searchAndDumpControl.Location = new System.Drawing.Point(0, 4);
+            this.searchAndDumpControl.Name = "searchAndDumpControl";
+            this.searchAndDumpControl.SelectedIndex = 0;
+            this.searchAndDumpControl.Size = new System.Drawing.Size(684, 328);
+            this.searchAndDumpControl.TabIndex = 0;
             // 
             // searchTab
             // 
@@ -1129,7 +1134,7 @@
             this.dumpLengthTextBox.Name = "dumpLengthTextBox";
             this.dumpLengthTextBox.Size = new System.Drawing.Size(148, 22);
             this.dumpLengthTextBox.TabIndex = 2;
-            this.dumpLengthTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
+            this.dumpLengthTextBox.Leave += new System.EventHandler(this.FixDumpLength);
             // 
             // dumpStartOffsetTextBox
             // 
@@ -1137,7 +1142,7 @@
             this.dumpStartOffsetTextBox.Name = "dumpStartOffsetTextBox";
             this.dumpStartOffsetTextBox.Size = new System.Drawing.Size(148, 22);
             this.dumpStartOffsetTextBox.TabIndex = 1;
-            this.dumpStartOffsetTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
+            this.dumpStartOffsetTextBox.Leave += new System.EventHandler(this.FixDumpAddresses);
             // 
             // dumpMemoryButton
             // 
@@ -1164,7 +1169,6 @@
             // 
             this.peeknpoke.BackColor = System.Drawing.SystemColors.Control;
             this.peeknpoke.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.peeknpoke.Controls.Add(this.label21);
             this.peeknpoke.Controls.Add(this.groupBox3);
             this.peeknpoke.Controls.Add(this.labelSelAddress);
             this.peeknpoke.Controls.Add(this.SelAddress);
@@ -1183,16 +1187,6 @@
             this.peeknpoke.Name = "peeknpoke";
             this.peeknpoke.Size = new System.Drawing.Size(681, 329);
             this.peeknpoke.TabIndex = 12;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(337, 37);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(285, 15);
-            this.label21.TabIndex = 22;
-            this.label21.Text = "NOTE: Max Recormmend length is 0xF0 or 240";
             // 
             // groupBox3
             // 
@@ -1537,11 +1531,6 @@
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1572,7 +1561,7 @@
             this.endianTypeGroupBox.ResumeLayout(false);
             this.endianTypeGroupBox.PerformLayout();
             this.searchNdumpTab.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
+            this.searchAndDumpControl.ResumeLayout(false);
             this.searchTab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -1706,7 +1695,7 @@
         private System.Windows.Forms.GroupBox endianTypeGroupBox;
         private System.Windows.Forms.RadioButton littleEndianRadioButton;
         private System.Windows.Forms.RadioButton BigEndianRadioButton;
-        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabControl searchAndDumpControl;
         private System.Windows.Forms.TabPage searchTab;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView resultGrid;
@@ -1731,7 +1720,6 @@
         private System.Windows.Forms.TextBox dumpLengthTextBox;
         private System.Windows.Forms.TextBox dumpStartOffsetTextBox;
         private System.Windows.Forms.Button dumpMemoryButton;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox peekLengthTextBox;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

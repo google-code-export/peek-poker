@@ -108,6 +108,7 @@ namespace PeekPoker
                     throw new Exception("Connection Failed!");
                 }
                 peeknpoke.Enabled = true;
+                searchAndDumpControl.Enabled = true;
                 statusStripLabel.Text = String.Format("Connected");
                 MessageBox.Show(this, String.Format("Connected"), String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SetLogText("Connected to " + ipAddressTextBox.Text);
@@ -249,14 +250,23 @@ namespace PeekPoker
 
         private void DumpMemoryButtonClick(object sender, EventArgs e)
         {
-            var saveFileDialog = new SaveFileDialog();
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-            _dumpFilePath = saveFileDialog.FileName;
-            File.Create(_dumpFilePath);
-            SetLogText("Dump Memory to: " + _dumpFilePath);
+            try
+            {
+                var saveFileDialog = new SaveFileDialog();
+                if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+                _dumpFilePath = saveFileDialog.FileName;
+                FileStream file = File.Create(_dumpFilePath);
+                file.Close();
+                SetLogText("Dump Memory to: " + _dumpFilePath);
 
-            var oThread = new Thread(Dump);
-            oThread.Start();
+                var oThread = new Thread(Dump);
+                oThread.Start();
+            }
+            catch (Exception ex)
+            {
+                SetLogText("Dump Error: " + ex.Message);
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
 
@@ -544,13 +554,12 @@ namespace PeekPoker
         {
             try
             {
-                CheckForIllegalCrossThreadCalls = false; //line 476 grid cross thread error
                 EnableSearchRangeButton(false);
                 EnableExSearchRangeButton(false);
                 EnableStopSearchButton(true);
                 SetLogText("Search Offset: " + GetStartRangeAddressTextBoxText() + " Search Length: " +
                            _searchRangeDumpLength);
-                _rtm.DumpOffset = GetStartRangeAddressTextBoxText();
+                _rtm.DumpOffset = Functions.Convert(GetStartRangeAddressTextBoxText());
                 _rtm.DumpLength = _searchRangeDumpLength;
 
                 ResultGridClean();//Clean list view
@@ -650,14 +659,14 @@ namespace PeekPoker
                 return dumpLengthTextBox.Text;
             return returnVal;
         }
-        private uint GetStartRangeAddressTextBoxText()
+        private string GetStartRangeAddressTextBoxText()
         {
             //recursion
-            uint returnVal = 0;
+            var returnVal = "";
             if (startRangeAddressTextBox.InvokeRequired) startRangeAddressTextBox.Invoke((MethodInvoker)
                   delegate { returnVal = GetStartRangeAddressTextBoxText(); });
             else
-                return Functions.Convert(startRangeAddressTextBox.Text);
+                return startRangeAddressTextBox.Text;
             return returnVal;
         }
         private void EnableStopSearchButton(bool value)
@@ -792,27 +801,29 @@ namespace PeekPoker
                 if (!startRangeAddressTextBox.Text.Equals(""))
                     startRangeAddressTextBox.Text = (string.Format("0x" + startRangeAddressTextBox.Text));
             }
-            if (!endRangeAddressTextBox.Text.StartsWith("0x"))
-            {//RangeEnd
-                if (!endRangeAddressTextBox.Text.Equals(""))
-                    endRangeAddressTextBox.Text = (string.Format("0x" + endRangeAddressTextBox.Text));
-            }
-            //Dumping
-            if (!dumpStartOffsetTextBox.Text.StartsWith("0x"))
-            {
-                if (!dumpStartOffsetTextBox.Text.Equals(""))
-                    dumpStartOffsetTextBox.Text = (string.Format("0x" + dumpStartOffsetTextBox.Text));
-                if (!System.Text.RegularExpressions.Regex.IsMatch(dumpStartOffsetTextBox.Text.Substring(2), @"\A\b[0-9a-fA-F]+\b\Z"))
-                    dumpStartOffsetTextBox.Clear();
-            }
-            if (!dumpLengthTextBox.Text.StartsWith("0x"))
-            {
-                if (!dumpLengthTextBox.Text.Equals(""))
-                    dumpLengthTextBox.Text = (string.Format("0x" + dumpLengthTextBox.Text));
-                if (!System.Text.RegularExpressions.Regex.IsMatch(dumpLengthTextBox.Text.Substring(2), @"\A\b[0-9a-fA-F]+\b\Z"))
-                    dumpLengthTextBox.Clear();
-            }
+            if (endRangeAddressTextBox.Text.StartsWith("0x")) return; //RangeEnd
+            if (!endRangeAddressTextBox.Text.Equals(""))
+                endRangeAddressTextBox.Text = (string.Format("0x" + endRangeAddressTextBox.Text));
         }
+
+        private void FixDumpAddresses(object sender, EventArgs e)
+        {
+            if (dumpStartOffsetTextBox.Text.StartsWith("0x")) return;
+            if (dumpStartOffsetTextBox.Text.Equals("")) return;
+            dumpStartOffsetTextBox.Text = (string.Format("0x" + dumpStartOffsetTextBox.Text));
+            if (!System.Text.RegularExpressions.Regex.IsMatch(dumpStartOffsetTextBox.Text.Substring(2), @"\A\b[0-9a-fA-F]+\b\Z"))
+                dumpStartOffsetTextBox.Clear();
+        }
+
+        private void FixDumpLength(object sender, EventArgs e)
+        {
+            if (dumpLengthTextBox.Text.StartsWith("0x")) return;
+            if (dumpLengthTextBox.Text.Equals("")) return;
+            dumpLengthTextBox.Text = (string.Format("0x" + dumpLengthTextBox.Text));
+            if (!System.Text.RegularExpressions.Regex.IsMatch(dumpLengthTextBox.Text.Substring(2), @"\A\b[0-9a-fA-F]+\b\Z"))
+                dumpLengthTextBox.Clear();
+        }
+
         #endregion
 
         #region Autocalculation

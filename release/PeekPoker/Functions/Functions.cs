@@ -47,7 +47,7 @@ namespace PeekPoker
         {
             //using Ternary operator
             return value.Contains("0x") ?
-                System.Convert.ToUInt32(value.Substring(2), 16) : System.Convert.ToUInt32(value);
+                System.Convert.ToUInt32(value.Substring(2), 16) : System.Convert.ToUInt32(value,16);
         }
         
         public static string ByteArrayToString(byte[] bytes)

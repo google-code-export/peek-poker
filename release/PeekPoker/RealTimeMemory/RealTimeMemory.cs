@@ -160,6 +160,8 @@ namespace PeekPoker.RealTimeMemory
         
         public BindingList<Types.SearchResults> FindHexOffset(string pointer)
         {
+            if (pointer == null)
+                throw new Exception("Empty Search string!");
             if (!Functions.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
             if (!Connect()) return null; //Call function - If not connected return
@@ -220,7 +222,7 @@ namespace PeekPoker.RealTimeMemory
             if (!GetMeMex(startDumpAddress, dumpLength)) return; //call function - If not connected or if somethign wrong return
 
             var readWriter = new RWStream(filename);
-            _readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
+            //_readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
             try
             {
                 var data = new byte[1026]; //byte chuncks

@@ -45,7 +45,7 @@ namespace PeekPoker
             try
             {
                 _fileName = filename;
-                _fStream = new FileStream(_fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                _fStream = new FileStream(_fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
                 _bReader = new BinaryReader(_fStream);
                 _bWriter = new BinaryWriter(_fStream);
                 _isBigEndian = true;
