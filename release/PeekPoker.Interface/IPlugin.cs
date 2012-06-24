@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Windows;
 
 namespace PeekPoker.Interface
 {
@@ -11,13 +9,21 @@ namespace PeekPoker.Interface
     // =====================================================//
     public interface IPlugin
     {
-        #region plugin description
-        string Name { get; }        // Plugin Name used for the Plugin Browser and Downloader/Updater
-        string Description { get; } // Plugin Description for the About Window
-        string Author { get; }      // Plugin Author(s)
-        Version Version { get; }    // Plugin Version
+        #region App Functions
+        /// <summary>Function to show the application or initialise it.</summary>
+        /// <example>Display:- Form1 form = new Form1 -- form.showDialog();</example>
+        void Display();
         #endregion
 
-
+        #region App Properties
+        /// <summary>Application name</summary>
+        string ApplicationName { get; }
+        /// <summary>Application's Description</summary>
+        string Description { get; }
+        /// <summary>The Author of the application</summary>
+        string Author { get; }
+        /// <summary>The version of the application</summary>
+        string Version { get; }
+        #endregion
     }
 }
