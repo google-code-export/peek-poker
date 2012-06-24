@@ -143,6 +143,12 @@ Added:
 Finished the dump coding and added some log text
 UI clean up, Games removed(Full trainer left)
 
+-changes 24/06/12
+[cornnatron]
+Added: 
+-Added dumpLength to dump tab controls
+-Added freeze/unfreeze buttons to dump tab
+
 TODO:
 -Add game id recognition to help user name trainer file correctly
 -Add trainer plugin so people can create game trainers

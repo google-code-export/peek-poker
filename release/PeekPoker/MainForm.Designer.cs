@@ -124,6 +124,8 @@
             this.dumpTab = new System.Windows.Forms.TabPage();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.unfreezebutton1 = new System.Windows.Forms.Button();
+            this.freezebutton1 = new System.Windows.Forms.Button();
             this.allocatedDataButton = new System.Windows.Forms.Button();
             this.baseFileButton = new System.Windows.Forms.Button();
             this.physicalRamButton = new System.Windows.Forms.Button();
@@ -760,7 +762,7 @@
             this.littleEndianRadioButton.AutoSize = true;
             this.littleEndianRadioButton.Location = new System.Drawing.Point(85, 21);
             this.littleEndianRadioButton.Name = "littleEndianRadioButton";
-            this.littleEndianRadioButton.Size = new System.Drawing.Size(54, 19);
+            this.littleEndianRadioButton.Size = new System.Drawing.Size(47, 17);
             this.littleEndianRadioButton.TabIndex = 1;
             this.littleEndianRadioButton.Text = "Little";
             this.littleEndianRadioButton.UseVisualStyleBackColor = true;
@@ -771,7 +773,7 @@
             this.BigEndianRadioButton.Checked = true;
             this.BigEndianRadioButton.Location = new System.Drawing.Point(6, 21);
             this.BigEndianRadioButton.Name = "BigEndianRadioButton";
-            this.BigEndianRadioButton.Size = new System.Drawing.Size(43, 19);
+            this.BigEndianRadioButton.Size = new System.Drawing.Size(40, 17);
             this.BigEndianRadioButton.TabIndex = 0;
             this.BigEndianRadioButton.TabStop = true;
             this.BigEndianRadioButton.Text = "Big";
@@ -906,10 +908,10 @@
             this.searchAndDumpControl.Controls.Add(this.searchTab);
             this.searchAndDumpControl.Controls.Add(this.dumpTab);
             this.searchAndDumpControl.Enabled = false;
-            this.searchAndDumpControl.Location = new System.Drawing.Point(0, 4);
+            this.searchAndDumpControl.Location = new System.Drawing.Point(0, 0);
             this.searchAndDumpControl.Name = "searchAndDumpControl";
             this.searchAndDumpControl.SelectedIndex = 0;
-            this.searchAndDumpControl.Size = new System.Drawing.Size(684, 328);
+            this.searchAndDumpControl.Size = new System.Drawing.Size(684, 332);
             this.searchAndDumpControl.TabIndex = 0;
             // 
             // searchTab
@@ -920,7 +922,7 @@
             this.searchTab.Location = new System.Drawing.Point(4, 24);
             this.searchTab.Name = "searchTab";
             this.searchTab.Padding = new System.Windows.Forms.Padding(3);
-            this.searchTab.Size = new System.Drawing.Size(676, 300);
+            this.searchTab.Size = new System.Drawing.Size(676, 304);
             this.searchTab.TabIndex = 0;
             this.searchTab.Text = "Search";
             // 
@@ -974,7 +976,7 @@
             this.label14.Size = new System.Drawing.Size(217, 60);
             this.label14.TabIndex = 12;
             this.label14.Text = "NOTE:\r\nThe larger the range the longer \r\nthe search will take.\r\nCannot Stop searc" +
-    "h while dumping.";
+                "h while dumping.";
             // 
             // groupBox1
             // 
@@ -1089,7 +1091,7 @@
             this.dumpTab.Location = new System.Drawing.Point(4, 24);
             this.dumpTab.Name = "dumpTab";
             this.dumpTab.Padding = new System.Windows.Forms.Padding(3);
-            this.dumpTab.Size = new System.Drawing.Size(676, 300);
+            this.dumpTab.Size = new System.Drawing.Size(676, 304);
             this.dumpTab.TabIndex = 1;
             this.dumpTab.Text = "Dump";
             // 
@@ -1105,6 +1107,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.unfreezebutton1);
+            this.groupBox5.Controls.Add(this.freezebutton1);
             this.groupBox5.Controls.Add(this.allocatedDataButton);
             this.groupBox5.Controls.Add(this.baseFileButton);
             this.groupBox5.Controls.Add(this.physicalRamButton);
@@ -1119,6 +1123,27 @@
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Dump";
+            // 
+            // unfreezebutton1
+            // 
+            this.unfreezebutton1.Enabled = false;
+            this.unfreezebutton1.Location = new System.Drawing.Point(109, 99);
+            this.unfreezebutton1.Name = "unfreezebutton1";
+            this.unfreezebutton1.Size = new System.Drawing.Size(75, 23);
+            this.unfreezebutton1.TabIndex = 9;
+            this.unfreezebutton1.Text = "Un-Freeze";
+            this.unfreezebutton1.UseVisualStyleBackColor = true;
+            this.unfreezebutton1.Click += new System.EventHandler(this.unfreezebutton1_Click);
+            // 
+            // freezebutton1
+            // 
+            this.freezebutton1.Location = new System.Drawing.Point(28, 99);
+            this.freezebutton1.Name = "freezebutton1";
+            this.freezebutton1.Size = new System.Drawing.Size(75, 23);
+            this.freezebutton1.TabIndex = 8;
+            this.freezebutton1.Text = "Freeze";
+            this.freezebutton1.UseVisualStyleBackColor = true;
+            this.freezebutton1.Click += new System.EventHandler(this.freezebutton1_Click);
             // 
             // allocatedDataButton
             // 
@@ -1282,7 +1307,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(71, 21);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(109, 19);
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1803,6 +1828,8 @@
         private System.Windows.Forms.GroupBox debugGroupBox;
         private System.Windows.Forms.Button unfreezeButton;
         private System.Windows.Forms.Button freezeButton;
+        private System.Windows.Forms.Button unfreezebutton1;
+        private System.Windows.Forms.Button freezebutton1;
 
     }
 }

@@ -273,11 +273,13 @@ namespace PeekPoker
         private void BaseFileButtonClick(object sender, EventArgs e)
         {
             dumpStartOffsetTextBox.Text = string.Format("0x82000000");
+            dumpLengthTextBox.Text = string.Format("0x5000000");
         }
 
         private void AllocatedDataButtonClick(object sender, EventArgs e)
         {
             dumpStartOffsetTextBox.Text = string.Format("0x40000000");
+            dumpLengthTextBox.Text = string.Format("0x5000000");
         }
 
         private void FreezeButtonClick(object sender, EventArgs e)
@@ -296,9 +298,26 @@ namespace PeekPoker
             freezeButton.Enabled = true;
         }
 
+        private void freezebutton1_Click(object sender, EventArgs e)
+        {
+            SetLogText("Freeze xbox console - command.");
+            _rtm.StopCommand();
+            unfreezeButton.Enabled = true;
+            freezeButton.Enabled = false;
+        }
+
+        private void unfreezebutton1_Click(object sender, EventArgs e)
+        {
+            SetLogText("Un-Freeze xbox console - command.");
+            _rtm.StartCommand();
+            unfreezeButton.Enabled = false;
+            freezeButton.Enabled = true;
+        }
+
         private void PhysicalRamButtonClick(object sender, EventArgs e)
         {
             dumpStartOffsetTextBox.Text = string.Format("0xC0000000");
+            dumpLengthTextBox.Text = string.Format("0x1FFF0FFF");
         }   
         #endregion
 
@@ -1467,5 +1486,8 @@ namespace PeekPoker
         }
         #endregion
         #endregion
+
+
+
     }
 }
