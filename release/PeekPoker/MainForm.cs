@@ -6,7 +6,14 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
-
+using Application = System.Windows.Forms.Application;
+using MessageBox = System.Windows.Forms.MessageBox;
+//=====================================================
+//NB: Update source file before you commit.         //
+//NB: Update source file before you commit.         //
+//NB: Update source file before you commit.         //
+//NB: Update source file before you commit.         //
+//====================================================
 //=====================================================
 // Namespaces        -> PascalCased                  //
 // Class names       -> PascalCased                  //
@@ -42,7 +49,7 @@ namespace PeekPoker
             SetLogText("Welcome to Peek Poker.");
             SetLogText("Please make sure you have the xbdm xbox 360 plugin.");
             SetLogText("All the information provided on this application are for educational purposes only. The application or host is no way responsible for any misuse of the information.");
-            //Set comboboxes correctly - need to be here for some reason... or it won't work...
+            LoadPlugins();
             searchRangeBaseValueTypeCB.SelectedIndex = 0;
             searchRangeEndTypeCB.SelectedIndex = 0;
             resultGrid.DataSource = _searchResult;
@@ -65,7 +72,7 @@ namespace PeekPoker
             //Set correct max. min values for the numeric fields
             ChangeNumericMaxMin();
 
-            if (File.Exists(_trainerdottext)) Injectcodes(); //loads trainers.txt
+            if (File.Exists(_trainerdottext)) AddTrainerFromTextFile(); //loads trainers.txt
         }
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
@@ -75,6 +82,7 @@ namespace PeekPoker
             stringBuilder.AppendLine(string.Format("Cybersam"));
             stringBuilder.AppendLine(string.Format("8Ball"));
             stringBuilder.AppendLine(string.Format("PureIso"));
+            stringBuilder.AppendLine(string.Format("Cornnatron"));
             stringBuilder.AppendLine(string.Format("Special Thanks"));
             stringBuilder.AppendLine(string.Format("optantic"));
             stringBuilder.AppendLine(string.Format("Mojobojo"));
@@ -298,22 +306,6 @@ namespace PeekPoker
             freezeButton.Enabled = true;
         }
 
-        private void freezebutton1_Click(object sender, EventArgs e)
-        {
-            SetLogText("Freeze xbox console - command.");
-            _rtm.StopCommand();
-            unfreezeButton.Enabled = true;
-            freezeButton.Enabled = false;
-        }
-
-        private void unfreezebutton1_Click(object sender, EventArgs e)
-        {
-            SetLogText("Un-Freeze xbox console - command.");
-            _rtm.StartCommand();
-            unfreezeButton.Enabled = false;
-            freezeButton.Enabled = true;
-        }
-
         private void PhysicalRamButtonClick(object sender, EventArgs e)
         {
             dumpStartOffsetTextBox.Text = string.Format("0xC0000000");
@@ -365,7 +357,7 @@ namespace PeekPoker
         }
         #endregion
 
-        #region functions
+        #region Functions
         private void NewPeek()
         {
             //Clean up
@@ -384,6 +376,43 @@ namespace PeekPoker
                 //if the text in peek or poke text box is not in autocomplete data - Add it
                 if (!ReferenceEquals(value, peekPokeAddressTextBox.Text))
                     _data.Add(peekPokeAddressTextBox.Text);
+            }
+        }
+        private void LoadPlugins()
+        {
+            try
+            {
+                var pathToPlugins = AppDomain.CurrentDomain.BaseDirectory + "Plugins";
+                if (!(Directory.Exists(pathToPlugins))) Directory.CreateDirectory(pathToPlugins);
+                Plugin.Plugin.Init(pathToPlugins);
+                pluginListView.Items.Clear();
+
+                foreach (var plugin in Plugin.Plugin.PluginService.PluginList)
+                {
+                    //
+                    var item = new ToolStripMenuItem
+                    {
+                        Name = plugin.Instance.ApplicationName,
+                        Tag = plugin.Instance.ApplicationName,
+                        Text = plugin.Instance.ApplicationName,
+                        Size = new System.Drawing.Size(170, 22)
+                    };
+
+                    item.Click += PluginClickEventHandler; //Event handler if you click on the cheat code
+                    pluginsToolStripMenuItem.DropDownItems.Add(item);
+                    //Plugin Details
+                    var listviewItem = new ListViewItem(plugin.Name);
+                    listviewItem.SubItems.Add(plugin.Description);
+                    listviewItem.SubItems.Add(plugin.Author);
+                    listviewItem.SubItems.Add(plugin.Version);
+                    pluginListView.Items.Add(listviewItem);
+                    SetLogText("Plugin Added:" + plugin.Name + "Version: "+plugin.Version);
+                }
+            }
+            catch (Exception e)
+            {
+                SetLogText("Plugin Error: " + e.Message);
+                SetLogText("Please Check your plugin (*.dll)");
             }
         }
 
@@ -473,73 +502,62 @@ namespace PeekPoker
                 NumericInt32.Minimum = UInt32.MinValue;
             }
         }
-
-        private void Injectcodes()
+        //Load Trainers from file
+        private void AddTrainerFromTextFile()
         {
             if (!File.Exists(_trainerdottext)) return;
             try
             {
-                //trainersToolStripMenuItem.DropDownItems.Add(k);
-
-                string trainerinjectorcode = File.ReadAllText(_trainerdottext);
-                var trainereader = new StringReader(trainerinjectorcode);
-
-                //Read Game Name
-                string name = trainereader.ReadLine();
-                do
+                //read the trainer file line by line
+                var trainereader = new StringReader(File.ReadAllText(_trainerdottext));
+                var name = trainereader.ReadLine();
+                 //while not end of trainer file (signalled by #)
+                while (name != null && name.Substring(0, 1) == "#")
                 {
-                    if (name == "#")
-                        break;
+                    if (name == "#")break;//end file
+                    var gameToolstripMenuItem = new ToolStripMenuItem {Text = name.Substring(1, (name.Length - 1))};
+                    //set the name of the new menu item to the name of the game
+                    var id = trainereader.ReadLine();//read nextline for id
+                    gameToolstripMenuItem.Text += string.Format("(" + id + ")");
+                    var titleUpdate = trainereader.ReadLine();//read nextline for title update
+                    gameToolstripMenuItem.Text += string.Format("(" + titleUpdate + ")");
+                    SetLogText("Trainer Codes Added For:" + (name.Replace("#"," ")));
 
-                    var k = new ToolStripMenuItem();
-                    if (name != null) k.Text = name.Substring(1, (name.Length - 1));
-
-                    string id = trainereader.ReadLine();
-                    string titleUpdate = trainereader.ReadLine();
-
-                    string code = trainereader.ReadLine();
-                    do
+                    //Start reading the game codes
+                    var code = trainereader.ReadLine();
+                    //while we have a cheat code
+                    while (code != null && code.Substring(0, 1) == "$")
                     {
-                        if (code != null && code.Substring(0, 1) == "#")
-                            break;
-                        if (name == "#")
-                            break;
-
-                        var j = new ToolStripMenuItem();
-                        var codes = new List<Types.CodeList>();
-                        var cLine = trainereader.ReadLine();
-                        do
+                        if (code.Substring(0, 1) == "#")break;//if game name or trainer file end is signalled
+                        var codeToolStripMenuItem = new ToolStripMenuItem();
+                        var fullCodeList = new List<Types.CodeList>();
+                        
+                        var codeLine = trainereader.ReadLine(); //read a line of memory editing code
+                        while (codeLine != null && codeLine.Substring(0, 1) != "$")
                         {
-                            if (cLine != null && cLine.Substring(0, 1) == "#")
-                                break;
-                            if (name == "#")
-                                break;
-
-                            Types.CodeList NCode = new Types.CodeList();
-                            NCode.Name = code.Substring(1, (code.Length - 1));
-                            NCode.Type = Convert.ToInt32(cLine.Substring(0, 1));
-                            NCode.Adress = Functions.BytesToUInt32(Functions.StringToByteArray(cLine.Substring(2, 8)));
-                            NCode.Code = Functions.BytesToUInt32(Functions.StringToByteArray(cLine.Substring(11, 8)));
-                            codes.Add(NCode);
-
-                            cLine = trainereader.ReadLine();
-                        } while (cLine.Substring(0, 1) != "$");
-
-                        j.Text = code.Substring(1, (code.Length - 1));
-                        j.Tag = codes;
-                        j.Click += Codesmith; //Event adder
-                        k.DropDownItems.Add(j);
-                        code = cLine;
-
-                    } while (code.Substring(0, 1) == "$");
-
-                    trainersToolStripMenuItem.DropDownItems.Add(k);
+                            if (codeLine.Substring(0, 1) == "#") break;//if game name or trainer file end is signalled
+                            var singleCode = new Types.CodeList
+                            {
+                                Name = code.Substring(1, (code.Length - 1)),
+                                Type = Convert.ToInt32(codeLine.Substring(0, 1)),
+                                Adress = Functions.BytesToUInt32(Functions.StringToByteArray(codeLine.Substring(2, 8))),
+                                Code = Functions.BytesToUInt32(Functions.StringToByteArray(codeLine.Substring(11, 8)))
+                            };
+                            //set the name of the code/cheat
+                            fullCodeList.Add(singleCode);
+                            codeLine = trainereader.ReadLine();
+                        }
+                        //Add Next cheat code
+                        codeToolStripMenuItem.Text = code.Substring(1, (code.Length - 1));
+                        codeToolStripMenuItem.Tag = fullCodeList;
+                        codeToolStripMenuItem.Click += CodeClickEventHandler; //Event handler if you click on the cheat code
+                        gameToolstripMenuItem.DropDownItems.Add(codeToolStripMenuItem); // add cheat code to the game
+                        code = codeLine;
+                    } 
+                    trainersToolStripMenuItem.DropDownItems.Add(gameToolstripMenuItem);
                     name = code;
-
-                    if (name == "#")
-                        break;
-
-                } while (name.Substring(0, 1) == "#");
+                    if (name == "#")break;
+                } 
             }
             catch (Exception ex)
             {
@@ -547,18 +565,27 @@ namespace PeekPoker
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void Codesmith(object sender, EventArgs e)
+        //The cick hander for the file trainers
+        private void CodeClickEventHandler(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem)sender;             // get the menu item
-            List<Types.CodeList> Codes = (List<Types.CodeList>)item.Tag;    // get the code list
+            var item = (ToolStripMenuItem)sender;       // get the menu item
+            var codes = (List<Types.CodeList>)item.Tag; // get the code list
 
             // read each entry and write the code to memory
-            foreach (Types.CodeList code in Codes)
+            foreach (Types.CodeList code in codes)
             {
-                uint currentaddress = code.Adress;
-                string currentvalue = Functions.ToHexString(Functions.UInt32ToBytes(code.Code));
+                var currentaddress = code.Adress;
+                var currentvalue = Functions.ToHexString(Functions.UInt32ToBytes(code.Code));
                 _rtm.WriteMemory(currentaddress, currentvalue);
+            }
+        }
+        //The cxlick handler for the plugins
+        private void PluginClickEventHandler(object sender, EventArgs e)
+        {
+            var item = (ToolStripMenuItem)sender;       // get the menu item
+            foreach (var plugin in Plugin.Plugin.PluginService.PluginList)
+            {
+                if (plugin.Name == item.Name) plugin.Instance.Display();
             }
         }
         #endregion
@@ -1173,7 +1200,7 @@ namespace PeekPoker
             var menu = (ToolStripMenuItem)sender;
             try
             {
-                var oThread = new Thread(ExROF);
+                var oThread = new Thread(ExRof);
                 oThread.Start(menu.Tag);
             }
             catch (Exception ex)
@@ -1181,9 +1208,9 @@ namespace PeekPoker
                 ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void ExROF(object sets)
+        private void ExRof(object sets)
         {
-            List<string> _poke;
+            List<string> poke;
             #region List Values
             List<string> WhiteHex = new List<string>();
             List<string> ColorHex = new List<string>();
@@ -1291,32 +1318,32 @@ namespace PeekPoker
             switch ((string)sets)
             {
                 case "WhiteHex":
-                    _poke = WhiteHex;
+                    poke = WhiteHex;
                     break;
                 case "ColorHex":
-                    _poke = ColorHex;
+                    poke = ColorHex;
                     break;
                 case "HexStations":
-                    _poke = HexStations;
+                    poke = HexStations;
                     break;
                 case "WeaponSet1":
-                    _poke = WeaponSet1;
+                    poke = WeaponSet1;
                     break;
                 case "WeaponSet2":
-                    _poke = WeaponSet2;
+                    poke = WeaponSet2;
                     break;
                 case "WeaponDebugSet":
-                    _poke = WeaponDebugSet;
+                    poke = WeaponDebugSet;
                     break;
                 case "ItemSpecialSet1":
-                    _poke = ItemSpecialSet1;
+                    poke = ItemSpecialSet1;
                     break;
                 case "ItemSpecialSet2":
-                    _poke = ItemSpecialSet2;
+                    poke = ItemSpecialSet2;
                     break;
 
                 default:
-                    _poke = WhiteHex;
+                    poke = WhiteHex;
                     break;
             }
             #endregion
@@ -1343,12 +1370,12 @@ namespace PeekPoker
                 UpdateProgressbar(0, 100, 0, "Poking");
                 SetLogText("#Trainers# Resonance Of Fate Poking ...");
 
-                for (int i = 0; i < _poke.Count; i++)
+                for (int i = 0; i < poke.Count; i++)
                 {
                     uint offsets = Functions.BytesToUInt32(Functions.HexToBytes(results[0].Offset)) + (uint)(i * 0x14);
 
-                    SetLogText(_poke[i]);
-                    _rtm.Poke(offsets, _poke[i]);
+                    SetLogText(poke[i]);
+                    _rtm.Poke(offsets, poke[i]);
                 }
                 SetLogText("#Trainers# Resonance Of Fate Done... Buy the items");
 
@@ -1367,7 +1394,7 @@ namespace PeekPoker
         #endregion
 
         #region Trainer-Utility
-        private void scanTrainerCodes(object sender, EventArgs e) //Opens a trainers txt file to read its codes
+        private void ScanTrainerCodes(object sender, EventArgs e) //Opens a trainers txt file to read its codes
         {
             string _filepath2;
             SetLogText("#Trainers# Activating Trainer Scanner");

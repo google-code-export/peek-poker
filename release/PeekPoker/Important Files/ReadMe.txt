@@ -1,5 +1,8 @@
-﻿Last Update - 20/06/12 by 8Ball
+﻿Last Update - 20/06/12 by PureIso
 ==============================================================
+NB: Update source file before you commit.
+NB: Update source file before you commit.
+NB: Update source file before you commit.
 NB: Update source file before you commit.
 ==============================================================
 Revision 7
@@ -148,6 +151,8 @@ UI clean up, Games removed(Full trainer left)
 Added: 
 -Added dumpLength to dump tab controls
 -Added freeze/unfreeze buttons to dump tab
+[PureIso]
+Added & Finished Plugin,Code clean up
 
 TODO:
 -Add game id recognition to help user name trainer file correctly

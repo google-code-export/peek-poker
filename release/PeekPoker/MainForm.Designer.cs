@@ -169,6 +169,13 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.pluginInfoTab = new System.Windows.Forms.TabPage();
+            this.pluginListView = new System.Windows.Forms.ListView();
+            this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.versionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.authorColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.descriptionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.calculatorTab.SuspendLayout();
@@ -192,6 +199,7 @@
             this.tabControl1.SuspendLayout();
             this.logTab.SuspendLayout();
             this.trainerUtilityTab.SuspendLayout();
+            this.pluginInfoTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -269,6 +277,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.trainersToolStripMenuItem,
+            this.pluginsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -614,7 +623,7 @@
             this.opentrainerbutton.Text = "Open Trainer";
             this.toolTips.SetToolTip(this.opentrainerbutton, "Open a trainer\'s codelist.");
             this.opentrainerbutton.UseVisualStyleBackColor = true;
-            this.opentrainerbutton.Click += new System.EventHandler(this.scanTrainerCodes);
+            this.opentrainerbutton.Click += new System.EventHandler(this.ScanTrainerCodes);
             // 
             // combocodetype
             // 
@@ -762,7 +771,7 @@
             this.littleEndianRadioButton.AutoSize = true;
             this.littleEndianRadioButton.Location = new System.Drawing.Point(85, 21);
             this.littleEndianRadioButton.Name = "littleEndianRadioButton";
-            this.littleEndianRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.littleEndianRadioButton.Size = new System.Drawing.Size(54, 19);
             this.littleEndianRadioButton.TabIndex = 1;
             this.littleEndianRadioButton.Text = "Little";
             this.littleEndianRadioButton.UseVisualStyleBackColor = true;
@@ -773,7 +782,7 @@
             this.BigEndianRadioButton.Checked = true;
             this.BigEndianRadioButton.Location = new System.Drawing.Point(6, 21);
             this.BigEndianRadioButton.Name = "BigEndianRadioButton";
-            this.BigEndianRadioButton.Size = new System.Drawing.Size(40, 17);
+            this.BigEndianRadioButton.Size = new System.Drawing.Size(43, 19);
             this.BigEndianRadioButton.TabIndex = 0;
             this.BigEndianRadioButton.TabStop = true;
             this.BigEndianRadioButton.Text = "Big";
@@ -976,7 +985,7 @@
             this.label14.Size = new System.Drawing.Size(217, 60);
             this.label14.TabIndex = 12;
             this.label14.Text = "NOTE:\r\nThe larger the range the longer \r\nthe search will take.\r\nCannot Stop searc" +
-                "h while dumping.";
+    "h while dumping.";
             // 
             // groupBox1
             // 
@@ -1123,27 +1132,6 @@
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Dump";
-            // 
-            // unfreezebutton1
-            // 
-            this.unfreezebutton1.Enabled = false;
-            this.unfreezebutton1.Location = new System.Drawing.Point(109, 99);
-            this.unfreezebutton1.Name = "unfreezebutton1";
-            this.unfreezebutton1.Size = new System.Drawing.Size(75, 23);
-            this.unfreezebutton1.TabIndex = 9;
-            this.unfreezebutton1.Text = "Un-Freeze";
-            this.unfreezebutton1.UseVisualStyleBackColor = true;
-            this.unfreezebutton1.Click += new System.EventHandler(this.unfreezebutton1_Click);
-            // 
-            // freezebutton1
-            // 
-            this.freezebutton1.Location = new System.Drawing.Point(28, 99);
-            this.freezebutton1.Name = "freezebutton1";
-            this.freezebutton1.Size = new System.Drawing.Size(75, 23);
-            this.freezebutton1.TabIndex = 8;
-            this.freezebutton1.Text = "Freeze";
-            this.freezebutton1.UseVisualStyleBackColor = true;
-            this.freezebutton1.Click += new System.EventHandler(this.freezebutton1_Click);
             // 
             // allocatedDataButton
             // 
@@ -1307,7 +1295,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(71, 21);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(94, 17);
+            this.isSigned.Size = new System.Drawing.Size(109, 19);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1515,6 +1503,7 @@
             this.tabControl1.Controls.Add(this.searchNdumpTab);
             this.tabControl1.Controls.Add(this.calculatorTab);
             this.tabControl1.Controls.Add(this.trainerUtilityTab);
+            this.tabControl1.Controls.Add(this.pluginInfoTab);
             this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(3, 58);
             this.tabControl1.Name = "tabControl1";
@@ -1629,6 +1618,59 @@
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
+            // pluginInfoTab
+            // 
+            this.pluginInfoTab.BackColor = System.Drawing.SystemColors.Control;
+            this.pluginInfoTab.Controls.Add(this.pluginListView);
+            this.pluginInfoTab.Location = new System.Drawing.Point(4, 24);
+            this.pluginInfoTab.Name = "pluginInfoTab";
+            this.pluginInfoTab.Padding = new System.Windows.Forms.Padding(3);
+            this.pluginInfoTab.Size = new System.Drawing.Size(687, 335);
+            this.pluginInfoTab.TabIndex = 5;
+            this.pluginInfoTab.Text = "plugin Info";
+            // 
+            // pluginListView
+            // 
+            this.pluginListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameColumn,
+            this.descriptionColumn,
+            this.authorColumn,
+            this.versionColumn});
+            this.pluginListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pluginListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pluginListView.Location = new System.Drawing.Point(3, 3);
+            this.pluginListView.Name = "pluginListView";
+            this.pluginListView.Size = new System.Drawing.Size(681, 329);
+            this.pluginListView.TabIndex = 2;
+            this.pluginListView.UseCompatibleStateImageBehavior = false;
+            this.pluginListView.View = System.Windows.Forms.View.Details;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.Text = "Name";
+            this.nameColumn.Width = 177;
+            // 
+            // versionColumn
+            // 
+            this.versionColumn.Text = "Version";
+            this.versionColumn.Width = 100;
+            // 
+            // authorColumn
+            // 
+            this.authorColumn.Text = "Author";
+            this.authorColumn.Width = 100;
+            // 
+            // descriptionColumn
+            // 
+            this.descriptionColumn.Text = "Description";
+            this.descriptionColumn.Width = 289;
+            // 
+            // pluginsToolStripMenuItem
+            // 
+            this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
+            this.pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.pluginsToolStripMenuItem.Text = "Plugins";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1684,6 +1726,7 @@
             this.logTab.PerformLayout();
             this.trainerUtilityTab.ResumeLayout(false);
             this.trainerUtilityTab.PerformLayout();
+            this.pluginInfoTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1830,6 +1873,13 @@
         private System.Windows.Forms.Button freezeButton;
         private System.Windows.Forms.Button unfreezebutton1;
         private System.Windows.Forms.Button freezebutton1;
+        private System.Windows.Forms.TabPage pluginInfoTab;
+        internal System.Windows.Forms.ListView pluginListView;
+        internal System.Windows.Forms.ColumnHeader nameColumn;
+        private System.Windows.Forms.ColumnHeader descriptionColumn;
+        internal System.Windows.Forms.ColumnHeader authorColumn;
+        internal System.Windows.Forms.ColumnHeader versionColumn;
+        private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
 
     }
 }
