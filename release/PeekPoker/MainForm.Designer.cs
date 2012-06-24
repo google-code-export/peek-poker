@@ -124,6 +124,9 @@
             this.dumpTab = new System.Windows.Forms.TabPage();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.allocatedDataButton = new System.Windows.Forms.Button();
+            this.baseFileButton = new System.Windows.Forms.Button();
+            this.physicalRamButton = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dumpLengthTextBox = new System.Windows.Forms.TextBox();
@@ -131,6 +134,9 @@
             this.dumpMemoryButton = new System.Windows.Forms.Button();
             this.peekNpokeTab = new System.Windows.Forms.TabPage();
             this.peeknpoke = new System.Windows.Forms.Panel();
+            this.debugGroupBox = new System.Windows.Forms.GroupBox();
+            this.unfreezeButton = new System.Windows.Forms.Button();
+            this.freezeButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.isSigned = new System.Windows.Forms.CheckBox();
             this.LabelInt8 = new System.Windows.Forms.Label();
@@ -176,6 +182,7 @@
             this.groupBox5.SuspendLayout();
             this.peekNpokeTab.SuspendLayout();
             this.peeknpoke.SuspendLayout();
+            this.debugGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt8)).BeginInit();
@@ -1090,7 +1097,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.ForeColor = System.Drawing.Color.Red;
-            this.label23.Location = new System.Drawing.Point(279, 208);
+            this.label23.Location = new System.Drawing.Point(289, 181);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(142, 15);
             this.label23.TabIndex = 13;
@@ -1098,22 +1105,55 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.allocatedDataButton);
+            this.groupBox5.Controls.Add(this.baseFileButton);
+            this.groupBox5.Controls.Add(this.physicalRamButton);
             this.groupBox5.Controls.Add(this.label17);
             this.groupBox5.Controls.Add(this.label11);
             this.groupBox5.Controls.Add(this.dumpLengthTextBox);
             this.groupBox5.Controls.Add(this.dumpStartOffsetTextBox);
             this.groupBox5.Controls.Add(this.dumpMemoryButton);
-            this.groupBox5.Location = new System.Drawing.Point(202, 90);
+            this.groupBox5.Location = new System.Drawing.Point(133, 38);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(273, 115);
+            this.groupBox5.Size = new System.Drawing.Size(447, 140);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Dump";
             // 
+            // allocatedDataButton
+            // 
+            this.allocatedDataButton.Location = new System.Drawing.Point(284, 101);
+            this.allocatedDataButton.Name = "allocatedDataButton";
+            this.allocatedDataButton.Size = new System.Drawing.Size(157, 23);
+            this.allocatedDataButton.TabIndex = 7;
+            this.allocatedDataButton.Text = "Allocated Data / Virtual";
+            this.allocatedDataButton.UseVisualStyleBackColor = true;
+            this.allocatedDataButton.Click += new System.EventHandler(this.AllocatedDataButtonClick);
+            // 
+            // baseFileButton
+            // 
+            this.baseFileButton.Location = new System.Drawing.Point(284, 71);
+            this.baseFileButton.Name = "baseFileButton";
+            this.baseFileButton.Size = new System.Drawing.Size(157, 23);
+            this.baseFileButton.TabIndex = 6;
+            this.baseFileButton.Text = "Base File / Image";
+            this.baseFileButton.UseVisualStyleBackColor = true;
+            this.baseFileButton.Click += new System.EventHandler(this.BaseFileButtonClick);
+            // 
+            // physicalRamButton
+            // 
+            this.physicalRamButton.Location = new System.Drawing.Point(284, 42);
+            this.physicalRamButton.Name = "physicalRamButton";
+            this.physicalRamButton.Size = new System.Drawing.Size(157, 23);
+            this.physicalRamButton.TabIndex = 5;
+            this.physicalRamButton.Text = "Physical RAM";
+            this.physicalRamButton.UseVisualStyleBackColor = true;
+            this.physicalRamButton.Click += new System.EventHandler(this.PhysicalRamButtonClick);
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(13, 58);
+            this.label17.Location = new System.Drawing.Point(21, 78);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(90, 15);
             this.label17.TabIndex = 4;
@@ -1122,7 +1162,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(7, 30);
+            this.label11.Location = new System.Drawing.Point(15, 50);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(96, 15);
             this.label11.TabIndex = 3;
@@ -1130,7 +1170,7 @@
             // 
             // dumpLengthTextBox
             // 
-            this.dumpLengthTextBox.Location = new System.Drawing.Point(109, 51);
+            this.dumpLengthTextBox.Location = new System.Drawing.Point(117, 71);
             this.dumpLengthTextBox.Name = "dumpLengthTextBox";
             this.dumpLengthTextBox.Size = new System.Drawing.Size(148, 22);
             this.dumpLengthTextBox.TabIndex = 2;
@@ -1138,7 +1178,7 @@
             // 
             // dumpStartOffsetTextBox
             // 
-            this.dumpStartOffsetTextBox.Location = new System.Drawing.Point(109, 23);
+            this.dumpStartOffsetTextBox.Location = new System.Drawing.Point(117, 43);
             this.dumpStartOffsetTextBox.Name = "dumpStartOffsetTextBox";
             this.dumpStartOffsetTextBox.Size = new System.Drawing.Size(148, 22);
             this.dumpStartOffsetTextBox.TabIndex = 1;
@@ -1146,7 +1186,7 @@
             // 
             // dumpMemoryButton
             // 
-            this.dumpMemoryButton.Location = new System.Drawing.Point(182, 79);
+            this.dumpMemoryButton.Location = new System.Drawing.Point(190, 99);
             this.dumpMemoryButton.Name = "dumpMemoryButton";
             this.dumpMemoryButton.Size = new System.Drawing.Size(75, 23);
             this.dumpMemoryButton.TabIndex = 0;
@@ -1169,6 +1209,7 @@
             // 
             this.peeknpoke.BackColor = System.Drawing.SystemColors.Control;
             this.peeknpoke.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.peeknpoke.Controls.Add(this.debugGroupBox);
             this.peeknpoke.Controls.Add(this.groupBox3);
             this.peeknpoke.Controls.Add(this.labelSelAddress);
             this.peeknpoke.Controls.Add(this.SelAddress);
@@ -1188,6 +1229,38 @@
             this.peeknpoke.Size = new System.Drawing.Size(681, 329);
             this.peeknpoke.TabIndex = 12;
             // 
+            // debugGroupBox
+            // 
+            this.debugGroupBox.Controls.Add(this.unfreezeButton);
+            this.debugGroupBox.Controls.Add(this.freezeButton);
+            this.debugGroupBox.Location = new System.Drawing.Point(504, 77);
+            this.debugGroupBox.Name = "debugGroupBox";
+            this.debugGroupBox.Size = new System.Drawing.Size(164, 85);
+            this.debugGroupBox.TabIndex = 22;
+            this.debugGroupBox.TabStop = false;
+            this.debugGroupBox.Text = "Debug Commands";
+            // 
+            // unfreezeButton
+            // 
+            this.unfreezeButton.Enabled = false;
+            this.unfreezeButton.Location = new System.Drawing.Point(38, 50);
+            this.unfreezeButton.Name = "unfreezeButton";
+            this.unfreezeButton.Size = new System.Drawing.Size(75, 23);
+            this.unfreezeButton.TabIndex = 1;
+            this.unfreezeButton.Text = "Un-Freeze";
+            this.unfreezeButton.UseVisualStyleBackColor = true;
+            this.unfreezeButton.Click += new System.EventHandler(this.UnfreezeButtonClick);
+            // 
+            // freezeButton
+            // 
+            this.freezeButton.Location = new System.Drawing.Point(38, 21);
+            this.freezeButton.Name = "freezeButton";
+            this.freezeButton.Size = new System.Drawing.Size(75, 23);
+            this.freezeButton.TabIndex = 0;
+            this.freezeButton.Text = "Freeze";
+            this.freezeButton.UseVisualStyleBackColor = true;
+            this.freezeButton.Click += new System.EventHandler(this.FreezeButtonClick);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.isSigned);
@@ -1197,7 +1270,7 @@
             this.groupBox3.Controls.Add(this.NumericInt8);
             this.groupBox3.Controls.Add(this.NumericInt16);
             this.groupBox3.Controls.Add(this.LabelInt32);
-            this.groupBox3.Location = new System.Drawing.Point(493, 106);
+            this.groupBox3.Location = new System.Drawing.Point(488, 180);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(189, 143);
             this.groupBox3.TabIndex = 21;
@@ -1575,6 +1648,7 @@
             this.peekNpokeTab.ResumeLayout(false);
             this.peeknpoke.ResumeLayout(false);
             this.peeknpoke.PerformLayout();
+            this.debugGroupBox.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).EndInit();
@@ -1723,6 +1797,12 @@
         private System.Windows.Forms.TextBox peekLengthTextBox;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button allocatedDataButton;
+        private System.Windows.Forms.Button baseFileButton;
+        private System.Windows.Forms.Button physicalRamButton;
+        private System.Windows.Forms.GroupBox debugGroupBox;
+        private System.Windows.Forms.Button unfreezeButton;
+        private System.Windows.Forms.Button freezeButton;
 
     }
 }

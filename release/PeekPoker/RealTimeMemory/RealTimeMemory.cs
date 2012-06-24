@@ -253,7 +253,26 @@ namespace PeekPoker.RealTimeMemory
                 _connected = false;
                 _memexValidConnection = false;
             }
+        }
 
+        /// <summary>Send a freeze command to the xbox</summary>
+        public void StopCommand()
+        {
+            if (_memexValidConnection) return;
+            var response = new byte[1024];
+            //Send a stop command to the xbox - freeze
+            _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("STOP\r\n")));
+            _tcp.Client.Receive(response);
+        }
+
+        /// <summary>Send a start command to the xbox</summary>
+        public void StartCommand()
+        {
+            if (_memexValidConnection) return;
+            var response = new byte[1024];
+            //Send a start command to the xbox - resume
+            _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("GO\r\n")));
+            _tcp.Client.Receive(response);
         }
 
         #region Private
@@ -283,14 +302,13 @@ namespace PeekPoker.RealTimeMemory
             _memexValidConnection = reponseString.Substring(0, 3) == "203";
             return _memexValidConnection;
         }
-        private uint Convert(string value)
+        private static uint Convert(string value)
         {
             if (value.Contains("0x"))
                 return System.Convert.ToUInt32(value.Substring(2), 16);
             return System.Convert.ToUInt32(value);
         }
-
-        private int ConvertSigned(string value)
+        private static int ConvertSigned(string value)
         {
             if (value.Contains("0x"))
                 return System.Convert.ToInt32(value.Substring(2), 16);

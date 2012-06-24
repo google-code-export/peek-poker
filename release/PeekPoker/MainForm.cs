@@ -75,9 +75,10 @@ namespace PeekPoker
             stringBuilder.AppendLine(string.Format("Cybersam"));
             stringBuilder.AppendLine(string.Format("8Ball"));
             stringBuilder.AppendLine(string.Format("PureIso"));
-            stringBuilder.AppendLine(string.Format("cornnatron"));
             stringBuilder.AppendLine(string.Format("Special Thanks"));
+            stringBuilder.AppendLine(string.Format("optantic"));
             stringBuilder.AppendLine(string.Format("Mojobojo"));
+            stringBuilder.AppendLine(string.Format("Natelx"));
             stringBuilder.AppendLine(string.Format("fairchild"));
             stringBuilder.AppendLine(string.Format("360Haven"));
             ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -268,6 +269,37 @@ namespace PeekPoker
                 ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void BaseFileButtonClick(object sender, EventArgs e)
+        {
+            dumpStartOffsetTextBox.Text = string.Format("0x82000000");
+        }
+
+        private void AllocatedDataButtonClick(object sender, EventArgs e)
+        {
+            dumpStartOffsetTextBox.Text = string.Format("0x40000000");
+        }
+
+        private void FreezeButtonClick(object sender, EventArgs e)
+        {
+            SetLogText("Freeze xbox console - command.");
+            _rtm.StopCommand();
+            unfreezeButton.Enabled = true;
+            freezeButton.Enabled = false;
+        }
+
+        private void UnfreezeButtonClick(object sender, EventArgs e)
+        {
+            SetLogText("Un-Freeze xbox console - command.");
+            _rtm.StartCommand();
+            unfreezeButton.Enabled = false;
+            freezeButton.Enabled = true;
+        }
+
+        private void PhysicalRamButtonClick(object sender, EventArgs e)
+        {
+            dumpStartOffsetTextBox.Text = string.Format("0xC0000000");
+        }   
         #endregion
 
         #region HexBox Events
