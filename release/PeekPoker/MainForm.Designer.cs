@@ -76,6 +76,7 @@
             this.itemSpecialSet1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemSpecialSet2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.newcodebutton = new System.Windows.Forms.Button();
@@ -87,7 +88,7 @@
             this.createtrainerbutton = new System.Windows.Forms.Button();
             this.searchRangeEndTypeCB = new System.Windows.Forms.ComboBox();
             this.searchRangeBaseValueTypeCB = new System.Windows.Forms.ComboBox();
-            this.calculatorTab = new System.Windows.Forms.TabPage();
+            this.converterTab = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.endianTypeGroupBox = new System.Windows.Forms.GroupBox();
             this.littleEndianRadioButton = new System.Windows.Forms.RadioButton();
@@ -122,10 +123,18 @@
             this.endRangeAddressTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.dumpTab = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.quickCalculatorMinusButton = new System.Windows.Forms.Button();
+            this.quickCalculatorPlusButton = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.quickCalculatorAnswerTextBox = new System.Windows.Forms.TextBox();
+            this.quickCalculatorValueTwoTextBox = new System.Windows.Forms.TextBox();
+            this.quickCalculatorValueOneTextBox = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.unfreezebutton1 = new System.Windows.Forms.Button();
-            this.freezebutton1 = new System.Windows.Forms.Button();
             this.allocatedDataButton = new System.Windows.Forms.Button();
             this.baseFileButton = new System.Windows.Forms.Button();
             this.physicalRamButton = new System.Windows.Forms.Button();
@@ -168,17 +177,22 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.pluginInfoTab = new System.Windows.Forms.TabPage();
             this.pluginListView = new System.Windows.Forms.ListView();
             this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.versionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.authorColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.descriptionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.authorColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.versionColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.peekPokeFeedBackTextBox = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tutorialTab = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.pluginTutorialTab = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.calculatorTab.SuspendLayout();
+            this.converterTab.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.endianTypeGroupBox.SuspendLayout();
             this.searchNdumpTab.SuspendLayout();
@@ -188,6 +202,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.dumpTab.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.peekNpokeTab.SuspendLayout();
             this.peeknpoke.SuspendLayout();
@@ -200,6 +215,9 @@
             this.logTab.SuspendLayout();
             this.trainerUtilityTab.SuspendLayout();
             this.pluginInfoTab.SuspendLayout();
+            this.tutorialTab.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.pluginTutorialTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -585,6 +603,12 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
+            // pluginsToolStripMenuItem
+            // 
+            this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
+            this.pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.pluginsToolStripMenuItem.Text = "Plugins";
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -722,16 +746,16 @@
             this.searchRangeBaseValueTypeCB.TabIndex = 15;
             this.toolTips.SetToolTip(this.searchRangeBaseValueTypeCB, "Insert your values in hex or dec");
             // 
-            // calculatorTab
+            // converterTab
             // 
-            this.calculatorTab.BackColor = System.Drawing.SystemColors.Control;
-            this.calculatorTab.Controls.Add(this.groupBox4);
-            this.calculatorTab.Location = new System.Drawing.Point(4, 24);
-            this.calculatorTab.Name = "calculatorTab";
-            this.calculatorTab.Padding = new System.Windows.Forms.Padding(3);
-            this.calculatorTab.Size = new System.Drawing.Size(687, 335);
-            this.calculatorTab.TabIndex = 1;
-            this.calculatorTab.Text = "Calculator";
+            this.converterTab.BackColor = System.Drawing.SystemColors.Control;
+            this.converterTab.Controls.Add(this.groupBox4);
+            this.converterTab.Location = new System.Drawing.Point(4, 24);
+            this.converterTab.Name = "converterTab";
+            this.converterTab.Padding = new System.Windows.Forms.Padding(3);
+            this.converterTab.Size = new System.Drawing.Size(687, 335);
+            this.converterTab.TabIndex = 1;
+            this.converterTab.Text = "Converter";
             // 
             // groupBox4
             // 
@@ -1095,6 +1119,7 @@
             // dumpTab
             // 
             this.dumpTab.BackColor = System.Drawing.SystemColors.Control;
+            this.dumpTab.Controls.Add(this.groupBox6);
             this.dumpTab.Controls.Add(this.label23);
             this.dumpTab.Controls.Add(this.groupBox5);
             this.dumpTab.Location = new System.Drawing.Point(4, 24);
@@ -1104,11 +1129,107 @@
             this.dumpTab.TabIndex = 1;
             this.dumpTab.Text = "Dump";
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label26);
+            this.groupBox6.Controls.Add(this.quickCalculatorMinusButton);
+            this.groupBox6.Controls.Add(this.quickCalculatorPlusButton);
+            this.groupBox6.Controls.Add(this.label25);
+            this.groupBox6.Controls.Add(this.label24);
+            this.groupBox6.Controls.Add(this.label21);
+            this.groupBox6.Controls.Add(this.quickCalculatorAnswerTextBox);
+            this.groupBox6.Controls.Add(this.quickCalculatorValueTwoTextBox);
+            this.groupBox6.Controls.Add(this.quickCalculatorValueOneTextBox);
+            this.groupBox6.Location = new System.Drawing.Point(45, 153);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(402, 134);
+            this.groupBox6.TabIndex = 14;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Quick Calculator";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.ForeColor = System.Drawing.Color.Red;
+            this.label26.Location = new System.Drawing.Point(198, 93);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(184, 30);
+            this.label26.TabIndex = 14;
+            this.label26.Text = "NOTE: Put value 1and value 2 \r\nthen press + or -\r\n";
+            // 
+            // quickCalculatorMinusButton
+            // 
+            this.quickCalculatorMinusButton.Location = new System.Drawing.Point(201, 56);
+            this.quickCalculatorMinusButton.Name = "quickCalculatorMinusButton";
+            this.quickCalculatorMinusButton.Size = new System.Drawing.Size(41, 23);
+            this.quickCalculatorMinusButton.TabIndex = 8;
+            this.quickCalculatorMinusButton.Text = "-";
+            this.quickCalculatorMinusButton.UseVisualStyleBackColor = true;
+            this.quickCalculatorMinusButton.Click += new System.EventHandler(this.QuickCalculatorMinusButtonClick);
+            // 
+            // quickCalculatorPlusButton
+            // 
+            this.quickCalculatorPlusButton.Location = new System.Drawing.Point(201, 30);
+            this.quickCalculatorPlusButton.Name = "quickCalculatorPlusButton";
+            this.quickCalculatorPlusButton.Size = new System.Drawing.Size(41, 25);
+            this.quickCalculatorPlusButton.TabIndex = 7;
+            this.quickCalculatorPlusButton.Text = "+";
+            this.quickCalculatorPlusButton.UseVisualStyleBackColor = true;
+            this.quickCalculatorPlusButton.Click += new System.EventHandler(this.QuickCalculatorPlusButtonClick);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(6, 93);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(55, 15);
+            this.label25.TabIndex = 6;
+            this.label25.Text = "Answer:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 65);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(56, 15);
+            this.label24.TabIndex = 5;
+            this.label24.Text = "Value 2:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 37);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(56, 15);
+            this.label21.TabIndex = 4;
+            this.label21.Text = "Value 1:";
+            // 
+            // quickCalculatorAnswerTextBox
+            // 
+            this.quickCalculatorAnswerTextBox.Location = new System.Drawing.Point(68, 86);
+            this.quickCalculatorAnswerTextBox.Name = "quickCalculatorAnswerTextBox";
+            this.quickCalculatorAnswerTextBox.Size = new System.Drawing.Size(100, 22);
+            this.quickCalculatorAnswerTextBox.TabIndex = 2;
+            // 
+            // quickCalculatorValueTwoTextBox
+            // 
+            this.quickCalculatorValueTwoTextBox.Location = new System.Drawing.Point(68, 58);
+            this.quickCalculatorValueTwoTextBox.Name = "quickCalculatorValueTwoTextBox";
+            this.quickCalculatorValueTwoTextBox.Size = new System.Drawing.Size(100, 22);
+            this.quickCalculatorValueTwoTextBox.TabIndex = 1;
+            // 
+            // quickCalculatorValueOneTextBox
+            // 
+            this.quickCalculatorValueOneTextBox.Location = new System.Drawing.Point(68, 30);
+            this.quickCalculatorValueOneTextBox.Name = "quickCalculatorValueOneTextBox";
+            this.quickCalculatorValueOneTextBox.Size = new System.Drawing.Size(100, 22);
+            this.quickCalculatorValueOneTextBox.TabIndex = 0;
+            // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.ForeColor = System.Drawing.Color.Red;
-            this.label23.Location = new System.Drawing.Point(289, 181);
+            this.label23.Location = new System.Drawing.Point(472, 153);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(142, 15);
             this.label23.TabIndex = 13;
@@ -1116,8 +1237,6 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.unfreezebutton1);
-            this.groupBox5.Controls.Add(this.freezebutton1);
             this.groupBox5.Controls.Add(this.allocatedDataButton);
             this.groupBox5.Controls.Add(this.baseFileButton);
             this.groupBox5.Controls.Add(this.physicalRamButton);
@@ -1126,7 +1245,7 @@
             this.groupBox5.Controls.Add(this.dumpLengthTextBox);
             this.groupBox5.Controls.Add(this.dumpStartOffsetTextBox);
             this.groupBox5.Controls.Add(this.dumpMemoryButton);
-            this.groupBox5.Location = new System.Drawing.Point(133, 38);
+            this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(447, 140);
             this.groupBox5.TabIndex = 2;
@@ -1222,6 +1341,8 @@
             // 
             this.peeknpoke.BackColor = System.Drawing.SystemColors.Control;
             this.peeknpoke.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.peeknpoke.Controls.Add(this.label27);
+            this.peeknpoke.Controls.Add(this.peekPokeFeedBackTextBox);
             this.peeknpoke.Controls.Add(this.debugGroupBox);
             this.peeknpoke.Controls.Add(this.groupBox3);
             this.peeknpoke.Controls.Add(this.labelSelAddress);
@@ -1501,9 +1622,10 @@
             this.tabControl1.Controls.Add(this.logTab);
             this.tabControl1.Controls.Add(this.peekNpokeTab);
             this.tabControl1.Controls.Add(this.searchNdumpTab);
-            this.tabControl1.Controls.Add(this.calculatorTab);
+            this.tabControl1.Controls.Add(this.converterTab);
             this.tabControl1.Controls.Add(this.trainerUtilityTab);
             this.tabControl1.Controls.Add(this.pluginInfoTab);
+            this.tabControl1.Controls.Add(this.tutorialTab);
             this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(3, 58);
             this.tabControl1.Name = "tabControl1";
@@ -1610,14 +1732,6 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Address";
             // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(0, 24);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 402);
-            this.splitter1.TabIndex = 15;
-            this.splitter1.TabStop = false;
-            // 
             // pluginInfoTab
             // 
             this.pluginInfoTab.BackColor = System.Drawing.SystemColors.Control;
@@ -1627,7 +1741,7 @@
             this.pluginInfoTab.Padding = new System.Windows.Forms.Padding(3);
             this.pluginInfoTab.Size = new System.Drawing.Size(687, 335);
             this.pluginInfoTab.TabIndex = 5;
-            this.pluginInfoTab.Text = "plugin Info";
+            this.pluginInfoTab.Text = "Plugin Info";
             // 
             // pluginListView
             // 
@@ -1650,26 +1764,87 @@
             this.nameColumn.Text = "Name";
             this.nameColumn.Width = 177;
             // 
-            // versionColumn
+            // descriptionColumn
             // 
-            this.versionColumn.Text = "Version";
-            this.versionColumn.Width = 100;
+            this.descriptionColumn.Text = "Description";
+            this.descriptionColumn.Width = 289;
             // 
             // authorColumn
             // 
             this.authorColumn.Text = "Author";
             this.authorColumn.Width = 100;
             // 
-            // descriptionColumn
+            // versionColumn
             // 
-            this.descriptionColumn.Text = "Description";
-            this.descriptionColumn.Width = 289;
+            this.versionColumn.Text = "Version";
+            this.versionColumn.Width = 100;
             // 
-            // pluginsToolStripMenuItem
+            // splitter1
             // 
-            this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
-            this.pluginsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.pluginsToolStripMenuItem.Text = "Plugins";
+            this.splitter1.Location = new System.Drawing.Point(0, 24);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 402);
+            this.splitter1.TabIndex = 15;
+            this.splitter1.TabStop = false;
+            // 
+            // peekPokeFeedBackTextBox
+            // 
+            this.peekPokeFeedBackTextBox.Location = new System.Drawing.Point(564, 33);
+            this.peekPokeFeedBackTextBox.Name = "peekPokeFeedBackTextBox";
+            this.peekPokeFeedBackTextBox.ReadOnly = true;
+            this.peekPokeFeedBackTextBox.Size = new System.Drawing.Size(112, 22);
+            this.peekPokeFeedBackTextBox.TabIndex = 23;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(420, 40);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(134, 15);
+            this.label27.TabIndex = 24;
+            this.label27.Text = "Peek/Poke Feedback:";
+            // 
+            // tutorialTab
+            // 
+            this.tutorialTab.BackColor = System.Drawing.SystemColors.Control;
+            this.tutorialTab.Controls.Add(this.tabControl2);
+            this.tutorialTab.Location = new System.Drawing.Point(4, 24);
+            this.tutorialTab.Name = "tutorialTab";
+            this.tutorialTab.Padding = new System.Windows.Forms.Padding(3);
+            this.tutorialTab.Size = new System.Drawing.Size(687, 335);
+            this.tutorialTab.TabIndex = 6;
+            this.tutorialTab.Text = "Tutorials";
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.pluginTutorialTab);
+            this.tabControl2.Location = new System.Drawing.Point(0, 0);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(684, 332);
+            this.tabControl2.TabIndex = 0;
+            // 
+            // pluginTutorialTab
+            // 
+            this.pluginTutorialTab.BackColor = System.Drawing.SystemColors.Control;
+            this.pluginTutorialTab.Controls.Add(this.textBox1);
+            this.pluginTutorialTab.Location = new System.Drawing.Point(4, 24);
+            this.pluginTutorialTab.Name = "pluginTutorialTab";
+            this.pluginTutorialTab.Padding = new System.Windows.Forms.Padding(3);
+            this.pluginTutorialTab.Size = new System.Drawing.Size(676, 304);
+            this.pluginTutorialTab.TabIndex = 0;
+            this.pluginTutorialTab.Text = "Plugin";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 4);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(667, 294);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // MainForm
             // 
@@ -1695,7 +1870,7 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.calculatorTab.ResumeLayout(false);
+            this.converterTab.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.endianTypeGroupBox.ResumeLayout(false);
@@ -1710,6 +1885,8 @@
             this.groupBox1.PerformLayout();
             this.dumpTab.ResumeLayout(false);
             this.dumpTab.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.peekNpokeTab.ResumeLayout(false);
@@ -1727,6 +1904,10 @@
             this.trainerUtilityTab.ResumeLayout(false);
             this.trainerUtilityTab.PerformLayout();
             this.pluginInfoTab.ResumeLayout(false);
+            this.tutorialTab.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.pluginTutorialTab.ResumeLayout(false);
+            this.pluginTutorialTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1745,7 +1926,7 @@
         private System.Windows.Forms.ToolTip toolTips;
         internal System.Windows.Forms.ToolStripProgressBar StatusProgressBar;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.TabPage calculatorTab;
+        private System.Windows.Forms.TabPage converterTab;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox integer32CalculatorTextBox;
@@ -1871,8 +2052,6 @@
         private System.Windows.Forms.GroupBox debugGroupBox;
         private System.Windows.Forms.Button unfreezeButton;
         private System.Windows.Forms.Button freezeButton;
-        private System.Windows.Forms.Button unfreezebutton1;
-        private System.Windows.Forms.Button freezebutton1;
         private System.Windows.Forms.TabPage pluginInfoTab;
         internal System.Windows.Forms.ListView pluginListView;
         internal System.Windows.Forms.ColumnHeader nameColumn;
@@ -1880,6 +2059,22 @@
         internal System.Windows.Forms.ColumnHeader authorColumn;
         internal System.Windows.Forms.ColumnHeader versionColumn;
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox quickCalculatorValueTwoTextBox;
+        private System.Windows.Forms.TextBox quickCalculatorValueOneTextBox;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox quickCalculatorAnswerTextBox;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button quickCalculatorMinusButton;
+        private System.Windows.Forms.Button quickCalculatorPlusButton;
+        private System.Windows.Forms.TextBox peekPokeFeedBackTextBox;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TabPage tutorialTab;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage pluginTutorialTab;
+        private System.Windows.Forms.TextBox textBox1;
 
     }
 }

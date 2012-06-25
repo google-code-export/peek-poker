@@ -150,10 +150,7 @@ namespace PeekPoker
                 hexBox.ByteProvider = buffer;
                 hexBox.Refresh();
                 SetLogText("Peeked Address: " + peekPokeAddressTextBox.Text + " Length: " + peekLengthTextBox.Text);
-                // the changed are handled automatically with my modifications of Be.HexBox
-
-                MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                peekPokeFeedBackTextBox.Text = string.Format("Peek Success!");
             }
             catch (Exception ex)
             {
@@ -176,7 +173,7 @@ namespace PeekPoker
                 SetLogText("Poked Address: " + peekPokeAddressTextBox.Text + " Length: " + _rtm.DumpLength);
                 Console.WriteLine(Functions.ByteArrayToString(buffer.Bytes.ToArray()));//?????
                 _rtm.Poke(peekPokeAddressTextBox.Text, Functions.ByteArrayToString(buffer.Bytes.ToArray()));
-                MessageBox.Show(this, String.Format("Done!"), String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                peekPokeFeedBackTextBox.Text = string.Format("Poke Success!");
             }
             catch (Exception ex)
             {
@@ -310,7 +307,40 @@ namespace PeekPoker
         {
             dumpStartOffsetTextBox.Text = string.Format("0xC0000000");
             dumpLengthTextBox.Text = string.Format("0x1FFF0FFF");
-        }   
+        }
+
+        private void QuickCalculatorPlusButtonClick(object sender, EventArgs e)
+        {
+            try
+            {
+                //convert text to uint the format results to hex string
+                quickCalculatorAnswerTextBox.Text = String.Format("0x{0:X}", Functions.Convert(quickCalculatorValueOneTextBox.Text) +
+                                                     Functions.Convert(quickCalculatorValueTwoTextBox.Text));
+            }
+            catch (Exception ex)
+            {
+                quickCalculatorAnswerTextBox.Clear();
+                SetLogText("Quick Calculator Error [Plus]: " + ex.Message);
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void QuickCalculatorMinusButtonClick(object sender, EventArgs e)
+        {
+            try
+            {
+                //convert text to uint the format results to hex string
+                quickCalculatorAnswerTextBox.Text = String.Format("0x{0:X}", Functions.Convert(quickCalculatorValueOneTextBox.Text) -
+                                                     Functions.Convert(quickCalculatorValueTwoTextBox.Text));
+            }
+            catch (Exception ex)
+            {
+                quickCalculatorAnswerTextBox.Clear();
+                SetLogText("Quick Calculator Error [Minus]: " + ex.Message);
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
 
         #region HexBox Events
@@ -677,6 +707,7 @@ namespace PeekPoker
                 EnableDumpButton(false);
                 SetLogText("Dump Offset: " + GetDumpStartOffsetTextBoxText() + " Dump Length: " + GetDumpLengthTextBox());
                 _rtm.Dump(_dumpFilePath, GetDumpStartOffsetTextBoxText(), GetDumpLengthTextBox());
+                UpdateProgressbar(0, 100, 0);
             }
             catch (Exception e)
             {
@@ -1513,8 +1544,5 @@ namespace PeekPoker
         }
         #endregion
         #endregion
-
-
-
     }
 }

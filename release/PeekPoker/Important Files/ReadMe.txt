@@ -154,6 +154,11 @@ Added:
 [PureIso]
 Added & Finished Plugin,Code clean up
 
+-changes 25/06/12
+[PureIso]
+More code cleanup
+-Added quick calcultor to dump section
+-Added plugin tutorial
+
 TODO:
 -Add game id recognition to help user name trainer file correctly
--Add trainer plugin so people can create game trainers
