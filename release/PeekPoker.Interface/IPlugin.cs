@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-
-namespace PeekPoker.Interface
+﻿namespace PeekPoker.Interface
 {
     //======================================================//
     // Interface that would allow other applications/tools  //
