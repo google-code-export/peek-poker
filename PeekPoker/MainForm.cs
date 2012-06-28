@@ -78,17 +78,11 @@ namespace PeekPoker
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor"));
-            stringBuilder.AppendLine(string.Format("By"));
-            stringBuilder.AppendLine(string.Format("Cybersam"));
-            stringBuilder.AppendLine(string.Format("8Ball"));
-            stringBuilder.AppendLine(string.Format("PureIso"));
-            stringBuilder.AppendLine(string.Format("Cornnatron"));
-            stringBuilder.AppendLine(string.Format("Special Thanks"));
-            stringBuilder.AppendLine(string.Format("optantic"));
-            stringBuilder.AppendLine(string.Format("Mojobojo"));
-            stringBuilder.AppendLine(string.Format("Natelx"));
-            stringBuilder.AppendLine(string.Format("fairchild"));
-            stringBuilder.AppendLine(string.Format("360Haven"));
+            stringBuilder.AppendLine(string.Format("================By================"));
+            stringBuilder.AppendLine(string.Format("Cybersamm, 8Ballm PureIso"));
+            stringBuilder.AppendLine(string.Format("=======Special Thanks To=========="));
+            stringBuilder.AppendLine(string.Format("optantic (tester), Mojobojo (codes), Natelx (xbdm)"));
+            stringBuilder.AppendLine(string.Format("fairchild (codes), actualmanx (tester), ioritree (tester), 360Haven"));
             ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void ConverterClearButtonClick(object sender, EventArgs e)
@@ -145,7 +139,7 @@ namespace PeekPoker
             {
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text))
                     throw new Exception("Invalide peek length!");
-                var retValue = Functions.StringToByteArray(_rtm.Peek(peekPokeAddressTextBox.Text, peekLengthTextBox.Text, peekPokeAddressTextBox.Text, peekLengthTextBox.Text));
+                var retValue = Functions.Functions.StringToByteArray(_rtm.Peek(peekPokeAddressTextBox.Text, peekLengthTextBox.Text, peekPokeAddressTextBox.Text, peekLengthTextBox.Text));
                 var buffer = new Be.Windows.Forms.DynamicByteProvider(retValue) { IsWriteByte = true }; //object initilizer 
                 hexBox.ByteProvider = buffer;
                 hexBox.Refresh();
@@ -166,13 +160,13 @@ namespace PeekPoker
             AutoComplete(); //run function
             try
             {
-                _rtm.DumpOffset = Functions.Convert(peekPokeAddressTextBox.Text);//Set the dump offset
+                _rtm.DumpOffset = Functions.Functions.Convert(peekPokeAddressTextBox.Text);//Set the dump offset
                 _rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
 
                 var buffer = (Be.Windows.Forms.DynamicByteProvider)hexBox.ByteProvider;
                 SetLogText("Poked Address: " + peekPokeAddressTextBox.Text + " Length: " + _rtm.DumpLength);
-                Console.WriteLine(Functions.ByteArrayToString(buffer.Bytes.ToArray()));//?????
-                _rtm.Poke(peekPokeAddressTextBox.Text, Functions.ByteArrayToString(buffer.Bytes.ToArray()));
+                Console.WriteLine(Functions.Functions.ByteArrayToString(buffer.Bytes.ToArray()));//?????
+                _rtm.Poke(peekPokeAddressTextBox.Text, Functions.Functions.ByteArrayToString(buffer.Bytes.ToArray()));
                 peekPokeFeedBackTextBox.Text = string.Format("Poke Success!");
             }
             catch (Exception ex)
@@ -203,11 +197,11 @@ namespace PeekPoker
             {
                 if (searchRangeEndTypeCB.SelectedIndex == 1)
                 {
-                    _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
+                    _searchRangeDumpLength = (Functions.Functions.Convert(endRangeAddressTextBox.Text) - Functions.Functions.Convert(startRangeAddressTextBox.Text));
                 }
                 else
                 {
-                    _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
+                    _searchRangeDumpLength = Functions.Functions.Convert(endRangeAddressTextBox.Text);
                 }
                 var oThread = new Thread(SearchRange);
                 oThread.Start();
@@ -314,8 +308,8 @@ namespace PeekPoker
             try
             {
                 //convert text to uint the format results to hex string
-                quickCalculatorAnswerTextBox.Text = String.Format("0x{0:X}", Functions.Convert(quickCalculatorValueOneTextBox.Text) +
-                                                     Functions.Convert(quickCalculatorValueTwoTextBox.Text));
+                quickCalculatorAnswerTextBox.Text = String.Format("0x{0:X}", Functions.Functions.Convert(quickCalculatorValueOneTextBox.Text) +
+                                                     Functions.Functions.Convert(quickCalculatorValueTwoTextBox.Text));
             }
             catch (Exception ex)
             {
@@ -331,8 +325,8 @@ namespace PeekPoker
             try
             {
                 //convert text to uint the format results to hex string
-                quickCalculatorAnswerTextBox.Text = String.Format("0x{0:X}", Functions.Convert(quickCalculatorValueOneTextBox.Text) -
-                                                     Functions.Convert(quickCalculatorValueTwoTextBox.Text));
+                quickCalculatorAnswerTextBox.Text = String.Format("0x{0:X}", Functions.Functions.Convert(quickCalculatorValueOneTextBox.Text) -
+                                                     Functions.Functions.Convert(quickCalculatorValueTwoTextBox.Text));
             }
             catch (Exception ex)
             {
@@ -348,8 +342,8 @@ namespace PeekPoker
         {
             ChangeNumericValue();//When you select an offset on the hexbox
 
-            var prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
-            var address = Functions.BytesToInt32(prev);
+            var prev = Functions.Functions.HexToBytes(peekPokeAddressTextBox.Text);
+            var address = Functions.Functions.BytesToInt32(prev);
             SelAddress.Text = string.Format("0x" + (address + (int)hexBox.SelectionStart).ToString("X8"));
         }
         private void IsSignedCheckedChanged(object sender, EventArgs e)
@@ -373,11 +367,11 @@ namespace PeekPoker
 
             if (searchRangeEndTypeCB.SelectedIndex == 1)
             {
-                _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
+                _searchRangeDumpLength = (Functions.Functions.Convert(endRangeAddressTextBox.Text) - Functions.Functions.Convert(startRangeAddressTextBox.Text));
             }
             else
             {
-                _searchRangeDumpLength = Functions.Convert(endRangeAddressTextBox.Text);
+                _searchRangeDumpLength = Functions.Functions.Convert(endRangeAddressTextBox.Text);
             }
 
             var oThread = new Thread(SearchRange);
@@ -454,23 +448,23 @@ namespace PeekPoker
             if (isSigned.Checked)
             {
                 NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ?
-                    Functions.ByteToSByte(hexBox.ByteProvider.ReadByte(hexBox.SelectionStart)) : 0;
+                    Functions.Functions.ByteToSByte(hexBox.ByteProvider.ReadByte(hexBox.SelectionStart)) : 0;
                 NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ?
-                    Functions.BytesToInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
+                    Functions.Functions.BytesToInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
                 NumericInt32.Value = (buffer.Count - hexBox.SelectionStart) > 3 ?
-                    Functions.BytesToInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
+                    Functions.Functions.BytesToInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
             }
             else
             {
                 NumericInt8.Value = (buffer.Count - hexBox.SelectionStart) > 0 ?
                     buffer[(int)hexBox.SelectionStart] : 0;
                 NumericInt16.Value = (buffer.Count - hexBox.SelectionStart) > 1 ?
-                    Functions.BytesToUInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
+                    Functions.Functions.BytesToUInt16(buffer.GetRange((int)hexBox.SelectionStart, 2).ToArray()) : 0;
                 NumericInt32.Value = (buffer.Count - hexBox.SelectionStart) > 3 ?
-                    Functions.BytesToUInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
+                    Functions.Functions.BytesToUInt32(buffer.GetRange((int)hexBox.SelectionStart, 4).ToArray()) : 0;
             }
-            var prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
-            var address = Functions.BytesToInt32(prev);
+            var prev = Functions.Functions.HexToBytes(peekPokeAddressTextBox.Text);
+            var address = Functions.Functions.BytesToInt32(prev);
             SelAddress.Text = string.Format("0x" + (address + (int)hexBox.SelectionStart).ToString("X8"));
         }
         private void ChangedNumericValue(object sender)
@@ -484,7 +478,7 @@ namespace PeekPoker
                     {
                         Console.WriteLine(((sbyte)numeric.Value).ToString("X2"));
                         hexBox.ByteProvider.WriteByte(hexBox.SelectionStart,
-                                                      Functions.HexToBytes(((sbyte)numeric.Value).ToString("X2"))[0]);
+                                                      Functions.Functions.HexToBytes(((sbyte)numeric.Value).ToString("X2"))[0]);
                     }
                     else
                     {
@@ -496,16 +490,16 @@ namespace PeekPoker
                     for (var i = 0; i < 2; i++)
                     {
                         hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i, isSigned.Checked
-                                                                                    ? Functions.Int16ToBytes((short)numeric.Value)[i]
-                                                                                    : Functions.UInt16ToBytes((ushort)numeric.Value)[i]);
+                                                                                    ? Functions.Functions.Int16ToBytes((short)numeric.Value)[i]
+                                                                                    : Functions.Functions.UInt16ToBytes((ushort)numeric.Value)[i]);
                     }
                     break;
                 case "NumericInt32":
                     for (var i = 0; i < 4; i++)
                     {
                         hexBox.ByteProvider.WriteByte(hexBox.SelectionStart + i, isSigned.Checked
-                                                                                    ? Functions.Int32ToBytes((int)numeric.Value)[i]
-                                                                                    : Functions.UInt32ToBytes((uint)numeric.Value)[i]);
+                                                                                    ? Functions.Functions.Int32ToBytes((int)numeric.Value)[i]
+                                                                                    : Functions.Functions.UInt32ToBytes((uint)numeric.Value)[i]);
                     }
                     break;
             }
@@ -570,8 +564,8 @@ namespace PeekPoker
                             {
                                 Name = code.Substring(1, (code.Length - 1)),
                                 Type = Convert.ToInt32(codeLine.Substring(0, 1)),
-                                Adress = Functions.BytesToUInt32(Functions.StringToByteArray(codeLine.Substring(2, 8))),
-                                Code = Functions.BytesToUInt32(Functions.StringToByteArray(codeLine.Substring(11, 8)))
+                                Adress = Functions.Functions.BytesToUInt32(Functions.Functions.StringToByteArray(codeLine.Substring(2, 8))),
+                                Code = Functions.Functions.BytesToUInt32(Functions.Functions.StringToByteArray(codeLine.Substring(11, 8)))
                             };
                             //set the name of the code/cheat
                             fullCodeList.Add(singleCode);
@@ -605,7 +599,7 @@ namespace PeekPoker
             foreach (Types.CodeList code in codes)
             {
                 var currentaddress = code.Adress;
-                var currentvalue = Functions.ToHexString(Functions.UInt32ToBytes(code.Code));
+                var currentvalue = Functions.Functions.ToHexString(Functions.Functions.UInt32ToBytes(code.Code));
                 _rtm.WriteMemory(currentaddress, currentvalue);
             }
         }
@@ -667,7 +661,7 @@ namespace PeekPoker
                 EnableStopSearchButton(true);
                 SetLogText("Search Offset: " + GetStartRangeAddressTextBoxText() + " Search Length: " +
                            _searchRangeDumpLength);
-                _rtm.DumpOffset = Functions.Convert(GetStartRangeAddressTextBoxText());
+                _rtm.DumpOffset = Functions.Functions.Convert(GetStartRangeAddressTextBoxText());
                 _rtm.DumpLength = _searchRangeDumpLength;
 
                 ResultGridClean();//Clean list view
@@ -1403,7 +1397,7 @@ namespace PeekPoker
 
                 for (int i = 0; i < poke.Count; i++)
                 {
-                    uint offsets = Functions.BytesToUInt32(Functions.HexToBytes(results[0].Offset)) + (uint)(i * 0x14);
+                    uint offsets = Functions.Functions.BytesToUInt32(Functions.Functions.HexToBytes(results[0].Offset)) + (uint)(i * 0x14);
 
                     SetLogText(poke[i]);
                     _rtm.Poke(offsets, poke[i]);

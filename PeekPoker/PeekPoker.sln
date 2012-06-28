@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeekPoker", "PeekPoker.csproj", "{E21F974E-ABB3-49E8-96E8-2154E3DBD79B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeekPoker.Interface", "..\PeekPoker.Interface\PeekPoker.Interface.csproj", "{35873DE4-33F4-4C86-9182-5E633BA5F24E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeekPoker.Interface", "PeekPoker.Interface\PeekPoker.Interface.csproj", "{35873DE4-33F4-4C86-9182-5E633BA5F24E}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution

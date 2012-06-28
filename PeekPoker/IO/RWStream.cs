@@ -176,8 +176,8 @@ namespace PeekPoker
                 if (segment.SequenceEqual(pattern))
                 {
                     var results = new Types.SearchResults();
-                    results.Offset = Functions.ToHexString(Functions.UInt32ToBytes(startDumpOffset + (uint)i));
-                    results.Value = Functions.ByteArrayToString(segment);
+                    results.Offset = Functions.Functions.ToHexString(Functions.Functions.UInt32ToBytes(startDumpOffset + (uint)i));
+                    results.Value = Functions.Functions.ByteArrayToString(segment);
                     results.ID = x.ToString();
                     positions.Add(results);
                     i = Array.IndexOf(buffer, pattern[0], i + pattern.Length);

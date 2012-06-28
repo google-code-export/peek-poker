@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PeekPoker
+namespace PeekPoker.Functions
 {
     static class Functions
     {
@@ -117,15 +117,15 @@ namespace PeekPoker
         /// <summary>
         /// Converts a Byte array to Int16
         /// </summary>
-        /// <param name="Bytes"> bytes array</param>
+        /// <param name="bytes"> bytes array</param>
         /// <param name="isBigEndian"> if bigendian = true else false; default = false</param>
         /// <returns> returns Int16 </returns>
-        public static Int16 BytesToInt16(Byte[] Bytes, bool isBigEndian = true)
+        public static Int16 BytesToInt16(Byte[] bytes, bool isBigEndian = true)
         {
             if (isBigEndian)
-                Array.Reverse(Bytes);
+                Array.Reverse(bytes);
 
-            return BitConverter.ToInt16(Bytes, 0);
+            return BitConverter.ToInt16(bytes, 0);
         }
         /// <summary>
         /// Converts Int16 to a bytes array
@@ -144,15 +144,15 @@ namespace PeekPoker
         /// <summary>
         /// Converts a Byte array to UInt16
         /// </summary>
-        /// <param name="Bytes"> bytes array</param>
+        /// <param name="bytes"> bytes array</param>
         /// <param name="isBigEndian"> if bigendian = true else false; default = false</param>
         /// <returns> returns UInt16 </returns>
-        public static UInt16 BytesToUInt16(Byte[] Bytes, bool BigEndian = true)
+        public static UInt16 BytesToUInt16(Byte[] bytes, bool isBigEndian = true)
         {
-            if (BigEndian)
-                Array.Reverse(Bytes);
+            if (isBigEndian)
+                Array.Reverse(bytes);
 
-            return BitConverter.ToUInt16(Bytes, 0);
+            return BitConverter.ToUInt16(bytes, 0);
         }
         /// <summary>
         /// Converts UInt16 to a bytes array
@@ -172,15 +172,15 @@ namespace PeekPoker
         /// <summary>
         /// Converts a Byte array to Int32
         /// </summary>
-        /// <param name="Bytes"> bytes array</param>
+        /// <param name="bytes"> bytes array</param>
         /// <param name="isBigEndian"> if bigendian = true else false; default = false</param>
         /// <returns> returns Int32 </returns>
-        public static Int32 BytesToInt32(Byte[] Bytes, bool isBigEndian = true)
+        public static Int32 BytesToInt32(Byte[] bytes, bool isBigEndian = true)
         {
             if (isBigEndian)
-                Array.Reverse(Bytes);
+                Array.Reverse(bytes);
 
-            return BitConverter.ToInt32(Bytes, 0);
+            return BitConverter.ToInt32(bytes, 0);
         }
         /// <summary>
         /// Converts Int32 to a bytes array
@@ -199,15 +199,15 @@ namespace PeekPoker
         /// <summary>
         /// Converts a Byte array to UInt32
         /// </summary>
-        /// <param name="Bytes"> bytes array</param>
+        /// <param name="bytes"> bytes array</param>
         /// <param name="isBigEndian"> if bigendian = true else false; default = false</param>
         /// <returns> returns UInt32 </returns>
-        public static UInt32 BytesToUInt32(Byte[] Bytes, bool BigEndian = true)
+        public static UInt32 BytesToUInt32(Byte[] bytes, bool isBigEndian = true)
         {
-            if (BigEndian)
-                Array.Reverse(Bytes);
+            if (isBigEndian)
+                Array.Reverse(bytes);
 
-            return BitConverter.ToUInt32(Bytes, 0);
+            return BitConverter.ToUInt32(bytes, 0);
         }
         /// <summary>
         /// Converts UInt32 to a bytes array
@@ -227,15 +227,15 @@ namespace PeekPoker
         /// <summary>
         /// Converts a Byte array to Int64
         /// </summary>
-        /// <param name="Bytes"> bytes array</param>
+        /// <param name="bytes"> bytes array</param>
         /// <param name="isBigEndian"> if bigendian = true else false; default = false</param>
         /// <returns> returns Int64 </returns>
-        public static Int64 BytesToInt64(Byte[] Bytes, bool isBigEndian = true)
+        public static Int64 BytesToInt64(Byte[] bytes, bool isBigEndian = true)
         {
             if (isBigEndian)
-                Array.Reverse(Bytes);
+                Array.Reverse(bytes);
 
-            return BitConverter.ToInt64(Bytes, 0);
+            return BitConverter.ToInt64(bytes, 0);
         }
         /// <summary>
         /// Converts Int64 to a bytes array
@@ -254,15 +254,15 @@ namespace PeekPoker
         /// <summary>
         /// Converts a Byte array to UInt64
         /// </summary>
-        /// <param name="Bytes"> bytes array</param>
+        /// <param name="bytes"> bytes array</param>
         /// <param name="isBigEndian"> if bigendian = true else false; default = false</param>
         /// <returns> returns UInt64 </returns>
-        public static UInt64 BytesToUInt64(Byte[] Bytes, bool BigEndian = true)
+        public static UInt64 BytesToUInt64(Byte[] bytes, bool isBigEndian = true)
         {
-            if (BigEndian)
-                Array.Reverse(Bytes);
+            if (isBigEndian)
+                Array.Reverse(bytes);
 
-            return BitConverter.ToUInt64(Bytes, 0);
+            return BitConverter.ToUInt64(bytes, 0);
         }
         /// <summary>
         /// Converts UInt64 to a bytes array
@@ -280,35 +280,35 @@ namespace PeekPoker
         }
         #endregion
         #region float/double to byte array to float/double
-        public static Byte[] floatToByteArray(Single f, bool BigEndian = true)
+        public static Byte[] FloatToByteArray(Single f, bool isBigEndian = true)
         {
             Byte[] buffer = BitConverter.GetBytes(f);
-            if (BigEndian)
+            if (isBigEndian)
                 Array.Reverse(buffer);
 
             return buffer;
         }
-        public static Single BytesToSingle(Byte[] Bytes, bool BigEndian = true)
+        public static Single BytesToSingle(Byte[] bytes, bool isBigEndian = true)
         {
-            if (BigEndian)
-                Array.Reverse(Bytes);
+            if (isBigEndian)
+                Array.Reverse(bytes);
 
-            return BitConverter.ToSingle(Bytes, 0);
+            return BitConverter.ToSingle(bytes, 0);
         }
-        public static Byte[] DoubleToByteArray(Double d, bool BigEndian = true)
+        public static Byte[] DoubleToByteArray(Double d, bool isBigEndian = true)
         {
             Byte[] buffer = BitConverter.GetBytes(d);
-            if (BigEndian)
+            if (isBigEndian)
                 Array.Reverse(buffer);
 
             return buffer;
         }
-        public static Double BytesToDouble(Byte[] Bytes, bool BigEndian = true)
+        public static Double BytesToDouble(Byte[] bytes, bool isBigEndian = true)
         {
-            if (BigEndian)
-                Array.Reverse(Bytes);
+            if (isBigEndian)
+                Array.Reverse(bytes);
 
-            return BitConverter.ToDouble(Bytes, 0);
+            return BitConverter.ToDouble(bytes, 0);
         }
         #endregion
     }

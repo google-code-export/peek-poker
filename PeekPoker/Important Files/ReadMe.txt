@@ -1,4 +1,4 @@
-﻿Last Update - 20/06/12 by PureIso
+﻿Last Update - 28/06/12 by PureIso
 ==============================================================
 NB: Update source file before you commit.
 NB: Update source file before you commit.
@@ -159,6 +159,13 @@ Added & Finished Plugin,Code clean up
 More code cleanup
 -Added quick calcultor to dump section
 -Added plugin tutorial
+
+-changes 28/06/12
+[PureIso]
+-Added more classes to the PeekPoker.interface to aid with plugin application coding
+-Fixed the svn (release to trunk)
+-Fixed the folder so peekpoker contains peekpoker.interface
+
 
 TODO:
 -Add game id recognition to help user name trainer file correctly
