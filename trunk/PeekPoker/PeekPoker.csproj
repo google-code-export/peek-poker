@@ -62,9 +62,8 @@
       <HintPath>Important Files\Be.Windows.Forms.HexBox.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="PeekPoker.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PeekPoker.Interface\bin\Debug\PeekPoker.Interface.dll</HintPath>
+    <Reference Include="PeekPoker.Interface">
+      <HintPath>PeekPoker.Interface\bin\Debug\PeekPoker.Interface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />

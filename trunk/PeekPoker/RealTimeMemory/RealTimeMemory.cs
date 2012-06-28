@@ -77,7 +77,7 @@ namespace PeekPoker.RealTimeMemory
         /// <param name="value">The value to poke Example:000032FF (hex string)</param>
         public void Poke(uint memoryAddress, string value)
         {
-            if (!Functions.IsHex(value))
+            if (!Functions.Functions.IsHex(value))
                 throw new Exception("Not a valid Hex String!");
             if (!Connect()) return; //Call function - If not connected return
             try
@@ -143,7 +143,7 @@ namespace PeekPoker.RealTimeMemory
                 readWriter.Flush();
                 readWriter.Position = total;
                 var value = readWriter.ReadBytes(peekSize);
-                return Functions.ToHexString(value);
+                return Functions.Functions.ToHexString(value);
             }
             catch (Exception ex)
             {
@@ -162,7 +162,7 @@ namespace PeekPoker.RealTimeMemory
         {
             if (pointer == null)
                 throw new Exception("Empty Search string!");
-            if (!Functions.IsHex(pointer))
+            if (!Functions.Functions.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
             if (!Connect()) return null; //Call function - If not connected return
             if (!GetMeMex()) return null; //call function - If not connected or if somethign wrong return
@@ -195,7 +195,7 @@ namespace PeekPoker.RealTimeMemory
                 //===================================
                 //===================================
                 _readWriter.Position = 0;
-                var values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer), _startDumpOffset);
+                var values = _readWriter.SearchHexString(Functions.Functions.StringToByteArray(pointer), _startDumpOffset);
                 return values;
             }
             catch (Exception ex)
@@ -213,7 +213,7 @@ namespace PeekPoker.RealTimeMemory
 
         public void Dump(string filename, string startDumpAddress, string dumpLength)
         {
-            Dump(filename, Functions.Convert(startDumpAddress), Functions.Convert(dumpLength));
+            Dump(filename, Functions.Functions.Convert(startDumpAddress), Functions.Functions.Convert(dumpLength));
         }
 
         private void Dump(string filename, uint startDumpAddress, uint dumpLength)
