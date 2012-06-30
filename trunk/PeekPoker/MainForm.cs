@@ -77,11 +77,11 @@ namespace PeekPoker
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor"));
+            stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor :Revision 7"));
             stringBuilder.AppendLine(string.Format("================By================"));
-            stringBuilder.AppendLine(string.Format("Cybersamm, 8Ballm PureIso"));
-            stringBuilder.AppendLine(string.Format("=======Special Thanks To=========="));
-            stringBuilder.AppendLine(string.Format("optantic (tester), Mojobojo (codes), Natelx (xbdm)"));
+            stringBuilder.AppendLine(string.Format("Cybersamm, 8Ball & PureIso"));
+            stringBuilder.AppendLine(string.Format("=============Special Thanks To========="));
+            stringBuilder.AppendLine(string.Format("optantic (tester), Mojobojo (codes), Natelx (xbdm), Be.Windows.Forms.HexBox.dll"));
             stringBuilder.AppendLine(string.Format("fairchild (codes), actualmanx (tester), ioritree (tester), 360Haven"));
             ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -137,8 +137,11 @@ namespace PeekPoker
             AutoComplete();//run function
             try
             {
-                if (string.IsNullOrEmpty(peekLengthTextBox.Text))
+                if (string.IsNullOrEmpty(peekLengthTextBox.Text) || Convert.ToUInt32(peekLengthTextBox.Text, 16) == 0)
                     throw new Exception("Invalide peek length!");
+                if (string.IsNullOrEmpty(peekPokeAddressTextBox.Text) || Convert.ToUInt32(peekPokeAddressTextBox.Text, 16) == 0)
+                    throw new Exception("Address cannot be 0 or null");
+                //convert peek result string values to byte
                 var retValue = Functions.Functions.StringToByteArray(_rtm.Peek(peekPokeAddressTextBox.Text, peekLengthTextBox.Text, peekPokeAddressTextBox.Text, peekLengthTextBox.Text));
                 var buffer = new Be.Windows.Forms.DynamicByteProvider(retValue) { IsWriteByte = true }; //object initilizer 
                 hexBox.ByteProvider = buffer;
