@@ -1,4 +1,4 @@
-﻿Last Update - 28/06/12 by PureIso
+﻿Last Update - 30/06/2012 by PureIso
 ==============================================================
 NB: Update source file before you commit.
 NB: Update source file before you commit.
@@ -6,7 +6,7 @@ NB: Update source file before you commit.
 NB: Update source file before you commit.
 ==============================================================
 Revision 7
-Release date: Unreleased
+Release date: 30/06/2012
 
 
 -Changes - 12/04/12
@@ -166,6 +166,10 @@ More code cleanup
 -Fixed the svn (release to trunk)
 -Fixed the folder so peekpoker contains peekpoker.interface
 
+-changes 30/06/12
+[PureIso]
+-Fixed peek exception handler
+-Version 7 Release
 
 TODO:
 -Add game id recognition to help user name trainer file correctly
