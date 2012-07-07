@@ -29,7 +29,7 @@ namespace PeekPoker
     public delegate void UpdateProgressBarHandler(int min, int max, int value, string text);
     #endregion
 
-    public partial class MainForm : Form
+    public partial class PeekPokerMainForm : Form
     {
         #region global varibales
 
@@ -43,7 +43,7 @@ namespace PeekPoker
 
         #endregion
 
-        public MainForm()
+        public PeekPokerMainForm()
         {
             InitializeComponent();
             SetLogText("Welcome to Peek Poker.");
@@ -286,18 +286,38 @@ namespace PeekPoker
 
         private void FreezeButtonClick(object sender, EventArgs e)
         {
-            SetLogText("Freeze xbox console - command.");
-            _rtm.StopCommand();
-            unfreezeButton.Enabled = true;
-            freezeButton.Enabled = false;
+            try
+            {
+                SetLogText("Freeze xbox console - command.");
+                _rtm.StopCommand();
+                unfreezeButton.Enabled = true;
+                freezeButton.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                SetLogText("Freeze Error: " + ex.Message);
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                unfreezeButton.Enabled = false;
+                freezeButton.Enabled = true;
+            }           
         }
 
         private void UnfreezeButtonClick(object sender, EventArgs e)
         {
-            SetLogText("Un-Freeze xbox console - command.");
-            _rtm.StartCommand();
-            unfreezeButton.Enabled = false;
-            freezeButton.Enabled = true;
+            try
+            {
+                SetLogText("Un-Freeze xbox console - command.");
+                _rtm.StartCommand();
+                unfreezeButton.Enabled = false;
+                freezeButton.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                SetLogText("Un-Freeze Error: " + ex.Message);
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                unfreezeButton.Enabled = true;
+                freezeButton.Enabled = false;
+            }  
         }
 
         private void PhysicalRamButtonClick(object sender, EventArgs e)
@@ -321,7 +341,6 @@ namespace PeekPoker
                 ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void QuickCalculatorMinusButtonClick(object sender, EventArgs e)
         {
@@ -422,6 +441,7 @@ namespace PeekPoker
                         Name = plugin.Instance.ApplicationName,
                         Tag = plugin.Instance.ApplicationName,
                         Text = plugin.Instance.ApplicationName,
+                        Image = plugin.Instance.Icon.ToBitmap(),
                         Size = new System.Drawing.Size(170, 22)
                     };
 
@@ -609,11 +629,20 @@ namespace PeekPoker
         //The cxlick handler for the plugins
         private void PluginClickEventHandler(object sender, EventArgs e)
         {
-            var item = (ToolStripMenuItem)sender;       // get the menu item
-            foreach (var plugin in Plugin.Plugin.PluginService.PluginList)
+            try
             {
-                if (plugin.Name == item.Name) plugin.Instance.Display();
+                var item = (ToolStripMenuItem)sender;       // get the menu item
+                foreach (var plugin in Plugin.Plugin.PluginService.PluginList)
+                {
+                    if (plugin.Name == item.Name)plugin.Instance.Display();
+                }
             }
+            catch (Exception ex)
+            {
+                SetLogText("Plugin Instance: " + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+            
         }
         #endregion
 

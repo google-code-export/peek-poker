@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using PeekPoker.Interface;
@@ -66,7 +67,7 @@ namespace PeekPoker.Plugin
                     var pluginInterfaceInstance = (IPlugin)(Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
                     //initials the plugin data
                     var pluginData = new PluginData(pluginInterfaceInstance.ApplicationName, pluginInterfaceInstance.Description,
-                                                    pluginInterfaceInstance.Author, pluginInterfaceInstance.Version, pluginInterfaceInstance);
+                                                    pluginInterfaceInstance.Author, pluginInterfaceInstance.Version, pluginInterfaceInstance.Icon,pluginInterfaceInstance);
 
                     _pluginList.Add(pluginData);
                 }
@@ -87,14 +88,16 @@ namespace PeekPoker.Plugin
         private readonly string _description;
         private readonly string _author;
         private readonly string _version;
+        private readonly Icon _icon;
         private readonly IPlugin _instance;
 
-        public PluginData(string name, string description, string author, string version, IPlugin instance)
+        public PluginData(string name, string description, string author, string version,Icon icon, IPlugin instance)
         {
             _name = name;
             _description = description;
             _author = author;
             _version = version;
+            _icon = icon;
             _instance = instance;
         }
 
@@ -113,6 +116,10 @@ namespace PeekPoker.Plugin
         public string Version
         {
             get { return _version; }
+        }
+        public Icon Icon
+        {
+            get { return _icon; }
         }
         public IPlugin Instance
         {

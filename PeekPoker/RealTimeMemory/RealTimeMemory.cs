@@ -6,7 +6,8 @@ using System.ComponentModel;
 namespace PeekPoker.RealTimeMemory
 {
     /// <summary>Real Time Memory Access Class using xbdm
-    /// NB: Large dump speed depends on the version of xbdm you have</summary>
+    /// NB: Large dump speed depends on the version of xbdm you have
+    /// and TCP is closed after each function.</summary>
     public class RealTimeMemory
     {
         #region Eventhandlers/DelegateHandlers
@@ -216,13 +217,12 @@ namespace PeekPoker.RealTimeMemory
             Dump(filename, Functions.Functions.Convert(startDumpAddress), Functions.Functions.Convert(dumpLength));
         }
 
-        private void Dump(string filename, uint startDumpAddress, uint dumpLength)
+        public void Dump(string filename, uint startDumpAddress, uint dumpLength)
         {
             if (!Connect()) return; //Call function - If not connected return
             if (!GetMeMex(startDumpAddress, dumpLength)) return; //call function - If not connected or if somethign wrong return
 
             var readWriter = new RWStream(filename);
-            //_readWriter.ReportProgress += new UpdateProgressBarHandler(ReportProgress);
             try
             {
                 var data = new byte[1026]; //byte chuncks
@@ -258,21 +258,47 @@ namespace PeekPoker.RealTimeMemory
         /// <summary>Send a freeze command to the xbox</summary>
         public void StopCommand()
         {
-            if (_memexValidConnection) return;
-            var response = new byte[1024];
-            //Send a stop command to the xbox - freeze
-            _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("STOP\r\n")));
-            _tcp.Client.Receive(response);
+            try
+            {
+                if (!Connect()) return; //Call function - If not connected return
+                var response = new byte[1024];
+                //Send a stop command to the xbox - freeze
+                _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("STOP\r\n")));
+                _tcp.Client.Receive(response);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                _tcp.Close(); //close connection
+                _connected = false;
+                _memexValidConnection = false;
+            }
         }
 
         /// <summary>Send a start command to the xbox</summary>
         public void StartCommand()
         {
-            if (_memexValidConnection) return;
-            var response = new byte[1024];
-            //Send a start command to the xbox - resume
-            _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("GO\r\n")));
-            _tcp.Client.Receive(response);
+            try
+            {
+                if (!Connect()) return; //Call function - If not connected return
+                var response = new byte[1024];
+                //Send a start command to the xbox - resume
+                _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("GO\r\n")));
+                _tcp.Client.Receive(response);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                _tcp.Close(); //close connection
+                _connected = false;
+                _memexValidConnection = false;
+            }
         }
 
         #region Private
@@ -314,7 +340,6 @@ namespace PeekPoker.RealTimeMemory
                 return System.Convert.ToInt32(value.Substring(2), 16);
             return System.Convert.ToInt32(value);
         }
-
         #endregion
         #endregion
 
@@ -344,7 +369,6 @@ namespace PeekPoker.RealTimeMemory
                 _stopSearch = value;
             }
         }
-
         #endregion
     }
 }

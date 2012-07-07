@@ -26,6 +26,13 @@ namespace PeekPoker.Interface
         #region Constructor
         /// <summary>RealTimeMemory constructor Example: Default start dump = "0xC0000000" and length = "0x1FFFFFFF"</summary>
         /// <param name="ipAddress">The IP address</param>
+        public RealTimeMemory(string ipAddress)
+        {
+            _ipAddress = ipAddress;
+            _connected = false;
+        }
+        /// <summary>RealTimeMemory constructor Example: Default start dump = "0xC0000000" and length = "0x1FFFFFFF"</summary>
+        /// <param name="ipAddress">The IP address</param>
         /// <param name="startDumpOffset">The start dump address</param>
         /// <param name="startDumpLength">The dump length</param>
         public RealTimeMemory(string ipAddress, string startDumpOffset, string startDumpLength)
@@ -306,7 +313,7 @@ namespace PeekPoker.Interface
         /// <summary>Find the address of a pointer from the start dump offset</summary>
         /// <param name="pointer">The hex string of the pointer Example: 821122114455EEFF000000</param>
         /// <returns>Returns and array of the address or all address where the pointer was found</returns>
-        public IEnumerable<string> FindHexOffset(string pointer)
+        public string[] FindHexOffset(string pointer)
         {
             if (!Hex.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
@@ -431,6 +438,51 @@ namespace PeekPoker.Interface
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _tcp.Close(); //close connection
+                _connected = false;
+                _memexValidConnection = false;
+            }
+        }
+
+        /// <summary>Send a freeze command to the xbox</summary>
+        public void StopCommand()
+        {
+            try
+            {
+                if (!Connect()) return; //Call function - If not connected return
+                var response = new byte[1024];
+                //Send a stop command to the xbox - freeze
+                _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("STOP\r\n")));
+                _tcp.Client.Receive(response);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                _tcp.Close(); //close connection
+                _connected = false;
+                _memexValidConnection = false;
+            }
+        }
+        /// <summary>Send a start command to the xbox</summary>
+        public void StartCommand()
+        {
+            try
+            {
+                if (!Connect()) return; //Call function - If not connected return
+                var response = new byte[1024];
+                //Send a start command to the xbox - resume
+                _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("GO\r\n")));
+                _tcp.Client.Receive(response);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
             finally
             {
