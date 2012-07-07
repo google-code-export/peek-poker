@@ -1,4 +1,6 @@
-﻿namespace PeekPoker.Interface
+﻿using System.Drawing;
+
+namespace PeekPoker.Interface
 {
     //======================================================//
     // Interface that would allow other applications/tools  //
@@ -21,6 +23,8 @@
         string Author { get; }
         /// <summary>The version of the application</summary>
         string Version { get; }
+        /// <summary>The application's Icon</summary>
+        Icon Icon { get; }
         #endregion
     }
 }
