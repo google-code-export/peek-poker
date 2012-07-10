@@ -79,7 +79,7 @@ namespace PeekPoker
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor :Revision 7"));
             stringBuilder.AppendLine(string.Format("================By================"));
-            stringBuilder.AppendLine(string.Format("Cybersamm, 8Ball & PureIso"));
+            stringBuilder.AppendLine(string.Format("Cybersam, 8Ball & PureIso"));
             stringBuilder.AppendLine(string.Format("=============Special Thanks To========="));
             stringBuilder.AppendLine(string.Format("optantic (tester), Mojobojo (codes), Natelx (xbdm), Be.Windows.Forms.HexBox.dll"));
             stringBuilder.AppendLine(string.Format("fairchild (codes), actualmanx (tester), ioritree (tester), 360Haven"));
@@ -453,7 +453,7 @@ namespace PeekPoker
                     listviewItem.SubItems.Add(plugin.Author);
                     listviewItem.SubItems.Add(plugin.Version);
                     pluginListView.Items.Add(listviewItem);
-                    SetLogText("Plugin Added:" + plugin.Name + "Version: "+plugin.Version);
+                    SetLogText("Plugin Added: " + plugin.Name + " Version: "+plugin.Version);
                 }
             }
             catch (Exception e)
@@ -1449,7 +1449,6 @@ namespace PeekPoker
             #endregion
         }
         #endregion
-
         #region Trainer-Utility
         private void ScanTrainerCodes(object sender, EventArgs e) //Opens a trainers txt file to read its codes
         {
