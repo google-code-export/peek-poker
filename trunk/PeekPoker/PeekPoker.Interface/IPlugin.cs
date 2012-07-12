@@ -17,14 +17,19 @@ namespace PeekPoker.Interface
         #region App Properties
         /// <summary>Application name</summary>
         string ApplicationName { get; }
+
         /// <summary>Application's Description</summary>
         string Description { get; }
+
         /// <summary>The Author of the application</summary>
         string Author { get; }
+
         /// <summary>The version of the application</summary>
         string Version { get; }
+
         /// <summary>The application's Icon</summary>
         Icon Icon { get; }
+
         #endregion
     }
 }
