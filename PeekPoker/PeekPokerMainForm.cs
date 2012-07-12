@@ -71,7 +71,6 @@ namespace PeekPoker
             
             //Set correct max. min values for the numeric fields
             ChangeNumericMaxMin();
-
             if (File.Exists(_trainerdottext)) AddTrainerFromTextFile(); //loads trainers.txt
         }
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
@@ -634,7 +633,10 @@ namespace PeekPoker
                 var item = (ToolStripMenuItem)sender;       // get the menu item
                 foreach (var plugin in Plugin.Plugin.PluginService.PluginList)
                 {
-                    if (plugin.Name == item.Name)plugin.Instance.Display();
+                    if (plugin.Name == item.Name)
+                    {
+                        plugin.Instance.Display();
+                    }
                 }
             }
             catch (Exception ex)

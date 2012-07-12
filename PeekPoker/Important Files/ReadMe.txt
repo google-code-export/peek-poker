@@ -171,10 +171,17 @@ More code cleanup
 -Fixed peek exception handler
 -Version 7 Release
 
+-changes 07/07/12
 [PureIso]
 -Fixed freeze and Unfreeze exceptions
 -Added extra constructor to RealTimeMemory Class - Interface
 -Added get plugin Icon
+
+-changes 12/07/12
+[PureIso]
+Cleanup
+-Version 7.1.6 Release
+
 
 TODO:
 -Add game id recognition to help user name trainer file correctly
