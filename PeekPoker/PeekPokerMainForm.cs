@@ -2,10 +2,12 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Microsoft.Win32;
 using Application = System.Windows.Forms.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
 //=====================================================
@@ -47,8 +49,8 @@ namespace PeekPoker
         {
             InitializeComponent();
             SetLogText("Welcome to Peek Poker.");
-            SetLogText("Please make sure you have the xbdm xbox 360 plugin.");
-            SetLogText("All the information provided on this application are for educational purposes only. The application or host is no way responsible for any misuse of the information.");
+            SetLogText("Please make sure you have the xbdm xbox 360 plugin loaded.");
+            SetLogText("All the information provided in this application is for educational purposes only. Neither the application nor host are in any way responsible for any misuse of the information.");
             LoadPlugins();
             searchRangeBaseValueTypeCB.SelectedIndex = 0;
             searchRangeEndTypeCB.SelectedIndex = 0;
@@ -62,13 +64,12 @@ namespace PeekPoker
         private void Form1Load(Object sender, EventArgs e)
         {
             //feature suggested by fairchild
-            var xboxname = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound");
-            if (xboxname != "NotFound")
-                ipAddressTextBox.Text = xboxname;
-            //This is for handling automatic loading of the IP address and txt file creation. -8Ball
-            //Changed a bit to only check if it does exist creation and fill code is in the same place now - sam
+            var ipRegex = new Regex(@"^(([01]?\d\d?|2[0-4]\d|25[0-5])\.){3}([01]?\d\d?|25[0-5]|2[0-4]\d)$"); //IP Check for XDK Name
+            var xboxname = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound"); //feature suggested by fairchild -Introduced regex to accomodate the possiblity of a name instead of ip, which is very possible.
+            var validIp = ipRegex.Match(xboxname); // For regex to check if theres a match
+            if (validIp.Success) ipAddressTextBox.Text = xboxname;// If the registry contains a valid IP, send to textbox.
             if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
-            
+            else SetLogText("XboxIP.txt was not detected, will be created upon conection.");
             //Set correct max. min values for the numeric fields
             ChangeNumericMaxMin();
             if (File.Exists(_trainerdottext)) AddTrainerFromTextFile(); //loads trainers.txt
