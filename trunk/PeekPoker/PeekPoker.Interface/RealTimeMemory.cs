@@ -67,7 +67,7 @@ namespace PeekPoker.Interface
                 if (_ipAddress.Length < 5)
                     throw new Exception("Invalid IP");
                 if (_connected) return true; //If you are already connected then return
-                _tcp = new TcpClient(); //New Istance of TCP
+                _tcp = new TcpClient(); //New Instance of TCP
                 //Connect to the specified host using port 730
                 _tcp.Connect(_ipAddress, 730);
                 var response = new byte[1024];
@@ -125,9 +125,7 @@ namespace PeekPoker.Interface
             if (!Connect()) return; //Call function - If not connected return
             try
             {
-                if (memoryAddress > (_startDumpOffset + _startDumpLength) || memoryAddress < _startDumpOffset)
-                    throw new Exception("Memory Address Out of Bounds");
-                WriteMemory(memoryAddress, value); //Items 1 flame grenade
+                WriteMemory(memoryAddress, value);
             }
             catch (Exception ex)
             {
@@ -325,7 +323,7 @@ namespace PeekPoker.Interface
             {
                 if (!_streamDumpFlag)
                 {
-                    //LENGTH or Szie = Length of the dump
+                    //LENGTH or Size = Length of the dump
                     var size = _startDumpLength;
                     var readWriter = new RWStream();
                     var data = new byte[1026]; //byte chuncks
