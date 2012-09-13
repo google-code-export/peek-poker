@@ -182,6 +182,9 @@ More code cleanup
 Cleanup
 -Version 7.1.6 Release
 
+-changes 13/09/12
+[PureIso]
+-Fixed RealTimeMemory poke bug
 
 TODO:
 -Add game id recognition to help user name trainer file correctly

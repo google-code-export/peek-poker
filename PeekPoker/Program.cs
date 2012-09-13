@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace PeekPoker
@@ -13,9 +11,18 @@ namespace PeekPoker
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PeekPokerMainForm());
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new PeekPokerMainForm());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            
         }
     }
 }
