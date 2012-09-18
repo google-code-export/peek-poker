@@ -186,5 +186,9 @@ Cleanup
 [PureIso]
 -Fixed RealTimeMemory poke bug
 
+-changes 18/09/12
+[PureIso]
+-Added an experimental poking function (Requested)(Not tested)
+
 TODO:
 -Add game id recognition to help user name trainer file correctly

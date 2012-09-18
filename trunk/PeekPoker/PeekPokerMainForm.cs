@@ -49,7 +49,7 @@ namespace PeekPoker
         {
             InitializeComponent();
             SetLogText("Welcome to Peek Poker.");
-            SetLogText("Please make sure you have the xbdm xbox 360 plugin loaded.");
+            SetLogText("Please make sure you have the xbdm xbox 360 plug-in loaded.");
             SetLogText("All the information provided in this application is for educational purposes only. Neither the application nor host are in any way responsible for any misuse of the information.");
             LoadPlugins();
             searchRangeBaseValueTypeCB.SelectedIndex = 0;
@@ -59,17 +59,17 @@ namespace PeekPoker
         }
         private void MainFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            Process.GetCurrentProcess().Kill();//Immidiable stop the process
+            Process.GetCurrentProcess().Kill();//Immediately stop the process
         }
         private void Form1Load(Object sender, EventArgs e)
         {
-            //feature suggested by fairchild
+            //feature suggested by Fairchild
             var ipRegex = new Regex(@"^(([01]?\d\d?|2[0-4]\d|25[0-5])\.){3}([01]?\d\d?|25[0-5]|2[0-4]\d)$"); //IP Check for XDK Name
             var xboxname = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound"); //feature suggested by fairchild -Introduced regex to accomodate the possiblity of a name instead of ip, which is very possible.
-            var validIp = ipRegex.Match(xboxname); // For regex to check if theres a match
+            var validIp = ipRegex.Match(xboxname); // For regex to check if there's a match
             if (validIp.Success) ipAddressTextBox.Text = xboxname;// If the registry contains a valid IP, send to textbox.
             if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
-            else SetLogText("XboxIP.txt was not detected, will be created upon conection.");
+            else SetLogText("XboxIP.txt was not detected, will be created upon connection.");
             //Set correct max. min values for the numeric fields
             ChangeNumericMaxMin();
             if (File.Exists(_trainerdottext)) AddTrainerFromTextFile(); //loads trainers.txt
@@ -82,7 +82,7 @@ namespace PeekPoker
             stringBuilder.AppendLine(string.Format("Cybersam, 8Ball & PureIso"));
             stringBuilder.AppendLine(string.Format("=============Special Thanks To========="));
             stringBuilder.AppendLine(string.Format("optantic (tester), Mojobojo (codes), Natelx (xbdm), Be.Windows.Forms.HexBox.dll"));
-            stringBuilder.AppendLine(string.Format("fairchild (codes), actualmanx (tester), ioritree (tester), 360Haven"));
+            stringBuilder.AppendLine(string.Format("Fairchild (codes), actualmanx (tester), ioritree (tester), 360Haven"));
             ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void ConverterClearButtonClick(object sender, EventArgs e)
@@ -138,7 +138,7 @@ namespace PeekPoker
             try
             {
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text) || Convert.ToUInt32(peekLengthTextBox.Text, 16) == 0)
-                    throw new Exception("Invalide peek length!");
+                    throw new Exception("Invalid peek length!");
                 if (string.IsNullOrEmpty(peekPokeAddressTextBox.Text) || Convert.ToUInt32(peekPokeAddressTextBox.Text, 16) == 0)
                     throw new Exception("Address cannot be 0 or null");
                 //convert peek result string values to byte
@@ -193,7 +193,7 @@ namespace PeekPoker
             SetLogText("New Peek Initiated!");
         }
 
-        //Esearch Button
+        //search Button
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
             try
@@ -356,6 +356,12 @@ namespace PeekPoker
                 SetLogText("Quick Calculator Error [Minus]: " + ex.Message);
                 ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ConstantPokingButtonClick(object sender, EventArgs e)
+        {
+            Thread othread = new Thread(ConstantPoking);
+            othread.Start();
         }
         #endregion
 
@@ -749,6 +755,34 @@ namespace PeekPoker
                 Thread.CurrentThread.Abort();
             }
         }
+
+        private void ConstantPoking()
+        {
+            try
+            {
+                while(constantPokingCheckBox.Checked)
+                {
+                    int startPause = 0;
+                    //Pause
+                    while (startPause <= GetPauseBetweenPokesNumericUpDown())
+                    {
+                        startPause++;
+                    }
+                    _rtm.Poke(GetConstantStartRangeAddressTextBoxText(), GetConstantLengthTextBox());
+                    SetConstantPokingDebugText("Successful");
+                }
+            }
+            catch (Exception ex)
+            {
+                SetLogText("Constant Poking Error: " + ex.Message);
+                SetConstantPokingDebugText("Constant Poking Error: " + ex.Message);
+                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Thread.CurrentThread.Abort();
+            }
+        }
         #endregion
 
         #region safeThreadingProperties
@@ -807,6 +841,36 @@ namespace PeekPoker
                 return startRangeAddressTextBox.Text;
             return returnVal;
         }
+        private string GetConstantStartRangeAddressTextBoxText()
+        {
+            //recursion
+            var returnVal = "";
+            if (constantPokingAddressTextBox.InvokeRequired) constantPokingAddressTextBox.Invoke((MethodInvoker)
+                  delegate { returnVal = GetConstantStartRangeAddressTextBoxText(); });
+            else
+                return constantPokingAddressTextBox.Text;
+            return returnVal;
+        }
+        private String GetConstantLengthTextBox()//Get the value from the textbox - safe
+        {
+            //recursion
+            var returnVal = "";
+            if (constantPokingLengthTextBox.InvokeRequired) constantPokingLengthTextBox.Invoke((MethodInvoker)
+                  delegate { returnVal = GetConstantLengthTextBox(); });
+            else
+                return constantPokingLengthTextBox.Text;
+            return returnVal;
+        }
+        private uint GetPauseBetweenPokesNumericUpDown()
+        {
+            //recursion
+            uint returnVal = 0;
+            if (pauseBetweenPokesNumericUpDown.InvokeRequired) pauseBetweenPokesNumericUpDown.Invoke((MethodInvoker)
+                  delegate { returnVal = GetPauseBetweenPokesNumericUpDown(); });
+            else
+                return (uint)pauseBetweenPokesNumericUpDown.Value;
+            return returnVal;
+        }
         private void EnableStopSearchButton(bool value)
         {
             if (stopSearchButton.InvokeRequired)
@@ -845,6 +909,18 @@ namespace PeekPoker
                 logTextBox.Text += m;
                 logTextBox.Select(logTextBox.Text.Length, 0); // set the cursor to end of textbox
                 logTextBox.ScrollToCaret();                     // scroll down to the cursor position
+            }
+        }
+        private void SetConstantPokingDebugText(string value)
+        {
+            if (logTextBox.InvokeRequired)
+                Invoke((MethodInvoker)(() => SetConstantPokingDebugText(value)));
+            else
+            {
+                var m = DateTime.Now.ToString("HH:mm:ss tt") + " " + value + Environment.NewLine;
+                constantPokingDebugTextBox.Text += m;
+                constantPokingDebugTextBox.Select(logTextBox.Text.Length, 0); // set the cursor to end of textbox
+                constantPokingDebugTextBox.ScrollToCaret();                     // scroll down to the cursor position
             }
         }
         private void ShowMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
