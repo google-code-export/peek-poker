@@ -180,11 +180,13 @@ namespace PeekPoker
                     results.Value = Functions.Functions.ByteArrayToString(segment);
                     results.ID = x.ToString();
                     positions.Add(results);
+                    if (_stopSearch) return positions;
                     i = Array.IndexOf(buffer, pattern[0], i + pattern.Length);
                     x++;
                 }
                 else 
                 {
+                    if (_stopSearch) return positions;
                     i = Array.IndexOf(buffer, pattern[0], i + 1);
                 }
                 if (_stopSearch) return positions;

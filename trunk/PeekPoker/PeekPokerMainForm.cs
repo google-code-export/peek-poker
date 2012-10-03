@@ -63,16 +63,24 @@ namespace PeekPoker
         }
         private void Form1Load(Object sender, EventArgs e)
         {
-            //feature suggested by Fairchild
-            var ipRegex = new Regex(@"^(([01]?\d\d?|2[0-4]\d|25[0-5])\.){3}([01]?\d\d?|25[0-5]|2[0-4]\d)$"); //IP Check for XDK Name
-            var xboxname = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound"); //feature suggested by fairchild -Introduced regex to accomodate the possiblity of a name instead of ip, which is very possible.
-            var validIp = ipRegex.Match(xboxname); // For regex to check if there's a match
-            if (validIp.Success) ipAddressTextBox.Text = xboxname;// If the registry contains a valid IP, send to textbox.
-            if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
-            else SetLogText("XboxIP.txt was not detected, will be created upon connection.");
-            //Set correct max. min values for the numeric fields
-            ChangeNumericMaxMin();
-            if (File.Exists(_trainerdottext)) AddTrainerFromTextFile(); //loads trainers.txt
+            try
+            {
+                //Set correct max. min values for the numeric fields
+                ChangeNumericMaxMin();
+                if (File.Exists(_trainerdottext)) AddTrainerFromTextFile(); //loads trainers.txt
+
+                //feature suggested by Fairchild
+                var ipRegex = new Regex(@"^(([01]?\d\d?|2[0-4]\d|25[0-5])\.){3}([01]?\d\d?|25[0-5]|2[0-4]\d)$"); //IP Check for XDK Name
+                var xboxname = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound"); //feature suggested by fairchild -Introduced regex to accomodate the possiblity of a name instead of ip, which is very possible.
+                var validIp = ipRegex.Match(xboxname); // For regex to check if there's a match
+                if (validIp.Success) ipAddressTextBox.Text = xboxname;// If the registry contains a valid IP, send to textbox.
+                if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
+                else SetLogText("XboxIP.txt was not detected, will be created upon connection.");
+            }
+            catch (Exception ex)
+            {
+                SetLogText("Error: XenonSDK not installed XboxName is null! You can still use PeekPoker");
+            } 
         }
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
@@ -137,6 +145,7 @@ namespace PeekPoker
             AutoComplete();//run function
             try
             {
+                peekButton.Enabled = false;
                 if (string.IsNullOrEmpty(peekLengthTextBox.Text) || Convert.ToUInt32(peekLengthTextBox.Text, 16) == 0)
                     throw new Exception("Invalid peek length!");
                 if (string.IsNullOrEmpty(peekPokeAddressTextBox.Text) || Convert.ToUInt32(peekPokeAddressTextBox.Text, 16) == 0)
@@ -148,12 +157,14 @@ namespace PeekPoker
                 hexBox.Refresh();
                 SetLogText("Peeked Address: " + peekPokeAddressTextBox.Text + " Length: " + peekLengthTextBox.Text);
                 peekPokeFeedBackTextBox.Text = string.Format("Peek Success!");
+                peekButton.Enabled = true;
             }
             catch (Exception ex)
             {
                 SetLogText("Error: " + ex.Message);
                 MessageBox.Show(this, ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
+                peekButton.Enabled = true;
             }
         }
 
@@ -163,6 +174,10 @@ namespace PeekPoker
             AutoComplete(); //run function
             try
             {
+                pokeButton.Enabled = false;
+                uint dumplength = (uint) hexBox.ByteProvider.Length/2;
+                if (dumplength > 240)
+                    throw new Exception("Poke Length has to be under 240 bytes.");
                 _rtm.DumpOffset = Functions.Functions.Convert(peekPokeAddressTextBox.Text);//Set the dump offset
                 _rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
 
@@ -171,11 +186,13 @@ namespace PeekPoker
                 Console.WriteLine(Functions.Functions.ByteArrayToString(buffer.Bytes.ToArray()));//?????
                 _rtm.Poke(peekPokeAddressTextBox.Text, Functions.Functions.ByteArrayToString(buffer.Bytes.ToArray()));
                 peekPokeFeedBackTextBox.Text = string.Format("Poke Success!");
+                pokeButton.Enabled = true;
             }
             catch (Exception ex)
             {
                 SetLogText("Error: " + ex.Message);
                 MessageBox.Show(this, ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                pokeButton.Enabled = true;
             }
         }
 
@@ -240,7 +257,7 @@ namespace PeekPoker
             }
             else
             {
-                ShowMessageBox("Can not refresh! \r\n Resultlist empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessageBox("Can not refresh! \r\n Result list empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -661,6 +678,7 @@ namespace PeekPoker
         {
             try
             {
+                EnableButton(resultRefreshButton, false);
                 var value = 0;
                 foreach (var item in _searchResult)
                 {
@@ -671,13 +689,12 @@ namespace PeekPoker
                     var length = (item.Value.Length / 2).ToString("X");
                     var retvalue = _rtm.Peek("0x" + item.Offset, length, "0x" + item.Offset, length);
 
-                    if (item.Value == retvalue) continue;//if value hasn't change continue foreach loop
+                    if (item.Value == retvalue) continue;//if value hasn't change continue for each loop
 
                     GridRowColours(value);
                     item.Value = retvalue;
-                    SetLogText("Search List was refreshed!");
                 }
-
+                SetLogText("Search List was refreshed!");
                 ResultGridUpdate();
                 UpdateProgressbar(0, 100, 0, "idle");
             }
@@ -688,6 +705,8 @@ namespace PeekPoker
             }
             finally
             {
+                EnableButton(resultRefreshButton, true);
+                UpdateProgressbar(0, 100, 0, "idle");
                 Thread.CurrentThread.Abort();
             }
         }
@@ -697,9 +716,8 @@ namespace PeekPoker
         {
             try
             {
-                EnableSearchRangeButton(false);
-                EnableExSearchRangeButton(false);
-                EnableStopSearchButton(true);
+                EnableButton(searchRangeButton,false);
+                EnableButton(stopSearchButton, true);
                 SetLogText("Search Offset: " + GetStartRangeAddressTextBoxText() + " Search Length: " +
                            _searchRangeDumpLength);
                 _rtm.DumpOffset = Functions.Functions.Convert(GetStartRangeAddressTextBoxText());
@@ -727,9 +745,8 @@ namespace PeekPoker
             }
             finally
             {
-                EnableExSearchRangeButton(true);
-                EnableSearchRangeButton(true);
-                EnableStopSearchButton(false);
+                EnableButton(searchRangeButton, true);
+                EnableButton(stopSearchButton, false);
                 Thread.CurrentThread.Abort();
             }
         }
@@ -739,7 +756,7 @@ namespace PeekPoker
         {
             try
             {
-                EnableDumpButton(false);
+                EnableButton(dumpMemoryButton,false);
                 SetLogText("Dump Offset: " + GetDumpStartOffsetTextBoxText() + " Dump Length: " + GetDumpLengthTextBox());
                 _rtm.Dump(_dumpFilePath, GetDumpStartOffsetTextBoxText(), GetDumpLengthTextBox());
                 UpdateProgressbar(0, 100, 0);
@@ -751,7 +768,8 @@ namespace PeekPoker
             }
             finally
             {
-                EnableDumpButton(true);
+                EnableButton(dumpMemoryButton, true);
+                UpdateProgressbar(0, 100, 0);
                 Thread.CurrentThread.Abort();
             }
         }
@@ -871,34 +889,15 @@ namespace PeekPoker
                 return (uint)pauseBetweenPokesNumericUpDown.Value;
             return returnVal;
         }
-        private void EnableStopSearchButton(bool value)
+        
+        private void EnableButton(Control control, bool value)
         {
-            if (stopSearchButton.InvokeRequired)
-                stopSearchButton.Invoke((MethodInvoker)delegate { EnableStopSearchButton(value); });
+            if (control.InvokeRequired)
+                control.Invoke((MethodInvoker)delegate { EnableButton(control, value); });
             else
-                stopSearchButton.Enabled = value;
+                control.Enabled = value;
         }
-        private void EnableDumpButton(bool value)
-        {
-            if (dumpMemoryButton.InvokeRequired)
-                dumpMemoryButton.Invoke((MethodInvoker)delegate { EnableDumpButton(value); });
-            else
-                dumpMemoryButton.Enabled = value;
-        }
-        private void EnableSearchRangeButton(bool value)
-        {
-            if (searchRangeButton.InvokeRequired)
-                searchRangeButton.Invoke((MethodInvoker)delegate { EnableSearchRangeButton(value); });
-            else
-                searchRangeButton.Enabled = value;
-        }
-        private void EnableExSearchRangeButton(bool value)
-        {
-            if (searchRangeButton.InvokeRequired)
-                searchRangeButton.Invoke((MethodInvoker)delegate { EnableExSearchRangeButton(value); });
-            else
-                searchRangeButton.Enabled = value;
-        }
+        
         private void SetLogText(string value)
         {
             if (logTextBox.InvokeRequired)
@@ -961,7 +960,7 @@ namespace PeekPoker
             }
         }
 
-        //Progressbar Delegates
+        //Progress bar Delegates
         private void UpdateProgressbar(int min, int max, int value, string text = "Idle")
         {
             if (statusStrip1.InvokeRequired)

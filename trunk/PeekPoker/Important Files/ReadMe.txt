@@ -189,6 +189,7 @@ Cleanup
 -changes 18/09/12
 [PureIso]
 -Added an experimental poking function (Requested)(Not tested)
+-Fixed error throw when xboxsdk is missing
 
 TODO:
 -Add game id recognition to help user name trainer file correctly

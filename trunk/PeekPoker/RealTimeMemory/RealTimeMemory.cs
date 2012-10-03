@@ -32,7 +32,7 @@ namespace PeekPoker.RealTimeMemory
         {
             _ipAddress = ipAddress;
             _connected = false;
-            //fullmemory dump by default
+            //full memory dump by default
             _startDumpOffset = startDumpOffset;
             _startDumpLength = startDumpLength;
         }
@@ -48,7 +48,7 @@ namespace PeekPoker.RealTimeMemory
                 if (_ipAddress.Length < 5)
                     throw new Exception("Invalid IP");
                 if (_connected) return true; //If you are already connected then return
-                _tcp = new TcpClient(); //New Istance of TCP
+                _tcp = new TcpClient(); //New Instance of TCP
                 //Connect to the specified host using port 730
                 _tcp.Connect(_ipAddress, 730);
                 var response = new byte[1024];
@@ -66,7 +66,7 @@ namespace PeekPoker.RealTimeMemory
         }
 
         /// <summary>Poke the Memory</summary>
-        /// <param name="memoryAddress">The memory addess to Poke Example:0xCEADEADE - Uses *.FindOffset</param>
+        /// <param name="memoryAddress">The memory address to Poke Example:0xCEADEADE - Uses *.FindOffset</param>
         /// <param name="value">The value to poke Example:000032FF (hex string)</param>
         public void Poke(string memoryAddress, string value)
         {
@@ -74,7 +74,7 @@ namespace PeekPoker.RealTimeMemory
         }
        
         /// <summary>Poke the Memory</summary>
-        /// <param name="memoryAddress">The memory addess to Poke Example:0xCEADEADE - Uses *.FindOffset</param>
+        /// <param name="memoryAddress">The memory address to Poke Example:0xCEADEADE - Uses *.FindOffset</param>
         /// <param name="value">The value to poke Example:000032FF (hex string)</param>
         public void Poke(uint memoryAddress, string value)
         {
@@ -166,7 +166,7 @@ namespace PeekPoker.RealTimeMemory
             if (!Functions.Functions.IsHex(pointer))
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
             if (!Connect()) return null; //Call function - If not connected return
-            if (!GetMeMex()) return null; //call function - If not connected or if somethign wrong return
+            if (!GetMeMex()) return null; //call function - If not connected or if something wrong return
 
             try
             {
@@ -189,12 +189,14 @@ namespace PeekPoker.RealTimeMemory
                 var extra = (int)(size % 1024);
                 if (extra > 0)
                 {
+                    if (_stopSearch) return null;
                     _tcp.Client.Receive(data);
                     _readWriter.WriteBytes(data, 2, extra);
                 }
                 _readWriter.Flush();
                 //===================================
                 //===================================
+                if (_stopSearch) return null;
                 _readWriter.Position = 0;
                 var values = _readWriter.SearchHexString(Functions.Functions.StringToByteArray(pointer), _startDumpOffset);
                 return values;
@@ -209,6 +211,7 @@ namespace PeekPoker.RealTimeMemory
                 _tcp.Close(); //close connection
                 _connected = false;
                 _memexValidConnection = false;
+                ReportProgress(0, 100, 0,"Idle");
             }
         }
 
@@ -220,7 +223,7 @@ namespace PeekPoker.RealTimeMemory
         public void Dump(string filename, uint startDumpAddress, uint dumpLength)
         {
             if (!Connect()) return; //Call function - If not connected return
-            if (!GetMeMex(startDumpAddress, dumpLength)) return; //call function - If not connected or if somethign wrong return
+            if (!GetMeMex(startDumpAddress, dumpLength)) return; //call function - If not connected or if something wrong return
 
             var readWriter = new RWStream(filename);
             try
