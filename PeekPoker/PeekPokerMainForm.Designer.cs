@@ -110,7 +110,7 @@
             this.searchTab = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.resultGrid = new System.Windows.Forms.DataGridView();
-            this.ResultRefresh = new System.Windows.Forms.Button();
+            this.resultRefreshButton = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.stopSearchButton = new System.Windows.Forms.Button();
@@ -277,8 +277,8 @@
             // 
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(82, 19);
-            this.toolStripStatusLabel1.Text = "Revision 7.2.8";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(88, 19);
+            this.toolStripStatusLabel1.Text = "Revision 7.2.12";
             // 
             // StatusProgressBar
             // 
@@ -982,7 +982,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.resultGrid);
-            this.groupBox2.Controls.Add(this.ResultRefresh);
+            this.groupBox2.Controls.Add(this.resultRefreshButton);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Location = new System.Drawing.Point(11, 122);
             this.groupBox2.Name = "groupBox2";
@@ -1010,15 +1010,15 @@
             this.resultGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResultGridCellValueChanged);
             this.resultGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SearchRangeResultListViewMouseClick);
             // 
-            // ResultRefresh
+            // resultRefreshButton
             // 
-            this.ResultRefresh.Location = new System.Drawing.Point(522, 120);
-            this.ResultRefresh.Name = "ResultRefresh";
-            this.ResultRefresh.Size = new System.Drawing.Size(76, 36);
-            this.ResultRefresh.TabIndex = 13;
-            this.ResultRefresh.Text = "Refresh";
-            this.ResultRefresh.UseVisualStyleBackColor = true;
-            this.ResultRefresh.Click += new System.EventHandler(this.ResultRefreshClick);
+            this.resultRefreshButton.Location = new System.Drawing.Point(522, 120);
+            this.resultRefreshButton.Name = "resultRefreshButton";
+            this.resultRefreshButton.Size = new System.Drawing.Size(76, 36);
+            this.resultRefreshButton.TabIndex = 13;
+            this.resultRefreshButton.Text = "Refresh";
+            this.resultRefreshButton.UseVisualStyleBackColor = true;
+            this.resultRefreshButton.Click += new System.EventHandler(this.ResultRefreshClick);
             // 
             // label14
             // 
@@ -1611,7 +1611,7 @@
             // 
             // newPeekButton
             // 
-            this.newPeekButton.Location = new System.Drawing.Point(248, 34);
+            this.newPeekButton.Location = new System.Drawing.Point(216, 33);
             this.newPeekButton.Name = "newPeekButton";
             this.newPeekButton.Size = new System.Drawing.Size(87, 27);
             this.newPeekButton.TabIndex = 31;
@@ -1621,7 +1621,7 @@
             // 
             // pokeButton
             // 
-            this.pokeButton.Location = new System.Drawing.Point(352, 4);
+            this.pokeButton.Location = new System.Drawing.Point(320, 3);
             this.pokeButton.Name = "pokeButton";
             this.pokeButton.Size = new System.Drawing.Size(87, 27);
             this.pokeButton.TabIndex = 28;
@@ -1632,7 +1632,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 43);
+            this.label3.Location = new System.Drawing.Point(28, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 30;
@@ -1640,7 +1640,7 @@
             // 
             // peekLengthTextBox
             // 
-            this.peekLengthTextBox.Location = new System.Drawing.Point(114, 36);
+            this.peekLengthTextBox.Location = new System.Drawing.Point(82, 35);
             this.peekLengthTextBox.Name = "peekLengthTextBox";
             this.peekLengthTextBox.Size = new System.Drawing.Size(116, 22);
             this.peekLengthTextBox.TabIndex = 26;
@@ -1648,7 +1648,7 @@
             // 
             // peekButton
             // 
-            this.peekButton.Location = new System.Drawing.Point(248, 4);
+            this.peekButton.Location = new System.Drawing.Point(216, 3);
             this.peekButton.Name = "peekButton";
             this.peekButton.Size = new System.Drawing.Size(87, 27);
             this.peekButton.TabIndex = 29;
@@ -1659,7 +1659,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 9);
+            this.label1.Location = new System.Drawing.Point(17, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 27;
@@ -1669,7 +1669,7 @@
             // 
             this.peekPokeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.peekPokeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(114, 6);
+            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(82, 5);
             this.peekPokeAddressTextBox.Name = "peekPokeAddressTextBox";
             this.peekPokeAddressTextBox.Size = new System.Drawing.Size(116, 22);
             this.peekPokeAddressTextBox.TabIndex = 25;
@@ -2182,7 +2182,7 @@
         private System.Windows.Forms.TabPage searchTab;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView resultGrid;
-        private System.Windows.Forms.Button ResultRefresh;
+        private System.Windows.Forms.Button resultRefreshButton;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button stopSearchButton;
