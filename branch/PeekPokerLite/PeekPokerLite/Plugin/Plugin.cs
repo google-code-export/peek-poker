@@ -11,7 +11,7 @@ namespace PeekPoker.Plugin
     /// </summary>
     public class PluginService
     {
-        private List<IPlugin> _pluginDatas = new List<IPlugin>();
+        private List<AbstractIPlugin> _pluginDatas = new List<AbstractIPlugin>();
 
         /// <summary>
         ///     Plug-in service constructor
@@ -39,7 +39,7 @@ namespace PeekPoker.Plugin
         /// <summary>
         ///     Plug-in Data
         /// </summary>
-        public List<IPlugin> PluginDatas
+        public List<AbstractIPlugin> PluginDatas
         {
             get { return _pluginDatas; }
         }
@@ -54,15 +54,15 @@ namespace PeekPoker.Plugin
                     if (!pluginType.IsPublic) continue; //break the for each loop to next iteration if any
                     if (pluginType.IsAbstract) continue; //break the for each loop to next iteration if any
                     //search for specified interface while ignoring case sensitivity
-                    Type typeInterface = pluginType.GetInterface("PeekPoker.Interface.IPlugin", true);
+                    if (pluginType.BaseType.FullName == "PeekPoker.Interface.AbstractIPlugin")
+                    {
+                        //New plug-in information setting
+                        AbstractIPlugin pluginInterfaceInstance =
+                            (AbstractIPlugin)(Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
 
-                    if (typeInterface == null) continue; //break if interface is present in the application
-
-                    //New plug-in information setting
-                    IPlugin pluginInterfaceInstance =
-                        (IPlugin) (Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
-
-                    _pluginDatas.Add(pluginInterfaceInstance);
+                        _pluginDatas.Add(pluginInterfaceInstance);
+                    }
+                    
                 }
             }
             catch (Exception e)

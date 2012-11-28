@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using PeekPoker.Interface;
 
 namespace PeekPoker.PeekPokerLitePartialClasses
 {
@@ -28,9 +29,13 @@ namespace PeekPoker.PeekPokerLitePartialClasses
 
         private void LoadToolStripMenuItemClick(object sender, EventArgs e)
         {
-            Form n = (Form) _pluginService.PluginDatas[_currentlySelectedItem];
-            n.MdiParent = this;
-            n.Show();
+            foreach (Form form in this.MdiChildren)
+            {
+                if (form.Name == _pluginService.PluginDatas[_currentlySelectedItem].FormName)
+                    return;
+            }
+            _pluginService.PluginDatas[_currentlySelectedItem].IPAddress = "192.168.1.10";
+            _pluginService.PluginDatas[_currentlySelectedItem].Display(this);
         }
     }
 }
