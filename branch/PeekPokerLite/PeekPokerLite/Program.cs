@@ -20,7 +20,7 @@ namespace PeekPoker
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK,
+                MessageBox.Show(ex.Message, String.Format("Peek Poker Lite"), MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
         }

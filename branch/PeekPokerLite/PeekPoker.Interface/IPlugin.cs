@@ -10,12 +10,15 @@ namespace PeekPoker.Interface
     public interface IPlugin
     {
         #region App Functions
+
         /// <summary>Function to show the application or initialise it.</summary>
         /// <example>Display:- Form1 form = new Form1 -- form.showDialog();</example>
         void Display(Form host);
+
         #endregion
 
         #region App Properties
+
         /// <summary>Application name</summary>
         string ApplicationName { get; }
 

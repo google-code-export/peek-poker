@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeekPokerLite", "PeekPokerLite\PeekPokerLite.csproj", "{E21F974E-ABB3-49E8-96E8-2154E3DBD79B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeekPoker.Interface", "PeekPoker.Interface\PeekPoker.Interface.csproj", "{35873DE4-33F4-4C86-9182-5E633BA5F24E}"
@@ -8,6 +8,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UFC3 - Memory Editor", "UFC3 - Memory Editor\UFC3 - Memory Editor.csproj", "{46B9D811-440C-4265-8C40-6D92E35C90D8}"
 EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using PeekPoker.Interface;
 
 namespace UFC3___Memory_Editor
@@ -10,13 +6,6 @@ namespace UFC3___Memory_Editor
     public class EntryPoint : AbstractIPlugin
     {
         #region IPlugin Members
-        public override void Display(Form form)
-        {
-            Ufc3Form newForm = new Ufc3Form(base.IPAddress);
-            newForm.MdiParent = form;
-            base.FormName = newForm.Name;
-            newForm.Show();
-        }
 
         public override string ApplicationName
         {
@@ -37,6 +26,15 @@ namespace UFC3___Memory_Editor
         {
             get { return "1.0.0.0"; }
         }
+
+        public override void Display(Form form)
+        {
+            Ufc3Form newForm = new Ufc3Form(base.IPAddress);
+            newForm.MdiParent = form;
+            base.FormName = newForm.Name;
+            newForm.Show();
+        }
+
         #endregion
     }
 }

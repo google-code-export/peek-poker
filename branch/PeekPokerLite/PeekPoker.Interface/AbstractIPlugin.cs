@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace PeekPoker.Interface
@@ -9,6 +6,7 @@ namespace PeekPoker.Interface
     public abstract class AbstractIPlugin : IPlugin
     {
         #region IPlugin
+
         public virtual void Display(Form form)
         {
             Form newForm = new Form();
@@ -37,22 +35,17 @@ namespace PeekPoker.Interface
             get { return "0.0.0.0"; }
         }
 
-        public virtual System.Drawing.Icon Icon
+        public virtual Icon Icon
         {
             get { return null; }
         }
+
         #endregion
 
-        public virtual string IPAddress
-        {
-            get;
-            set;
-        }
+        public virtual string IPAddress { get; set; }
 
-        public virtual string FormName
-        {
-            get;
-            set;
-        }
+        public virtual string FormName { get; set; }
+
+        public virtual RealTimeMemory Rtm { get; set; }
     }
 }

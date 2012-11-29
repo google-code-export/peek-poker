@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace PeekPoker.Interface
@@ -10,13 +10,15 @@ namespace PeekPoker.Interface
         private bool _accessed;
         private BinaryReader _bReader;
         private BinaryWriter _bWriter;
-        private string _fileName;
         private Stream _fStream;
+        private string _fileName;
         private bool _isBigEndian;
         private long _lastPosition;
 
         #region RwStream Constructors
+
         #region Main Contructor
+
         /// <summary>Initialize File Reader and Writer by specifying file a valid file path</summary>
         /// <param name="path">The file Path</param>
         public RWStream(String path)
@@ -68,7 +70,8 @@ namespace PeekPoker.Interface
         /// <param name="theFileMode">The File Mode</param>
         /// <param name="theFileAccess">The File Access Option</param>
         /// <param name="theFileShare">The File Share Option</param>
-        private void ReadWriter(String path, Boolean isBigEndian, FileMode theFileMode, FileAccess theFileAccess, FileShare theFileShare)
+        private void ReadWriter(String path, Boolean isBigEndian, FileMode theFileMode, FileAccess theFileAccess,
+                                FileShare theFileShare)
         {
             if (!(File.Exists(path)))
             {
@@ -80,9 +83,11 @@ namespace PeekPoker.Interface
             _isBigEndian = isBigEndian;
             _accessed = true;
         }
+
         #endregion
 
         #region Byte Array to Stream
+
         /// <summary>Initialize Array Streaming</summary>
         /// <param name="buffer">The Byte Array to Stream</param>
         public RWStream(Byte[] buffer)
@@ -125,6 +130,7 @@ namespace PeekPoker.Interface
                 throw new Exception(e.Message);
             }
         }
+
         #endregion
 
         /// <summary>Makes a temporary file Stream</summary>
@@ -133,7 +139,7 @@ namespace PeekPoker.Interface
             try
             {
                 _fileName = Path.GetTempPath() + Guid.NewGuid() + ".ISOLib";
-                _fStream = new FileStream(_fileName,FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                _fStream = new FileStream(_fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
                 _bReader = new BinaryReader(_fStream);
                 _bWriter = new BinaryWriter(_fStream);
                 _isBigEndian = true;
@@ -159,9 +165,11 @@ namespace PeekPoker.Interface
             _isBigEndian = true;
             _accessed = true;
         }
+
         #endregion
 
         #region Methods
+
         /// <summary>Clears buffer by Flushing and Closes theI/O Stream</summary>
         public void Close()
         {
@@ -182,7 +190,7 @@ namespace PeekPoker.Interface
                         File.Delete(_fileName);
                         _fileName = null;
                     }
-                        Dispose();
+                    Dispose();
                 }
             }
             catch (Exception exception)
@@ -228,9 +236,11 @@ namespace PeekPoker.Interface
                 throw new Exception(exception.Message);
             }
         }
+
         #endregion
 
         #region Reader
+
         /// <summary>Reads a set size of bytes</summary>
         /// <param name="length">The byte array length</param>
         /// <returns>Byte Array</returns>
@@ -250,9 +260,9 @@ namespace PeekPoker.Interface
                     throw new Exception("Cannot move position past file size");
                 if (length == 0)
                     return new byte[0];
-                var buffer = new byte[length];
+                byte[] buffer = new byte[length];
                 _fStream.Read(buffer, 0, length);
-                if(!isBigEndien)
+                if (!isBigEndien)
                     Array.Reverse(buffer);
                 return buffer;
             }
@@ -537,13 +547,13 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = new byte[Length];
-                var position = Position;
+                byte[] buffer = new byte[Length];
+                long position = Position;
                 Position = 0L;
                 long index;
                 for (index = 0L; index < buffer.Length; index ++)
                 {
-                    buffer[(int)((IntPtr)index)] = ReadUInt8();
+                    buffer[(int) ((IntPtr) index)] = ReadUInt8();
                 }
                 Position = position;
                 return buffer;
@@ -755,6 +765,7 @@ namespace PeekPoker.Interface
                 throw new Exception(exception.Message);
             }
         }
+
         /// <summary>Search the file stream for a specified Hex String</summary>
         /// <param name="data">The data you want to search for</param>
         /// <param name="firstFind">If you want to only search for the first location</param>
@@ -764,17 +775,17 @@ namespace PeekPoker.Interface
             try
             {
                 //location of the value/s
-                var locations = new List<long>();
+                List<long> locations = new List<long>();
                 long index;
                 for (index = Position; index < Length; index++)
                 {
                     Position = index;
 
-                    var buffer = ReadBytes(data.Length/2, _isBigEndian);
+                    byte[] buffer = ReadBytes(data.Length/2, _isBigEndian);
                     if (data != Hex.ToHexString(buffer)) continue;
                     locations.Add(index);
 
-                    if (firstFind)break;
+                    if (firstFind) break;
                 }
                 return locations.ToArray();
             }
@@ -789,18 +800,18 @@ namespace PeekPoker.Interface
         /// <param name="startoffset">The starting offset </param>
         /// <param name="firstFind">If you want to only search for the first location</param>
         /// <returns>The long offset</returns>
-        public long[] SearchHexString(string data,long startoffset, bool firstFind)
+        public long[] SearchHexString(string data, long startoffset, bool firstFind)
         {
             try
             {
                 //location of the value/s
-                var locations = new List<long>();
+                List<long> locations = new List<long>();
                 long index;
                 for (index = startoffset; index < Length; index++)
                 {
                     Position = index;
 
-                    var buffer = ReadBytes(data.Length / 2, _isBigEndian);
+                    byte[] buffer = ReadBytes(data.Length/2, _isBigEndian);
                     if (data != Hex.ToHexString(buffer)) continue;
                     locations.Add(index);
 
@@ -813,6 +824,7 @@ namespace PeekPoker.Interface
                 throw new Exception(exception.Message);
             }
         }
+
         /// <summary>Search the file stream for a specified Hex String</summary>
         /// <param name="data">The data you want to search for</param>
         /// <returns>The long offset</returns>
@@ -826,7 +838,7 @@ namespace PeekPoker.Interface
                 {
                     Position = index;
 
-                    var buffer = ReadBytes(data.Length / 2,_isBigEndian);
+                    byte[] buffer = ReadBytes(data.Length/2, _isBigEndian);
                     if (data != Hex.ToHexString(buffer)) continue;
                     //break if not found
                     break;
@@ -838,9 +850,11 @@ namespace PeekPoker.Interface
                 throw new Exception(exception.Message);
             }
         }
+
         #endregion
 
         #region Writer
+
         /// <summary>Writes a byte array to the underlying stream</summary>
         /// <param name="buffer">A byte array containing the data to write</param>
         public void WriteBytes(byte[] buffer)
@@ -927,7 +941,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Double(value);
+                byte[] buffer = ToByteArray.Double(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -957,7 +971,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.HexToBytes(value);
+                byte[] buffer = ToByteArray.HexToBytes(value);
                 WriteBytes(buffer, offset, buffer.Length);
             }
             catch (Exception exception)
@@ -986,7 +1000,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int16(value);
+                byte[] buffer = ToByteArray.Int16(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1016,7 +1030,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int24(value);
+                byte[] buffer = ToByteArray.Int24(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1046,7 +1060,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int32(value);
+                byte[] buffer = ToByteArray.Int32(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1076,7 +1090,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int40(value);
+                byte[] buffer = ToByteArray.Int40(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1106,7 +1120,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int48(value);
+                byte[] buffer = ToByteArray.Int48(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1136,7 +1150,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int56(value);
+                byte[] buffer = ToByteArray.Int56(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1166,7 +1180,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int64(value);
+                byte[] buffer = ToByteArray.Int64(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1195,7 +1209,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Single(value);
+                byte[] buffer = ToByteArray.Single(value);
                 WriteBytes(buffer);
             }
             catch (Exception exception)
@@ -1225,7 +1239,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.UInt16(value);
+                byte[] buffer = ToByteArray.UInt16(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1255,7 +1269,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.UInt24(value);
+                byte[] buffer = ToByteArray.UInt24(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1285,7 +1299,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.UInt32(value);
+                byte[] buffer = ToByteArray.UInt32(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1315,7 +1329,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.UInt40(value);
+                byte[] buffer = ToByteArray.UInt40(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1375,7 +1389,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.UInt56(value);
+                byte[] buffer = ToByteArray.UInt56(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1405,7 +1419,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.UInt64(value);
+                byte[] buffer = ToByteArray.UInt64(value);
                 WriteBytes(buffer, isBigEndian);
             }
             catch (Exception exception)
@@ -1427,60 +1441,41 @@ namespace PeekPoker.Interface
                 throw new Exception(exception.Message);
             }
         }
+
         #endregion
-        
+
         #region Properties
+
         /// <summary>Set if current initialization is being accessed</summary>
         public bool Accessed
         {
-            get
-            {
-                return _accessed;
-            }
+            get { return _accessed; }
         }
 
         /// <summary>Set/Get if current initialization is big endian</summary>
         public bool IsBigEndian
         {
-            get
-            {
-                return _isBigEndian;
-            }
-            set
-            {
-                _isBigEndian = value;
-            }
+            get { return _isBigEndian; }
+            set { _isBigEndian = value; }
         }
 
         /// <summary>Get last position accessed</summary>
         public long LastPosition
         {
-            get
-            {
-                return _lastPosition;
-            }
+            get { return _lastPosition; }
         }
 
         /// <summary>Get/Set if current initialization length</summary>
         public long Length
         {
-            get
-            {
-                return _fStream.Length;
-            }
-            set
-            {
-                _fStream.SetLength(value);
-            }
+            get { return _fStream.Length; }
+            set { _fStream.SetLength(value); }
         }
 
         /// <summary>Get/Set if current initialization position</summary>
         public long Position
         {
-            get
-            {
-                return _fStream.Position;
-            }
+            get { return _fStream.Position; }
             set
             {
                 try
@@ -1497,7 +1492,7 @@ namespace PeekPoker.Interface
                 }
             }
         }
+
         #endregion
     }
 }
-

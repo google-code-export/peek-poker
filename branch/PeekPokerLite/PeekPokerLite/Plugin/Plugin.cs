@@ -54,15 +54,15 @@ namespace PeekPoker.Plugin
                     if (!pluginType.IsPublic) continue; //break the for each loop to next iteration if any
                     if (pluginType.IsAbstract) continue; //break the for each loop to next iteration if any
                     //search for specified interface while ignoring case sensitivity
-                    if (pluginType.BaseType.FullName == "PeekPoker.Interface.AbstractIPlugin")
-                    {
-                        //New plug-in information setting
-                        AbstractIPlugin pluginInterfaceInstance =
-                            (AbstractIPlugin)(Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
+                    if (pluginType.BaseType == null ||
+                        pluginType.BaseType.FullName != "PeekPoker.Interface.AbstractIPlugin")
+                        continue;
 
-                        _pluginDatas.Add(pluginInterfaceInstance);
-                    }
-                    
+                    //New plug-in information setting
+                    AbstractIPlugin pluginInterfaceInstance =
+                        (AbstractIPlugin) (Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
+
+                    _pluginDatas.Add(pluginInterfaceInstance);
                 }
             }
             catch (Exception e)

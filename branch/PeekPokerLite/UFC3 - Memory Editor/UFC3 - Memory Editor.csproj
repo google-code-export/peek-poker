@@ -66,7 +66,6 @@
     <Compile Include="UFC3Form.Designer.cs">
       <DependentUpon>UFC3Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="UFC3Form.resx">
       <DependentUpon>UFC3Form.cs</DependentUpon>
