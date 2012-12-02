@@ -1,4 +1,4 @@
-﻿Last Update - 30/06/2012 by PureIso
+﻿Last Update - 02/12/2012 by 8Ball
 ==============================================================
 NB: Update source file before you commit.
 NB: Update source file before you commit.
@@ -191,5 +191,7 @@ Cleanup
 -Added an experimental poking function (Requested)(Not tested)
 -Fixed error throw when xboxsdk is missing
 
-TODO:
--Add game id recognition to help user name trainer file correctly
+-changes 02/12/12
+[8Ball]
+-Fixed Issue #2 by changing AutoScaleMode of mainform to Dpi, seems to work with quick test.
+-[Queries] Should we consider deleting the stuff relating to trainers.txt since we have the plugins working so well now? I also wish to discuss deciding on some universal registry keys for peekpoker and plugins to use to store the ip and such, working off .txt files and no files is so yesterday :p

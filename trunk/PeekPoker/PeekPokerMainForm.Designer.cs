@@ -278,7 +278,7 @@
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(88, 19);
-            this.toolStripStatusLabel1.Text = "Revision 7.2.12";
+            this.toolStripStatusLabel1.Text = "Revision 7.2.13";
             // 
             // StatusProgressBar
             // 
@@ -815,7 +815,7 @@
             this.littleEndianRadioButton.AutoSize = true;
             this.littleEndianRadioButton.Location = new System.Drawing.Point(85, 21);
             this.littleEndianRadioButton.Name = "littleEndianRadioButton";
-            this.littleEndianRadioButton.Size = new System.Drawing.Size(54, 19);
+            this.littleEndianRadioButton.Size = new System.Drawing.Size(47, 17);
             this.littleEndianRadioButton.TabIndex = 1;
             this.littleEndianRadioButton.Text = "Little";
             this.littleEndianRadioButton.UseVisualStyleBackColor = true;
@@ -826,7 +826,7 @@
             this.BigEndianRadioButton.Checked = true;
             this.BigEndianRadioButton.Location = new System.Drawing.Point(6, 21);
             this.BigEndianRadioButton.Name = "BigEndianRadioButton";
-            this.BigEndianRadioButton.Size = new System.Drawing.Size(43, 19);
+            this.BigEndianRadioButton.Size = new System.Drawing.Size(40, 17);
             this.BigEndianRadioButton.TabIndex = 0;
             this.BigEndianRadioButton.TabStop = true;
             this.BigEndianRadioButton.Text = "Big";
@@ -1474,7 +1474,7 @@
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(71, 21);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(109, 19);
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -1752,7 +1752,7 @@
             this.constantPokingCheckBox.AutoSize = true;
             this.constantPokingCheckBox.Location = new System.Drawing.Point(45, 21);
             this.constantPokingCheckBox.Name = "constantPokingCheckBox";
-            this.constantPokingCheckBox.Size = new System.Drawing.Size(233, 19);
+            this.constantPokingCheckBox.Size = new System.Drawing.Size(194, 17);
             this.constantPokingCheckBox.TabIndex = 36;
             this.constantPokingCheckBox.Text = "Constant Poking - Uncheck to Stop";
             this.constantPokingCheckBox.UseVisualStyleBackColor = true;
@@ -2017,8 +2017,8 @@
             // 
             // PeekPokerMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(726, 484);
             this.Controls.Add(this.splitter1);
