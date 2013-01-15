@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace PeekPoker.Interface
 {
@@ -14,7 +18,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 2)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return (ushort)(buffer[1] << 8 | buffer[0]);
+            return (ushort) (buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 2 Bytes Array to Integer 16</summary>
@@ -26,7 +30,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 2)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return (short)(buffer[1] << 8 | buffer[0]);
+            return (short) (buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 3 Bytes Array to Integer 24</summary>
@@ -50,7 +54,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 3)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((uint)buffer[2] << 16 | (uint)buffer[1] << 8 | buffer[0]);
+            return ((uint) buffer[2] << 16 | (uint) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 4 Bytes Array to Integer 32</summary>
@@ -74,7 +78,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 4)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return (uint)(buffer[3] << 24 | buffer[2] << 16 | buffer[1] << 8 | buffer[0]);
+            return (uint) (buffer[3] << 24 | buffer[2] << 16 | buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 5 Bytes Array to Integer 64</summary>
@@ -86,7 +90,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 5)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[4] << 32 | (long)buffer[3] << 24 | (long)buffer[2] << 16 | (long)buffer[1] << 8 | buffer[0]);
+            return ((long) buffer[4] << 32 | (long) buffer[3] << 24 | (long) buffer[2] << 16 | (long) buffer[1] << 8 |
+                    buffer[0]);
         }
 
         /// <summary>Converts 5 Bytes Array to Unsigned Integer 64</summary>
@@ -98,7 +103,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 5)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[4] << 32 | (ulong)buffer[3] << 24 | (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 | buffer[0]);
+            return ((ulong) buffer[4] << 32 | (ulong) buffer[3] << 24 | (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 |
+                    buffer[0]);
         }
 
         /// <summary>Converts 6 Bytes Array to Integer 64</summary>
@@ -110,7 +116,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 6)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[5] << 40 | (long)buffer[4] << 32 | (long)buffer[3] << 24 | (long)buffer[2] << 16 | (long)buffer[1] << 8 | buffer[0]);
+            return ((long) buffer[5] << 40 | (long) buffer[4] << 32 | (long) buffer[3] << 24 | (long) buffer[2] << 16 |
+                    (long) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 6 Bytes Array to Unsigned Integer 64</summary>
@@ -122,7 +129,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 6)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[5] << 40 | (ulong)buffer[4] << 32 | (ulong)buffer[3] << 24 | (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 | buffer[0]);
+            return ((ulong) buffer[5] << 40 | (ulong) buffer[4] << 32 | (ulong) buffer[3] << 24 |
+                    (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 7 Bytes Array to Integer 64</summary>
@@ -134,7 +142,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 7)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[6] << 48 | (long)buffer[5] << 40 | (long)buffer[4] << 32 | (long)buffer[3] << 24 | (long)buffer[2] << 16 | (long)buffer[1] << 8 | buffer[0]);
+            return ((long) buffer[6] << 48 | (long) buffer[5] << 40 | (long) buffer[4] << 32 | (long) buffer[3] << 24 |
+                    (long) buffer[2] << 16 | (long) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 7 Bytes Array to Unsigned Integer 64</summary>
@@ -146,7 +155,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 7)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[6] << 48 | (ulong)buffer[5] << 40 | (ulong)buffer[4] << 32 | (ulong)buffer[3] << 24 | (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 | buffer[0]);
+            return ((ulong) buffer[6] << 48 | (ulong) buffer[5] << 40 | (ulong) buffer[4] << 32 |
+                    (ulong) buffer[3] << 24 | (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 8 Bytes Array to Integer 64</summary>
@@ -158,7 +168,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 8)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[7] << 56 | (long)buffer[6] << 48 | (long)buffer[5] << 40 | (long)buffer[4] << 32 | (long)buffer[3] << 24 | (long)buffer[2] << 16 | (long)buffer[1] << 8 | buffer[0]);
+            return ((long) buffer[7] << 56 | (long) buffer[6] << 48 | (long) buffer[5] << 40 | (long) buffer[4] << 32 |
+                    (long) buffer[3] << 24 | (long) buffer[2] << 16 | (long) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 8 Bytes Array to Unsigned Integer 64</summary>
@@ -170,7 +181,9 @@ namespace PeekPoker.Interface
             if (buffer.Length < 8)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[7] << 56 | (ulong)buffer[6] << 48 | (ulong)buffer[5] << 40 | (ulong)buffer[4] << 32 | (ulong)buffer[3] << 24 | (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 | buffer[0]);
+            return ((ulong) buffer[7] << 56 | (ulong) buffer[6] << 48 | (ulong) buffer[5] << 40 |
+                    (ulong) buffer[4] << 32 | (ulong) buffer[3] << 24 | (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 |
+                    buffer[0]);
         }
 
         /// <summary>Converts Byte Array to Single/Float</summary>
@@ -219,7 +232,7 @@ namespace PeekPoker.Interface
                 throw new Exception(ex.Message);
             }
         }
-        
+
         /// <summary>Convert hex string to Long</summary>
         /// <param name="value">The string(hex) value</param>
         /// <returns>A long value of the given hex</returns>

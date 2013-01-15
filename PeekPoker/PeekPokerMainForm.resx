@@ -123,47 +123,52 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>248, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pluginsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHZSURBVDhPjVJLSEJBFHUTbUpMwaLPqk20a9uikD5aFkK0
+        qEVkpdJ30aag2rUoaB+F6SutRRpBtGwVlQQlfSBIcdcH2oam9CZu9857Yz7NaOAwb84995yZN6PTFRlx
+        t2HzcdQANBfTaPinuZraxKT5WpDpsBu+Hg4hczQLyFmJpzrpCgyJjHuMb6nwOFAqgZ2twVfUxyG45ME0
+        3I0Z36U+U4PGJDFhjiaxWT5d5Y1FgfVUeBIuhkxPaFCuMeGpJwuIxT+wwHeDjfOI4UKD4ylgKkgYWbbe
+        cuM8XjVQ+mMug/fD2wFsfwDk0BBHTgol9dJa1FhoENKopz5uwBN8LfDpR5NdB8f5UnM0N+XTZw+Imix1
+        or5VhNh0MXfFVnq9mZOyzwLMbxFFuzgj34G/TamjjvR7PWVXuSE2LpLaUdgOTOrgJpmNNonvENeMaoi8
+        49myP1IRomjbCgwh73RlwdfEaw1+LiExVXmT3HcpSWozC6BBsBv4jGbEU510EafpVXOFz4v1dfcu43sK
+        i+LVUbMcUCA4qqMu2VRVsoIGTo1JsL+q8dJpflF/zHzGi8fBZpoFF3GaX5uqS6l5puAlqm56nEfoO+4x
+        bVNyyKHXXKlaJ92/RreaTvOv4xtu4Z0Kfr0o7AAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAARpSURBVEhLjVZrUFRlGD57ObuxyC67C7vsshfEHMopgWBkpqmBH44lMpV2QdASzbSGTEPN6+QF
+        DckLywKG3BKBxEytqFFS4qKSRPWngKlpaOpPE/6rcfoR7NP7nm3PAp1jfTPP7Lvf+53n+b73e9/3HEG4
+        +1hI7nJBJ/YLDv+EZl7mlObeh6bYprkB8h0ipP8Hh6I7W9Dqe7QLckPiyoMQ93wM8Ugf9IEh6GuGIVb2
+        h+cKD0J7f25I0Ol7iWXR/xHS8o61voxJ4+oATNsuwFreDefRXiQf74P3WC88b/fAXXEVieVXEL+3CzFb
+        zsFYfAJab8bkPydiDsWho9kOMesZxG5shYMI/MHr8AcG4DvRBx+Re4ncS+Sew91ILr+M5AOfwv1mF+xb
+        z8NU0ggxYwUEQXOWeJjrX6NazHoO8a92wBcg4uCNKDntnoX81TRfNQDv0c8lAfe+Lrj3fgTX7g/hfOMD
+        mNc0wJD+NIkIwdnsS3X+nJC1tB3+mkGZnEXm1g8htelrPNL5LTrGbktgm+f8tYOSkGvnRSSRgHPr+7Cs
+        Ogm9NztEAksjIjpBNI2ZiwNEfFMmT6n7AnNPDcsY/vV3RAbb031euqOk7efhLOuEY/N7mFNwCIIYMxYJ
+        1TIxbTE8R65Fd15zEyl1t2ZgdOIPWYDt2X4WcW45C8emDiS81AIxNY9Dlc+naIkvroySR2LN8Z6GgtND
+        GBy/LYHt6b6IzZeeWNqGxFdaEbdkJws0C4Ihdsy9/5MZF+qjS1XCE61DYKj5fcd74XiNTrDxXdhWn6Qw
+        mUYEnT3lT19Vv5SKUhpWXlPEtsujCIVCEthWW+fadRH29c2wr2uE1uK5Ixj8D8p57nmrm3L8iiLav/lF
+        vgO21dZJdUHk9pJT0DvmQzCmpstFxDFM3q+Mtq9+lgXYVlsnCRC5/YV66JPSIBi8992JVKhUNCpo+/Kn
+        qADZautcuy9J5HwHegq/oI21jHgqPpPK37XrEpJ2XFDEmVvjsgDbauucZeckcltRDTTGOVwLQrNzc2O4
+        IumCuFiUcGbwx6gA2WrrEl8+DVtxLcz5ezhNW1ggPy63KNy4KDyOTe2KaL3xgyzAtto62/PvwFoYxD0L
+        lsiFptPExI25dnSGBajUE2gXs9E68H1UgGylNZw9TG55qgIag2mUNi+37nxTxuIQd0WOLReKfV3TDDRc
+        /U4WYHu23762AdaVQcQ/G4AhJYeb3eOzO2rQ/NiGcFeki0p4sQl83AgeLmvDyPhvEtie7uNLZXIrkcdk
+        Su06oPQ+oJeEpjMubw2cr4e7YsKGFikjpIcJluXHJET+WylTbEW1Ulh45zELn2TyDrUXDotyzA4b52VP
+        2kuq5cZlX0+n4dxeVQcrZQhnia24TvplcvOyfRDdD/xFzx6YHnelU0TmcuhF3mdMezRkKdgO+9p6ufwj
+        RWQtrEJcXinFe1FI0Op66MGsuxGq+TL5RPSFcV0X75rQO+dPUX+Z0pqTJmiun3zlBP60UR1/A9EzCEMV
+        fpd8AAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="toolTips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>520, 16</value>
   </metadata>
-  <data name="textBox1.Text" xml:space="preserve">
-    <value>-Your application must be in a .dll format, it must be places in the Plugin Folder and you need to reference the PeekPoker.Interface.dll
--PeekPoker.Interface.dll contains real time memory class
-
-[Sample Code]
-public partial class Form1 : Form,IPlugin
-    {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        public void Display()
-        {
-            var f = new Form1();
-            f.ShowDialog();
-        }
-        public string ApplicationName
-        {
-            get { return "WindowsForm1"; }
-        }
-        public string Description
-        {
-            get { return "Test"; }
-        }
-        public string Author
-        {
-            get { return "PureIso"; }
-        }
-        public string Version
-        {
-            get { return Application.ProductVersion; }
-        }
-    }</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>40</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAA8AEBAQAAAAAAAoAQAA9gAAABAQAAABABgAaAMAAB4CAAAQEAAAAQAgAGgEAACGBQAAICAQAAAA

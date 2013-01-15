@@ -39,8 +39,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateClass.cs" />
+    <Compile Include="Functions.cs" />
     <Compile Include="Hex.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -48,6 +51,7 @@
     <Compile Include="RWStream.cs" />
     <Compile Include="ToByteArray.cs" />
     <Compile Include="ToValue.cs" />
+    <Compile Include="Types.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
