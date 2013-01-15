@@ -1,4 +1,9 @@
+#region
+
 using System;
+using System.Text.RegularExpressions;
+
+#endregion
 
 namespace PeekPoker.Interface
 {
@@ -10,10 +15,10 @@ namespace PeekPoker.Interface
         /// <returns>True if its hex and false if it isn't.</returns>
         public static bool IsHex(string value)
         {
-            if (value.Length % 2 != 0) return false;
+            if (value.Length%2 != 0) return false;
             //^ - Begin the match at the beginning of the line.
             //$ - End the match at the end of the line.
-            return System.Text.RegularExpressions.Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z");
+            return Regex.IsMatch(value, @"\A\b[0-9a-fA-F]+\b\Z");
         }
 
         /// <summary>Convert Long to String Hex</summary>
@@ -23,7 +28,7 @@ namespace PeekPoker.Interface
         {
             try
             {
-                var buffer = ToByteArray.Int64(value);
+                byte[] buffer = ToByteArray.Int64(value);
                 return BitConverter.ToString(buffer).Replace("-", "");
             }
             catch (Exception exception)
@@ -107,9 +112,9 @@ namespace PeekPoker.Interface
                 hexString = hexString.Replace("-", "");
                 hexString = hexString.Replace("0x", "");
                 hexString = hexString.Replace("0X", "");
-                var str = hexString.Remove(finalCharPos + 1, hexString.Length - (finalCharPos + 1));
-                var str2 = str.Substring(firstCharPos, str.Length - firstCharPos);
-                if ((str2.Length % 2) != 0)
+                string str = hexString.Remove(finalCharPos + 1, hexString.Length - (finalCharPos + 1));
+                string str2 = str.Substring(firstCharPos, str.Length - firstCharPos);
+                if ((str2.Length%2) != 0)
                 {
                     return "0" + str2;
                 }
@@ -122,4 +127,3 @@ namespace PeekPoker.Interface
         }
     }
 }
-
