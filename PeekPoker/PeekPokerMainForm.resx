@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>248, 17</value>
   </metadata>
@@ -127,7 +124,7 @@
   <data name="pluginsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHZSURBVDhPjVJLSEJBFHUTbUpMwaLPqk20a9uikD5aFkK0
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAHZSURBVDhPjVJLSEJBFHUTbUpMwaLPqk20a9uikD5aFkK0
         qEVkpdJ30aag2rUoaB+F6SutRRpBtGwVlQQlfSBIcdcH2oam9CZu9857Yz7NaOAwb84995yZN6PTFRlx
         t2HzcdQANBfTaPinuZraxKT5WpDpsBu+Hg4hczQLyFmJpzrpCgyJjHuMb6nwOFAqgZ2twVfUxyG45ME0
         3I0Z36U+U4PGJDFhjiaxWT5d5Y1FgfVUeBIuhkxPaFCuMeGpJwuIxT+wwHeDjfOI4UKD4ylgKkgYWbbe
@@ -165,6 +162,9 @@
   </data>
   <metadata name="toolTips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>520, 16</value>
+  </metadata>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>615, 16</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>40</value>
