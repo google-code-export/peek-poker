@@ -14,4 +14,6 @@ namespace PeekPoker.Interface
     public delegate string GetTextBoxTextHandler(Control control);
 
     public delegate void EnableControlHandler(Control control, bool value);
+
+    public delegate void SetTextBoxTextDelegateHandler(Control control, string value);
 }

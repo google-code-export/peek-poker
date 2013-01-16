@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Drawing;
+using System.Windows.Forms;
 
 #endregion
 
@@ -16,7 +17,7 @@ namespace PeekPoker.Interface
 
         /// <summary>Function to show the application or initialise it.</summary>
         /// <example>Display:- Form1 form = new Form1 -- form.showDialog();</example>
-        void Display();
+        void Display(Form parent);
 
         #endregion
 
