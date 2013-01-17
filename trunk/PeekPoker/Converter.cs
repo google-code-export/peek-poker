@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
+using PeekPoker.Interface;
 
 namespace PeekPoker
 {
     public partial class Converter : Form
     {
+		public event ShowMessageBoxHandler ShowMessageBox;
         public Converter()
         {
             InitializeComponent();
@@ -137,6 +139,7 @@ namespace PeekPoker
             }
             catch (Exception ex)
             {
+				ShowMessageBox(ex.Message,"Peek Poker - Converter",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
         private void ConverterClearButtonClick(object sender, EventArgs e)

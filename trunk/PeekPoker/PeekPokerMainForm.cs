@@ -110,6 +110,7 @@ namespace PeekPoker
             }
             catch (Exception e)
             {
+				ShowMessageBox(e.Message,"Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //The click handler for the plugins
@@ -150,7 +151,7 @@ namespace PeekPoker
                 }
                 //EnableControl(peeknpoke, true);
 
-                statusStripLabel.Text = "Connected!";
+                SetToolStripLabel("Connected!");
 
                 ShowMessageBox("Connected!", "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -202,10 +203,19 @@ namespace PeekPoker
                 control.Enabled = value;
         }
         //Setter Methods
+        private void SetToolStripLabel(string value)
+        {
+            if (this.InvokeRequired)
+                Invoke((MethodInvoker)(() => SetToolStripLabel(value)));
+            else
+            {
+                statusStripLabel.Text = value;
+            }
+        }
         private void SetTextBoxText(Control control, string value)
         {
             if (control.InvokeRequired)
-                Invoke((MethodInvoker)(() => SetTextBoxText(control,value)));
+                Invoke((MethodInvoker)(() => SetTextBoxText(control, value)));
             else
             {
                 control.Text = value;
@@ -247,6 +257,7 @@ namespace PeekPoker
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
+            form.SetTextBoxText += SetTextBoxText;
             form.Show();
         }
 
@@ -274,6 +285,7 @@ namespace PeekPoker
         private void converterButton_Click(object sender, EventArgs e)
         {
             Converter form = new Converter { MdiParent = this };
+			form.ShowMessageBox += ShowMessageBox;
             form.Show();
         }
 
