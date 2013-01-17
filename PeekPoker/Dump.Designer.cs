@@ -218,7 +218,7 @@
             this.dumpLengthTextBox.Name = "dumpLengthTextBox";
             this.dumpLengthTextBox.Size = new System.Drawing.Size(148, 20);
             this.dumpLengthTextBox.TabIndex = 2;
-            this.dumpLengthTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FixDumpLength);
+            this.dumpLengthTextBox.Leave += new System.EventHandler(this.FixDumpLength);
             // 
             // dumpStartOffsetTextBox
             // 
@@ -226,7 +226,7 @@
             this.dumpStartOffsetTextBox.Name = "dumpStartOffsetTextBox";
             this.dumpStartOffsetTextBox.Size = new System.Drawing.Size(148, 20);
             this.dumpStartOffsetTextBox.TabIndex = 1;
-            this.dumpStartOffsetTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FixDumpAddresses);
+            this.dumpStartOffsetTextBox.Leave += new System.EventHandler(this.FixDumpAddresses);
             // 
             // dumpMemoryButton
             // 

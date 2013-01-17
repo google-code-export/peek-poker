@@ -40,6 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
             this.endRangeAddressTextBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -50,9 +51,9 @@
             this.groupBox2.Controls.Add(this.resultGrid);
             this.groupBox2.Controls.Add(this.resultRefreshButton);
             this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(12, 112);
+            this.groupBox2.Location = new System.Drawing.Point(12, 96);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(674, 189);
+            this.groupBox2.Size = new System.Drawing.Size(674, 163);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Result/s";
@@ -98,6 +99,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.stopSearchButton);
             this.groupBox1.Controls.Add(this.searchRangeButton);
             this.groupBox1.Controls.Add(this.startRangeAddressTextBox);
@@ -105,9 +107,9 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
             this.groupBox1.Controls.Add(this.endRangeAddressTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(18, 10);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(668, 96);
+            this.groupBox1.Size = new System.Drawing.Size(668, 78);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Range Selection Options";
@@ -115,7 +117,7 @@
             // stopSearchButton
             // 
             this.stopSearchButton.Enabled = false;
-            this.stopSearchButton.Location = new System.Drawing.Point(598, 43);
+            this.stopSearchButton.Location = new System.Drawing.Point(598, 21);
             this.stopSearchButton.Name = "stopSearchButton";
             this.stopSearchButton.Size = new System.Drawing.Size(64, 47);
             this.stopSearchButton.TabIndex = 18;
@@ -125,7 +127,7 @@
             // 
             // searchRangeButton
             // 
-            this.searchRangeButton.Location = new System.Drawing.Point(499, 43);
+            this.searchRangeButton.Location = new System.Drawing.Point(499, 21);
             this.searchRangeButton.Name = "searchRangeButton";
             this.searchRangeButton.Size = new System.Drawing.Size(93, 47);
             this.searchRangeButton.TabIndex = 9;
@@ -174,16 +176,25 @@
             // 
             this.endRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.endRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.endRangeAddressTextBox.Location = new System.Drawing.Point(357, 22);
+            this.endRangeAddressTextBox.Location = new System.Drawing.Point(270, 22);
             this.endRangeAddressTextBox.Name = "endRangeAddressTextBox";
             this.endRangeAddressTextBox.Size = new System.Drawing.Size(163, 20);
             this.endRangeAddressTextBox.TabIndex = 7;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(235, 25);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 13);
+            this.label12.TabIndex = 19;
+            this.label12.Text = "End:";
             // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 307);
+            this.ClientSize = new System.Drawing.Size(690, 260);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -212,5 +223,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox searchRangeValueTextBox;
         private System.Windows.Forms.TextBox endRangeAddressTextBox;
+        private System.Windows.Forms.Label label12;
     }
 }

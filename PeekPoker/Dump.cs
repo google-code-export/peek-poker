@@ -63,20 +63,20 @@ namespace PeekPoker
 
         private void BaseFileButtonClick(object sender, EventArgs e)
         {
-            dumpMemoryButton.Text = string.Format("0x82000000");
+            dumpStartOffsetTextBox.Text = string.Format("0x82000000");
             dumpLengthTextBox.Text = string.Format("0x5000000");
         }
 
         private void AllocatedDataButtonClick(object sender, EventArgs e)
         {
-            dumpMemoryButton.Text = string.Format("0x40000000");
+            dumpStartOffsetTextBox.Text = string.Format("0x40000000");
             dumpLengthTextBox.Text = string.Format("0x5000000");
         }
 
 
         private void PhysicalRamButtonClick(object sender, EventArgs e)
         {
-            dumpMemoryButton.Text = string.Format("0xC0000000");
+            dumpStartOffsetTextBox.Text = string.Format("0xC0000000");
             dumpLengthTextBox.Text = string.Format("0x1FFF0FFF");
         }
 
@@ -118,7 +118,7 @@ namespace PeekPoker
             {
                 EnableControl(dumpMemoryButton, false);
                 _rtm.Dump(_dumpFilePath, GetTextBoxText(dumpStartOffsetTextBox), GetTextBoxText(dumpLengthTextBox));
-                UpdateProgressbar(0, 100, 0,"");
+                UpdateProgressbar(0, 100, 0);
             }
             catch (Exception e)
             {
@@ -127,7 +127,7 @@ namespace PeekPoker
             finally
             {
                 EnableControl(dumpMemoryButton, true);
-                UpdateProgressbar(0, 100, 0,"");
+                UpdateProgressbar(0, 100, 0);
                 Thread.CurrentThread.Abort();
             }
         }

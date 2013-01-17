@@ -129,7 +129,7 @@ namespace PeekPoker
                 //The ExFindHexOffset function is a Experimental search function
                 var results = _rtm.FindHexOffset(GetTextBoxText(searchRangeValueTextBox));//pointer
                 //Reset the progressbar...
-                UpdateProgressbar(0, 100, 0,"");
+                UpdateProgressbar(0, 100, 0);
 
                 if (results.Count < 1)
                 {
