@@ -15,7 +15,6 @@ namespace PeekPoker
 
         private BindingList<SearchResults> _searchResult = new BindingList<SearchResults>();
         private RealTimeMemory _rtm;
-        private uint _searchRangeDumpLength;
 
         public Search(RealTimeMemory rtm)
         {
@@ -36,8 +35,7 @@ namespace PeekPoker
         {
             try
             {
-                _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
-                var oThread = new Thread(SearchRange);
+                Thread oThread = new Thread(SearchRange);
                 oThread.Start();
             }
             catch (Exception ex)
@@ -106,13 +104,11 @@ namespace PeekPoker
         private void SearchRangeValueTextBoxKeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Return || !searchRangeValueTextBox.Focused) return;
-            _searchRangeDumpLength = (Functions.Convert(endRangeAddressTextBox.Text) - Functions.Convert(startRangeAddressTextBox.Text));
             var oThread = new Thread(SearchRange);
             oThread.Start();
             e.Handled = true;
             searchRangeButton.Focus();
         }
-
 
         //Searches the memory for the specified value (Experimental)
         private void SearchRange()
@@ -122,7 +118,7 @@ namespace PeekPoker
                 EnableControl(searchRangeButton, false);
                 EnableControl(stopSearchButton, true);
                 _rtm.DumpOffset = Functions.Convert(GetTextBoxText(startRangeAddressTextBox));
-                _rtm.DumpLength = _searchRangeDumpLength;
+                _rtm.DumpLength = Functions.Convert(GetTextBoxText(lengthRangeAddressTextBox));
 
                 ResultGridClean();//Clean list view
 
@@ -176,6 +172,26 @@ namespace PeekPoker
         private void StopSearchButtonClick(object sender, EventArgs e)
         {
             _rtm.StopSearch = true;
+        }
+
+        private void FixTheAddresses(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!startRangeAddressTextBox.Text.StartsWith("0x"))
+                {
+                    if (!startRangeAddressTextBox.Text.Equals(""))
+                        startRangeAddressTextBox.Text = "0x" + uint.Parse(startRangeAddressTextBox.Text).ToString("X");
+                }
+
+                if (lengthRangeAddressTextBox.Text.StartsWith("0x")) return;
+                if (!lengthRangeAddressTextBox.Text.Equals(""))
+                    lengthRangeAddressTextBox.Text = "0x" + uint.Parse(lengthRangeAddressTextBox.Text).ToString("X");
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message, "PeekNPoke", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

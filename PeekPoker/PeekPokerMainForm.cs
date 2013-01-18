@@ -205,7 +205,7 @@ namespace PeekPoker
         //Setter Methods
         private void SetToolStripLabel(string value)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
                 Invoke((MethodInvoker)(() => SetToolStripLabel(value)));
             else
             {
@@ -253,7 +253,8 @@ namespace PeekPoker
 
         private void peekNpokeButton_Click(object sender, EventArgs e)
         {
-            PeekNPoke form = new PeekNPoke(_rtm) {MdiParent = this};
+            PeekNPoke form = displayOutsideParentBox.Checked ? 
+                                 new PeekNPoke(_rtm) : new PeekNPoke(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
@@ -263,18 +264,19 @@ namespace PeekPoker
 
         private void dumpButton_Click(object sender, EventArgs e)
         {
-            Dump form = new Dump(_rtm) { MdiParent = this };
+            Dump form = displayOutsideParentBox.Checked ? 
+                new Dump(_rtm) : new Dump(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
             form.UpdateProgressbar += UpdateProgressbar;
-            form.SetTextBoxText += SetTextBoxText;
             form.Show();
         }
 
-        private void SearchButton_Click(object sender, EventArgs e)
+        private void SearchButtonClick(object sender, EventArgs e)
         {
-            Search form = new Search(_rtm) { MdiParent = this };
+            Search form = displayOutsideParentBox.Checked ? 
+                new Search(_rtm) : new Search(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
@@ -284,17 +286,17 @@ namespace PeekPoker
 
         private void converterButton_Click(object sender, EventArgs e)
         {
-            Converter form = new Converter { MdiParent = this };
-			form.ShowMessageBox += ShowMessageBox;
+            Converter form = displayOutsideParentBox.Checked ? 
+                new Converter() : new Converter {MdiParent = this};
+            form.ShowMessageBox += ShowMessageBox;
             form.Show();
         }
 
         private void pluginInfoButton_Click(object sender, EventArgs e)
         {
-            PluginInfo form = new PluginInfo(_listviewItem) { MdiParent = this };
+            PluginInfo form = displayOutsideParentBox.Checked ? 
+                new PluginInfo(_listviewItem) : new PluginInfo(_listviewItem) {MdiParent = this};
             form.Show();
         }
-
-
     }
 }

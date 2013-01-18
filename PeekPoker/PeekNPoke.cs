@@ -78,28 +78,21 @@ namespace PeekPoker
         }
         private void FixTheAddresses(object sender, EventArgs e)
         {
-            if (!peekPokeAddressTextBox.Text.StartsWith("0x")) //Peek Address Box, Formatting Check.
-            {//PeekPokeAddress
-                if (!peekPokeAddressTextBox.Text.Equals("")) //Empty Check
-                    peekPokeAddressTextBox.Text = (string.Format("0x" + peekPokeAddressTextBox.Text)); //Formatting
+            try
+            {
+                if (!peekPokeAddressTextBox.Text.StartsWith("0x"))
+                {
+                    if (!peekPokeAddressTextBox.Text.Equals(""))
+                        peekPokeAddressTextBox.Text = "0x"+uint.Parse(peekPokeAddressTextBox.Text).ToString("X");
+                }
+
+                if (peekLengthTextBox.Text.StartsWith("0x")) return;
+                if (!peekLengthTextBox.Text.Equals(""))
+                    peekLengthTextBox.Text = "0x" + uint.Parse(peekLengthTextBox.Text).ToString("X");
             }
-            if (peekLengthTextBox.Text.StartsWith("0x")) // Checks if peek length is hex value or not based on 0x
-            { //Peeklength pt1
-                string result = (peekLengthTextBox.Text.ToUpper().Substring(2));
-                uint result2 = UInt32.Parse(result, System.Globalization.NumberStyles.HexNumber);
-                peekLengthTextBox.Text = result2.ToString();
-            }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(peekLengthTextBox.Text.ToUpper(), "^[A-Z]$")) //Checks if hex, based on uppercase alphabet presence.
-            {//Peeklength pt2
-                string result = (peekLengthTextBox.Text.ToUpper());
-                uint result2 = UInt32.Parse(result, System.Globalization.NumberStyles.HexNumber);
-                peekLengthTextBox.Text = result2.ToString();
-            }
-            else if (peekLengthTextBox.Text.StartsWith("h")) //Checks if hex, based on starting with h.
-            {//Peeklength pt3
-                string result = (peekLengthTextBox.Text.ToUpper().Substring(1));
-                uint result2 = UInt32.Parse(result, System.Globalization.NumberStyles.HexNumber);
-                peekLengthTextBox.Text = result2.ToString();
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message,"PeekNPoke",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
         private void PeekButtonClick(object sender, EventArgs e)
@@ -120,7 +113,7 @@ namespace PeekPoker
         {
             //Clean up
             peekPokeAddressTextBox.Text = "0xC0000000";
-            peekLengthTextBox.Text = "240";
+            peekLengthTextBox.Text = "0xFF";
             SelAddress.Clear();
             peekPokeFeedBackTextBox.Clear();
             NumericInt8.Value = 0;
@@ -138,6 +131,7 @@ namespace PeekPoker
         {
             ChangeNumericValue();//When you select an offset on the hexbox
 
+            if(hexBox.ByteProvider == null)return;
             var prev = Functions.HexToBytes(peekPokeAddressTextBox.Text);
             var address = Functions.BytesToInt32(prev);
             SelAddress.Text = string.Format("0x" + (address + (int)hexBox.SelectionStart).ToString("X8"));
@@ -273,7 +267,7 @@ namespace PeekPoker
         private void SetHexBoxRefresh()
         {
             if (hexBox.InvokeRequired)
-                Invoke((MethodInvoker)(this.SetHexBoxRefresh));
+                Invoke((MethodInvoker)(SetHexBoxRefresh));
             else
             {
                 hexBox.Refresh();
@@ -321,10 +315,10 @@ namespace PeekPoker
             {
                 EnableControl(pokeButton, false);
                 uint dumplength = (uint)hexBox.ByteProvider.Length / 2;
-                if (dumplength > 240)
-                    throw new Exception("Poke Length has to be under 240 bytes.");
+                //if (dumplength > 240)
+                //    throw new Exception("Poke Length has to be under 240 bytes.");
                 _rtm.DumpOffset = Functions.Convert(GetTextBoxText(peekPokeAddressTextBox));//Set the dump offset
-                _rtm.DumpLength = (uint)hexBox.ByteProvider.Length / 2;//The length of data to dump
+                _rtm.DumpLength = dumplength;//The length of data to dump
 
                 DynamicByteProvider buffer = GetHexBoxByteProvider();
                 _rtm.Poke(GetTextBoxText(peekPokeAddressTextBox), Functions.ByteArrayToString(buffer.Bytes.ToArray()));
