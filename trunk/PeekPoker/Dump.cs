@@ -12,8 +12,6 @@ namespace PeekPoker
         public event UpdateProgressBarHandler UpdateProgressbar;
         public event EnableControlHandler EnableControl;
         public event GetTextBoxTextHandler GetTextBoxText;
-        public event SetTextBoxTextDelegateHandler SetTextBoxText;
-
         private RealTimeMemory _rtm;
         private string _dumpFilePath;
 
@@ -23,36 +21,36 @@ namespace PeekPoker
             _rtm = rtm;
         }
 
-        private void FixDumpLength(object sender, EventArgs e)
+        private void FixTheAddresses(object sender, EventArgs e)
         {
-            if (dumpLengthTextBox.Text.StartsWith("0x")) return;
-            if (dumpLengthTextBox.Text.Equals("")) return;
-            dumpLengthTextBox.Text = (string.Format("0x" + dumpLengthTextBox.Text));
-            if (!System.Text.RegularExpressions.Regex.IsMatch(dumpLengthTextBox.Text.Substring(2), @"\A\b[0-9a-fA-F]+\b\Z"))
-                dumpLengthTextBox.Clear();
-        }
+            try
+            {
+                if (!dumpStartOffsetTextBox.Text.StartsWith("0x"))
+                {
+                    if (!dumpStartOffsetTextBox.Text.Equals(""))
+                        dumpStartOffsetTextBox.Text = "0x" + uint.Parse(dumpStartOffsetTextBox.Text).ToString("X");
+                }
 
-        private void FixDumpAddresses(object sender, EventArgs e)
-        {
-            if (dumpStartOffsetTextBox.Text.StartsWith("0x")) return;
-            if (dumpStartOffsetTextBox.Text.Equals("")) return;
-            dumpStartOffsetTextBox.Text = (string.Format("0x" + dumpStartOffsetTextBox.Text));
-            if (!System.Text.RegularExpressions.Regex.IsMatch(dumpStartOffsetTextBox.Text.Substring(2), @"\A\b[0-9a-fA-F]+\b\Z"))
-                dumpStartOffsetTextBox.Clear();
+                if (dumpLengthTextBox.Text.StartsWith("0x")) return;
+                if (!dumpLengthTextBox.Text.Equals(""))
+                    dumpLengthTextBox.Text = "0x" + uint.Parse(dumpLengthTextBox.Text).ToString("X");
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message, "PeekNPoke", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
 
         private void DumpMemoryButtonClick(object sender, EventArgs e)
         {
             try
             {
-                var saveFileDialog = new SaveFileDialog();
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
                 if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
                 _dumpFilePath = saveFileDialog.FileName;
-                FileStream file = File.Create(_dumpFilePath);
-                file.Close();
-
-                var oThread = new Thread(DumpMem);
+                using (FileStream file = File.Create(_dumpFilePath)){file.Close();}
+                
+                Thread oThread = new Thread(DumpMem);
                 oThread.Start();
             }
             catch (Exception ex)
@@ -78,38 +76,6 @@ namespace PeekPoker
         {
             dumpStartOffsetTextBox.Text = string.Format("0xC0000000");
             dumpLengthTextBox.Text = string.Format("0x1FFF0FFF");
-        }
-
-        private void QuickCalculatorPlusButtonClick(object sender, EventArgs e)
-        {
-            try
-            {
-                //convert text to uint the format results to hex string
-                SetTextBoxText(quickCalculatorAnswerTextBox,
-                    String.Format("0x{0:X}",
-                    Functions.Convert(GetTextBoxText(quickCalculatorValueOneTextBox)) +
-                    Functions.Convert(GetTextBoxText(quickCalculatorValueTwoTextBox))));
-            }
-            catch (Exception ex)
-            {
-                quickCalculatorAnswerTextBox.Clear();
-                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void QuickCalculatorMinusButtonClick(object sender, EventArgs e)
-        {
-            try
-            {
-                //convert text to uint the format results to hex string
-                quickCalculatorAnswerTextBox.Text = String.Format("0x{0:X}", Functions.Convert(quickCalculatorValueOneTextBox.Text) -
-                                                     Functions.Convert(quickCalculatorValueTwoTextBox.Text));
-            }
-            catch (Exception ex)
-            {
-                quickCalculatorAnswerTextBox.Clear();
-                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void DumpMem()

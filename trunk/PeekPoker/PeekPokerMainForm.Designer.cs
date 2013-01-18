@@ -50,6 +50,7 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
+            this.displayOutsideParentBox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -172,6 +173,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.displayOutsideParentBox);
             this.groupBox5.Controls.Add(this.pluginInfoButton);
             this.groupBox5.Controls.Add(this.converterButton);
             this.groupBox5.Controls.Add(this.SearchButton);
@@ -216,7 +218,7 @@
             this.SearchButton.TabIndex = 11;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            this.SearchButton.Click += new System.EventHandler(this.SearchButtonClick);
             // 
             // dumpButton
             // 
@@ -239,6 +241,17 @@
             this.peekNpokeButton.Text = "Peek && Poke";
             this.peekNpokeButton.UseVisualStyleBackColor = true;
             this.peekNpokeButton.Click += new System.EventHandler(this.peekNpokeButton_Click);
+            // 
+            // displayOutsideParentBox
+            // 
+            this.displayOutsideParentBox.AutoSize = true;
+            this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.displayOutsideParentBox.Location = new System.Drawing.Point(510, 18);
+            this.displayOutsideParentBox.Name = "displayOutsideParentBox";
+            this.displayOutsideParentBox.Size = new System.Drawing.Size(162, 33);
+            this.displayOutsideParentBox.TabIndex = 14;
+            this.displayOutsideParentBox.Text = "Display outside Parent?";
+            this.displayOutsideParentBox.UseVisualStyleBackColor = true;
             // 
             // PeekPokerMainForm
             // 
@@ -265,6 +278,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,6 +306,7 @@
         private System.Windows.Forms.Button converterButton;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button dumpButton;
+        private System.Windows.Forms.CheckBox displayOutsideParentBox;
 
     }
 }

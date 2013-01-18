@@ -62,6 +62,7 @@ namespace PeekPoker.Interface
                 _tcp = new TcpClient(); //New Instance of TCP
                 //Connect to the specified host using port 730
                 _tcp.Connect(_ipAddress, 730);
+                _tcp.ReceiveTimeout = 1000; //1sec
                 byte[] response = new byte[1024];
                 _tcp.Client.Receive(response);
                 string reponseString = Encoding.ASCII.GetString(response).Replace("\0", "");
