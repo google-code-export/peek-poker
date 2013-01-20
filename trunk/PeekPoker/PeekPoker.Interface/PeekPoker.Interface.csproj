@@ -42,6 +42,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractPlugin.cs" />
     <Compile Include="DelegateClass.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="Hex.cs" />

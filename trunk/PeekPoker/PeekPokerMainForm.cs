@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using PeekPoker.Interface;
+using PeekPoker.Plugin;
 using Application = System.Windows.Forms.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -16,6 +17,7 @@ namespace PeekPoker
     {
         #region global varibales
 
+        private PluginService _pluginService;
         private ListViewItem _listviewItem;
         private RealTimeMemory _rtm;//DLL is now in the Important File Folder
         private readonly string _filepath = (Application.StartupPath + "\\XboxIP.txt"); //For IP address loading - 8Ball
@@ -38,19 +40,25 @@ namespace PeekPoker
         {
             try
             {
-
                 //feature suggested by Fairchild
-                var ipRegex = new Regex(@"^(([01]?\d\d?|2[0-4]\d|25[0-5])\.){3}([01]?\d\d?|25[0-5]|2[0-4]\d)$"); //IP Check for XDK Name
-                var xboxname = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound"); //feature suggested by fairchild -Introduced regex to accomodate the possiblity of a name instead of ip, which is very possible.
+                var ipRegex = new Regex(@"^(([01]?\d\d?|2[0-4]\d|25[0-5])\.){3}([01]?\d\d?|25[0-5]|2[0-4]\d)$");
+                    //IP Check for XDK Name
+                var xboxname =
+                    (string)
+                    Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "XboxName", "NotFound");
+                    //feature suggested by fairchild -Introduced regex to accomodate the possiblity of a name instead of ip, which is very possible.
                 var validIp = ipRegex.Match(xboxname); // For regex to check if there's a match
-                if (validIp.Success) ipAddressTextBox.Text = xboxname;// If the registry contains a valid IP, send to textbox.
-                if (File.Exists(_filepath)) ipAddressTextBox.Text = File.ReadAllText(_filepath);
-                //else SetLogText("XboxIP.txt was not detected, will be created upon connection.");
+                if (validIp.Success)
+                    ipAddressTextBox.Text = xboxname; // If the registry contains a valid IP, send to textbox.
+                if (File.Exists(_filepath))
+                    ipAddressTextBox.Text = File.ReadAllText(_filepath);
+
             }
             catch (Exception)
             {
-                //SetLogText("Error: XenonSDK not installed XboxName is null! You can still use PeekPoker");
-            } 
+            }
+
+
         }
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
@@ -84,28 +92,26 @@ namespace PeekPoker
             {
                 var pathToPlugins = AppDomain.CurrentDomain.BaseDirectory + "Plugins";
                 if (!(Directory.Exists(pathToPlugins))) Directory.CreateDirectory(pathToPlugins);
-                Plugin.Plugin.Init(pathToPlugins);
 
-                foreach (var plugin in Plugin.Plugin.PluginService.PluginList)
+                _pluginService = new PluginService(pathToPlugins);
+                foreach (AbstractPlugin pluginData in _pluginService.PluginDatas)
                 {
-                    //
                     var item = new ToolStripMenuItem
-                    {
-                        Name = plugin.Instance.ApplicationName,
-                        Tag = plugin.Instance.ApplicationName,
-                        Text = plugin.Instance.ApplicationName,
-                        Image = plugin.Instance.Icon.ToBitmap(),
-                        Size = new System.Drawing.Size(170, 22)
-                    };
-
+                        {
+                            Name = pluginData.ApplicationName,
+                            Tag = pluginData.ApplicationName,
+                            Text = pluginData.ApplicationName,
+                            Image = pluginData.Icon.ToBitmap(),
+                            Size = new System.Drawing.Size(170, 22)
+                        };
                     item.Click += PluginClickEventHandler; //Event handler if you click on the cheat code
                     pluginsToolStripMenuItem.DropDownItems.Add(item);
+
                     //Plugin Details
-                    _listviewItem = new ListViewItem(plugin.Name);
-                    _listviewItem.SubItems.Add(plugin.Description);
-                    _listviewItem.SubItems.Add(plugin.Author);
-                    _listviewItem.SubItems.Add(plugin.Version);
-                    //
+                    _listviewItem = new ListViewItem(pluginData.ApplicationName);
+                    _listviewItem.SubItems.Add(pluginData.Description);
+                    _listviewItem.SubItems.Add(pluginData.Author);
+                    _listviewItem.SubItems.Add(pluginData.Version);
                 }
             }
             catch (Exception e)
@@ -119,11 +125,13 @@ namespace PeekPoker
             try
             {
                 var item = (ToolStripMenuItem)sender;       // get the menu item
-                foreach (var plugin in Plugin.Plugin.PluginService.PluginList)
+                foreach (AbstractPlugin plugin in _pluginService.PluginDatas)
                 {
-                    if (plugin.Name == item.Name)
+                    if (plugin.ApplicationName == item.Name)
                     {
-                        plugin.Instance.Display(this);
+                        plugin.RTM = _rtm;
+                        plugin.IsMdiChild = !displayOutsideParentBox.Checked;
+                        plugin.Display(this);
                     }
                 }
             }
