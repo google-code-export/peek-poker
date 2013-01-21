@@ -78,6 +78,7 @@
             this.ClientSize = new System.Drawing.Size(707, 250);
             this.Controls.Add(this.pluginListView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "PluginInfo";
             this.Text = "PluginInfo";
             this.ResumeLayout(false);

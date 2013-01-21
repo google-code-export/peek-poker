@@ -54,11 +54,7 @@ namespace PeekPoker
                     ipAddressTextBox.Text = File.ReadAllText(_filepath);
 
             }
-            catch (Exception)
-            {
-            }
-
-
+            catch (Exception){}
         }
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
@@ -94,8 +90,10 @@ namespace PeekPoker
                 if (!(Directory.Exists(pathToPlugins))) Directory.CreateDirectory(pathToPlugins);
 
                 _pluginService = new PluginService(pathToPlugins);
+
                 foreach (AbstractPlugin pluginData in _pluginService.PluginDatas)
                 {
+                    EnableControl(pluginInfoButton, true);
                     var item = new ToolStripMenuItem
                         {
                             Name = pluginData.ApplicationName,
@@ -154,13 +152,11 @@ namespace PeekPoker
 
                 if (!_rtm.Connect())
                 {
-
                     throw new Exception("Connection Failed!");
                 }
-                //EnableControl(peeknpoke, true);
+                EnableControl(mainGroupBox, true);
 
                 SetToolStripLabel("Connected!");
-
                 ShowMessageBox("Connected!", "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (!File.Exists(_filepath)) File.Create(_filepath).Dispose(); //Create the file if it doesn't exist

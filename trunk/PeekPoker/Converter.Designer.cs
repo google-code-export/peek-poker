@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.endianTypeGroupBox = new System.Windows.Forms.GroupBox();
             this.littleEndianRadioButton = new System.Windows.Forms.RadioButton();
             this.BigEndianRadioButton = new System.Windows.Forms.RadioButton();
@@ -44,37 +43,14 @@
             this.hexCalculatorTextBox = new System.Windows.Forms.TextBox();
             this.integer8CalculatorTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox4.SuspendLayout();
             this.endianTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.endianTypeGroupBox);
-            this.groupBox4.Controls.Add(this.converterClearButton);
-            this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.floatCalculatorTextBox);
-            this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.integer16CalculatorTextBox);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.integer32CalculatorTextBox);
-            this.groupBox4.Controls.Add(this.hexCalculatorTextBox);
-            this.groupBox4.Controls.Add(this.integer8CalculatorTextBox);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Location = new System.Drawing.Point(12, 12);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(527, 148);
-            this.groupBox4.TabIndex = 16;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Converter";
             // 
             // endianTypeGroupBox
             // 
             this.endianTypeGroupBox.Controls.Add(this.littleEndianRadioButton);
             this.endianTypeGroupBox.Controls.Add(this.BigEndianRadioButton);
-            this.endianTypeGroupBox.Location = new System.Drawing.Point(349, 14);
+            this.endianTypeGroupBox.Location = new System.Drawing.Point(332, 10);
             this.endianTypeGroupBox.Name = "endianTypeGroupBox";
             this.endianTypeGroupBox.Size = new System.Drawing.Size(172, 47);
             this.endianTypeGroupBox.TabIndex = 15;
@@ -105,7 +81,7 @@
             // 
             // converterClearButton
             // 
-            this.converterClearButton.Location = new System.Drawing.Point(434, 108);
+            this.converterClearButton.Location = new System.Drawing.Point(417, 104);
             this.converterClearButton.Name = "converterClearButton";
             this.converterClearButton.Size = new System.Drawing.Size(75, 23);
             this.converterClearButton.TabIndex = 14;
@@ -116,7 +92,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(63, 112);
+            this.label10.Location = new System.Drawing.Point(46, 108);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(33, 13);
             this.label10.TabIndex = 13;
@@ -124,7 +100,7 @@
             // 
             // floatCalculatorTextBox
             // 
-            this.floatCalculatorTextBox.Location = new System.Drawing.Point(110, 109);
+            this.floatCalculatorTextBox.Location = new System.Drawing.Point(93, 105);
             this.floatCalculatorTextBox.MaxLength = 3276700;
             this.floatCalculatorTextBox.Name = "floatCalculatorTextBox";
             this.floatCalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -135,7 +111,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 56);
+            this.label9.Location = new System.Drawing.Point(8, 52);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 13);
             this.label9.TabIndex = 11;
@@ -143,7 +119,7 @@
             // 
             // integer16CalculatorTextBox
             // 
-            this.integer16CalculatorTextBox.Location = new System.Drawing.Point(110, 51);
+            this.integer16CalculatorTextBox.Location = new System.Drawing.Point(93, 47);
             this.integer16CalculatorTextBox.MaxLength = 3276700;
             this.integer16CalculatorTextBox.Name = "integer16CalculatorTextBox";
             this.integer16CalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -154,7 +130,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(261, 69);
+            this.label20.Location = new System.Drawing.Point(244, 65);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(37, 13);
             this.label20.TabIndex = 6;
@@ -163,7 +139,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 84);
+            this.label4.Location = new System.Drawing.Point(24, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 3;
@@ -172,7 +148,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(38, 26);
+            this.label22.Location = new System.Drawing.Point(21, 22);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(54, 13);
             this.label22.TabIndex = 8;
@@ -180,7 +156,7 @@
             // 
             // integer32CalculatorTextBox
             // 
-            this.integer32CalculatorTextBox.Location = new System.Drawing.Point(110, 81);
+            this.integer32CalculatorTextBox.Location = new System.Drawing.Point(93, 77);
             this.integer32CalculatorTextBox.MaxLength = 3276700;
             this.integer32CalculatorTextBox.Name = "integer32CalculatorTextBox";
             this.integer32CalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -190,7 +166,7 @@
             // 
             // hexCalculatorTextBox
             // 
-            this.hexCalculatorTextBox.Location = new System.Drawing.Point(364, 66);
+            this.hexCalculatorTextBox.Location = new System.Drawing.Point(347, 62);
             this.hexCalculatorTextBox.Name = "hexCalculatorTextBox";
             this.hexCalculatorTextBox.Size = new System.Drawing.Size(145, 20);
             this.hexCalculatorTextBox.TabIndex = 4;
@@ -199,7 +175,7 @@
             // 
             // integer8CalculatorTextBox
             // 
-            this.integer8CalculatorTextBox.Location = new System.Drawing.Point(110, 23);
+            this.integer8CalculatorTextBox.Location = new System.Drawing.Point(93, 19);
             this.integer8CalculatorTextBox.MaxLength = 3276700;
             this.integer8CalculatorTextBox.Name = "integer8CalculatorTextBox";
             this.integer8CalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -210,7 +186,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(314, 69);
+            this.label5.Location = new System.Drawing.Point(297, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 5;
@@ -220,22 +196,33 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 170);
-            this.Controls.Add(this.groupBox4);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.ClientSize = new System.Drawing.Size(511, 135);
+            this.Controls.Add(this.endianTypeGroupBox);
+            this.Controls.Add(this.converterClearButton);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.floatCalculatorTextBox);
+            this.Controls.Add(this.integer8CalculatorTextBox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.hexCalculatorTextBox);
+            this.Controls.Add(this.integer16CalculatorTextBox);
+            this.Controls.Add(this.integer32CalculatorTextBox);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.label4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "Converter";
             this.Text = "Converter";
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.endianTypeGroupBox.ResumeLayout(false);
             this.endianTypeGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox endianTypeGroupBox;
         private System.Windows.Forms.RadioButton littleEndianRadioButton;
         private System.Windows.Forms.RadioButton BigEndianRadioButton;
