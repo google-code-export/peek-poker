@@ -44,17 +44,17 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.mainGroupBox = new System.Windows.Forms.GroupBox();
+            this.displayOutsideParentBox = new System.Windows.Forms.CheckBox();
             this.pluginInfoButton = new System.Windows.Forms.Button();
             this.converterButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
-            this.displayOutsideParentBox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.mainGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -161,7 +161,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.groupBox5);
+            this.panel1.Controls.Add(this.mainGroupBox);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.ipAddressTextBox);
             this.panel1.Controls.Add(this.connectButton);
@@ -171,25 +171,38 @@
             this.panel1.Size = new System.Drawing.Size(699, 97);
             this.panel1.TabIndex = 18;
             // 
-            // groupBox5
+            // mainGroupBox
             // 
-            this.groupBox5.Controls.Add(this.displayOutsideParentBox);
-            this.groupBox5.Controls.Add(this.pluginInfoButton);
-            this.groupBox5.Controls.Add(this.converterButton);
-            this.groupBox5.Controls.Add(this.SearchButton);
-            this.groupBox5.Controls.Add(this.dumpButton);
-            this.groupBox5.Controls.Add(this.peekNpokeButton);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox5.Location = new System.Drawing.Point(0, 41);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(697, 54);
-            this.groupBox5.TabIndex = 7;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Selection Options";
+            this.mainGroupBox.Controls.Add(this.displayOutsideParentBox);
+            this.mainGroupBox.Controls.Add(this.pluginInfoButton);
+            this.mainGroupBox.Controls.Add(this.converterButton);
+            this.mainGroupBox.Controls.Add(this.SearchButton);
+            this.mainGroupBox.Controls.Add(this.dumpButton);
+            this.mainGroupBox.Controls.Add(this.peekNpokeButton);
+            this.mainGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mainGroupBox.Enabled = false;
+            this.mainGroupBox.Location = new System.Drawing.Point(0, 41);
+            this.mainGroupBox.Name = "mainGroupBox";
+            this.mainGroupBox.Size = new System.Drawing.Size(697, 54);
+            this.mainGroupBox.TabIndex = 7;
+            this.mainGroupBox.TabStop = false;
+            this.mainGroupBox.Text = "Selection Options";
+            // 
+            // displayOutsideParentBox
+            // 
+            this.displayOutsideParentBox.AutoSize = true;
+            this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.displayOutsideParentBox.Location = new System.Drawing.Point(510, 18);
+            this.displayOutsideParentBox.Name = "displayOutsideParentBox";
+            this.displayOutsideParentBox.Size = new System.Drawing.Size(162, 33);
+            this.displayOutsideParentBox.TabIndex = 14;
+            this.displayOutsideParentBox.Text = "Display outside Parent?";
+            this.displayOutsideParentBox.UseVisualStyleBackColor = true;
             // 
             // pluginInfoButton
             // 
             this.pluginInfoButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pluginInfoButton.Enabled = false;
             this.pluginInfoButton.Location = new System.Drawing.Point(391, 18);
             this.pluginInfoButton.Name = "pluginInfoButton";
             this.pluginInfoButton.Size = new System.Drawing.Size(119, 33);
@@ -242,17 +255,6 @@
             this.peekNpokeButton.UseVisualStyleBackColor = true;
             this.peekNpokeButton.Click += new System.EventHandler(this.peekNpokeButton_Click);
             // 
-            // displayOutsideParentBox
-            // 
-            this.displayOutsideParentBox.AutoSize = true;
-            this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.displayOutsideParentBox.Location = new System.Drawing.Point(510, 18);
-            this.displayOutsideParentBox.Name = "displayOutsideParentBox";
-            this.displayOutsideParentBox.Size = new System.Drawing.Size(162, 33);
-            this.displayOutsideParentBox.TabIndex = 14;
-            this.displayOutsideParentBox.Text = "Display outside Parent?";
-            this.displayOutsideParentBox.UseVisualStyleBackColor = true;
-            // 
             // PeekPokerMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -277,8 +279,8 @@
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            this.mainGroupBox.ResumeLayout(false);
+            this.mainGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,7 +302,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripProgressBar StatusProgressBar;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox mainGroupBox;
         private System.Windows.Forms.Button peekNpokeButton;
         private System.Windows.Forms.Button pluginInfoButton;
         private System.Windows.Forms.Button converterButton;
