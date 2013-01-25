@@ -193,5 +193,10 @@ namespace PeekPoker
                 ShowMessageBox(ex.Message, "PeekNPoke", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void SearchRangeValueTextBoxLeave(object sender, EventArgs e)
+        {
+            searchRangeValueTextBox.Text = searchRangeValueTextBox.Text.Replace(" ", "");
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace PeekPoker
         public event EnableControlHandler EnableControl;
         public event GetTextBoxTextHandler GetTextBoxText;
         public event SetTextBoxTextDelegateHandler SetTextBoxText;
+        public event UpdateProgressBarHandler UpdateProgressbar;
 
         private readonly RealTimeMemory _rtm;
         private readonly AutoCompleteStringCollection _data = new AutoCompleteStringCollection();
@@ -126,6 +127,14 @@ namespace PeekPoker
         private void PeekNPokeLoad(object sender, EventArgs e)
         {
             ChangeNumericMaxMin();
+        }
+        private void HexBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                this.hexBox.CopyHex();
+                e.SuppressKeyPress = true;
+            }
         }
         private void HexBoxMouseUp(object sender, MouseEventArgs e)
         {
@@ -302,6 +311,7 @@ namespace PeekPoker
                 SetHexBoxRefresh();
                 EnableControl(peekButton, true);
                 SetTextBoxText(peekPokeFeedBackTextBox,"Peek Success!");
+                UpdateProgressbar(0, 100, 0);
             }
             catch (Exception ex)
             {

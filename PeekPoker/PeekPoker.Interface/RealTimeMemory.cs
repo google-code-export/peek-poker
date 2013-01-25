@@ -147,6 +147,7 @@ namespace PeekPoker.Interface
                 {
                     _tcp.Client.Receive(data);
                     readWriter.WriteBytes(data, 2, 1024);
+                    ReportProgress(0, (int)(dumpLength / 1024), (i + 1), "Dumping Memory...");
                 }
                 //Write whatever is left
                 int extra = (int) (dumpLength%1024);
