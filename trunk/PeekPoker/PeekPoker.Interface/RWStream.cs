@@ -3,7 +3,8 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 
 #endregion
 
@@ -18,7 +19,9 @@ namespace PeekPoker.Interface
 
         #endregion
 
-        private readonly bool _isBigEndian;
+        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
+        static extern int memcmp(byte[] b1, byte[] b2, long count);
+
         private bool _accessed;
         private BinaryReader _bReader;
         private BinaryWriter _bWriter;
@@ -37,7 +40,6 @@ namespace PeekPoker.Interface
                 _fStream = new FileStream(_fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
                 _bReader = new BinaryReader(_fStream);
                 _bWriter = new BinaryWriter(_fStream);
-                _isBigEndian = true;
                 _accessed = true;
                 _stopSearch = false;
             }
@@ -55,7 +57,6 @@ namespace PeekPoker.Interface
                 _fStream = new FileStream(_fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
                 _bReader = new BinaryReader(_fStream);
                 _bWriter = new BinaryWriter(_fStream);
-                _isBigEndian = true;
                 _accessed = true;
                 _stopSearch = false;
             }
@@ -146,14 +147,6 @@ namespace PeekPoker.Interface
         /// <returns>Byte Array</returns>
         public byte[] ReadBytes(int length)
         {
-            return ReadBytes(length, _isBigEndian);
-        }
-
-        /// <summary>Reads a set size of bytes</summary>
-        /// <param name="length">The byte array length</param>
-        /// <param name="isBigEndien">Specifiy if read is in Big Endien Type</param>
-        private byte[] ReadBytes(int length, bool isBigEndien)
-        {
             try
             {
                 if (Position == Length)
@@ -162,8 +155,7 @@ namespace PeekPoker.Interface
                     return new byte[0];
                 byte[] buffer = new byte[length];
                 _fStream.Read(buffer, 0, length);
-                if (!isBigEndien)
-                    Array.Reverse(buffer);
+
                 return buffer;
             }
             catch (Exception exception)
@@ -172,11 +164,35 @@ namespace PeekPoker.Interface
             }
         }
 
+        private static bool ByteArrayCompare(byte[] b1, byte[] b2)
+        {
+            // Validate buffers are the same length.
+            // This also ensures that the count does not exceed the length of either buffer.  
+            return b1.Length == b2.Length && memcmp(b1, b2, b1.Length) == 0;
+        }
+
+        private static int IndexOfInt(byte[] arr, byte value, int start)
+        {
+            for (int i = start; i < arr.Length; i++)
+            {
+                if (arr[i] == value)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         public BindingList<SearchResults> SearchHexString(byte[] pattern, uint startDumpOffset)
         {
-            byte[] buffer = ReadBytes((int) Length, _isBigEndian);
+
+
+
+            byte[] buffer = new byte[_fStream.Length];
+            _fStream.Read(buffer, 0, (int)_fStream.Length);
+            int i = IndexOfInt(buffer, pattern[0], 0);
             BindingList<SearchResults> positions = new BindingList<SearchResults>();
-            int i = Array.IndexOf(buffer, pattern[0], 0);
+
             int x = 1;
             while (i >= 0 && i <= buffer.Length - pattern.Length)
             {
@@ -185,21 +201,27 @@ namespace PeekPoker.Interface
 
                 byte[] segment = new byte[pattern.Length];
                 Buffer.BlockCopy(buffer, i, segment, 0, pattern.Length);
-                if (segment.SequenceEqual(pattern))
+
+                if (ByteArrayCompare(segment, pattern))
                 {
                     SearchResults results = new SearchResults();
-                    results.Offset = Functions.ToHexString(Functions.UInt32ToBytes(startDumpOffset + (uint) i));
-                    results.Value = Functions.ByteArrayToString(segment);
+                    results.Offset = String.Format("{0:X}", startDumpOffset + (uint)i);
+
+                    StringBuilder hex = new StringBuilder(segment.Length * 2);
+                    foreach (byte b in segment)
+                        hex.AppendFormat("{0:x2}", b);
+
+                    results.Value = hex.ToString().ToUpper();
                     results.ID = x.ToString();
                     positions.Add(results);
                     if (_stopSearch) return positions;
-                    i = Array.IndexOf(buffer, pattern[0], i + pattern.Length);
+                    i = IndexOfInt(buffer, pattern[0], i + pattern.Length);
                     x++;
                 }
                 else
                 {
                     if (_stopSearch) return positions;
-                    i = Array.IndexOf(buffer, pattern[0], i + 1);
+                    i = IndexOfInt(buffer, pattern[0], i + 1);
                 }
                 if (_stopSearch) return positions;
             }
@@ -218,25 +240,6 @@ namespace PeekPoker.Interface
         {
             try
             {
-                WriteBytes(buffer, index, count, _isBigEndian);
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.Message);
-            }
-        }
-
-        /// <summary>Writes a region of a byte array to the current stream</summary>
-        /// <param name="buffer">A byte array containing the data to write</param>
-        /// <param name="index">The starting point to start writing</param>
-        /// <param name="count">The amount of bytes to write</param>
-        /// <param name="isBigEndian">If the Endien type is Big</param>
-        private void WriteBytes(byte[] buffer, int index, int count, bool isBigEndian)
-        {
-            try
-            {
-                if (!isBigEndian)
-                    Array.Reverse(buffer);
                 _bWriter.Write(buffer, index, count);
             }
             catch (Exception exception)

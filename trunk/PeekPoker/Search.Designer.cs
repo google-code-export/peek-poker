@@ -170,6 +170,7 @@
             this.searchRangeValueTextBox.TabIndex = 8;
             this.searchRangeValueTextBox.Text = "FF00FF00FF00";
             this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchRangeValueTextBoxKeyUp);
+            this.searchRangeValueTextBox.Leave += new System.EventHandler(this.SearchRangeValueTextBoxLeave);
             // 
             // lengthRangeAddressTextBox
             // 

@@ -296,7 +296,7 @@
             this.peekLengthTextBox.Name = "peekLengthTextBox";
             this.peekLengthTextBox.Size = new System.Drawing.Size(135, 22);
             this.peekLengthTextBox.TabIndex = 41;
-            this.peekLengthTextBox.Text = "0xFF";
+            this.peekLengthTextBox.Text = "0xFFFF";
             this.peekLengthTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // peekButton
@@ -341,6 +341,10 @@
             // 
             // hexBox
             // 
+            // 
+            // 
+            // 
+            this.hexBox.BuiltInContextMenu.CopyMenuItemText = "";
             this.hexBox.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hexBox.LineInfoForeColor = System.Drawing.Color.Empty;
             this.hexBox.LineInfoVisible = true;
@@ -353,6 +357,7 @@
             this.hexBox.UseFixedBytesPerLine = true;
             this.hexBox.VScrollBarVisible = true;
             this.hexBox.SelectionStartChanged += new System.EventHandler(this.HexBoxSelectionStartChanged);
+            this.hexBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HexBoxKeyDown);
             this.hexBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HexBoxMouseUp);
             // 
             // PeekNPoke
