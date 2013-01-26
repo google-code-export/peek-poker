@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PeekPoker.Interface;
@@ -29,8 +30,18 @@ namespace PeekPoker
             if (resultGrid.InvokeRequired)
                 resultGrid.Invoke((MethodInvoker)(() => GridRowColours(value)));
             else
-                resultGrid.Rows[value - 1].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+                resultGrid.Rows[value - 1].DefaultCellStyle.ForeColor = Color.Red;
         }
+
+        private void GridRowRemove(int value)
+        {
+            if (resultGrid.InvokeRequired)
+                resultGrid.Invoke((MethodInvoker)(() => GridRowRemove(value)));
+            else
+                //resultGrid.Rows[value - 1].
+                resultGrid.Rows.RemoveAt(resultGrid.Rows[value - 1].Index);
+        }
+
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
             try
@@ -49,22 +60,98 @@ namespace PeekPoker
             try
             {
                 EnableControl(resultRefreshButton, false);
+                BindingList<SearchResults> newSearchResults = new BindingList<SearchResults>();
                 var value = 0;
                 foreach (var item in _searchResult)
                 {
                     UpdateProgressbar(0, _searchResult.Count, value, "Refreshing...");
                     value++;
 
-                    //peekPokeAddressTextBox.Text = "0x" + _item.Offset;
                     var length = (item.Value.Length / 2).ToString("X");
                     var retvalue = _rtm.Peek("0x" + item.Offset, length, "0x" + item.Offset, length);
 
-                    if (item.Value == retvalue) continue;//if value hasn't change continue for each loop
+                    //===================================================
+                    //Default
+                    if(defaultRadioButton.Checked)
+                    {
+                        if (item.Value == retvalue) continue; //if value hasn't change continue for each loop
+                        this.GridRowColours(value);
+                        item.Value = retvalue;
+                    }
+                    else if (ifEqualsRadioButton.Checked)
+                    {
+                        if (retvalue == newValueTextBox.Text)
+                        {
+                            SearchResults searchResultItem = new SearchResults
+                                                                 {
+                                                                     ID = item.ID,
+                                                                     Offset = item.Offset,
+                                                                     Value = retvalue
+                                                                 };
+                            newSearchResults.Add(searchResultItem);
+                        }
+                    }
+                    else if (ifGreaterThanRadioButton.Checked)
+                    {
+                        uint currentResults;
+                        uint newResult;
 
-                    GridRowColours(value);
-                    item.Value = retvalue;
+                        if(!uint.TryParse("0x" + searchRangeValueTextBox.Text, out currentResults))
+                            throw new Exception("Invalid Search Value this function only works for Unsigned Integers.");
+                        uint.TryParse("0x" + retvalue, out newResult);
+
+                        if (newResult > currentResults)
+                        {
+                            SearchResults searchResultItem = new SearchResults
+                            {
+                                ID = item.ID,
+                                Offset = item.Offset,
+                                Value = retvalue
+                            };
+                            newSearchResults.Add(searchResultItem);
+                        }
+                    }
+                    else if (ifLessThanRadioButton.Checked)
+                    {
+                        uint currentResults;
+                        uint newResult;
+
+                        if (!uint.TryParse("0x" + searchRangeValueTextBox.Text, out currentResults))
+                            throw new Exception("Invalid Search Value this function only works for Unsigned Integers.");
+                        uint.TryParse("0x" + retvalue, out newResult);
+
+                        if (newResult < currentResults)
+                        {
+                            SearchResults searchResultItem = new SearchResults
+                            {
+                                ID = item.ID,
+                                Offset = item.Offset,
+                                Value = retvalue
+                            };
+                            newSearchResults.Add(searchResultItem);
+                        }
+                    }
+                    else if (ifLessThanRadioButton.Checked)
+                    {
+                        if (retvalue != newValueTextBox.Text)
+                        {
+                            SearchResults searchResultItem = new SearchResults
+                            {
+                                ID = item.ID,
+                                Offset = item.Offset,
+                                Value = retvalue
+                            };
+                            newSearchResults.Add(searchResultItem);
+                        }
+                    }
                 }
-                ResultGridUpdate();
+                if(defaultRadioButton.Checked)
+                    ResultGridUpdate();
+                else
+                {
+                    _searchResult = newSearchResults;
+                    ResultGridUpdate();
+                }
                 UpdateProgressbar(0, 100, 0, "idle");
             }
             catch (Exception ex)
@@ -85,7 +172,6 @@ namespace PeekPoker
             if (_searchResult.Count > 0)
             {
                 var thread = new Thread(RefreshResultList);
-                //thread.Name = "RefreshResultsList";
                 thread.Start();
             }
             else
@@ -184,9 +270,16 @@ namespace PeekPoker
                         startRangeAddressTextBox.Text = "0x" + uint.Parse(startRangeAddressTextBox.Text).ToString("X");
                 }
 
-                if (lengthRangeAddressTextBox.Text.StartsWith("0x")) return;
-                if (!lengthRangeAddressTextBox.Text.Equals(""))
-                    lengthRangeAddressTextBox.Text = "0x" + uint.Parse(lengthRangeAddressTextBox.Text).ToString("X");
+                if (!lengthRangeAddressTextBox.Text.StartsWith("0x"))
+                {
+                    if (!lengthRangeAddressTextBox.Text.Equals(""))
+                        lengthRangeAddressTextBox.Text = "0x" + uint.Parse(lengthRangeAddressTextBox.Text).ToString("X");
+
+                }
+
+                uint value = Convert.ToUInt32(startRangeAddressTextBox.Text, 16);
+                uint valueTwo = Convert.ToUInt32(lengthRangeAddressTextBox.Text, 16);
+                totalTextBoxText.Text = "0x" +(value+valueTwo).ToString("X");
             }
             catch (Exception ex)
             {
@@ -197,6 +290,15 @@ namespace PeekPoker
         private void SearchRangeValueTextBoxLeave(object sender, EventArgs e)
         {
             searchRangeValueTextBox.Text = searchRangeValueTextBox.Text.Replace(" ", "");
+        }
+
+        private void resultGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                Clipboard.SetText(string.Format("0x" + resultGrid.Rows[resultGrid.SelectedRows[0].Index].Cells[1].Value));
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

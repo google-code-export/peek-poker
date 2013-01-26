@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Be.Windows.Forms;
@@ -331,7 +332,13 @@ namespace PeekPoker
                 _rtm.DumpLength = dumplength;//The length of data to dump
 
                 DynamicByteProvider buffer = GetHexBoxByteProvider();
-                _rtm.Poke(GetTextBoxText(peekPokeAddressTextBox), Functions.ByteArrayToString(buffer.Bytes.ToArray()));
+
+                StringBuilder sb = new StringBuilder(buffer.Bytes.Count * 2);
+                foreach (byte b in buffer.Bytes)
+                {
+                    sb.AppendFormat("{0:x2}", b);
+                }
+                _rtm.Poke(GetTextBoxText(peekPokeAddressTextBox), sb.ToString());
                 SetTextBoxText(peekPokeFeedBackTextBox, "Poke Success!");
                 EnableControl(pokeButton, true);
             }

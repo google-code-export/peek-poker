@@ -62,7 +62,7 @@ namespace PeekPoker.Interface
                 _tcp = new TcpClient(); //New Instance of TCP
                 //Connect to the specified host using port 730
                 _tcp.Connect(_ipAddress, 730);
-                _tcp.ReceiveTimeout = 1000; //1sec
+                _tcp.ReceiveTimeout = 3000; //1sec
                 byte[] response = new byte[1024];
                 _tcp.Client.Receive(response);
                 string reponseString = Encoding.ASCII.GetString(response).Replace("\0", "");
@@ -227,7 +227,7 @@ namespace PeekPoker.Interface
                 _tcp.Close(); //close connection
                 _connected = false;
                 _memexValidConnection = false;
-                ReportProgress(0, 100, 0, "Idle");
+                ReportProgress(0, 100, 0);
             }
         }
 
