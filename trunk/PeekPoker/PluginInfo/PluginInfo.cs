@@ -1,15 +1,15 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 
-namespace PeekPoker
+namespace PeekPoker.PluginInfo
 {
     public partial class PluginInfo : Form
     {
         public PluginInfo(ListViewItem items)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             if(items == null)
                 items = new ListViewItem();
-            pluginListView.Items.Add(items);
+            this.pluginListView.Items.Add(items);
         }
     }
 }

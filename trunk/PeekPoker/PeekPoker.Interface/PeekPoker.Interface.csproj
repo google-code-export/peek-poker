@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PeekPoker.Interface</RootNamespace>
     <AssemblyName>PeekPoker.Interface</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>Svn</SccProjectName>
     <SccLocalPath>Svn</SccLocalPath>
@@ -46,13 +46,10 @@
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="DelegateClass.cs" />
     <Compile Include="Functions.cs" />
-    <Compile Include="Hex.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTimeMemory.cs" />
     <Compile Include="RWStream.cs" />
-    <Compile Include="ToByteArray.cs" />
-    <Compile Include="ToValue.cs" />
     <Compile Include="Types.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

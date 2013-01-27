@@ -15,7 +15,14 @@ namespace PeekPoker
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new PeekPokerMainForm());
+                //TODO: Load Config.ini file, Load user agreement option, load and pass ip address aswell
+                if(true)
+                    Application.Run(new License.License());
+                else
+                {
+                    //if agreed
+                    Application.Run(new PeekPokerMainForm());
+                }
             }
             catch (Exception ex)
             {
