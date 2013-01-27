@@ -208,9 +208,9 @@ namespace PeekPoker.Search
             // 
             this.lengthRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.lengthRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.lengthRangeAddressTextBox.Location = new System.Drawing.Point(214, 31);
+            this.lengthRangeAddressTextBox.Location = new System.Drawing.Point(228, 31);
             this.lengthRangeAddressTextBox.Name = "lengthRangeAddressTextBox";
-            this.lengthRangeAddressTextBox.Size = new System.Drawing.Size(75, 20);
+            this.lengthRangeAddressTextBox.Size = new System.Drawing.Size(61, 20);
             this.lengthRangeAddressTextBox.TabIndex = 7;
             this.lengthRangeAddressTextBox.Text = "FFFF";
             this.lengthRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
