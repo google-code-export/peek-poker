@@ -1,0 +1,11 @@
+#summary Revision 8 Work order
+= Introduction =
+
+What we should be working on.
+
+
+= Details =
+8Ball:
+  * Restore automated 0x formatting.
+  * Background image options.
+  * Migrate IP and settings to an .ini
