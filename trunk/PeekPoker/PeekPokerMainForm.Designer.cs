@@ -32,8 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PeekPokerMainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHideOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultXbox360IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -54,10 +58,7 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
-            this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.defaultXbox360IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showHideOptionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -84,6 +85,44 @@
             this.pluginsToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.pluginsToolStripMenuItem.Text = "Plugins";
             // 
+            // showHideOptionsToolStripMenuItem
+            // 
+            this.showHideOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backgroundImageToolStripMenuItem,
+            this.defaultXbox360IPToolStripMenuItem,
+            this.showHideOptionsToolStripMenuItem1});
+            this.showHideOptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showHideOptionsToolStripMenuItem.Image")));
+            this.showHideOptionsToolStripMenuItem.Name = "showHideOptionsToolStripMenuItem";
+            this.showHideOptionsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.showHideOptionsToolStripMenuItem.Text = "Settings";
+            // 
+            // backgroundImageToolStripMenuItem
+            // 
+            this.backgroundImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectToolStripMenuItem,
+            this.clearToolStripMenuItem});
+            this.backgroundImageToolStripMenuItem.Name = "backgroundImageToolStripMenuItem";
+            this.backgroundImageToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.backgroundImageToolStripMenuItem.Text = "Background Image";
+            // 
+            // selectToolStripMenuItem
+            // 
+            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+            this.selectToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.selectToolStripMenuItem.Text = "Select..";
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
+            // 
+            // defaultXbox360IPToolStripMenuItem
+            // 
+            this.defaultXbox360IPToolStripMenuItem.Name = "defaultXbox360IPToolStripMenuItem";
+            this.defaultXbox360IPToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.defaultXbox360IPToolStripMenuItem.Text = "Default Xbox360 IP";
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripMenuItem.Image")));
@@ -91,17 +130,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
-            // 
-            // showHideOptionsToolStripMenuItem
-            // 
-            this.showHideOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backgroundImageToolStripMenuItem,
-            this.defaultXbox360IPToolStripMenuItem});
-            this.showHideOptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showHideOptionsToolStripMenuItem.Image")));
-            this.showHideOptionsToolStripMenuItem.Name = "showHideOptionsToolStripMenuItem";
-            this.showHideOptionsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.showHideOptionsToolStripMenuItem.Text = "Settings";
-            this.showHideOptionsToolStripMenuItem.Click += new System.EventHandler(this.showHideOptionsToolStripMenuItem_Click);
             // 
             // splitter1
             // 
@@ -297,32 +325,12 @@
             this.peekNpokeButton.UseVisualStyleBackColor = true;
             this.peekNpokeButton.Click += new System.EventHandler(this.peekNpokeButton_Click);
             // 
-            // backgroundImageToolStripMenuItem
+            // showHideOptionsToolStripMenuItem1
             // 
-            this.backgroundImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectToolStripMenuItem,
-            this.clearToolStripMenuItem});
-            this.backgroundImageToolStripMenuItem.Name = "backgroundImageToolStripMenuItem";
-            this.backgroundImageToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.backgroundImageToolStripMenuItem.Text = "Background Image";
-            // 
-            // defaultXbox360IPToolStripMenuItem
-            // 
-            this.defaultXbox360IPToolStripMenuItem.Name = "defaultXbox360IPToolStripMenuItem";
-            this.defaultXbox360IPToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.defaultXbox360IPToolStripMenuItem.Text = "Default Xbox360 IP";
-            // 
-            // selectToolStripMenuItem
-            // 
-            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            this.selectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.selectToolStripMenuItem.Text = "Select..";
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.clearToolStripMenuItem.Text = "Clear";
+            this.showHideOptionsToolStripMenuItem1.Name = "showHideOptionsToolStripMenuItem1";
+            this.showHideOptionsToolStripMenuItem1.Size = new System.Drawing.Size(178, 22);
+            this.showHideOptionsToolStripMenuItem1.Text = "Show/Hide Options";
+            this.showHideOptionsToolStripMenuItem1.Click += new System.EventHandler(this.showHideOptionsToolStripMenuItem_Click);
             // 
             // PeekPokerMainForm
             // 
@@ -388,6 +396,7 @@
         private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem defaultXbox360IPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showHideOptionsToolStripMenuItem1;
 
     }
 }
