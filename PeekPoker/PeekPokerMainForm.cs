@@ -179,12 +179,17 @@ namespace PeekPoker
                 var item = (ToolStripMenuItem) sender; // get the menu item
                 foreach (AbstractPlugin plugin in _pluginService.PluginDatas)
                 {
-                    if (plugin.ApplicationName == item.Name)
-                    {
-                        plugin.RTM = _rtm;
-                        plugin.IsMdiChild = !displayOutsideParentBox.Checked;
-                        plugin.Display(this);
-                    }
+                    if (plugin.ApplicationName != item.Name) continue;
+
+                    //Setting Values
+                    plugin.Rtm = this._rtm;
+                    plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
+                    plugin.ShowMessageBox += this.ShowMessageBox;
+                    plugin.EnableControl += this.EnableControl;
+                    plugin.UpdateProgressBar += this.UpdateProgressbar;
+                    plugin.GetTextBoxText += this.GetTextBoxText;
+                    plugin.SetTextBoxText += this.SetTextBoxText;
+                    plugin.Display(this);
                 }
             }
             catch (Exception ex)
@@ -299,5 +304,15 @@ namespace PeekPoker
         }
 
         #endregion
+
+        private void showHideOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (panel2.Visible)
+                panel2.Hide();
+            else
+            {
+                panel2.Show();
+            }
+        }
     }
 }

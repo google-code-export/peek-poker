@@ -30,12 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PeekPokerMainForm));
-            this.label2 = new System.Windows.Forms.Label();
-            this.ipAddressTextBox = new System.Windows.Forms.TextBox();
-            this.connectButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showHideOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -44,6 +42,11 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.connectButton = new System.Windows.Forms.Button();
+            this.ipAddressTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.mainGroupBox = new System.Windows.Forms.GroupBox();
             this.displayOutsideParentBox = new System.Windows.Forms.CheckBox();
             this.pluginInfoButton = new System.Windows.Forms.Button();
@@ -53,44 +56,20 @@
             this.peekNpokeButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.mainGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "IP Address:";
-            // 
-            // ipAddressTextBox
-            // 
-            this.ipAddressTextBox.Location = new System.Drawing.Point(80, 6);
-            this.ipAddressTextBox.Name = "ipAddressTextBox";
-            this.ipAddressTextBox.Size = new System.Drawing.Size(116, 22);
-            this.ipAddressTextBox.TabIndex = 1;
-            // 
-            // connectButton
-            // 
-            this.connectButton.Location = new System.Drawing.Point(202, 3);
-            this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(87, 27);
-            this.connectButton.TabIndex = 6;
-            this.connectButton.Text = "Connect";
-            this.connectButton.UseVisualStyleBackColor = true;
-            this.connectButton.Click += new System.EventHandler(this.ConnectButtonClick);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pluginsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.showHideOptionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(702, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(838, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -109,11 +88,18 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem1Click);
             // 
+            // showHideOptionsToolStripMenuItem
+            // 
+            this.showHideOptionsToolStripMenuItem.Name = "showHideOptionsToolStripMenuItem";
+            this.showHideOptionsToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
+            this.showHideOptionsToolStripMenuItem.Text = "Show/Hide Options";
+            this.showHideOptionsToolStripMenuItem.Click += new System.EventHandler(this.showHideOptionsToolStripMenuItem_Click);
+            // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 24);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 282);
+            this.splitter1.Size = new System.Drawing.Size(3, 456);
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
@@ -124,9 +110,9 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel1,
             this.StatusProgressBar});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 282);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 456);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(699, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(835, 24);
             this.statusStrip1.TabIndex = 17;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -160,16 +146,65 @@
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.mainGroupBox);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.ipAddressTextBox);
-            this.panel1.Controls.Add(this.connectButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(699, 97);
+            this.panel1.Size = new System.Drawing.Size(835, 79);
             this.panel1.TabIndex = 18;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Controls.Add(this.mainGroupBox);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(3, 103);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(193, 353);
+            this.panel2.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.connectButton);
+            this.groupBox1.Controls.Add(this.ipAddressTextBox);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(8, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(169, 100);
+            this.groupBox1.TabIndex = 23;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // connectButton
+            // 
+            this.connectButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.connectButton.Location = new System.Drawing.Point(3, 55);
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(163, 27);
+            this.connectButton.TabIndex = 6;
+            this.connectButton.Text = "Connect";
+            this.connectButton.UseVisualStyleBackColor = true;
+            this.connectButton.Click += new System.EventHandler(this.ConnectButtonClick);
+            // 
+            // ipAddressTextBox
+            // 
+            this.ipAddressTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ipAddressTextBox.Location = new System.Drawing.Point(3, 33);
+            this.ipAddressTextBox.Name = "ipAddressTextBox";
+            this.ipAddressTextBox.Size = new System.Drawing.Size(163, 22);
+            this.ipAddressTextBox.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Location = new System.Drawing.Point(3, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 15);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "IP Address:";
             // 
             // mainGroupBox
             // 
@@ -179,33 +214,32 @@
             this.mainGroupBox.Controls.Add(this.SearchButton);
             this.mainGroupBox.Controls.Add(this.dumpButton);
             this.mainGroupBox.Controls.Add(this.peekNpokeButton);
-            this.mainGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.mainGroupBox.Enabled = false;
-            this.mainGroupBox.Location = new System.Drawing.Point(0, 41);
+            this.mainGroupBox.Location = new System.Drawing.Point(8, 111);
             this.mainGroupBox.Name = "mainGroupBox";
-            this.mainGroupBox.Size = new System.Drawing.Size(697, 54);
-            this.mainGroupBox.TabIndex = 7;
+            this.mainGroupBox.Size = new System.Drawing.Size(172, 213);
+            this.mainGroupBox.TabIndex = 22;
             this.mainGroupBox.TabStop = false;
             this.mainGroupBox.Text = "Selection Options";
             // 
             // displayOutsideParentBox
             // 
             this.displayOutsideParentBox.AutoSize = true;
-            this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.displayOutsideParentBox.Location = new System.Drawing.Point(510, 18);
+            this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.displayOutsideParentBox.Location = new System.Drawing.Point(3, 183);
             this.displayOutsideParentBox.Name = "displayOutsideParentBox";
-            this.displayOutsideParentBox.Size = new System.Drawing.Size(162, 33);
+            this.displayOutsideParentBox.Size = new System.Drawing.Size(166, 19);
             this.displayOutsideParentBox.TabIndex = 14;
             this.displayOutsideParentBox.Text = "Display outside Parent?";
             this.displayOutsideParentBox.UseVisualStyleBackColor = true;
             // 
             // pluginInfoButton
             // 
-            this.pluginInfoButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pluginInfoButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.pluginInfoButton.Enabled = false;
-            this.pluginInfoButton.Location = new System.Drawing.Point(391, 18);
+            this.pluginInfoButton.Location = new System.Drawing.Point(3, 150);
             this.pluginInfoButton.Name = "pluginInfoButton";
-            this.pluginInfoButton.Size = new System.Drawing.Size(119, 33);
+            this.pluginInfoButton.Size = new System.Drawing.Size(166, 33);
             this.pluginInfoButton.TabIndex = 13;
             this.pluginInfoButton.Text = "Plugin Info";
             this.pluginInfoButton.UseVisualStyleBackColor = true;
@@ -213,10 +247,10 @@
             // 
             // converterButton
             // 
-            this.converterButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.converterButton.Location = new System.Drawing.Point(294, 18);
+            this.converterButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.converterButton.Location = new System.Drawing.Point(3, 117);
             this.converterButton.Name = "converterButton";
-            this.converterButton.Size = new System.Drawing.Size(97, 33);
+            this.converterButton.Size = new System.Drawing.Size(166, 33);
             this.converterButton.TabIndex = 12;
             this.converterButton.Text = "Converter";
             this.converterButton.UseVisualStyleBackColor = true;
@@ -224,10 +258,10 @@
             // 
             // SearchButton
             // 
-            this.SearchButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.SearchButton.Location = new System.Drawing.Point(197, 18);
+            this.SearchButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SearchButton.Location = new System.Drawing.Point(3, 84);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(97, 33);
+            this.SearchButton.Size = new System.Drawing.Size(166, 33);
             this.SearchButton.TabIndex = 11;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -235,10 +269,10 @@
             // 
             // dumpButton
             // 
-            this.dumpButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dumpButton.Location = new System.Drawing.Point(100, 18);
+            this.dumpButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dumpButton.Location = new System.Drawing.Point(3, 51);
             this.dumpButton.Name = "dumpButton";
-            this.dumpButton.Size = new System.Drawing.Size(97, 33);
+            this.dumpButton.Size = new System.Drawing.Size(166, 33);
             this.dumpButton.TabIndex = 10;
             this.dumpButton.Text = "Dump";
             this.dumpButton.UseVisualStyleBackColor = true;
@@ -246,10 +280,10 @@
             // 
             // peekNpokeButton
             // 
-            this.peekNpokeButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.peekNpokeButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.peekNpokeButton.Location = new System.Drawing.Point(3, 18);
             this.peekNpokeButton.Name = "peekNpokeButton";
-            this.peekNpokeButton.Size = new System.Drawing.Size(97, 33);
+            this.peekNpokeButton.Size = new System.Drawing.Size(166, 33);
             this.peekNpokeButton.TabIndex = 9;
             this.peekNpokeButton.Text = "Peek && Poke";
             this.peekNpokeButton.UseVisualStyleBackColor = true;
@@ -260,7 +294,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(702, 306);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(838, 480);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitter1);
@@ -277,8 +313,9 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.mainGroupBox.ResumeLayout(false);
             this.mainGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -288,9 +325,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox ipAddressTextBox;
-        private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolTip toolTips;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -302,13 +336,19 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         internal System.Windows.Forms.ToolStripProgressBar StatusProgressBar;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem showHideOptionsToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button connectButton;
+        private System.Windows.Forms.TextBox ipAddressTextBox;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox mainGroupBox;
-        private System.Windows.Forms.Button peekNpokeButton;
+        private System.Windows.Forms.CheckBox displayOutsideParentBox;
         private System.Windows.Forms.Button pluginInfoButton;
         private System.Windows.Forms.Button converterButton;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button dumpButton;
-        private System.Windows.Forms.CheckBox displayOutsideParentBox;
+        private System.Windows.Forms.Button peekNpokeButton;
 
     }
 }
