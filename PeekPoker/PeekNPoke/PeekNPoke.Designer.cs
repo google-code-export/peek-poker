@@ -1,4 +1,4 @@
-﻿namespace PeekPoker
+namespace PeekPoker.PeekNPoke
 {
     partial class PeekNPoke
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -64,7 +64,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(509, 51);
+            this.label27.Location = new System.Drawing.Point(363, 51);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(134, 15);
             this.label27.TabIndex = 54;
@@ -72,7 +72,7 @@
             // 
             // peekPokeFeedBackTextBox
             // 
-            this.peekPokeFeedBackTextBox.Location = new System.Drawing.Point(646, 44);
+            this.peekPokeFeedBackTextBox.Location = new System.Drawing.Point(500, 44);
             this.peekPokeFeedBackTextBox.Name = "peekPokeFeedBackTextBox";
             this.peekPokeFeedBackTextBox.ReadOnly = true;
             this.peekPokeFeedBackTextBox.Size = new System.Drawing.Size(130, 22);
@@ -82,7 +82,7 @@
             // 
             this.debugGroupBox.Controls.Add(this.unfreezeButton);
             this.debugGroupBox.Controls.Add(this.freezeButton);
-            this.debugGroupBox.Location = new System.Drawing.Point(625, 97);
+            this.debugGroupBox.Location = new System.Drawing.Point(504, 97);
             this.debugGroupBox.Name = "debugGroupBox";
             this.debugGroupBox.Size = new System.Drawing.Size(141, 98);
             this.debugGroupBox.TabIndex = 52;
@@ -121,9 +121,9 @@
             this.groupBox3.Controls.Add(this.NumericInt8);
             this.groupBox3.Controls.Add(this.NumericInt16);
             this.groupBox3.Controls.Add(this.LabelInt32);
-            this.groupBox3.Location = new System.Drawing.Point(607, 203);
+            this.groupBox3.Location = new System.Drawing.Point(495, 203);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 196);
+            this.groupBox3.Size = new System.Drawing.Size(182, 196);
             this.groupBox3.TabIndex = 51;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Value";
@@ -132,7 +132,7 @@
             // 
             this.NumericFloatTextBox.Location = new System.Drawing.Point(63, 155);
             this.NumericFloatTextBox.Name = "NumericFloatTextBox";
-            this.NumericFloatTextBox.Size = new System.Drawing.Size(109, 22);
+            this.NumericFloatTextBox.Size = new System.Drawing.Size(95, 22);
             this.NumericFloatTextBox.TabIndex = 20;
             this.NumericFloatTextBox.Text = "0";
             this.NumericFloatTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -149,7 +149,7 @@
             // isSigned
             // 
             this.isSigned.AutoSize = true;
-            this.isSigned.Location = new System.Drawing.Point(63, 21);
+            this.isSigned.Location = new System.Drawing.Point(39, 21);
             this.isSigned.Name = "isSigned";
             this.isSigned.Size = new System.Drawing.Size(109, 19);
             this.isSigned.TabIndex = 16;
@@ -189,7 +189,7 @@
             0,
             -2147483648});
             this.NumericInt32.Name = "NumericInt32";
-            this.NumericInt32.Size = new System.Drawing.Size(127, 22);
+            this.NumericInt32.Size = new System.Drawing.Size(109, 22);
             this.NumericInt32.TabIndex = 18;
             this.NumericInt32.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.NumericInt32.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
@@ -209,7 +209,7 @@
             0,
             -2147483648});
             this.NumericInt8.Name = "NumericInt8";
-            this.NumericInt8.Size = new System.Drawing.Size(127, 18);
+            this.NumericInt8.Size = new System.Drawing.Size(109, 18);
             this.NumericInt8.TabIndex = 18;
             this.NumericInt8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.NumericInt8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
@@ -228,7 +228,7 @@
             0,
             -2147483648});
             this.NumericInt16.Name = "NumericInt16";
-            this.NumericInt16.Size = new System.Drawing.Size(127, 22);
+            this.NumericInt16.Size = new System.Drawing.Size(109, 22);
             this.NumericInt16.TabIndex = 18;
             this.NumericInt16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.NumericInt16.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
@@ -245,7 +245,7 @@
             // labelSelAddress
             // 
             this.labelSelAddress.AutoSize = true;
-            this.labelSelAddress.Location = new System.Drawing.Point(529, 15);
+            this.labelSelAddress.Location = new System.Drawing.Point(383, 15);
             this.labelSelAddress.Name = "labelSelAddress";
             this.labelSelAddress.Size = new System.Drawing.Size(114, 15);
             this.labelSelAddress.TabIndex = 50;
@@ -255,7 +255,7 @@
             // 
             this.SelAddress.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.SelAddress.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.SelAddress.Location = new System.Drawing.Point(646, 13);
+            this.SelAddress.Location = new System.Drawing.Point(500, 13);
             this.SelAddress.Name = "SelAddress";
             this.SelAddress.ReadOnly = true;
             this.SelAddress.Size = new System.Drawing.Size(130, 22);
@@ -263,7 +263,7 @@
             // 
             // newPeekButton
             // 
-            this.newPeekButton.Location = new System.Drawing.Point(215, 44);
+            this.newPeekButton.Location = new System.Drawing.Point(176, 44);
             this.newPeekButton.Name = "newPeekButton";
             this.newPeekButton.Size = new System.Drawing.Size(61, 25);
             this.newPeekButton.TabIndex = 46;
@@ -273,7 +273,7 @@
             // 
             // pokeButton
             // 
-            this.pokeButton.Location = new System.Drawing.Point(282, 12);
+            this.pokeButton.Location = new System.Drawing.Point(243, 9);
             this.pokeButton.Name = "pokeButton";
             this.pokeButton.Size = new System.Drawing.Size(61, 25);
             this.pokeButton.TabIndex = 43;
@@ -284,24 +284,24 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 51);
+            this.label3.Location = new System.Drawing.Point(20, 51);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 15);
+            this.label3.Size = new System.Drawing.Size(70, 15);
             this.label3.TabIndex = 45;
-            this.label3.Text = "Length:";
+            this.label3.Text = "Length 0x:";
             // 
             // peekLengthTextBox
             // 
-            this.peekLengthTextBox.Location = new System.Drawing.Point(71, 47);
+            this.peekLengthTextBox.Location = new System.Drawing.Point(87, 48);
             this.peekLengthTextBox.Name = "peekLengthTextBox";
-            this.peekLengthTextBox.Size = new System.Drawing.Size(135, 22);
+            this.peekLengthTextBox.Size = new System.Drawing.Size(83, 22);
             this.peekLengthTextBox.TabIndex = 41;
-            this.peekLengthTextBox.Text = "0xFFFF";
+            this.peekLengthTextBox.Text = "FFFF";
             this.peekLengthTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // peekButton
             // 
-            this.peekButton.Location = new System.Drawing.Point(215, 11);
+            this.peekButton.Location = new System.Drawing.Point(176, 9);
             this.peekButton.Name = "peekButton";
             this.peekButton.Size = new System.Drawing.Size(61, 25);
             this.peekButton.TabIndex = 44;
@@ -312,30 +312,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-1, 17);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 15);
+            this.label1.Size = new System.Drawing.Size(78, 15);
             this.label1.TabIndex = 42;
-            this.label1.Text = "Address:";
+            this.label1.Text = "Address 0x:";
             // 
             // peekPokeAddressTextBox
             // 
             this.peekPokeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.peekPokeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(71, 13);
+            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(87, 12);
             this.peekPokeAddressTextBox.Name = "peekPokeAddressTextBox";
-            this.peekPokeAddressTextBox.Size = new System.Drawing.Size(135, 22);
+            this.peekPokeAddressTextBox.Size = new System.Drawing.Size(83, 22);
             this.peekPokeAddressTextBox.TabIndex = 40;
-            this.peekPokeAddressTextBox.Text = "0xC0000000";
+            this.peekPokeAddressTextBox.Text = "C0000000";
             this.peekPokeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(104, 76);
+            this.label7.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(84, 78);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(488, 18);
+            this.label7.Size = new System.Drawing.Size(392, 16);
             this.label7.TabIndex = 47;
             this.label7.Text = "00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F ";
             // 
@@ -345,14 +345,14 @@
             // 
             // 
             this.hexBox.BuiltInContextMenu.CopyMenuItemText = "";
-            this.hexBox.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hexBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hexBox.LineInfoForeColor = System.Drawing.Color.Empty;
             this.hexBox.LineInfoVisible = true;
             this.hexBox.Location = new System.Drawing.Point(2, 97);
             this.hexBox.Name = "hexBox";
             this.hexBox.SelectionBackColor = System.Drawing.Color.DodgerBlue;
             this.hexBox.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hexBox.Size = new System.Drawing.Size(599, 302);
+            this.hexBox.Size = new System.Drawing.Size(489, 302);
             this.hexBox.TabIndex = 33;
             this.hexBox.UseFixedBytesPerLine = true;
             this.hexBox.VScrollBarVisible = true;
@@ -364,7 +364,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 402);
+            this.ClientSize = new System.Drawing.Size(683, 402);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.peekPokeFeedBackTextBox);
             this.Controls.Add(this.debugGroupBox);

@@ -1,4 +1,4 @@
-﻿namespace PeekPoker
+namespace PeekPoker.Search
 {
     partial class Search
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -32,6 +32,8 @@
             this.resultGrid = new System.Windows.Forms.DataGridView();
             this.resultRefreshButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.totalTextBoxText = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.stopSearchButton = new System.Windows.Forms.Button();
             this.searchRangeButton = new System.Windows.Forms.Button();
@@ -41,14 +43,12 @@
             this.searchRangeValueTextBox = new System.Windows.Forms.TextBox();
             this.lengthRangeAddressTextBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.defaultRadioButton = new System.Windows.Forms.RadioButton();
-            this.ifEqualsRadioButton = new System.Windows.Forms.RadioButton();
-            this.ifGreaterThanRadioButton = new System.Windows.Forms.RadioButton();
-            this.ifLessThanRadioButton = new System.Windows.Forms.RadioButton();
-            this.ifChangeRadioButton = new System.Windows.Forms.RadioButton();
             this.newValueTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.totalTextBoxText = new System.Windows.Forms.TextBox();
+            this.ifChangeRadioButton = new System.Windows.Forms.RadioButton();
+            this.ifLessThanRadioButton = new System.Windows.Forms.RadioButton();
+            this.ifGreaterThanRadioButton = new System.Windows.Forms.RadioButton();
+            this.ifEqualsRadioButton = new System.Windows.Forms.RadioButton();
+            this.defaultRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -113,14 +113,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Range Selection Options";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(295, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Total 0x:";
+            // 
+            // totalTextBoxText
+            // 
+            this.totalTextBoxText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.totalTextBoxText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.totalTextBoxText.Location = new System.Drawing.Point(344, 31);
+            this.totalTextBoxText.Name = "totalTextBoxText";
+            this.totalTextBoxText.ReadOnly = true;
+            this.totalTextBoxText.Size = new System.Drawing.Size(75, 20);
+            this.totalTextBoxText.TabIndex = 20;
+            this.totalTextBoxText.Text = "C00000FF";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(165, 34);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(43, 13);
+            this.label12.Size = new System.Drawing.Size(57, 13);
             this.label12.TabIndex = 19;
-            this.label12.Text = "Length:";
+            this.label12.Text = "Length 0x:";
             // 
             // stopSearchButton
             // 
@@ -147,38 +167,38 @@
             // 
             this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.startRangeAddressTextBox.Location = new System.Drawing.Point(78, 31);
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(90, 31);
             this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
-            this.startRangeAddressTextBox.Size = new System.Drawing.Size(75, 20);
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(69, 20);
             this.startRangeAddressTextBox.TabIndex = 5;
-            this.startRangeAddressTextBox.Text = "0xC0000000";
+            this.startRangeAddressTextBox.Text = "C0000000";
             this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(7, 62);
+            this.label13.Location = new System.Drawing.Point(11, 62);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(62, 13);
+            this.label13.Size = new System.Drawing.Size(73, 13);
             this.label13.TabIndex = 10;
-            this.label13.Text = "Search for :";
+            this.label13.Text = "Search for 0x:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(7, 34);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 13);
+            this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Start Offset:";
+            this.label6.Text = "Start Offset 0x:";
             // 
             // searchRangeValueTextBox
             // 
             this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchRangeValueTextBox.Location = new System.Drawing.Point(75, 59);
+            this.searchRangeValueTextBox.Location = new System.Drawing.Point(90, 57);
             this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(344, 20);
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(329, 20);
             this.searchRangeValueTextBox.TabIndex = 8;
             this.searchRangeValueTextBox.Text = "FF00FF00FF00";
             this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchRangeValueTextBoxKeyUp);
@@ -192,7 +212,7 @@
             this.lengthRangeAddressTextBox.Name = "lengthRangeAddressTextBox";
             this.lengthRangeAddressTextBox.Size = new System.Drawing.Size(75, 20);
             this.lengthRangeAddressTextBox.TabIndex = 7;
-            this.lengthRangeAddressTextBox.Text = "0xFF";
+            this.lengthRangeAddressTextBox.Text = "FFFF";
             this.lengthRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // groupBox3
@@ -211,47 +231,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Remove If Not";
             // 
-            // defaultRadioButton
+            // newValueTextBox
             // 
-            this.defaultRadioButton.AutoSize = true;
-            this.defaultRadioButton.Checked = true;
-            this.defaultRadioButton.Location = new System.Drawing.Point(6, 16);
-            this.defaultRadioButton.Name = "defaultRadioButton";
-            this.defaultRadioButton.Size = new System.Drawing.Size(143, 17);
-            this.defaultRadioButton.TabIndex = 0;
-            this.defaultRadioButton.TabStop = true;
-            this.defaultRadioButton.Text = "Default (Original Refresh)";
-            this.defaultRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // ifEqualsRadioButton
-            // 
-            this.ifEqualsRadioButton.AutoSize = true;
-            this.ifEqualsRadioButton.Location = new System.Drawing.Point(6, 39);
-            this.ifEqualsRadioButton.Name = "ifEqualsRadioButton";
-            this.ifEqualsRadioButton.Size = new System.Drawing.Size(100, 17);
-            this.ifEqualsRadioButton.TabIndex = 1;
-            this.ifEqualsRadioButton.Text = "If Equals (Keep)";
-            this.ifEqualsRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // ifGreaterThanRadioButton
-            // 
-            this.ifGreaterThanRadioButton.AutoSize = true;
-            this.ifGreaterThanRadioButton.Location = new System.Drawing.Point(6, 88);
-            this.ifGreaterThanRadioButton.Name = "ifGreaterThanRadioButton";
-            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(131, 17);
-            this.ifGreaterThanRadioButton.TabIndex = 2;
-            this.ifGreaterThanRadioButton.Text = "If Greater Than (Keep)";
-            this.ifGreaterThanRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // ifLessThanRadioButton
-            // 
-            this.ifLessThanRadioButton.AutoSize = true;
-            this.ifLessThanRadioButton.Location = new System.Drawing.Point(6, 111);
-            this.ifLessThanRadioButton.Name = "ifLessThanRadioButton";
-            this.ifLessThanRadioButton.Size = new System.Drawing.Size(118, 17);
-            this.ifLessThanRadioButton.TabIndex = 3;
-            this.ifLessThanRadioButton.Text = "If Less Than (Keep)";
-            this.ifLessThanRadioButton.UseVisualStyleBackColor = true;
+            this.newValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.newValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.newValueTextBox.Location = new System.Drawing.Point(6, 62);
+            this.newValueTextBox.Name = "newValueTextBox";
+            this.newValueTextBox.Size = new System.Drawing.Size(173, 20);
+            this.newValueTextBox.TabIndex = 9;
+            this.newValueTextBox.Text = "FF00FF00FF00";
             // 
             // ifChangeRadioButton
             // 
@@ -263,35 +251,47 @@
             this.ifChangeRadioButton.Text = "If Change (Unknown Value Keep)";
             this.ifChangeRadioButton.UseVisualStyleBackColor = true;
             // 
-            // newValueTextBox
+            // ifLessThanRadioButton
             // 
-            this.newValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.newValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.newValueTextBox.Location = new System.Drawing.Point(6, 62);
-            this.newValueTextBox.Name = "newValueTextBox";
-            this.newValueTextBox.Size = new System.Drawing.Size(173, 20);
-            this.newValueTextBox.TabIndex = 9;
-            this.newValueTextBox.Text = "FF00FF00FF00";
+            this.ifLessThanRadioButton.AutoSize = true;
+            this.ifLessThanRadioButton.Location = new System.Drawing.Point(6, 111);
+            this.ifLessThanRadioButton.Name = "ifLessThanRadioButton";
+            this.ifLessThanRadioButton.Size = new System.Drawing.Size(118, 17);
+            this.ifLessThanRadioButton.TabIndex = 3;
+            this.ifLessThanRadioButton.Text = "If Less Than (Keep)";
+            this.ifLessThanRadioButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // ifGreaterThanRadioButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(306, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Total:";
+            this.ifGreaterThanRadioButton.AutoSize = true;
+            this.ifGreaterThanRadioButton.Location = new System.Drawing.Point(6, 88);
+            this.ifGreaterThanRadioButton.Name = "ifGreaterThanRadioButton";
+            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(131, 17);
+            this.ifGreaterThanRadioButton.TabIndex = 2;
+            this.ifGreaterThanRadioButton.Text = "If Greater Than (Keep)";
+            this.ifGreaterThanRadioButton.UseVisualStyleBackColor = true;
             // 
-            // totalTextBoxText
+            // ifEqualsRadioButton
             // 
-            this.totalTextBoxText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.totalTextBoxText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.totalTextBoxText.Location = new System.Drawing.Point(344, 31);
-            this.totalTextBoxText.Name = "totalTextBoxText";
-            this.totalTextBoxText.ReadOnly = true;
-            this.totalTextBoxText.Size = new System.Drawing.Size(75, 20);
-            this.totalTextBoxText.TabIndex = 20;
-            this.totalTextBoxText.Text = "0xC00000FF";
+            this.ifEqualsRadioButton.AutoSize = true;
+            this.ifEqualsRadioButton.Location = new System.Drawing.Point(6, 39);
+            this.ifEqualsRadioButton.Name = "ifEqualsRadioButton";
+            this.ifEqualsRadioButton.Size = new System.Drawing.Size(100, 17);
+            this.ifEqualsRadioButton.TabIndex = 1;
+            this.ifEqualsRadioButton.Text = "If Equals (Keep)";
+            this.ifEqualsRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // defaultRadioButton
+            // 
+            this.defaultRadioButton.AutoSize = true;
+            this.defaultRadioButton.Checked = true;
+            this.defaultRadioButton.Location = new System.Drawing.Point(6, 16);
+            this.defaultRadioButton.Name = "defaultRadioButton";
+            this.defaultRadioButton.Size = new System.Drawing.Size(143, 17);
+            this.defaultRadioButton.TabIndex = 0;
+            this.defaultRadioButton.TabStop = true;
+            this.defaultRadioButton.Text = "Default (Original Refresh)";
+            this.defaultRadioButton.UseVisualStyleBackColor = true;
             // 
             // Search
             // 

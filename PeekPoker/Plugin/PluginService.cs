@@ -41,7 +41,11 @@ namespace PeekPoker.Plugin
         /// </summary>
         public List<AbstractPlugin> PluginDatas
         {
-            get { return _pluginDatas; }
+            get
+            {
+                _pluginDatas.Sort((x, y) => String.CompareOrdinal(x.ApplicationName, y.ApplicationName));
+                return _pluginDatas;
+            }
         }
 
         private void AddPlugin(string pluginPath)

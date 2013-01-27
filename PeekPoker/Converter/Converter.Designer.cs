@@ -1,4 +1,4 @@
-﻿namespace PeekPoker
+namespace PeekPoker.Converter
 {
     partial class Converter
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -50,7 +50,7 @@
             // 
             this.endianTypeGroupBox.Controls.Add(this.littleEndianRadioButton);
             this.endianTypeGroupBox.Controls.Add(this.BigEndianRadioButton);
-            this.endianTypeGroupBox.Location = new System.Drawing.Point(332, 10);
+            this.endianTypeGroupBox.Location = new System.Drawing.Point(49, 6);
             this.endianTypeGroupBox.Name = "endianTypeGroupBox";
             this.endianTypeGroupBox.Size = new System.Drawing.Size(172, 47);
             this.endianTypeGroupBox.TabIndex = 15;
@@ -81,7 +81,7 @@
             // 
             // converterClearButton
             // 
-            this.converterClearButton.Location = new System.Drawing.Point(417, 104);
+            this.converterClearButton.Location = new System.Drawing.Point(93, 210);
             this.converterClearButton.Name = "converterClearButton";
             this.converterClearButton.Size = new System.Drawing.Size(75, 23);
             this.converterClearButton.TabIndex = 14;
@@ -92,7 +92,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(46, 108);
+            this.label10.Location = new System.Drawing.Point(46, 148);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(33, 13);
             this.label10.TabIndex = 13;
@@ -100,7 +100,7 @@
             // 
             // floatCalculatorTextBox
             // 
-            this.floatCalculatorTextBox.Location = new System.Drawing.Point(93, 105);
+            this.floatCalculatorTextBox.Location = new System.Drawing.Point(93, 145);
             this.floatCalculatorTextBox.MaxLength = 3276700;
             this.floatCalculatorTextBox.Name = "floatCalculatorTextBox";
             this.floatCalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -111,7 +111,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 52);
+            this.label9.Location = new System.Drawing.Point(8, 92);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 13);
             this.label9.TabIndex = 11;
@@ -119,7 +119,7 @@
             // 
             // integer16CalculatorTextBox
             // 
-            this.integer16CalculatorTextBox.Location = new System.Drawing.Point(93, 47);
+            this.integer16CalculatorTextBox.Location = new System.Drawing.Point(93, 87);
             this.integer16CalculatorTextBox.MaxLength = 3276700;
             this.integer16CalculatorTextBox.Name = "integer16CalculatorTextBox";
             this.integer16CalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -130,7 +130,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(244, 65);
+            this.label20.Location = new System.Drawing.Point(90, 168);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(37, 13);
             this.label20.TabIndex = 6;
@@ -139,7 +139,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 80);
+            this.label4.Location = new System.Drawing.Point(24, 120);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 3;
@@ -148,7 +148,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(21, 22);
+            this.label22.Location = new System.Drawing.Point(21, 62);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(54, 13);
             this.label22.TabIndex = 8;
@@ -156,7 +156,7 @@
             // 
             // integer32CalculatorTextBox
             // 
-            this.integer32CalculatorTextBox.Location = new System.Drawing.Point(93, 77);
+            this.integer32CalculatorTextBox.Location = new System.Drawing.Point(93, 117);
             this.integer32CalculatorTextBox.MaxLength = 3276700;
             this.integer32CalculatorTextBox.Name = "integer32CalculatorTextBox";
             this.integer32CalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -166,7 +166,7 @@
             // 
             // hexCalculatorTextBox
             // 
-            this.hexCalculatorTextBox.Location = new System.Drawing.Point(347, 62);
+            this.hexCalculatorTextBox.Location = new System.Drawing.Point(93, 184);
             this.hexCalculatorTextBox.Name = "hexCalculatorTextBox";
             this.hexCalculatorTextBox.Size = new System.Drawing.Size(145, 20);
             this.hexCalculatorTextBox.TabIndex = 4;
@@ -175,7 +175,7 @@
             // 
             // integer8CalculatorTextBox
             // 
-            this.integer8CalculatorTextBox.Location = new System.Drawing.Point(93, 19);
+            this.integer8CalculatorTextBox.Location = new System.Drawing.Point(93, 59);
             this.integer8CalculatorTextBox.MaxLength = 3276700;
             this.integer8CalculatorTextBox.Name = "integer8CalculatorTextBox";
             this.integer8CalculatorTextBox.Size = new System.Drawing.Size(145, 20);
@@ -186,17 +186,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(297, 65);
+            this.label5.Location = new System.Drawing.Point(43, 187);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Hex:";
+            this.label5.Text = "Hex 0x:";
             // 
             // Converter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 135);
+            this.ClientSize = new System.Drawing.Size(248, 240);
             this.Controls.Add(this.endianTypeGroupBox);
             this.Controls.Add(this.converterClearButton);
             this.Controls.Add(this.label10);

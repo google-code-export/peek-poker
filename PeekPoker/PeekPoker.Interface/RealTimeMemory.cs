@@ -95,8 +95,6 @@ namespace PeekPoker.Interface
             if (!Connect()) return; //Call function - If not connected return
             try
             {
-                if (memoryAddress > (_startDumpOffset + _startDumpLength) || memoryAddress < _startDumpOffset)
-                    throw new Exception("Memory Address Out of Bounds");
                 WriteMemory(memoryAddress, value); //Items 1 flame grenade
             }
             catch (Exception ex)

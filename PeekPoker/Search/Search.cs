@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PeekPoker.Interface;
 
-namespace PeekPoker
+namespace PeekPoker.Search
 {
     public partial class Search : Form
     {
@@ -19,39 +19,30 @@ namespace PeekPoker
 
         public Search(RealTimeMemory rtm)
         {
-            InitializeComponent();
-            _rtm = rtm;
-            resultGrid.DataSource = _searchResult;
+            this.InitializeComponent();
+            this._rtm = rtm;
+            this.resultGrid.DataSource = this._searchResult;
         }
 
         //Control changes
         private void GridRowColours(int value)
         {
-            if (resultGrid.InvokeRequired)
-                resultGrid.Invoke((MethodInvoker)(() => GridRowColours(value)));
+            if (this.resultGrid.InvokeRequired)
+                this.resultGrid.Invoke((MethodInvoker)(() => this.GridRowColours(value)));
             else
-                resultGrid.Rows[value - 1].DefaultCellStyle.ForeColor = Color.Red;
-        }
-
-        private void GridRowRemove(int value)
-        {
-            if (resultGrid.InvokeRequired)
-                resultGrid.Invoke((MethodInvoker)(() => GridRowRemove(value)));
-            else
-                //resultGrid.Rows[value - 1].
-                resultGrid.Rows.RemoveAt(resultGrid.Rows[value - 1].Index);
+                this.resultGrid.Rows[value - 1].DefaultCellStyle.ForeColor = Color.Red;
         }
 
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
             try
             {
-                Thread oThread = new Thread(SearchRange);
+                Thread oThread = new Thread(this.SearchRange);
                 oThread.Start();
             }
             catch (Exception ex)
             {
-                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //Refresh results Thread
@@ -59,28 +50,28 @@ namespace PeekPoker
         {
             try
             {
-                EnableControl(resultRefreshButton, false);
+                this.EnableControl(this.resultRefreshButton, false);
                 BindingList<SearchResults> newSearchResults = new BindingList<SearchResults>();
                 var value = 0;
-                foreach (var item in _searchResult)
+                foreach (var item in this._searchResult)
                 {
-                    UpdateProgressbar(0, _searchResult.Count, value, "Refreshing...");
+                    this.UpdateProgressbar(0, this._searchResult.Count, value, "Refreshing...");
                     value++;
 
                     var length = (item.Value.Length / 2).ToString("X");
-                    var retvalue = _rtm.Peek("0x" + item.Offset, length, "0x" + item.Offset, length);
+                    var retvalue = this._rtm.Peek(item.Offset, length, item.Offset, length);
 
                     //===================================================
                     //Default
-                    if(defaultRadioButton.Checked)
+                    if(this.defaultRadioButton.Checked)
                     {
                         if (item.Value == retvalue) continue; //if value hasn't change continue for each loop
                         this.GridRowColours(value);
                         item.Value = retvalue;
                     }
-                    else if (ifEqualsRadioButton.Checked)
+                    else if (this.ifEqualsRadioButton.Checked)
                     {
-                        if (retvalue == newValueTextBox.Text)
+                        if (retvalue == this.newValueTextBox.Text)
                         {
                             SearchResults searchResultItem = new SearchResults
                                                                  {
@@ -91,14 +82,14 @@ namespace PeekPoker
                             newSearchResults.Add(searchResultItem);
                         }
                     }
-                    else if (ifGreaterThanRadioButton.Checked)
+                    else if (this.ifGreaterThanRadioButton.Checked)
                     {
                         uint currentResults;
                         uint newResult;
 
-                        if(!uint.TryParse("0x" + searchRangeValueTextBox.Text, out currentResults))
+                        if(!uint.TryParse(this.searchRangeValueTextBox.Text, out currentResults))
                             throw new Exception("Invalid Search Value this function only works for Unsigned Integers.");
-                        uint.TryParse("0x" + retvalue, out newResult);
+                        uint.TryParse(retvalue, out newResult);
 
                         if (newResult > currentResults)
                         {
@@ -111,14 +102,14 @@ namespace PeekPoker
                             newSearchResults.Add(searchResultItem);
                         }
                     }
-                    else if (ifLessThanRadioButton.Checked)
+                    else if (this.ifLessThanRadioButton.Checked)
                     {
                         uint currentResults;
                         uint newResult;
 
-                        if (!uint.TryParse("0x" + searchRangeValueTextBox.Text, out currentResults))
+                        if (!uint.TryParse(this.searchRangeValueTextBox.Text, out currentResults))
                             throw new Exception("Invalid Search Value this function only works for Unsigned Integers.");
-                        uint.TryParse("0x" + retvalue, out newResult);
+                        uint.TryParse(retvalue, out newResult);
 
                         if (newResult < currentResults)
                         {
@@ -131,9 +122,9 @@ namespace PeekPoker
                             newSearchResults.Add(searchResultItem);
                         }
                     }
-                    else if (ifLessThanRadioButton.Checked)
+                    else if (this.ifLessThanRadioButton.Checked)
                     {
-                        if (retvalue != newValueTextBox.Text)
+                        if (retvalue != this.newValueTextBox.Text)
                         {
                             SearchResults searchResultItem = new SearchResults
                             {
@@ -145,23 +136,23 @@ namespace PeekPoker
                         }
                     }
                 }
-                if(defaultRadioButton.Checked)
-                    ResultGridUpdate();
+                if(this.defaultRadioButton.Checked)
+                    this.ResultGridUpdate();
                 else
                 {
-                    _searchResult = newSearchResults;
-                    ResultGridUpdate();
+                    this._searchResult = newSearchResults;
+                    this.ResultGridUpdate();
                 }
-                UpdateProgressbar(0, 100, 0, "idle");
+                this.UpdateProgressbar(0, 100, 0, "idle");
             }
             catch (Exception ex)
             {
-                ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                EnableControl(resultRefreshButton, true);
-                UpdateProgressbar(0, 100, 0, "idle");
+                this.EnableControl(this.resultRefreshButton, true);
+                this.UpdateProgressbar(0, 100, 0, "idle");
                 Thread.CurrentThread.Abort();
             }
         }
@@ -169,31 +160,31 @@ namespace PeekPoker
         // Refresh results
         private void ResultRefreshClick(object sender, EventArgs e)
         {
-            if (_searchResult.Count > 0)
+            if (this._searchResult.Count > 0)
             {
-                var thread = new Thread(RefreshResultList);
+                var thread = new Thread(this.RefreshResultList);
                 thread.Start();
             }
             else
             {
-                ShowMessageBox("Can not refresh! \r\n Result list empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowMessageBox("Can not refresh! \r\n Result list empty!!", string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ResultGridCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             var cell = (DataGridCell)sender;
-            if (resultGrid.Rows[cell.RowNumber].Cells[2].Value != null)
-                resultGrid.Rows[cell.RowNumber].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+            if (this.resultGrid.Rows[cell.RowNumber].Cells[2].Value != null)
+                this.resultGrid.Rows[cell.RowNumber].DefaultCellStyle.ForeColor = Color.Red;
         }
 
         private void SearchRangeValueTextBoxKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Return || !searchRangeValueTextBox.Focused) return;
-            var oThread = new Thread(SearchRange);
+            if (e.KeyCode != Keys.Return || !this.searchRangeValueTextBox.Focused) return;
+            var oThread = new Thread(this.SearchRange);
             oThread.Start();
             e.Handled = true;
-            searchRangeButton.Focus();
+            this.searchRangeButton.Focus();
         }
 
         //Searches the memory for the specified value (Experimental)
@@ -201,34 +192,34 @@ namespace PeekPoker
         {
             try
             {
-                EnableControl(searchRangeButton, false);
-                EnableControl(stopSearchButton, true);
-                _rtm.DumpOffset = Functions.Convert(GetTextBoxText(startRangeAddressTextBox));
-                _rtm.DumpLength = Functions.Convert(GetTextBoxText(lengthRangeAddressTextBox));
+                this.EnableControl(this.searchRangeButton, false);
+                this.EnableControl(this.stopSearchButton, true);
+                this._rtm.DumpOffset = Functions.Convert(this.GetTextBoxText(this.startRangeAddressTextBox));
+                this._rtm.DumpLength = Functions.Convert(this.GetTextBoxText(this.lengthRangeAddressTextBox));
 
-                ResultGridClean();//Clean list view
+                this.ResultGridClean();//Clean list view
 
                 //The ExFindHexOffset function is a Experimental search function
-                var results = _rtm.FindHexOffset(GetTextBoxText(searchRangeValueTextBox));//pointer
+                var results = this._rtm.FindHexOffset(this.GetTextBoxText(this.searchRangeValueTextBox));//pointer
                 //Reset the progressbar...
-                UpdateProgressbar(0, 100, 0);
+                this.UpdateProgressbar(0, 100, 0);
 
                 if (results.Count < 1)
                 {
-                    ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return; //We don't want it to continue
                 }
-                _searchResult = results;
-                ResultGridUpdate();
+                this._searchResult = results;
+                this.ResultGridUpdate();
             }
             catch (Exception e)
             {
-                ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowMessageBox(e.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                EnableControl(searchRangeButton, true);
-                EnableControl(stopSearchButton, false);
+                this.EnableControl(this.searchRangeButton, true);
+                this.EnableControl(this.stopSearchButton, false);
                 Thread.CurrentThread.Abort();
             }
         }
@@ -237,66 +228,66 @@ namespace PeekPoker
         //Refresh the values of Search Results
         private void ResultGridClean()
         {
-            if (resultGrid.InvokeRequired)
-                resultGrid.Invoke((MethodInvoker)(ResultGridClean));
+            if (this.resultGrid.InvokeRequired)
+                this.resultGrid.Invoke((MethodInvoker)(this.ResultGridClean));
             else
-                resultGrid.Rows.Clear();
+                this.resultGrid.Rows.Clear();
         }
         private void ResultGridUpdate()
         {
             //IList or represents a collection of objects(String)
-            if (resultGrid.InvokeRequired)
+            if (this.resultGrid.InvokeRequired)
                 //lambda expression empty delegate that calls a recursive function if InvokeRequired
-                resultGrid.Invoke((MethodInvoker)(ResultGridUpdate));
+                this.resultGrid.Invoke((MethodInvoker)(this.ResultGridUpdate));
             else
             {
-                resultGrid.DataSource = _searchResult;
-                resultGrid.Refresh();
+                this.resultGrid.DataSource = this._searchResult;
+                this.resultGrid.Refresh();
             }
         }
 
         private void StopSearchButtonClick(object sender, EventArgs e)
         {
-            _rtm.StopSearch = true;
+            this._rtm.StopSearch = true;
         }
 
         private void FixTheAddresses(object sender, EventArgs e)
         {
             try
             {
-                if (!startRangeAddressTextBox.Text.StartsWith("0x"))
+                if (!Functions.IsHex(startRangeAddressTextBox.Text))
                 {
-                    if (!startRangeAddressTextBox.Text.Equals(""))
-                        startRangeAddressTextBox.Text = "0x" + uint.Parse(startRangeAddressTextBox.Text).ToString("X");
+                    if (!this.startRangeAddressTextBox.Text.Equals(""))
+                        this.startRangeAddressTextBox.Text = uint.Parse(this.startRangeAddressTextBox.Text).ToString("X");
                 }
 
-                if (!lengthRangeAddressTextBox.Text.StartsWith("0x"))
+                if (!Functions.IsHex(lengthRangeAddressTextBox.Text))
                 {
-                    if (!lengthRangeAddressTextBox.Text.Equals(""))
-                        lengthRangeAddressTextBox.Text = "0x" + uint.Parse(lengthRangeAddressTextBox.Text).ToString("X");
+                    if (!this.lengthRangeAddressTextBox.Text.Equals(""))
+                        this.lengthRangeAddressTextBox.Text = uint.Parse(this.lengthRangeAddressTextBox.Text).ToString("X");
 
                 }
 
-                uint value = Convert.ToUInt32(startRangeAddressTextBox.Text, 16);
-                uint valueTwo = Convert.ToUInt32(lengthRangeAddressTextBox.Text, 16);
-                totalTextBoxText.Text = "0x" +(value+valueTwo).ToString("X");
+                uint value = Convert.ToUInt32(this.startRangeAddressTextBox.Text, 16);
+                uint valueTwo = Convert.ToUInt32(this.lengthRangeAddressTextBox.Text, 16);
+                this.totalTextBoxText.Text = value+valueTwo.ToString("X");
             }
             catch (Exception ex)
             {
-                ShowMessageBox(ex.Message, "PeekNPoke", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowMessageBox(ex.Message, "PeekNPoke", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void SearchRangeValueTextBoxLeave(object sender, EventArgs e)
         {
-            searchRangeValueTextBox.Text = searchRangeValueTextBox.Text.Replace(" ", "");
+            this.searchRangeValueTextBox.Text = this.searchRangeValueTextBox.Text.Replace(" ", "");
         }
 
         private void resultGrid_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.C)
             {
-                Clipboard.SetText(string.Format("0x" + resultGrid.Rows[resultGrid.SelectedRows[0].Index].Cells[1].Value));
+                Clipboard.SetText(string.Format("" + this.resultGrid.Rows[this.resultGrid.SelectedRows[0].Index].Cells[1].Value));
                 e.SuppressKeyPress = true;
             }
         }

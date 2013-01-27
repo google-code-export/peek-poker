@@ -1,4 +1,4 @@
-﻿namespace PeekPoker
+namespace PeekPoker.Dump
 {
     partial class Dump
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -40,7 +40,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(49, 71);
+            this.button3.Location = new System.Drawing.Point(28, 71);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(157, 23);
             this.button3.TabIndex = 7;
@@ -50,7 +50,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(49, 41);
+            this.button4.Location = new System.Drawing.Point(28, 41);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(157, 23);
             this.button4.TabIndex = 6;
@@ -60,7 +60,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(49, 12);
+            this.button5.Location = new System.Drawing.Point(28, 12);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(157, 23);
             this.button5.TabIndex = 5;
@@ -71,42 +71,42 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(7, 155);
+            this.label32.Location = new System.Drawing.Point(11, 135);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(74, 13);
+            this.label32.Size = new System.Drawing.Size(88, 13);
             this.label32.TabIndex = 4;
-            this.label32.Text = "Dump Length:";
+            this.label32.Text = "Dump Length 0x:";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(7, 127);
+            this.label33.Location = new System.Drawing.Point(8, 107);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(77, 13);
+            this.label33.Size = new System.Drawing.Size(91, 13);
             this.label33.TabIndex = 3;
-            this.label33.Text = "Starting Offset:";
+            this.label33.Text = "Starting Offset 0x:";
             // 
             // dumpLengthTextBox
             // 
-            this.dumpLengthTextBox.Location = new System.Drawing.Point(87, 152);
+            this.dumpLengthTextBox.Location = new System.Drawing.Point(105, 132);
             this.dumpLengthTextBox.Name = "dumpLengthTextBox";
-            this.dumpLengthTextBox.Size = new System.Drawing.Size(148, 20);
+            this.dumpLengthTextBox.Size = new System.Drawing.Size(102, 20);
             this.dumpLengthTextBox.TabIndex = 2;
-            this.dumpLengthTextBox.Text = "0xFF";
+            this.dumpLengthTextBox.Text = "FF";
             this.dumpLengthTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // dumpStartOffsetTextBox
             // 
-            this.dumpStartOffsetTextBox.Location = new System.Drawing.Point(87, 124);
+            this.dumpStartOffsetTextBox.Location = new System.Drawing.Point(105, 104);
             this.dumpStartOffsetTextBox.Name = "dumpStartOffsetTextBox";
-            this.dumpStartOffsetTextBox.Size = new System.Drawing.Size(148, 20);
+            this.dumpStartOffsetTextBox.Size = new System.Drawing.Size(102, 20);
             this.dumpStartOffsetTextBox.TabIndex = 1;
-            this.dumpStartOffsetTextBox.Text = "0xC0000000";
+            this.dumpStartOffsetTextBox.Text = "C0000000";
             this.dumpStartOffsetTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // dumpMemoryButton
             // 
-            this.dumpMemoryButton.Location = new System.Drawing.Point(87, 178);
+            this.dumpMemoryButton.Location = new System.Drawing.Point(73, 158);
             this.dumpMemoryButton.Name = "dumpMemoryButton";
             this.dumpMemoryButton.Size = new System.Drawing.Size(75, 23);
             this.dumpMemoryButton.TabIndex = 0;
@@ -118,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(251, 208);
+            this.ClientSize = new System.Drawing.Size(210, 191);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);

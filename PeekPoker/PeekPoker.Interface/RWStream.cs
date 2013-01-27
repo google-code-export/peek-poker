@@ -185,9 +185,6 @@ namespace PeekPoker.Interface
 
         public BindingList<SearchResults> SearchHexString(byte[] pattern, uint startDumpOffset)
         {
-
-
-
             byte[] buffer = new byte[_fStream.Length];
             _fStream.Read(buffer, 0, (int)_fStream.Length);
             int i = IndexOfInt(buffer, pattern[0], 0);
@@ -214,6 +211,8 @@ namespace PeekPoker.Interface
                     results.Value = hex.ToString().ToUpper();
                     results.ID = x.ToString();
                     positions.Add(results);
+
+                    if (positions.Count == 500) return positions;
                     if (_stopSearch) return positions;
                     i = IndexOfInt(buffer, pattern[0], i + pattern.Length);
                     x++;

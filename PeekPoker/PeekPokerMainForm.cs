@@ -3,10 +3,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using PeekPoker.About;
 using PeekPoker.Interface;
 using PeekPoker.Plugin;
 
@@ -25,9 +25,6 @@ namespace PeekPoker
         public PeekPokerMainForm()
         {
             InitializeComponent();
-            //SetLogText("Welcome to Peek Poker.");
-            //SetLogText("Please make sure you have the xbdm xbox 360 plug-in loaded.");
-            //SetLogText("All the information provided in this application is for educational purposes only. Neither the application nor host are in any way responsible for any misuse of the information.");
             LoadPlugins();
         }
 
@@ -36,6 +33,7 @@ namespace PeekPoker
             Process.GetCurrentProcess().Kill(); //Immediately stop the process
         }
 
+        //TODO: All config will be loaded at start up so this should be removed
         private void Form1Load(Object sender, EventArgs e)
         {
             try
@@ -51,20 +49,55 @@ namespace PeekPoker
 
         #region button clicks
 
-        private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
+        private void showHideOptionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine(string.Format("Peek Poker - Open Source Memory Editor :Revision 8"));
-            stringBuilder.AppendLine(string.Format("================By===================="));
-            stringBuilder.AppendLine(string.Format("Cybersam, 8Ball, PureIso & Jappi88"));
-            stringBuilder.AppendLine(string.Format("=============Special Thanks To========="));
-            stringBuilder.AppendLine(
-                string.Format("optantic (tester), Mojobojo (codes), Natelx (xbdm), Be.Windows.Forms.HexBox.dll"));
-            stringBuilder.AppendLine(string.Format("Fairchild (codes), actualmanx (tester), ioritree (tester), 360Haven"));
-            ShowMessageBox(stringBuilder.ToString(), string.Format("Peek Poker"), MessageBoxButtons.OK,
-                           MessageBoxIcon.Information);
+            if (optionPanel.Visible)
+                optionPanel.Hide();
+            else
+                optionPanel.Show();
         }
 
+        private void showHidePluginsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pluginPanel.Visible)
+                pluginPanel.Hide();
+            else
+                pluginPanel.Show();
+        }
+        private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
+        {
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog(this);
+        }
+
+        //The click handler for the plugins
+        private void PluginClickEventHandler(object sender, EventArgs e)
+        {
+            try
+            {
+                var item = (Button)sender; // get the menu item
+                foreach (AbstractPlugin plugin in _pluginService.PluginDatas)
+                {
+                    if (plugin.ApplicationName != item.Name) continue;
+
+                    //Setting Values
+                    plugin.Rtm = this._rtm;
+                    plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
+                    plugin.ShowMessageBox += this.ShowMessageBox;
+                    plugin.EnableControl += this.EnableControl;
+                    plugin.UpdateProgressBar += this.UpdateProgressbar;
+                    plugin.GetTextBoxText += this.GetTextBoxText;
+                    plugin.SetTextBoxText += this.SetTextBoxText;
+                    plugin.Display(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //TODO: Once user connect save the ip to config file
         //When you click on the connect button
         private void ConnectButtonClick(object sender, EventArgs e)
         {
@@ -79,9 +112,9 @@ namespace PeekPoker
 
         private void peekNpokeButton_Click(object sender, EventArgs e)
         {
-            PeekNPoke form = displayOutsideParentBox.Checked
-                                 ? new PeekNPoke(_rtm)
-                                 : new PeekNPoke(_rtm) {MdiParent = this};
+            PeekNPoke.PeekNPoke form = displayOutsideParentBox.Checked
+                                 ? new PeekNPoke.PeekNPoke(_rtm)
+                                 : new PeekNPoke.PeekNPoke(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.UpdateProgressbar += UpdateProgressbar;
             form.EnableControl += EnableControl;
@@ -92,9 +125,9 @@ namespace PeekPoker
 
         private void dumpButton_Click(object sender, EventArgs e)
         {
-            Dump form = displayOutsideParentBox.Checked
-                            ? new Dump(_rtm)
-                            : new Dump(_rtm) {MdiParent = this};
+            Dump.Dump form = displayOutsideParentBox.Checked
+                            ? new Dump.Dump(_rtm)
+                            : new Dump.Dump(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
@@ -104,9 +137,9 @@ namespace PeekPoker
 
         private void SearchButtonClick(object sender, EventArgs e)
         {
-            Search form = displayOutsideParentBox.Checked
-                              ? new Search(_rtm)
-                              : new Search(_rtm) {MdiParent = this};
+            Search.Search form = displayOutsideParentBox.Checked
+                              ? new Search.Search(_rtm)
+                              : new Search.Search(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
@@ -116,18 +149,18 @@ namespace PeekPoker
 
         private void converterButton_Click(object sender, EventArgs e)
         {
-            Converter form = displayOutsideParentBox.Checked
-                                 ? new Converter()
-                                 : new Converter {MdiParent = this};
+            Converter.Converter form = displayOutsideParentBox.Checked
+                                 ? new Converter.Converter()
+                                 : new Converter.Converter {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.Show();
         }
 
         private void pluginInfoButton_Click(object sender, EventArgs e)
         {
-            PluginInfo form = displayOutsideParentBox.Checked
-                                  ? new PluginInfo(_listviewItem)
-                                  : new PluginInfo(_listviewItem) {MdiParent = this};
+            PluginInfo.PluginInfo form = displayOutsideParentBox.Checked
+                                  ? new PluginInfo.PluginInfo(_listviewItem)
+                                  : new PluginInfo.PluginInfo(_listviewItem) {MdiParent = this};
             form.Show();
         }
 
@@ -147,16 +180,21 @@ namespace PeekPoker
                 foreach (AbstractPlugin pluginData in _pluginService.PluginDatas)
                 {
                     EnableControl(pluginInfoButton, true);
-                    var item = new ToolStripMenuItem
-                                   {
-                                       Name = pluginData.ApplicationName,
-                                       Tag = pluginData.ApplicationName,
-                                       Text = pluginData.ApplicationName,
-                                       Image = pluginData.Icon.ToBitmap(),
-                                       Size = new Size(170, 22)
-                                   };
-                    item.Click += PluginClickEventHandler; //Event handler if you click on the cheat code
-                    pluginsToolStripMenuItem.DropDownItems.Add(item);
+                    Button item = new Button
+                                      {
+                                          Name = pluginData.ApplicationName,
+                                          Tag = pluginData.ApplicationName,
+                                          Text = pluginData.ApplicationName,
+                                          Image = pluginData.Icon.ToBitmap(),
+                                          Size = new Size(108, 57),
+                                          ImageAlign = ContentAlignment.TopCenter,
+                                          MaximumSize = new Size(108, 50),
+                                          Dock = DockStyle.Left,
+                                          TextAlign = ContentAlignment.BottomCenter,
+                                          
+                                      };
+                    item.Click += PluginClickEventHandler;
+                    pluginPanel.Controls.Add(item);
 
                     //Plugin Details
                     _listviewItem = new ListViewItem(pluginData.ApplicationName);
@@ -168,33 +206,6 @@ namespace PeekPoker
             catch (Exception e)
             {
                 ShowMessageBox(e.Message, "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //The click handler for the plugins
-        private void PluginClickEventHandler(object sender, EventArgs e)
-        {
-            try
-            {
-                var item = (ToolStripMenuItem) sender; // get the menu item
-                foreach (AbstractPlugin plugin in _pluginService.PluginDatas)
-                {
-                    if (plugin.ApplicationName != item.Name) continue;
-
-                    //Setting Values
-                    plugin.Rtm = this._rtm;
-                    plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
-                    plugin.ShowMessageBox += this.ShowMessageBox;
-                    plugin.EnableControl += this.EnableControl;
-                    plugin.UpdateProgressBar += this.UpdateProgressbar;
-                    plugin.GetTextBoxText += this.GetTextBoxText;
-                    plugin.SetTextBoxText += this.SetTextBoxText;
-                    plugin.Display(this);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -304,15 +315,5 @@ namespace PeekPoker
         }
 
         #endregion
-
-        private void showHideOptionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (panel2.Visible)
-                panel2.Hide();
-            else
-            {
-                panel2.Show();
-            }
-        }
     }
 }
