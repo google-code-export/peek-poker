@@ -212,7 +212,7 @@ namespace PeekPoker.Interface
                     results.ID = x.ToString();
                     positions.Add(results);
 
-                    if (positions.Count == 500) return positions;
+                    if (positions.Count == 1000) return positions;
                     if (_stopSearch) return positions;
                     i = IndexOfInt(buffer, pattern[0], i + pattern.Length);
                     x++;

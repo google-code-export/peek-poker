@@ -180,7 +180,7 @@ namespace PeekPoker.Interface
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
             if (!Connect()) return null; //Call function - If not connected return
             if (!GetMeMex()) return null; //call function - If not connected or if something wrong return
-
+            BindingList<SearchResults> values = new BindingList<SearchResults>();
             try
             {
                 //LENGTH or Size = Length of the dump
@@ -211,8 +211,12 @@ namespace PeekPoker.Interface
                 //===================================
                 if (_stopSearch) return null;
                 _readWriter.Position = 0;
-                BindingList<SearchResults> values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer),
+                values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer),
                                                                                 _startDumpOffset);
+                return values;
+            }
+            catch (SocketException te)
+            {
                 return values;
             }
             catch (Exception ex)
@@ -260,6 +264,7 @@ namespace PeekPoker.Interface
                 }
                 readWriter.Flush();
             }
+            catch(SocketException te){}
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -356,14 +361,14 @@ namespace PeekPoker.Interface
         {
             if (value.Contains("0x"))
                 return System.Convert.ToUInt32(value.Substring(2), 16);
-            return System.Convert.ToUInt32(value);
+            return System.Convert.ToUInt32(value,16);
         }
 
         private static int ConvertSigned(string value)
         {
             if (value.Contains("0x"))
                 return System.Convert.ToInt32(value.Substring(2), 16);
-            return System.Convert.ToInt32(value);
+            return System.Convert.ToInt32(value,16);
         }
 
         #endregion

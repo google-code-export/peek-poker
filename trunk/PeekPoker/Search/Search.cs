@@ -270,7 +270,7 @@ namespace PeekPoker.Search
 
                 uint value = Convert.ToUInt32(this.startRangeAddressTextBox.Text, 16);
                 uint valueTwo = Convert.ToUInt32(this.lengthRangeAddressTextBox.Text, 16);
-                this.totalTextBoxText.Text = value+valueTwo.ToString("X");
+                this.totalTextBoxText.Text = (value+valueTwo).ToString("X");
             }
             catch (Exception ex)
             {
