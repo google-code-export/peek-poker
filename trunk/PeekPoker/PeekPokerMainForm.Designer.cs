@@ -54,6 +54,10 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
+            this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultXbox360IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,8 +69,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pluginsToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.showHideOptionsToolStripMenuItem});
+            this.showHideOptionsToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(838, 24);
@@ -90,9 +94,13 @@
             // 
             // showHideOptionsToolStripMenuItem
             // 
+            this.showHideOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backgroundImageToolStripMenuItem,
+            this.defaultXbox360IPToolStripMenuItem});
+            this.showHideOptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showHideOptionsToolStripMenuItem.Image")));
             this.showHideOptionsToolStripMenuItem.Name = "showHideOptionsToolStripMenuItem";
-            this.showHideOptionsToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
-            this.showHideOptionsToolStripMenuItem.Text = "Show/Hide Options";
+            this.showHideOptionsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.showHideOptionsToolStripMenuItem.Text = "Settings";
             this.showHideOptionsToolStripMenuItem.Click += new System.EventHandler(this.showHideOptionsToolStripMenuItem_Click);
             // 
             // splitter1
@@ -137,7 +145,7 @@
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(91, 19);
-            this.toolStripStatusLabel1.Text = "Revision 8.0.0.0";
+            this.toolStripStatusLabel1.Text = "Revision 8.0.0.3";
             // 
             // StatusProgressBar
             // 
@@ -180,7 +188,7 @@
             // connectButton
             // 
             this.connectButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.connectButton.Location = new System.Drawing.Point(3, 55);
+            this.connectButton.Location = new System.Drawing.Point(3, 49);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(163, 27);
             this.connectButton.TabIndex = 6;
@@ -191,7 +199,7 @@
             // ipAddressTextBox
             // 
             this.ipAddressTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ipAddressTextBox.Location = new System.Drawing.Point(3, 33);
+            this.ipAddressTextBox.Location = new System.Drawing.Point(3, 29);
             this.ipAddressTextBox.Name = "ipAddressTextBox";
             this.ipAddressTextBox.Size = new System.Drawing.Size(163, 22);
             this.ipAddressTextBox.TabIndex = 1;
@@ -200,7 +208,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Location = new System.Drawing.Point(3, 18);
+            this.label2.Location = new System.Drawing.Point(3, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 15);
             this.label2.TabIndex = 5;
@@ -226,9 +234,9 @@
             // 
             this.displayOutsideParentBox.AutoSize = true;
             this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.displayOutsideParentBox.Location = new System.Drawing.Point(3, 183);
+            this.displayOutsideParentBox.Location = new System.Drawing.Point(3, 181);
             this.displayOutsideParentBox.Name = "displayOutsideParentBox";
-            this.displayOutsideParentBox.Size = new System.Drawing.Size(166, 19);
+            this.displayOutsideParentBox.Size = new System.Drawing.Size(166, 17);
             this.displayOutsideParentBox.TabIndex = 14;
             this.displayOutsideParentBox.Text = "Display outside Parent?";
             this.displayOutsideParentBox.UseVisualStyleBackColor = true;
@@ -237,7 +245,7 @@
             // 
             this.pluginInfoButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.pluginInfoButton.Enabled = false;
-            this.pluginInfoButton.Location = new System.Drawing.Point(3, 150);
+            this.pluginInfoButton.Location = new System.Drawing.Point(3, 148);
             this.pluginInfoButton.Name = "pluginInfoButton";
             this.pluginInfoButton.Size = new System.Drawing.Size(166, 33);
             this.pluginInfoButton.TabIndex = 13;
@@ -248,7 +256,7 @@
             // converterButton
             // 
             this.converterButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.converterButton.Location = new System.Drawing.Point(3, 117);
+            this.converterButton.Location = new System.Drawing.Point(3, 115);
             this.converterButton.Name = "converterButton";
             this.converterButton.Size = new System.Drawing.Size(166, 33);
             this.converterButton.TabIndex = 12;
@@ -259,7 +267,7 @@
             // SearchButton
             // 
             this.SearchButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SearchButton.Location = new System.Drawing.Point(3, 84);
+            this.SearchButton.Location = new System.Drawing.Point(3, 82);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(166, 33);
             this.SearchButton.TabIndex = 11;
@@ -270,7 +278,7 @@
             // dumpButton
             // 
             this.dumpButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dumpButton.Location = new System.Drawing.Point(3, 51);
+            this.dumpButton.Location = new System.Drawing.Point(3, 49);
             this.dumpButton.Name = "dumpButton";
             this.dumpButton.Size = new System.Drawing.Size(166, 33);
             this.dumpButton.TabIndex = 10;
@@ -281,13 +289,40 @@
             // peekNpokeButton
             // 
             this.peekNpokeButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.peekNpokeButton.Location = new System.Drawing.Point(3, 18);
+            this.peekNpokeButton.Location = new System.Drawing.Point(3, 16);
             this.peekNpokeButton.Name = "peekNpokeButton";
             this.peekNpokeButton.Size = new System.Drawing.Size(166, 33);
             this.peekNpokeButton.TabIndex = 9;
             this.peekNpokeButton.Text = "Peek && Poke";
             this.peekNpokeButton.UseVisualStyleBackColor = true;
             this.peekNpokeButton.Click += new System.EventHandler(this.peekNpokeButton_Click);
+            // 
+            // backgroundImageToolStripMenuItem
+            // 
+            this.backgroundImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectToolStripMenuItem,
+            this.clearToolStripMenuItem});
+            this.backgroundImageToolStripMenuItem.Name = "backgroundImageToolStripMenuItem";
+            this.backgroundImageToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.backgroundImageToolStripMenuItem.Text = "Background Image";
+            // 
+            // defaultXbox360IPToolStripMenuItem
+            // 
+            this.defaultXbox360IPToolStripMenuItem.Name = "defaultXbox360IPToolStripMenuItem";
+            this.defaultXbox360IPToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.defaultXbox360IPToolStripMenuItem.Text = "Default Xbox360 IP";
+            // 
+            // selectToolStripMenuItem
+            // 
+            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+            this.selectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selectToolStripMenuItem.Text = "Select..";
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
             // 
             // PeekPokerMainForm
             // 
@@ -349,6 +384,10 @@
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button dumpButton;
         private System.Windows.Forms.Button peekNpokeButton;
+        private System.Windows.Forms.ToolStripMenuItem backgroundImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem defaultXbox360IPToolStripMenuItem;
 
     }
 }
