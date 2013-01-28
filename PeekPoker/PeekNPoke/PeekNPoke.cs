@@ -325,6 +325,7 @@ namespace PeekPoker.PeekNPoke
             {
                 this.ShowMessageBox(ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK,MessageBoxIcon.Error);
                 this.EnableControl(this.peekButton, true);
+                this.UpdateProgressbar(0, 100, 0);
             }
         }
         private void Poke(object a)
@@ -337,17 +338,30 @@ namespace PeekPoker.PeekNPoke
                 this._rtm.DumpLength = dumplength;//The length of data to dump
 
                 DynamicByteProvider buffer = this.GetHexBoxByteProvider();
-
-                for (int i = 0; i < buffer.Bytes.Count; i++)
+                if (fillCheckBox.Checked)
                 {
-                    if(buffer.Bytes[i] == this._old[i]) continue;
-
-                    uint value = Convert.ToUInt32(this.peekPokeAddressTextBox.Text, 16);
-                    string address = string.Format((value + i).ToString("X8"));
-                    this._rtm.Poke(address, String.Format("{0,0:X2}",buffer.Bytes[i]));
+                    for (int i = 0; i < dumplength; i++)
+                    {
+                        uint value = Convert.ToUInt32(this.peekPokeAddressTextBox.Text, 16);
+                        string address = string.Format((value + i).ToString("X8"));
+                        this._rtm.Poke(address, String.Format("{0,0:X2}", Convert.ToByte(fillValueTextBox.Text,16)));
+                        UpdateProgressbar(0, (int)(dumplength), (i + 1), "Poking Memory...");
+                    }
                     this.SetTextBoxText(this.peekPokeFeedBackTextBox, "Poke Success!");
                 }
-                
+                else
+                {
+                    for (int i = 0; i < buffer.Bytes.Count; i++)
+                    {
+                        if (buffer.Bytes[i] == this._old[i]) continue;
+
+                        uint value = Convert.ToUInt32(this.peekPokeAddressTextBox.Text, 16);
+                        string address = string.Format((value + i).ToString("X8"));
+                        this._rtm.Poke(address, String.Format("{0,0:X2}", buffer.Bytes[i]));
+                        this.SetTextBoxText(this.peekPokeFeedBackTextBox, "Poke Success!");
+                    }
+                }
+                UpdateProgressbar(0, 100,0);
                 this.EnableControl(this.pokeButton, true);
             }
             catch (Exception ex)

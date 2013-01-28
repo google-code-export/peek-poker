@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 #endregion
 
@@ -95,7 +96,7 @@ namespace PeekPoker.Interface
             if (!Connect()) return; //Call function - If not connected return
             try
             {
-                WriteMemory(memoryAddress, value); //Items 1 flame grenade
+                WriteMemory(memoryAddress, value);
             }
             catch (Exception ex)
             {
@@ -145,7 +146,7 @@ namespace PeekPoker.Interface
                 {
                     _tcp.Client.Receive(data);
                     readWriter.WriteBytes(data, 2, 1024);
-                    ReportProgress(0, (int)(dumpLength / 1024), (i + 1), "Dumping Memory...");
+                    ReportProgress(0, (int) (dumpLength/1024), (i + 1), "Dumping Memory...");
                 }
                 //Write whatever is left
                 int extra = (int) (dumpLength%1024);
@@ -154,6 +155,13 @@ namespace PeekPoker.Interface
                     _tcp.Client.Receive(data);
                     readWriter.WriteBytes(data, 2, extra);
                 }
+                readWriter.Flush();
+                readWriter.Position = total;
+                byte[] value = readWriter.ReadBytes(peekSize);
+                return Functions.ToHexString(value);
+            }
+            catch (SocketException)
+            {
                 readWriter.Flush();
                 readWriter.Position = total;
                 byte[] value = readWriter.ReadBytes(peekSize);
@@ -180,7 +188,7 @@ namespace PeekPoker.Interface
                 throw new Exception(string.Format("{0} is not a valid Hex string.", pointer));
             if (!Connect()) return null; //Call function - If not connected return
             if (!GetMeMex()) return null; //call function - If not connected or if something wrong return
-            BindingList<SearchResults> values = new BindingList<SearchResults>();
+            BindingList<SearchResults> values;
             try
             {
                 //LENGTH or Size = Length of the dump
@@ -215,8 +223,16 @@ namespace PeekPoker.Interface
                                                                                 _startDumpOffset);
                 return values;
             }
-            catch (SocketException te)
+            catch (SocketException)
             {
+                _readWriter.Flush();
+                //===================================
+                //===================================
+                if (_stopSearch) return null;
+                _readWriter.Position = 0;
+                values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer),
+                                                                                _startDumpOffset);
+
                 return values;
             }
             catch (Exception ex)
@@ -264,7 +280,7 @@ namespace PeekPoker.Interface
                 }
                 readWriter.Flush();
             }
-            catch(SocketException te){}
+            catch (SocketException) { readWriter.Flush(); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -326,15 +342,32 @@ namespace PeekPoker.Interface
 
         #region Private
 
-        public void WriteMemory(uint address, string data)
+        private void WriteMemory(uint address, string data)
         {
-            // Send the setmem command
-            _tcp.Client.Send(
-                Encoding.ASCII.GetBytes(string.Format("SETMEM ADDR=0x{0} DATA={1}\r\n", address.ToString("X2"), data)));
+            int sent = 0;
 
-            // Check to see our response
-            byte[] packet = new byte[1026];
-            _tcp.Client.Receive(packet);
+            try
+            {
+                // Send the setmem command
+                _tcp.Client.Send(
+                    Encoding.ASCII.GetBytes(string.Format("SETMEM ADDR=0x{0} DATA={1}\r\n", address.ToString("X2"), data)));
+
+                // Check to see our response
+                //byte[] packet = new byte[1026];
+               // _tcp.Client.Receive(packet);
+            }
+            catch (SocketException ex)
+            {
+                if (ex.SocketErrorCode == SocketError.WouldBlock ||
+                    ex.SocketErrorCode == SocketError.IOPending ||
+                    ex.SocketErrorCode == SocketError.NoBufferSpaceAvailable)
+                {
+                    // socket buffer is probably full, wait and try again
+                    Thread.Sleep(30);
+                }
+                else
+                    throw new Exception(ex.Message+" - "+sent);  // any serious error occurr
+            }
         }
 
         private bool GetMeMex()
