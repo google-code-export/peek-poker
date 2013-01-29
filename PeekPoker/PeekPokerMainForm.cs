@@ -81,13 +81,13 @@ namespace PeekPoker
                     if (plugin.ApplicationName != item.Name) continue;
 
                     //Setting Values
-                    plugin.Rtm = this._rtm;
+                    plugin.APRtm = this._rtm;
                     plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
-                    plugin.ShowMessageBox += this.ShowMessageBox;
-                    plugin.EnableControl += this.EnableControl;
-                    plugin.UpdateProgressBar += this.UpdateProgressbar;
-                    plugin.GetTextBoxText += this.GetTextBoxText;
-                    plugin.SetTextBoxText += this.SetTextBoxText;
+                    plugin.APShowMessageBox = this.ShowMessageBox;
+                    plugin.APEnableControl = this.EnableControl;
+                    plugin.APUpdateProgressBar = this.UpdateProgressbar;
+                    plugin.APGetTextBoxText = this.GetTextBoxText;
+                    plugin.APSetTextBoxText = this.SetTextBoxText;
                     plugin.Display(this);
                 }
             }
@@ -233,6 +233,7 @@ namespace PeekPoker
                 ShowMessageBox("Connected!", "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetTextBoxText(connectButton, "Re-Connect");
+                this.EnableControl(pluginPanel,true);
             }
             catch (Exception ex)
             {
