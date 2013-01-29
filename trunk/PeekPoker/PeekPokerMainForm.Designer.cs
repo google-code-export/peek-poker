@@ -205,6 +205,7 @@
             this.pluginPanel.AutoScroll = true;
             this.pluginPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pluginPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pluginPanel.Enabled = false;
             this.pluginPanel.Location = new System.Drawing.Point(3, 24);
             this.pluginPanel.Name = "pluginPanel";
             this.pluginPanel.Size = new System.Drawing.Size(522, 68);

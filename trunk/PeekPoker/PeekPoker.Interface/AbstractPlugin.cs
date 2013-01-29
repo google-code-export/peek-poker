@@ -9,23 +9,23 @@ namespace PeekPoker.Interface
         /// <summary>
         /// Show MessageBox - Thread Safe
         /// </summary>
-        public ShowMessageBoxHandler ShowMessageBox { get; set; }
+        public ShowMessageBoxHandler APShowMessageBox { get; set; }
         /// <summary>
         /// Work with the progressbar - Thread Safe
         /// </summary>
-        public UpdateProgressBarHandler UpdateProgressBar { get; set; }
+        public UpdateProgressBarHandler APUpdateProgressBar { get; set; }
         /// <summary>
         /// Enable Controls - Thread Safe
         /// </summary>
-        public EnableControlHandler EnableControl { get; set; }
+        public EnableControlHandler APEnableControl { get; set; }
         /// <summary>
         /// Get a text from a textbox - Thread Safe
         /// </summary>
-        public GetTextBoxTextHandler GetTextBoxText { get; set; }
+        public GetTextBoxTextHandler APGetTextBoxText { get; set; }
         /// <summary>
         /// Set a text into a textbox - Thread Safe
         /// </summary>
-        public SetTextBoxTextDelegateHandler SetTextBoxText { get; set; }
+        public SetTextBoxTextDelegateHandler APSetTextBoxText { get; set; }
         #endregion
 
         protected AbstractPlugin()
@@ -52,7 +52,7 @@ namespace PeekPoker.Interface
         /// <summary>
         /// The real time memory property
         /// </summary>
-        public RealTimeMemory Rtm { get; set; }
+        public RealTimeMemory APRtm { get; set; }
         /// <summary>
         /// Set or Get if the plugin loads as a MDI
         /// </summary>
