@@ -62,13 +62,13 @@ namespace PeekPoker.Dump
         private void BaseFileButtonClick(object sender, EventArgs e)
         {
             this.dumpStartOffsetTextBox.Text = string.Format("82000000");
-            this.dumpLengthTextBox.Text = string.Format("5000000");
+            this.dumpLengthTextBox.Text = string.Format("05000000");
         }
 
         private void AllocatedDataButtonClick(object sender, EventArgs e)
         {
             this.dumpStartOffsetTextBox.Text = string.Format("40000000");
-            this.dumpLengthTextBox.Text = string.Format("5000000");
+            this.dumpLengthTextBox.Text = string.Format("05000000");
         }
 
 

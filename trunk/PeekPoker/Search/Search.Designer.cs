@@ -58,9 +58,9 @@ namespace PeekPoker.Search
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.resultGrid);
-            this.groupBox2.Location = new System.Drawing.Point(12, 110);
+            this.groupBox2.Location = new System.Drawing.Point(14, 127);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(340, 197);
+            this.groupBox2.Size = new System.Drawing.Size(397, 227);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Result/s";
@@ -73,22 +73,22 @@ namespace PeekPoker.Search
             this.resultGrid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.resultGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.resultGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.resultGrid.Location = new System.Drawing.Point(6, 12);
+            this.resultGrid.Location = new System.Drawing.Point(7, 14);
             this.resultGrid.MultiSelect = false;
             this.resultGrid.Name = "resultGrid";
             this.resultGrid.ReadOnly = true;
             this.resultGrid.RowHeadersVisible = false;
             this.resultGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.resultGrid.Size = new System.Drawing.Size(328, 173);
+            this.resultGrid.Size = new System.Drawing.Size(383, 200);
             this.resultGrid.TabIndex = 14;
             this.resultGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResultGridCellValueChanged);
             this.resultGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.resultGrid_KeyDown);
             // 
             // resultRefreshButton
             // 
-            this.resultRefreshButton.Location = new System.Drawing.Point(48, 157);
+            this.resultRefreshButton.Location = new System.Drawing.Point(56, 181);
             this.resultRefreshButton.Name = "resultRefreshButton";
-            this.resultRefreshButton.Size = new System.Drawing.Size(76, 28);
+            this.resultRefreshButton.Size = new System.Drawing.Size(89, 32);
             this.resultRefreshButton.TabIndex = 13;
             this.resultRefreshButton.Text = "Refresh";
             this.resultRefreshButton.UseVisualStyleBackColor = true;
@@ -106,9 +106,9 @@ namespace PeekPoker.Search
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.searchRangeValueTextBox);
             this.groupBox1.Controls.Add(this.lengthRangeAddressTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(14, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(539, 92);
+            this.groupBox1.Size = new System.Drawing.Size(629, 106);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search Range Selection Options";
@@ -116,9 +116,9 @@ namespace PeekPoker.Search
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(295, 34);
+            this.label1.Location = new System.Drawing.Point(342, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.Size = new System.Drawing.Size(60, 15);
             this.label1.TabIndex = 21;
             this.label1.Text = "Total 0x:";
             // 
@@ -126,28 +126,28 @@ namespace PeekPoker.Search
             // 
             this.totalTextBoxText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.totalTextBoxText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.totalTextBoxText.Location = new System.Drawing.Point(344, 31);
+            this.totalTextBoxText.Location = new System.Drawing.Point(405, 36);
             this.totalTextBoxText.Name = "totalTextBoxText";
             this.totalTextBoxText.ReadOnly = true;
-            this.totalTextBoxText.Size = new System.Drawing.Size(75, 20);
+            this.totalTextBoxText.Size = new System.Drawing.Size(87, 22);
             this.totalTextBoxText.TabIndex = 20;
-            this.totalTextBoxText.Text = "C00000FF";
+            this.totalTextBoxText.Text = "C000FFFF";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(165, 34);
+            this.label12.Location = new System.Drawing.Point(192, 39);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(57, 13);
+            this.label12.Size = new System.Drawing.Size(70, 15);
             this.label12.TabIndex = 19;
             this.label12.Text = "Length 0x:";
             // 
             // stopSearchButton
             // 
             this.stopSearchButton.Enabled = false;
-            this.stopSearchButton.Location = new System.Drawing.Point(432, 51);
+            this.stopSearchButton.Location = new System.Drawing.Point(504, 59);
             this.stopSearchButton.Name = "stopSearchButton";
-            this.stopSearchButton.Size = new System.Drawing.Size(94, 34);
+            this.stopSearchButton.Size = new System.Drawing.Size(110, 39);
             this.stopSearchButton.TabIndex = 18;
             this.stopSearchButton.Text = "Stop Search";
             this.stopSearchButton.UseVisualStyleBackColor = true;
@@ -155,9 +155,9 @@ namespace PeekPoker.Search
             // 
             // searchRangeButton
             // 
-            this.searchRangeButton.Location = new System.Drawing.Point(432, 13);
+            this.searchRangeButton.Location = new System.Drawing.Point(504, 15);
             this.searchRangeButton.Name = "searchRangeButton";
-            this.searchRangeButton.Size = new System.Drawing.Size(94, 34);
+            this.searchRangeButton.Size = new System.Drawing.Size(110, 39);
             this.searchRangeButton.TabIndex = 9;
             this.searchRangeButton.Text = "Search Hex Value";
             this.searchRangeButton.UseVisualStyleBackColor = true;
@@ -167,9 +167,9 @@ namespace PeekPoker.Search
             // 
             this.startRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.startRangeAddressTextBox.Location = new System.Drawing.Point(90, 31);
+            this.startRangeAddressTextBox.Location = new System.Drawing.Point(105, 36);
             this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
-            this.startRangeAddressTextBox.Size = new System.Drawing.Size(69, 20);
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(80, 22);
             this.startRangeAddressTextBox.TabIndex = 5;
             this.startRangeAddressTextBox.Text = "C0000000";
             this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
@@ -177,18 +177,18 @@ namespace PeekPoker.Search
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 62);
+            this.label13.Location = new System.Drawing.Point(13, 72);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(73, 13);
+            this.label13.Size = new System.Drawing.Size(89, 15);
             this.label13.TabIndex = 10;
             this.label13.Text = "Search for 0x:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 34);
+            this.label6.Location = new System.Drawing.Point(8, 39);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
+            this.label6.Size = new System.Drawing.Size(97, 15);
             this.label6.TabIndex = 0;
             this.label6.Text = "Start Offset 0x:";
             // 
@@ -196,9 +196,9 @@ namespace PeekPoker.Search
             // 
             this.searchRangeValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchRangeValueTextBox.Location = new System.Drawing.Point(90, 57);
+            this.searchRangeValueTextBox.Location = new System.Drawing.Point(105, 66);
             this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(329, 20);
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(383, 22);
             this.searchRangeValueTextBox.TabIndex = 8;
             this.searchRangeValueTextBox.Text = "FF00FF00FF00";
             this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchRangeValueTextBoxKeyUp);
@@ -208,9 +208,9 @@ namespace PeekPoker.Search
             // 
             this.lengthRangeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.lengthRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.lengthRangeAddressTextBox.Location = new System.Drawing.Point(228, 31);
+            this.lengthRangeAddressTextBox.Location = new System.Drawing.Point(266, 36);
             this.lengthRangeAddressTextBox.Name = "lengthRangeAddressTextBox";
-            this.lengthRangeAddressTextBox.Size = new System.Drawing.Size(61, 20);
+            this.lengthRangeAddressTextBox.Size = new System.Drawing.Size(70, 22);
             this.lengthRangeAddressTextBox.TabIndex = 7;
             this.lengthRangeAddressTextBox.Text = "FFFF";
             this.lengthRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
@@ -224,9 +224,9 @@ namespace PeekPoker.Search
             this.groupBox3.Controls.Add(this.ifGreaterThanRadioButton);
             this.groupBox3.Controls.Add(this.ifEqualsRadioButton);
             this.groupBox3.Controls.Add(this.defaultRadioButton);
-            this.groupBox3.Location = new System.Drawing.Point(359, 110);
+            this.groupBox3.Location = new System.Drawing.Point(419, 127);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(192, 197);
+            this.groupBox3.Size = new System.Drawing.Size(224, 227);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Remove If Not";
@@ -235,18 +235,18 @@ namespace PeekPoker.Search
             // 
             this.newValueTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.newValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.newValueTextBox.Location = new System.Drawing.Point(6, 62);
+            this.newValueTextBox.Location = new System.Drawing.Point(7, 72);
             this.newValueTextBox.Name = "newValueTextBox";
-            this.newValueTextBox.Size = new System.Drawing.Size(173, 20);
+            this.newValueTextBox.Size = new System.Drawing.Size(201, 22);
             this.newValueTextBox.TabIndex = 9;
             this.newValueTextBox.Text = "FF00FF00FF00";
             // 
             // ifChangeRadioButton
             // 
             this.ifChangeRadioButton.AutoSize = true;
-            this.ifChangeRadioButton.Location = new System.Drawing.Point(6, 134);
+            this.ifChangeRadioButton.Location = new System.Drawing.Point(7, 155);
             this.ifChangeRadioButton.Name = "ifChangeRadioButton";
-            this.ifChangeRadioButton.Size = new System.Drawing.Size(184, 17);
+            this.ifChangeRadioButton.Size = new System.Drawing.Size(216, 19);
             this.ifChangeRadioButton.TabIndex = 4;
             this.ifChangeRadioButton.Text = "If Change (Unknown Value Keep)";
             this.ifChangeRadioButton.UseVisualStyleBackColor = true;
@@ -254,9 +254,9 @@ namespace PeekPoker.Search
             // ifLessThanRadioButton
             // 
             this.ifLessThanRadioButton.AutoSize = true;
-            this.ifLessThanRadioButton.Location = new System.Drawing.Point(6, 111);
+            this.ifLessThanRadioButton.Location = new System.Drawing.Point(7, 128);
             this.ifLessThanRadioButton.Name = "ifLessThanRadioButton";
-            this.ifLessThanRadioButton.Size = new System.Drawing.Size(118, 17);
+            this.ifLessThanRadioButton.Size = new System.Drawing.Size(133, 19);
             this.ifLessThanRadioButton.TabIndex = 3;
             this.ifLessThanRadioButton.Text = "If Less Than (Keep)";
             this.ifLessThanRadioButton.UseVisualStyleBackColor = true;
@@ -264,9 +264,9 @@ namespace PeekPoker.Search
             // ifGreaterThanRadioButton
             // 
             this.ifGreaterThanRadioButton.AutoSize = true;
-            this.ifGreaterThanRadioButton.Location = new System.Drawing.Point(6, 88);
+            this.ifGreaterThanRadioButton.Location = new System.Drawing.Point(7, 102);
             this.ifGreaterThanRadioButton.Name = "ifGreaterThanRadioButton";
-            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(131, 17);
+            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(151, 19);
             this.ifGreaterThanRadioButton.TabIndex = 2;
             this.ifGreaterThanRadioButton.Text = "If Greater Than (Keep)";
             this.ifGreaterThanRadioButton.UseVisualStyleBackColor = true;
@@ -274,9 +274,9 @@ namespace PeekPoker.Search
             // ifEqualsRadioButton
             // 
             this.ifEqualsRadioButton.AutoSize = true;
-            this.ifEqualsRadioButton.Location = new System.Drawing.Point(6, 39);
+            this.ifEqualsRadioButton.Location = new System.Drawing.Point(7, 45);
             this.ifEqualsRadioButton.Name = "ifEqualsRadioButton";
-            this.ifEqualsRadioButton.Size = new System.Drawing.Size(100, 17);
+            this.ifEqualsRadioButton.Size = new System.Drawing.Size(113, 19);
             this.ifEqualsRadioButton.TabIndex = 1;
             this.ifEqualsRadioButton.Text = "If Equals (Keep)";
             this.ifEqualsRadioButton.UseVisualStyleBackColor = true;
@@ -285,9 +285,9 @@ namespace PeekPoker.Search
             // 
             this.defaultRadioButton.AutoSize = true;
             this.defaultRadioButton.Checked = true;
-            this.defaultRadioButton.Location = new System.Drawing.Point(6, 16);
+            this.defaultRadioButton.Location = new System.Drawing.Point(7, 18);
             this.defaultRadioButton.Name = "defaultRadioButton";
-            this.defaultRadioButton.Size = new System.Drawing.Size(143, 17);
+            this.defaultRadioButton.Size = new System.Drawing.Size(168, 19);
             this.defaultRadioButton.TabIndex = 0;
             this.defaultRadioButton.TabStop = true;
             this.defaultRadioButton.Text = "Default (Original Refresh)";
@@ -295,12 +295,13 @@ namespace PeekPoker.Search
             // 
             // Search
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 315);
+            this.ClientSize = new System.Drawing.Size(649, 363);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Search";

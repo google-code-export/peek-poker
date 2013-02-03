@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PeekPoker
@@ -15,14 +16,30 @@ namespace PeekPoker
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                //TODO: Load Config.ini file, Load user agreement option, load and pass ip address aswell
-                if(true)
-                    Application.Run(new License.License());
-                else
+                string license = "";
+                string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+                if (!(File.Exists(filePath)))
                 {
-                    //if agreed
-                    Application.Run(new PeekPokerMainForm());
+                    using (FileStream str = File.Create(filePath)) { str.Close(); }
                 }
+                using (StreamReader file = new StreamReader(filePath))
+                {
+                    string line;
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        switch (line)
+                        {
+                            case "#License#":
+                                license = file.ReadLine();
+                                break;
+                        }
+                    }
+                }
+
+                if (license == "Accept")
+                    Application.Run(new PeekPokerMainForm());
+                else
+                    Application.Run(new License.License());
             }
             catch (Exception ex)
             {

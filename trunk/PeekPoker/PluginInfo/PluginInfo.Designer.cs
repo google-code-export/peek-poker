@@ -47,6 +47,7 @@ namespace PeekPoker.PluginInfo
             this.pluginListView.Location = new System.Drawing.Point(0, 0);
             this.pluginListView.Name = "pluginListView";
             this.pluginListView.Size = new System.Drawing.Size(707, 250);
+            this.pluginListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.pluginListView.TabIndex = 3;
             this.pluginListView.UseCompatibleStateImageBehavior = false;
             this.pluginListView.View = System.Windows.Forms.View.Details;

@@ -11,6 +11,10 @@ namespace PeekPoker.Interface
     // Interface that would allow other applications/tools  //
     // to be plugged into the peekpoker application.        //
     // =====================================================//
+
+    /// <summary>
+    /// The PeekPoker Interface
+    /// </summary>
     public interface IPlugin
     {
         #region App Properties
