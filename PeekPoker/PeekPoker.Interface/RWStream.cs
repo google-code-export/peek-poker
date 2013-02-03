@@ -15,6 +15,9 @@ namespace PeekPoker.Interface
     {
         #region Eventhandlers/DelegateHandlers
 
+        /// <summary>
+        /// The Progress
+        /// </summary>
         public event UpdateProgressBarHandler ReportProgress;
 
         #endregion
@@ -49,6 +52,10 @@ namespace PeekPoker.Interface
             }
         }
 
+        /// <summary>
+        /// RW Stream Constructor
+        /// </summary>
+        /// <param name="filename">The file name</param>
         public RwStream(string filename)
         {
             try
@@ -183,6 +190,12 @@ namespace PeekPoker.Interface
             return -1;
         }
 
+        /// <summary>
+        /// Search Hex String
+        /// </summary>
+        /// <param name="pattern">The pattern you are searching for</param>
+        /// <param name="startDumpOffset">The Offset you want to start dump from</param>
+        /// <returns></returns>
         public BindingList<SearchResults> SearchHexString(byte[] pattern, uint startDumpOffset)
         {
             byte[] buffer = new byte[_fStream.Length];
@@ -277,11 +290,17 @@ namespace PeekPoker.Interface
             }
         }
 
+        /// <summary>
+        /// If the object is accessed
+        /// </summary>
         public bool Accessed
         {
             get { return _accessed; }
         }
 
+        /// <summary>
+        /// Stop the search
+        /// </summary>
         public bool StopSearch
         {
             get { return _stopSearch; }

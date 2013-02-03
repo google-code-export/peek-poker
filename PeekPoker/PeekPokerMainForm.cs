@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
@@ -16,7 +18,7 @@ namespace PeekPoker
     {
         #region global varibales
 
-        private ListViewItem _listviewItem;
+        private List<ListViewItem> _listviewItem;
         private PluginService _pluginService;
         private RealTimeMemory _rtm; //DLL is now in the Important File Folder
 
@@ -38,12 +40,32 @@ namespace PeekPoker
         {
             try
             {
-                ipAddressTextBox.Text =
-                    (string)
-                    Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "DefaultIP", "0.0.0.0");
+                string ip = "";
+
+                string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+                if (!(File.Exists(filePath)))
+                {
+                    using (FileStream str = File.Create(filePath)) { str.Close(); }
+                }
+                using (StreamReader file = new StreamReader(filePath))
+                {
+                    string line;
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        switch (line)
+                        {
+                            case "#IP#":
+                                ip = file.ReadLine();
+                                break;
+                        }
+                    }
+                }
+
+                ipAddressTextBox.Text = ip;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ShowMessageBox(ex.Message,"Peek Poker",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -83,11 +105,11 @@ namespace PeekPoker
                     //Setting Values
                     plugin.APRtm = this._rtm;
                     plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
-                    plugin.APShowMessageBox = this.ShowMessageBox;
-                    plugin.APEnableControl = this.EnableControl;
-                    plugin.APUpdateProgressBar = this.UpdateProgressbar;
-                    plugin.APGetTextBoxText = this.GetTextBoxText;
-                    plugin.APSetTextBoxText = this.SetTextBoxText;
+                    plugin.APShowMessageBox += this.ShowMessageBox;
+                    plugin.APEnableControl += this.EnableControl;
+                    plugin.APUpdateProgressBar += this.UpdateProgressbar;
+                    plugin.APGetTextBoxText += this.GetTextBoxText;
+                    plugin.APSetTextBoxText += this.SetTextBoxText;
                     plugin.Display(this);
                 }
             }
@@ -176,6 +198,7 @@ namespace PeekPoker
                 if (!(Directory.Exists(pathToPlugins))) Directory.CreateDirectory(pathToPlugins);
 
                 _pluginService = new PluginService(pathToPlugins);
+                _listviewItem = new List<ListViewItem>(_pluginService.PluginDatas.Count);
 
                 foreach (AbstractPlugin pluginData in _pluginService.PluginDatas)
                 {
@@ -197,10 +220,11 @@ namespace PeekPoker
                     pluginPanel.Controls.Add(item);
 
                     //Plugin Details
-                    _listviewItem = new ListViewItem(pluginData.ApplicationName);
-                    _listviewItem.SubItems.Add(pluginData.Description);
-                    _listviewItem.SubItems.Add(pluginData.Author);
-                    _listviewItem.SubItems.Add(pluginData.Version);
+                    ListViewItem listviewItem = new ListViewItem(pluginData.ApplicationName);
+                    listviewItem.SubItems.Add(pluginData.Description);
+                    listviewItem.SubItems.Add(pluginData.Author);
+                    listviewItem.SubItems.Add(pluginData.Version);
+                    _listviewItem.Add(listviewItem);
                 }
             }
             catch (Exception e)
@@ -218,6 +242,26 @@ namespace PeekPoker
             try
             {
                 string ipAddress = GetTextBoxText(ipAddressTextBox);
+
+                string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+                if (!(File.Exists(filePath)))
+                {
+                    using (FileStream str = File.Create(filePath)) { str.Close(); }
+                }
+
+                //Save
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.AppendLine("#License#");
+                stringBuilder.AppendLine("Accept");
+                stringBuilder.AppendLine("#IP#");
+                stringBuilder.AppendLine(ipAddress);
+
+                string line = stringBuilder.ToString();
+                using (StreamWriter file = new StreamWriter(filePath))
+                {
+                    file.Write(line);
+                }
+
                 _rtm = new RealTimeMemory(ipAddress, 0, 0); //initialize real time memory
                 _rtm.ReportProgress += UpdateProgressbar;
 

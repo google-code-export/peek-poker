@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace PeekPoker.Interface
 {
+    /// <summary>
+    /// The Abstract Plugin Type for Peek Poker
+    /// </summary>
     public abstract class AbstractPlugin : IPlugin
     {
         #region Delegate Handlers
@@ -28,6 +31,9 @@ namespace PeekPoker.Interface
         public SetTextBoxTextDelegateHandler APSetTextBoxText { get; set; }
         #endregion
 
+        /// <summary>
+        /// The Abstract Plugin Constructor
+        /// </summary>
         protected AbstractPlugin()
         {
             this.ApplicationName = "Unavailable";

@@ -43,7 +43,7 @@ namespace PeekPoker.Plugin
         {
             get
             {
-                _pluginDatas.Sort((x, y) => String.CompareOrdinal(x.ApplicationName, y.ApplicationName));
+                _pluginDatas.Sort((x, y) => String.CompareOrdinal(y.ApplicationName, x.ApplicationName));
                 return _pluginDatas;
             }
         }

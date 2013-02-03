@@ -193,7 +193,7 @@
             this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(91, 19);
-            this.toolStripStatusLabel1.Text = "Revision 8.0.0.3";
+            this.toolStripStatusLabel1.Text = "Revision 8.0.0.0";
             // 
             // StatusProgressBar
             // 

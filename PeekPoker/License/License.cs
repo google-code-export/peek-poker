@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Windows.Forms;
 
 namespace PeekPoker.License
 {
@@ -11,6 +14,40 @@ namespace PeekPoker.License
 
         private void agreeButton_Click(object sender, System.EventArgs e)
         {
+            string ip = "";
+            string line;
+
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+            if (!(File.Exists(filePath)))
+            {
+                using (FileStream str = File.Create(filePath)) { str.Close(); }
+            }
+            using (StreamReader file = new StreamReader(filePath))
+            {
+                
+                while ((line = file.ReadLine()) != null)
+                {
+                    switch (line)
+                    {
+                        case "#IP#":
+                            ip = file.ReadLine();
+                            break;
+                    }
+                }
+            }
+
+            //Save
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("#License#");
+            stringBuilder.AppendLine("Accept");
+            stringBuilder.AppendLine("#IP#");
+            stringBuilder.AppendLine(ip);
+
+            line = stringBuilder.ToString();
+            using (StreamWriter file = new StreamWriter(filePath))
+            {
+                file.Write(line);
+            }
             PeekPokerMainForm form = new PeekPokerMainForm();
             form.Show();
             this.Hide();
