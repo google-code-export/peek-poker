@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
@@ -75,7 +76,7 @@ namespace PeekPoker
         {
             if (optionPanel.Visible)
                 optionPanel.Hide();
-            else
+           else
                 optionPanel.Show();
         }
 
@@ -239,8 +240,17 @@ namespace PeekPoker
 
         private void Connect(object a)
         {
+            if (ipAddressTextBox.Text == "debug") { EnableControl(mainGroupBox, true);
+                return; //Bypass needing to connect to xbox for debugging purposes.
+            }
             try
             {
+                if (Regex.IsMatch(ipAddressTextBox.Text, @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"))
+            {
+                MessageBox.Show(" IP Address is not valid!");
+                return;
+            }
+
                 string ipAddress = GetTextBoxText(ipAddressTextBox);
 
                 string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
@@ -255,6 +265,10 @@ namespace PeekPoker
                 stringBuilder.AppendLine("Accept");
                 stringBuilder.AppendLine("#IP#");
                 stringBuilder.AppendLine(ipAddress);
+                stringBuilder.AppendLine("#BG#");
+                stringBuilder.AppendLine(BGBox.ImageLocation ?? "None");
+                stringBuilder.AppendLine("#BGSize#");
+                stringBuilder.AppendLine(BGBox.SizeMode.ToString());
 
                 string line = stringBuilder.ToString();
                 using (StreamWriter file = new StreamWriter(filePath))
@@ -359,6 +373,17 @@ namespace PeekPoker
             }
         }
 
+        #endregion
+
+        #region Background Image
+        private void SelectBg(object sender, EventArgs e)
+        {
+            var open = new OpenFileDialog {Title = "Select an image as your background."};
+            open.ShowDialog();
+                if (open.FileName == null) return;
+                BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                BGBox.ImageLocation = open.FileName;
+            }
         #endregion
     }
 }

@@ -60,11 +60,20 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
+            this.BGBox = new System.Windows.Forms.PictureBox();
+            this.sizeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stretchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.centreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.optionPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BGBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -96,7 +105,9 @@
             // 
             this.backgroundImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectToolStripMenuItem,
-            this.clearToolStripMenuItem});
+            this.clearToolStripMenuItem,
+            this.sizeModeToolStripMenuItem,
+            this.fromScreenshotToolStripMenuItem});
             this.backgroundImageToolStripMenuItem.Name = "backgroundImageToolStripMenuItem";
             this.backgroundImageToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.backgroundImageToolStripMenuItem.Text = "Background Image";
@@ -104,13 +115,14 @@
             // selectToolStripMenuItem
             // 
             this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            this.selectToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.selectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.selectToolStripMenuItem.Text = "Select..";
+            this.selectToolStripMenuItem.Click += new System.EventHandler(this.SelectBg);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             // 
             // toolStripSeparator2
@@ -237,7 +249,7 @@
             // connectButton
             // 
             this.connectButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.connectButton.Location = new System.Drawing.Point(3, 40);
+            this.connectButton.Location = new System.Drawing.Point(3, 36);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(185, 27);
             this.connectButton.TabIndex = 6;
@@ -248,7 +260,7 @@
             // ipAddressTextBox
             // 
             this.ipAddressTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ipAddressTextBox.Location = new System.Drawing.Point(3, 18);
+            this.ipAddressTextBox.Location = new System.Drawing.Point(3, 16);
             this.ipAddressTextBox.Name = "ipAddressTextBox";
             this.ipAddressTextBox.Size = new System.Drawing.Size(185, 22);
             this.ipAddressTextBox.TabIndex = 1;
@@ -274,9 +286,9 @@
             // 
             this.displayOutsideParentBox.AutoSize = true;
             this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.displayOutsideParentBox.Location = new System.Drawing.Point(3, 183);
+            this.displayOutsideParentBox.Location = new System.Drawing.Point(3, 181);
             this.displayOutsideParentBox.Name = "displayOutsideParentBox";
-            this.displayOutsideParentBox.Size = new System.Drawing.Size(185, 19);
+            this.displayOutsideParentBox.Size = new System.Drawing.Size(185, 17);
             this.displayOutsideParentBox.TabIndex = 14;
             this.displayOutsideParentBox.Text = "Display outside Parent?";
             this.displayOutsideParentBox.UseVisualStyleBackColor = true;
@@ -285,7 +297,7 @@
             // 
             this.pluginInfoButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.pluginInfoButton.Enabled = false;
-            this.pluginInfoButton.Location = new System.Drawing.Point(3, 150);
+            this.pluginInfoButton.Location = new System.Drawing.Point(3, 148);
             this.pluginInfoButton.Name = "pluginInfoButton";
             this.pluginInfoButton.Size = new System.Drawing.Size(185, 33);
             this.pluginInfoButton.TabIndex = 13;
@@ -296,7 +308,7 @@
             // converterButton
             // 
             this.converterButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.converterButton.Location = new System.Drawing.Point(3, 117);
+            this.converterButton.Location = new System.Drawing.Point(3, 115);
             this.converterButton.Name = "converterButton";
             this.converterButton.Size = new System.Drawing.Size(185, 33);
             this.converterButton.TabIndex = 12;
@@ -307,7 +319,7 @@
             // SearchButton
             // 
             this.SearchButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SearchButton.Location = new System.Drawing.Point(3, 84);
+            this.SearchButton.Location = new System.Drawing.Point(3, 82);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(185, 33);
             this.SearchButton.TabIndex = 11;
@@ -318,7 +330,7 @@
             // dumpButton
             // 
             this.dumpButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dumpButton.Location = new System.Drawing.Point(3, 51);
+            this.dumpButton.Location = new System.Drawing.Point(3, 49);
             this.dumpButton.Name = "dumpButton";
             this.dumpButton.Size = new System.Drawing.Size(185, 33);
             this.dumpButton.TabIndex = 10;
@@ -329,13 +341,80 @@
             // peekNpokeButton
             // 
             this.peekNpokeButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.peekNpokeButton.Location = new System.Drawing.Point(3, 18);
+            this.peekNpokeButton.Location = new System.Drawing.Point(3, 16);
             this.peekNpokeButton.Name = "peekNpokeButton";
             this.peekNpokeButton.Size = new System.Drawing.Size(185, 33);
             this.peekNpokeButton.TabIndex = 9;
             this.peekNpokeButton.Text = "Peek && Poke";
             this.peekNpokeButton.UseVisualStyleBackColor = true;
             this.peekNpokeButton.Click += new System.EventHandler(this.peekNpokeButton_Click);
+            // 
+            // BGBox
+            // 
+            this.BGBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BGBox.Location = new System.Drawing.Point(197, 94);
+            this.BGBox.Name = "BGBox";
+            this.BGBox.Size = new System.Drawing.Size(327, 284);
+            this.BGBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BGBox.TabIndex = 20;
+            this.BGBox.TabStop = false;
+            // 
+            // sizeModeToolStripMenuItem
+            // 
+            this.sizeModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoToolStripMenuItem,
+            this.centreToolStripMenuItem,
+            this.normalToolStripMenuItem,
+            this.stretchToolStripMenuItem,
+            this.zoomToolStripMenuItem});
+            this.sizeModeToolStripMenuItem.Name = "sizeModeToolStripMenuItem";
+            this.sizeModeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.sizeModeToolStripMenuItem.Text = "Size Mode";
+            // 
+            // stretchToolStripMenuItem
+            // 
+            this.stretchToolStripMenuItem.Checked = true;
+            this.stretchToolStripMenuItem.CheckOnClick = true;
+            this.stretchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
+            this.stretchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stretchToolStripMenuItem.Text = "Stretch";
+            // 
+            // autoToolStripMenuItem
+            // 
+            this.autoToolStripMenuItem.CheckOnClick = true;
+            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
+            this.autoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.autoToolStripMenuItem.Text = "Auto";
+            // 
+            // normalToolStripMenuItem
+            // 
+            this.normalToolStripMenuItem.CheckOnClick = true;
+            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.normalToolStripMenuItem.Text = "Normal";
+            // 
+            // centreToolStripMenuItem
+            // 
+            this.centreToolStripMenuItem.CheckOnClick = true;
+            this.centreToolStripMenuItem.Name = "centreToolStripMenuItem";
+            this.centreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.centreToolStripMenuItem.Text = "Centre";
+            // 
+            // zoomToolStripMenuItem
+            // 
+            this.zoomToolStripMenuItem.CheckOnClick = true;
+            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zoomToolStripMenuItem.Text = "Zoom";
+            // 
+            // fromScreenshotToolStripMenuItem
+            // 
+            this.fromScreenshotToolStripMenuItem.Name = "fromScreenshotToolStripMenuItem";
+            this.fromScreenshotToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.fromScreenshotToolStripMenuItem.Text = "From Screenshot";
             // 
             // PeekPokerMainForm
             // 
@@ -349,6 +428,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.BGBox);
             this.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -367,6 +447,7 @@
             this.groupBox1.PerformLayout();
             this.mainGroupBox.ResumeLayout(false);
             this.mainGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BGBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -404,6 +485,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem showHidePluginsToolStripMenuItem;
+        private System.Windows.Forms.PictureBox BGBox;
+        private System.Windows.Forms.ToolStripMenuItem sizeModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem centreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stretchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fromScreenshotToolStripMenuItem;
 
     }
 }
