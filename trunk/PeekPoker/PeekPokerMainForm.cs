@@ -182,8 +182,8 @@ namespace PeekPoker
             form.Show();
             if (form.MdiParent == this) BGPanel.Controls.Add(form);
             BGBox.SendToBack();
-            
-        }
+            form.BringToFront();
+            }
 
         private void dumpButton_Click(object sender, EventArgs e)
         {
@@ -197,6 +197,7 @@ namespace PeekPoker
             form.Show();
             if (form.MdiParent == this) BGPanel.Controls.Add(form);
                 BGBox.SendToBack();
+                form.BringToFront();
             }
 
         private void SearchButtonClick(object sender, EventArgs e)
@@ -211,6 +212,7 @@ namespace PeekPoker
             form.Show();
             if (form.MdiParent == this) BGPanel.Controls.Add(form);
                 BGBox.SendToBack();
+                form.BringToFront();
            }
 
         private void converterButton_Click(object sender, EventArgs e)
@@ -222,6 +224,7 @@ namespace PeekPoker
             form.Show();
             if (form.MdiParent == this) BGPanel.Controls.Add(form);
                 BGBox.SendToBack();
+                form.BringToFront();
            }
 
         private void pluginInfoButton_Click(object sender, EventArgs e)
@@ -232,6 +235,7 @@ namespace PeekPoker
             form.Show();
             if (form.MdiParent == this) BGPanel.Controls.Add(form);
                 BGBox.SendToBack();
+                form.BringToFront();
            }
 
         #endregion
@@ -471,7 +475,5 @@ namespace PeekPoker
 
         }
     #endregion
-
-
-}
+        }
 }
