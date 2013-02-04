@@ -68,12 +68,14 @@
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
             this.BGBox = new System.Windows.Forms.PictureBox();
+            this.BGPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.optionPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BGBox)).BeginInit();
+            this.BGPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -315,8 +317,10 @@
             // 
             // ipAddressTextBox
             // 
+            this.ipAddressTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.ipAddressTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.ipAddressTextBox.Location = new System.Drawing.Point(3, 16);
+            this.ipAddressTextBox.MaxLength = 15;
             this.ipAddressTextBox.Name = "ipAddressTextBox";
             this.ipAddressTextBox.Size = new System.Drawing.Size(185, 22);
             this.ipAddressTextBox.TabIndex = 1;
@@ -407,18 +411,28 @@
             // 
             // BGBox
             // 
-            this.BGBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BGBox.BackColor = System.Drawing.Color.Transparent;
+            this.BGBox.BackColor = System.Drawing.Color.Silver;
             this.BGBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BGBox.Location = new System.Drawing.Point(197, 94);
+            this.BGBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BGBox.Location = new System.Drawing.Point(0, 0);
             this.BGBox.Name = "BGBox";
-            this.BGBox.Size = new System.Drawing.Size(327, 284);
+            this.BGBox.Size = new System.Drawing.Size(327, 286);
             this.BGBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BGBox.TabIndex = 20;
             this.BGBox.TabStop = false;
             this.BGBox.Visible = false;
+            // 
+            // BGPanel
+            // 
+            this.BGPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BGPanel.BackColor = System.Drawing.Color.Transparent;
+            this.BGPanel.Controls.Add(this.BGBox);
+            this.BGPanel.Location = new System.Drawing.Point(198, 93);
+            this.BGPanel.Name = "BGPanel";
+            this.BGPanel.Size = new System.Drawing.Size(327, 286);
+            this.BGPanel.TabIndex = 22;
             // 
             // PeekPokerMainForm
             // 
@@ -427,12 +441,12 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(525, 403);
+            this.Controls.Add(this.BGPanel);
             this.Controls.Add(this.optionPanel);
             this.Controls.Add(this.pluginPanel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.BGBox);
             this.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -452,6 +466,7 @@
             this.mainGroupBox.ResumeLayout(false);
             this.mainGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BGBox)).EndInit();
+            this.BGPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -497,6 +512,7 @@
         private System.Windows.Forms.ToolStripMenuItem stretchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fromScreenshotToolStripMenuItem;
+        private System.Windows.Forms.Panel BGPanel;
 
     }
 }

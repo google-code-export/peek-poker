@@ -58,6 +58,14 @@ namespace PeekPoker
                             case "#IP#":
                                 ip = file.ReadLine();
                                 break;
+
+                            case "#BG#":
+                                var storage = file.ReadLine();
+                                if (storage != "None")
+                                { try { BGBox.ImageLocation = storage;
+                                    BGBox.Visible = true;
+                                   } catch (Exception) { } }
+                                break;
                         }
                     }
                 }
@@ -132,7 +140,7 @@ namespace PeekPoker
         {
             Process.Start("www.360haven.com");
         }
-
+ 
         private void peekNpokeButton_Click(object sender, EventArgs e)
         {
             PeekNPoke.PeekNPoke form = displayOutsideParentBox.Checked
@@ -144,8 +152,9 @@ namespace PeekPoker
             form.GetTextBoxText += GetTextBoxText;
             form.SetTextBoxText += SetTextBoxText;
             form.Show();
+            if (form.MdiParent == this) BGPanel.Controls.Add(form);
             BGBox.SendToBack();
-           BGBox.Refresh();
+            
         }
 
         private void dumpButton_Click(object sender, EventArgs e)
@@ -157,8 +166,9 @@ namespace PeekPoker
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
             form.UpdateProgressbar += UpdateProgressbar;
-            form.Show();
-        }
+            if (form.MdiParent == this) BGPanel.Controls.Add(form);
+                BGBox.SendToBack();
+            }
 
         private void SearchButtonClick(object sender, EventArgs e)
         {
@@ -170,7 +180,9 @@ namespace PeekPoker
             form.GetTextBoxText += GetTextBoxText;
             form.UpdateProgressbar += UpdateProgressbar;
             form.Show();
-        }
+            if (form.MdiParent == this) BGPanel.Controls.Add(form);
+                BGBox.SendToBack();
+           }
 
         private void converterButton_Click(object sender, EventArgs e)
         {
@@ -179,7 +191,9 @@ namespace PeekPoker
                                  : new Converter.Converter {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.Show();
-        }
+            if (form.MdiParent == this) BGPanel.Controls.Add(form);
+                BGBox.SendToBack();
+           }
 
         private void pluginInfoButton_Click(object sender, EventArgs e)
         {
@@ -187,7 +201,9 @@ namespace PeekPoker
                                   ? new PluginInfo.PluginInfo(_listviewItem)
                                   : new PluginInfo.PluginInfo(_listviewItem) {MdiParent = this};
             form.Show();
-        }
+            if (form.MdiParent == this) BGPanel.Controls.Add(form);
+                BGBox.SendToBack();
+           }
 
         #endregion
 
@@ -365,6 +381,8 @@ namespace PeekPoker
                 BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 BGBox.ImageLocation = open.FileName;
             BGBox.Visible = true;
+            
+            Save();
             }
        
         private void ClearBg(object sender, EventArgs e)
