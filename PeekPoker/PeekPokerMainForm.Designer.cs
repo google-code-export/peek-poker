@@ -35,6 +35,13 @@
             this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sizeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.centreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stretchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fromScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.defaultXbox360IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -61,13 +68,6 @@
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
             this.BGBox = new System.Windows.Forms.PictureBox();
-            this.sizeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stretchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.centreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fromScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.optionPanel.SuspendLayout();
@@ -124,6 +124,62 @@
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
             this.clearToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.clearToolStripMenuItem.Text = "Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearBg);
+            // 
+            // sizeModeToolStripMenuItem
+            // 
+            this.sizeModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoToolStripMenuItem,
+            this.centreToolStripMenuItem,
+            this.normalToolStripMenuItem,
+            this.stretchToolStripMenuItem,
+            this.zoomToolStripMenuItem});
+            this.sizeModeToolStripMenuItem.Name = "sizeModeToolStripMenuItem";
+            this.sizeModeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.sizeModeToolStripMenuItem.Text = "Size Mode";
+            // 
+            // autoToolStripMenuItem
+            // 
+            this.autoToolStripMenuItem.CheckOnClick = true;
+            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
+            this.autoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.autoToolStripMenuItem.Text = "Auto";
+            // 
+            // centreToolStripMenuItem
+            // 
+            this.centreToolStripMenuItem.CheckOnClick = true;
+            this.centreToolStripMenuItem.Name = "centreToolStripMenuItem";
+            this.centreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.centreToolStripMenuItem.Text = "Centre";
+            // 
+            // normalToolStripMenuItem
+            // 
+            this.normalToolStripMenuItem.CheckOnClick = true;
+            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.normalToolStripMenuItem.Text = "Normal";
+            // 
+            // stretchToolStripMenuItem
+            // 
+            this.stretchToolStripMenuItem.Checked = true;
+            this.stretchToolStripMenuItem.CheckOnClick = true;
+            this.stretchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
+            this.stretchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stretchToolStripMenuItem.Text = "Stretch";
+            // 
+            // zoomToolStripMenuItem
+            // 
+            this.zoomToolStripMenuItem.CheckOnClick = true;
+            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zoomToolStripMenuItem.Text = "Zoom";
+            // 
+            // fromScreenshotToolStripMenuItem
+            // 
+            this.fromScreenshotToolStripMenuItem.Name = "fromScreenshotToolStripMenuItem";
+            this.fromScreenshotToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.fromScreenshotToolStripMenuItem.Text = "From Screenshot";
             // 
             // toolStripSeparator2
             // 
@@ -134,7 +190,7 @@
             // 
             this.defaultXbox360IPToolStripMenuItem.Name = "defaultXbox360IPToolStripMenuItem";
             this.defaultXbox360IPToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.defaultXbox360IPToolStripMenuItem.Text = "Default Xbox360 IP";
+            this.defaultXbox360IPToolStripMenuItem.Text = "Set Default IP";
             // 
             // toolStripSeparator1
             // 
@@ -354,67 +410,15 @@
             this.BGBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.BGBox.BackColor = System.Drawing.Color.Transparent;
+            this.BGBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BGBox.Location = new System.Drawing.Point(197, 94);
             this.BGBox.Name = "BGBox";
             this.BGBox.Size = new System.Drawing.Size(327, 284);
             this.BGBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BGBox.TabIndex = 20;
             this.BGBox.TabStop = false;
-            // 
-            // sizeModeToolStripMenuItem
-            // 
-            this.sizeModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.autoToolStripMenuItem,
-            this.centreToolStripMenuItem,
-            this.normalToolStripMenuItem,
-            this.stretchToolStripMenuItem,
-            this.zoomToolStripMenuItem});
-            this.sizeModeToolStripMenuItem.Name = "sizeModeToolStripMenuItem";
-            this.sizeModeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.sizeModeToolStripMenuItem.Text = "Size Mode";
-            // 
-            // stretchToolStripMenuItem
-            // 
-            this.stretchToolStripMenuItem.Checked = true;
-            this.stretchToolStripMenuItem.CheckOnClick = true;
-            this.stretchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
-            this.stretchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.stretchToolStripMenuItem.Text = "Stretch";
-            // 
-            // autoToolStripMenuItem
-            // 
-            this.autoToolStripMenuItem.CheckOnClick = true;
-            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            this.autoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.autoToolStripMenuItem.Text = "Auto";
-            // 
-            // normalToolStripMenuItem
-            // 
-            this.normalToolStripMenuItem.CheckOnClick = true;
-            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
-            this.normalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.normalToolStripMenuItem.Text = "Normal";
-            // 
-            // centreToolStripMenuItem
-            // 
-            this.centreToolStripMenuItem.CheckOnClick = true;
-            this.centreToolStripMenuItem.Name = "centreToolStripMenuItem";
-            this.centreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.centreToolStripMenuItem.Text = "Centre";
-            // 
-            // zoomToolStripMenuItem
-            // 
-            this.zoomToolStripMenuItem.CheckOnClick = true;
-            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.zoomToolStripMenuItem.Text = "Zoom";
-            // 
-            // fromScreenshotToolStripMenuItem
-            // 
-            this.fromScreenshotToolStripMenuItem.Name = "fromScreenshotToolStripMenuItem";
-            this.fromScreenshotToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.fromScreenshotToolStripMenuItem.Text = "From Screenshot";
+            this.BGBox.Visible = false;
             // 
             // PeekPokerMainForm
             // 
