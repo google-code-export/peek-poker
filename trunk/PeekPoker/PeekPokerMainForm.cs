@@ -144,6 +144,8 @@ namespace PeekPoker
             form.GetTextBoxText += GetTextBoxText;
             form.SetTextBoxText += SetTextBoxText;
             form.Show();
+            BGBox.SendToBack();
+           BGBox.Refresh();
         }
 
         private void dumpButton_Click(object sender, EventArgs e)
@@ -240,43 +242,21 @@ namespace PeekPoker
 
         private void Connect(object a)
         {
-            if (ipAddressTextBox.Text == "debug") { EnableControl(mainGroupBox, true);
+            if (ipAddressTextBox.Text.ToUpper() == "DEBUG") //For debugging PP without a connection to xbox
+            {
+                EnableControl(mainGroupBox, true); EnableControl(pluginPanel, true); 
                 return; //Bypass needing to connect to xbox for debugging purposes.
             }
             try
             {
-                if (Regex.IsMatch(ipAddressTextBox.Text, @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"))
+                if (!Regex.IsMatch(ipAddressTextBox.Text, @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")) //Checks if valid IP
             {
                 MessageBox.Show(" IP Address is not valid!");
                 return;
             }
 
-                string ipAddress = GetTextBoxText(ipAddressTextBox);
-
-                string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
-                if (!(File.Exists(filePath)))
-                {
-                    using (FileStream str = File.Create(filePath)) { str.Close(); }
-                }
-
-                //Save
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.AppendLine("#License#");
-                stringBuilder.AppendLine("Accept");
-                stringBuilder.AppendLine("#IP#");
-                stringBuilder.AppendLine(ipAddress);
-                stringBuilder.AppendLine("#BG#");
-                stringBuilder.AppendLine(BGBox.ImageLocation ?? "None");
-                stringBuilder.AppendLine("#BGSize#");
-                stringBuilder.AppendLine(BGBox.SizeMode.ToString());
-
-                string line = stringBuilder.ToString();
-                using (StreamWriter file = new StreamWriter(filePath))
-                {
-                    file.Write(line);
-                }
-
-                _rtm = new RealTimeMemory(ipAddress, 0, 0); //initialize real time memory
+               Save(); //Moved to own function
+               _rtm = new RealTimeMemory(ipAddressTextBox.Text, 0, 0); //initialize real time memory
                 _rtm.ReportProgress += UpdateProgressbar;
 
                 if (!_rtm.Connect())
@@ -286,8 +266,9 @@ namespace PeekPoker
                 EnableControl(mainGroupBox, true);
 
                 SetToolStripLabel("Connected!");
-                Registry.SetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "DefaultIP",
-                                  ipAddress.ToString(CultureInfo.InvariantCulture)); //Store IP in registry
+                //#CODE FOR SAVING IP IN REGISTRY#
+                //Registry.SetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\XenonSDK", "DefaultIP",
+                //                  ipAddress.ToString(CultureInfo.InvariantCulture)); //Store IP in registry
                 ShowMessageBox("Connected!", "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetTextBoxText(connectButton, "Re-Connect");
@@ -383,7 +364,39 @@ namespace PeekPoker
                 if (open.FileName == null) return;
                 BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 BGBox.ImageLocation = open.FileName;
+            BGBox.Visible = true;
             }
-        #endregion
+       
+        private void ClearBg(object sender, EventArgs e)
+        {
+            BGBox.ImageLocation = null;
+            BGBox.Visible = false;
+        }
+     #endregion
+        private void Save()
+        {
+            string ipAddress = GetTextBoxText(ipAddressTextBox);
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+            if (!(File.Exists(filePath)))
+            {
+                using (FileStream str = File.Create(filePath)) { str.Close(); }
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("#License#");
+            stringBuilder.AppendLine("Accept");
+            stringBuilder.AppendLine("#IP#");
+            stringBuilder.AppendLine(ipAddress);
+            stringBuilder.AppendLine("#BG#");
+            stringBuilder.AppendLine(BGBox.ImageLocation ?? "None");
+            stringBuilder.AppendLine("#BGSize#");
+            stringBuilder.AppendLine(BGBox.SizeMode.ToString());
+
+            string line = stringBuilder.ToString();
+            using (StreamWriter file = new StreamWriter(filePath))
+            {
+                file.Write(line);
+            }
+        }
     }
 }
