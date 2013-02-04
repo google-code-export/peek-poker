@@ -36,6 +36,7 @@
             this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sizeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SizeBox = new System.Windows.Forms.ToolStripComboBox();
             this.fromScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.defaultXbox360IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,16 +63,11 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.dumpButton = new System.Windows.Forms.Button();
             this.peekNpokeButton = new System.Windows.Forms.Button();
-            this.BGBox = new System.Windows.Forms.PictureBox();
-            this.BGPanel = new System.Windows.Forms.Panel();
-            this.SizeBox = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.optionPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BGBox)).BeginInit();
-            this.BGPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -81,7 +77,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(525, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(563, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -115,14 +111,12 @@
             this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
             this.selectToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.selectToolStripMenuItem.Text = "Select..";
-            this.selectToolStripMenuItem.Click += new System.EventHandler(this.SelectBg);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
             this.clearToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.clearToolStripMenuItem.Text = "Clear";
-            this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearBg);
             // 
             // sizeModeToolStripMenuItem
             // 
@@ -132,13 +126,24 @@
             this.sizeModeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.sizeModeToolStripMenuItem.Text = "Size Mode";
             // 
+            // SizeBox
+            // 
+            this.SizeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SizeBox.Items.AddRange(new object[] {
+            "Auto",
+            "Center",
+            "Normal",
+            "Stretch",
+            "Zoom"});
+            this.SizeBox.Name = "SizeBox";
+            this.SizeBox.Size = new System.Drawing.Size(121, 23);
+            // 
             // fromScreenshotToolStripMenuItem
             // 
             this.fromScreenshotToolStripMenuItem.Name = "fromScreenshotToolStripMenuItem";
             this.fromScreenshotToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.fromScreenshotToolStripMenuItem.Text = "From Screenshot";
             this.fromScreenshotToolStripMenuItem.Visible = false;
-            this.fromScreenshotToolStripMenuItem.Click += new System.EventHandler(this.fromScreenshotToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -182,7 +187,7 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 24);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 379);
+            this.splitter1.Size = new System.Drawing.Size(3, 410);
             this.splitter1.TabIndex = 15;
             this.splitter1.TabStop = false;
             // 
@@ -193,9 +198,9 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel1,
             this.StatusProgressBar});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 379);
+            this.statusStrip1.Location = new System.Drawing.Point(3, 410);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(522, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(560, 24);
             this.statusStrip1.TabIndex = 17;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -235,18 +240,17 @@
             this.pluginPanel.Enabled = false;
             this.pluginPanel.Location = new System.Drawing.Point(3, 24);
             this.pluginPanel.Name = "pluginPanel";
-            this.pluginPanel.Size = new System.Drawing.Size(522, 68);
+            this.pluginPanel.Size = new System.Drawing.Size(560, 92);
             this.pluginPanel.TabIndex = 18;
             // 
             // optionPanel
             // 
-            this.optionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.optionPanel.Controls.Add(this.groupBox1);
             this.optionPanel.Controls.Add(this.mainGroupBox);
             this.optionPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.optionPanel.Location = new System.Drawing.Point(3, 92);
+            this.optionPanel.Location = new System.Drawing.Point(3, 116);
             this.optionPanel.Name = "optionPanel";
-            this.optionPanel.Size = new System.Drawing.Size(193, 287);
+            this.optionPanel.Size = new System.Drawing.Size(193, 294);
             this.optionPanel.TabIndex = 0;
             // 
             // groupBox1
@@ -256,7 +260,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 213);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 79);
+            this.groupBox1.Size = new System.Drawing.Size(193, 79);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "IP Address";
@@ -264,9 +268,9 @@
             // connectButton
             // 
             this.connectButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.connectButton.Location = new System.Drawing.Point(3, 36);
+            this.connectButton.Location = new System.Drawing.Point(3, 40);
             this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(185, 27);
+            this.connectButton.Size = new System.Drawing.Size(187, 27);
             this.connectButton.TabIndex = 6;
             this.connectButton.Text = "Connect";
             this.connectButton.UseVisualStyleBackColor = true;
@@ -276,10 +280,10 @@
             // 
             this.ipAddressTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.ipAddressTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ipAddressTextBox.Location = new System.Drawing.Point(3, 16);
+            this.ipAddressTextBox.Location = new System.Drawing.Point(3, 18);
             this.ipAddressTextBox.MaxLength = 15;
             this.ipAddressTextBox.Name = "ipAddressTextBox";
-            this.ipAddressTextBox.Size = new System.Drawing.Size(185, 22);
+            this.ipAddressTextBox.Size = new System.Drawing.Size(187, 22);
             this.ipAddressTextBox.TabIndex = 1;
             // 
             // mainGroupBox
@@ -294,7 +298,7 @@
             this.mainGroupBox.Enabled = false;
             this.mainGroupBox.Location = new System.Drawing.Point(0, 0);
             this.mainGroupBox.Name = "mainGroupBox";
-            this.mainGroupBox.Size = new System.Drawing.Size(191, 213);
+            this.mainGroupBox.Size = new System.Drawing.Size(193, 213);
             this.mainGroupBox.TabIndex = 22;
             this.mainGroupBox.TabStop = false;
             this.mainGroupBox.Text = "Selection Options";
@@ -303,9 +307,9 @@
             // 
             this.displayOutsideParentBox.AutoSize = true;
             this.displayOutsideParentBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.displayOutsideParentBox.Location = new System.Drawing.Point(3, 181);
+            this.displayOutsideParentBox.Location = new System.Drawing.Point(3, 183);
             this.displayOutsideParentBox.Name = "displayOutsideParentBox";
-            this.displayOutsideParentBox.Size = new System.Drawing.Size(185, 17);
+            this.displayOutsideParentBox.Size = new System.Drawing.Size(187, 19);
             this.displayOutsideParentBox.TabIndex = 14;
             this.displayOutsideParentBox.Text = "Display outside Parent?";
             this.displayOutsideParentBox.UseVisualStyleBackColor = true;
@@ -314,9 +318,9 @@
             // 
             this.pluginInfoButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.pluginInfoButton.Enabled = false;
-            this.pluginInfoButton.Location = new System.Drawing.Point(3, 148);
+            this.pluginInfoButton.Location = new System.Drawing.Point(3, 150);
             this.pluginInfoButton.Name = "pluginInfoButton";
-            this.pluginInfoButton.Size = new System.Drawing.Size(185, 33);
+            this.pluginInfoButton.Size = new System.Drawing.Size(187, 33);
             this.pluginInfoButton.TabIndex = 13;
             this.pluginInfoButton.Text = "Plugin Info";
             this.pluginInfoButton.UseVisualStyleBackColor = true;
@@ -325,9 +329,9 @@
             // converterButton
             // 
             this.converterButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.converterButton.Location = new System.Drawing.Point(3, 115);
+            this.converterButton.Location = new System.Drawing.Point(3, 117);
             this.converterButton.Name = "converterButton";
-            this.converterButton.Size = new System.Drawing.Size(185, 33);
+            this.converterButton.Size = new System.Drawing.Size(187, 33);
             this.converterButton.TabIndex = 12;
             this.converterButton.Text = "Converter";
             this.converterButton.UseVisualStyleBackColor = true;
@@ -336,9 +340,9 @@
             // SearchButton
             // 
             this.SearchButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SearchButton.Location = new System.Drawing.Point(3, 82);
+            this.SearchButton.Location = new System.Drawing.Point(3, 84);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(185, 33);
+            this.SearchButton.Size = new System.Drawing.Size(187, 33);
             this.SearchButton.TabIndex = 11;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -347,9 +351,9 @@
             // dumpButton
             // 
             this.dumpButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dumpButton.Location = new System.Drawing.Point(3, 49);
+            this.dumpButton.Location = new System.Drawing.Point(3, 51);
             this.dumpButton.Name = "dumpButton";
-            this.dumpButton.Size = new System.Drawing.Size(185, 33);
+            this.dumpButton.Size = new System.Drawing.Size(187, 33);
             this.dumpButton.TabIndex = 10;
             this.dumpButton.Text = "Dump";
             this.dumpButton.UseVisualStyleBackColor = true;
@@ -358,48 +362,13 @@
             // peekNpokeButton
             // 
             this.peekNpokeButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.peekNpokeButton.Location = new System.Drawing.Point(3, 16);
+            this.peekNpokeButton.Location = new System.Drawing.Point(3, 18);
             this.peekNpokeButton.Name = "peekNpokeButton";
-            this.peekNpokeButton.Size = new System.Drawing.Size(185, 33);
+            this.peekNpokeButton.Size = new System.Drawing.Size(187, 33);
             this.peekNpokeButton.TabIndex = 9;
             this.peekNpokeButton.Text = "Peek && Poke";
             this.peekNpokeButton.UseVisualStyleBackColor = true;
             this.peekNpokeButton.Click += new System.EventHandler(this.peekNpokeButton_Click);
-            // 
-            // BGBox
-            // 
-            this.BGBox.BackColor = System.Drawing.Color.Transparent;
-            this.BGBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BGBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BGBox.Location = new System.Drawing.Point(0, 0);
-            this.BGBox.Name = "BGBox";
-            this.BGBox.Size = new System.Drawing.Size(329, 287);
-            this.BGBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BGBox.TabIndex = 20;
-            this.BGBox.TabStop = false;
-            // 
-            // BGPanel
-            // 
-            this.BGPanel.BackColor = System.Drawing.Color.Transparent;
-            this.BGPanel.Controls.Add(this.BGBox);
-            this.BGPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BGPanel.Location = new System.Drawing.Point(196, 92);
-            this.BGPanel.Name = "BGPanel";
-            this.BGPanel.Size = new System.Drawing.Size(329, 287);
-            this.BGPanel.TabIndex = 22;
-            // 
-            // SizeBox
-            // 
-            this.SizeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SizeBox.Items.AddRange(new object[] {
-            "Auto",
-            "Center",
-            "Normal",
-            "Stretch",
-            "Zoom"});
-            this.SizeBox.Name = "SizeBox";
-            this.SizeBox.Size = new System.Drawing.Size(121, 23);
-            this.SizeBox.SelectedIndexChanged += new System.EventHandler(this.BgControl);
             // 
             // PeekPokerMainForm
             // 
@@ -407,8 +376,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(525, 403);
-            this.Controls.Add(this.BGPanel);
+            this.ClientSize = new System.Drawing.Size(563, 434);
             this.Controls.Add(this.optionPanel);
             this.Controls.Add(this.pluginPanel);
             this.Controls.Add(this.statusStrip1);
@@ -418,7 +386,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(383, 441);
+            this.MinimumSize = new System.Drawing.Size(579, 473);
             this.Name = "PeekPokerMainForm";
             this.Text = "Peek Poker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
@@ -432,8 +400,6 @@
             this.groupBox1.PerformLayout();
             this.mainGroupBox.ResumeLayout(false);
             this.mainGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BGBox)).EndInit();
-            this.BGPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -471,10 +437,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem showHidePluginsToolStripMenuItem;
-        private System.Windows.Forms.PictureBox BGBox;
         private System.Windows.Forms.ToolStripMenuItem sizeModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fromScreenshotToolStripMenuItem;
-        private System.Windows.Forms.Panel BGPanel;
         private System.Windows.Forms.ToolStripComboBox SizeBox;
 
     }

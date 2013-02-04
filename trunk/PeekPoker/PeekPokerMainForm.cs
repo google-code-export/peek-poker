@@ -59,41 +59,6 @@ namespace PeekPoker
                             case "#IP#":
                                 ip = file.ReadLine();
                                 break;
-
-                            case "#BG#":
-                                var bgstorage = file.ReadLine();
-                                if (bgstorage != "None")
-                                { BGBox.ImageLocation = bgstorage;
-                                    BGBox.Visible = true;
-                                }
-                                break;
-
-                            case "#BGSize#":
-                                var sizestorage = file.ReadLine();
-                                switch (sizestorage)
-                                {                                    
-                                    case "AutoSize":
-                                BGBox.SizeMode = PictureBoxSizeMode.AutoSize;
-                                SizeBox.SelectedIndex = 0;
-                                       break;
-                                   case "CenterImage":
-                                BGBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                                SizeBox.SelectedIndex = 1;
-                                        break;
-                                    case "Normal":
-                                        BGBox.SizeMode = PictureBoxSizeMode.Normal;
-                                        SizeBox.SelectedIndex = 2;
-                                        break;
-                                    case "StretchImage":
-                                BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                                        SizeBox.SelectedIndex = 3;
-                                        break;
-                                    case "Zoom":
-                                        BGBox.SizeMode = PictureBoxSizeMode.Zoom;
-                                        SizeBox.SelectedIndex = 4; 
-                                        break;
-                                }
-                                break;
                         }
                     }
                 }
@@ -180,10 +145,7 @@ namespace PeekPoker
             form.GetTextBoxText += GetTextBoxText;
             form.SetTextBoxText += SetTextBoxText;
             form.Show();
-            if (form.MdiParent == this) BGPanel.Controls.Add(form);
-            BGBox.SendToBack();
-            form.BringToFront();
-            }
+        }
 
         private void dumpButton_Click(object sender, EventArgs e)
         {
@@ -195,10 +157,7 @@ namespace PeekPoker
             form.GetTextBoxText += GetTextBoxText;
             form.UpdateProgressbar += UpdateProgressbar;
             form.Show();
-            if (form.MdiParent == this) BGPanel.Controls.Add(form);
-                BGBox.SendToBack();
-                form.BringToFront();
-            }
+        }
 
         private void SearchButtonClick(object sender, EventArgs e)
         {
@@ -210,10 +169,7 @@ namespace PeekPoker
             form.GetTextBoxText += GetTextBoxText;
             form.UpdateProgressbar += UpdateProgressbar;
             form.Show();
-            if (form.MdiParent == this) BGPanel.Controls.Add(form);
-                BGBox.SendToBack();
-                form.BringToFront();
-           }
+        }
 
         private void converterButton_Click(object sender, EventArgs e)
         {
@@ -222,9 +178,6 @@ namespace PeekPoker
                                  : new Converter.Converter {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.Show();
-            if (form.MdiParent == this) BGPanel.Controls.Add(form);
-                BGBox.SendToBack();
-                form.BringToFront();
            }
 
         private void pluginInfoButton_Click(object sender, EventArgs e)
@@ -233,10 +186,7 @@ namespace PeekPoker
                                   ? new PluginInfo.PluginInfo(_listviewItem)
                                   : new PluginInfo.PluginInfo(_listviewItem) {MdiParent = this};
             form.Show();
-            if (form.MdiParent == this) BGPanel.Controls.Add(form);
-                BGBox.SendToBack();
-                form.BringToFront();
-           }
+        }
 
         #endregion
 
@@ -261,12 +211,11 @@ namespace PeekPoker
                                           Tag = pluginData.ApplicationName,
                                           Text = pluginData.ApplicationName,
                                           Image = pluginData.Icon.ToBitmap(),
-                                          Size = new Size(108, 57),
+                                          Size = new Size(108, 75),
                                           ImageAlign = ContentAlignment.TopCenter,
-                                          MaximumSize = new Size(108, 50),
+                                          MaximumSize = new Size(108, 75),
                                           Dock = DockStyle.Left,
                                           TextAlign = ContentAlignment.BottomCenter,
-                                          
                                       };
                     item.Click += PluginClickEventHandler;
                     pluginPanel.Controls.Add(item);
@@ -298,36 +247,11 @@ namespace PeekPoker
             stringBuilder.AppendLine("Accept");
             stringBuilder.AppendLine("#IP#");
             stringBuilder.AppendLine(ipAddress);
-            stringBuilder.AppendLine("#BG#");
-            stringBuilder.AppendLine(BGBox.ImageLocation ?? "None");
-            stringBuilder.AppendLine("#BGSize#");
-            stringBuilder.AppendLine(BGBox.SizeMode.ToString());
 
             string line = stringBuilder.ToString();
             using (StreamWriter file = new StreamWriter(filePath))
             {
                 file.Write(line);
-            }
-        }
-        private void BgControl(object sender, EventArgs e)
-        {
-            switch (SizeBox.SelectedIndex)
-            {
-                case 0:
-                    BGBox.SizeMode = PictureBoxSizeMode.AutoSize;
-                    break;
-                case 1:
-                    BGBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                    break;
-                case 2:
-                    BGBox.SizeMode = PictureBoxSizeMode.Normal;
-                    break;
-                case 3:
-                    BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    break;
-                case 4:
-                    BGBox.SizeMode = PictureBoxSizeMode.Zoom;
-                    break;
             }
         }
 
@@ -450,30 +374,5 @@ namespace PeekPoker
         }
 
         #endregion
-
-        #region Background Image
-        private void SelectBg(object sender, EventArgs e)
-        {
-            var open = new OpenFileDialog {Title = "Select an image as your background."};
-            open.ShowDialog();
-                if (open.FileName == null) return;
-                BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                BGBox.ImageLocation = open.FileName;
-            BGBox.Visible = true;
-            
-            Save();
-            }
-       
-        private void ClearBg(object sender, EventArgs e)
-        {
-            BGBox.ImageLocation = null;
-            BGBox.Visible = false;
-        }
-
-        private void fromScreenshotToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-    #endregion
-        }
+    }
 }
