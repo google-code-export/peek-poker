@@ -33,6 +33,7 @@ namespace PeekPoker
 
         private void MainFormFormClosing(object sender, FormClosingEventArgs e)
         {
+            Save();
             Process.GetCurrentProcess().Kill(); //Immediately stop the process
         }
 
@@ -60,11 +61,38 @@ namespace PeekPoker
                                 break;
 
                             case "#BG#":
-                                var storage = file.ReadLine();
-                                if (storage != "None")
-                                { try { BGBox.ImageLocation = storage;
+                                var bgstorage = file.ReadLine();
+                                if (bgstorage != "None")
+                                { BGBox.ImageLocation = bgstorage;
                                     BGBox.Visible = true;
-                                   } catch (Exception) { } }
+                                }
+                                break;
+
+                            case "#BGSize#":
+                                var sizestorage = file.ReadLine();
+                                switch (sizestorage)
+                                {                                    
+                                    case "AutoSize":
+                                BGBox.SizeMode = PictureBoxSizeMode.AutoSize;
+                                SizeBox.SelectedIndex = 0;
+                                       break;
+                                   case "CenterImage":
+                                BGBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                                SizeBox.SelectedIndex = 1;
+                                        break;
+                                    case "Normal":
+                                        BGBox.SizeMode = PictureBoxSizeMode.Normal;
+                                        SizeBox.SelectedIndex = 2;
+                                        break;
+                                    case "StretchImage":
+                                BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                                        SizeBox.SelectedIndex = 3;
+                                        break;
+                                    case "Zoom":
+                                        BGBox.SizeMode = PictureBoxSizeMode.Zoom;
+                                        SizeBox.SelectedIndex = 4; 
+                                        break;
+                                }
                                 break;
                         }
                     }
@@ -166,6 +194,7 @@ namespace PeekPoker
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
             form.UpdateProgressbar += UpdateProgressbar;
+            form.Show();
             if (form.MdiParent == this) BGPanel.Controls.Add(form);
                 BGBox.SendToBack();
             }
@@ -249,6 +278,52 @@ namespace PeekPoker
             catch (Exception e)
             {
                 ShowMessageBox(e.Message, "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Save()
+        {
+            string ipAddress = GetTextBoxText(ipAddressTextBox);
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
+            if (!(File.Exists(filePath)))
+            {
+                using (FileStream str = File.Create(filePath)) { str.Close(); }
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("#License#");
+            stringBuilder.AppendLine("Accept");
+            stringBuilder.AppendLine("#IP#");
+            stringBuilder.AppendLine(ipAddress);
+            stringBuilder.AppendLine("#BG#");
+            stringBuilder.AppendLine(BGBox.ImageLocation ?? "None");
+            stringBuilder.AppendLine("#BGSize#");
+            stringBuilder.AppendLine(BGBox.SizeMode.ToString());
+
+            string line = stringBuilder.ToString();
+            using (StreamWriter file = new StreamWriter(filePath))
+            {
+                file.Write(line);
+            }
+        }
+        private void BgControl(object sender, EventArgs e)
+        {
+            switch (SizeBox.SelectedIndex)
+            {
+                case 0:
+                    BGBox.SizeMode = PictureBoxSizeMode.AutoSize;
+                    break;
+                case 1:
+                    BGBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                    break;
+                case 2:
+                    BGBox.SizeMode = PictureBoxSizeMode.Normal;
+                    break;
+                case 3:
+                    BGBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    break;
+                case 4:
+                    BGBox.SizeMode = PictureBoxSizeMode.Zoom;
+                    break;
             }
         }
 
@@ -390,31 +465,13 @@ namespace PeekPoker
             BGBox.ImageLocation = null;
             BGBox.Visible = false;
         }
-     #endregion
-        private void Save()
+
+        private void fromScreenshotToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string ipAddress = GetTextBoxText(ipAddressTextBox);
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
-            if (!(File.Exists(filePath)))
-            {
-                using (FileStream str = File.Create(filePath)) { str.Close(); }
-            }
 
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("#License#");
-            stringBuilder.AppendLine("Accept");
-            stringBuilder.AppendLine("#IP#");
-            stringBuilder.AppendLine(ipAddress);
-            stringBuilder.AppendLine("#BG#");
-            stringBuilder.AppendLine(BGBox.ImageLocation ?? "None");
-            stringBuilder.AppendLine("#BGSize#");
-            stringBuilder.AppendLine(BGBox.SizeMode.ToString());
-
-            string line = stringBuilder.ToString();
-            using (StreamWriter file = new StreamWriter(filePath))
-            {
-                file.Write(line);
-            }
         }
-    }
+    #endregion
+
+
+}
 }

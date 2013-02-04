@@ -36,11 +36,6 @@
             this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sizeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.centreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stretchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fromScreenshotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.defaultXbox360IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +64,7 @@
             this.peekNpokeButton = new System.Windows.Forms.Button();
             this.BGBox = new System.Windows.Forms.PictureBox();
             this.BGPanel = new System.Windows.Forms.Panel();
+            this.SizeBox = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.optionPanel.SuspendLayout();
@@ -131,57 +127,18 @@
             // sizeModeToolStripMenuItem
             // 
             this.sizeModeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.autoToolStripMenuItem,
-            this.centreToolStripMenuItem,
-            this.normalToolStripMenuItem,
-            this.stretchToolStripMenuItem,
-            this.zoomToolStripMenuItem});
+            this.SizeBox});
             this.sizeModeToolStripMenuItem.Name = "sizeModeToolStripMenuItem";
             this.sizeModeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.sizeModeToolStripMenuItem.Text = "Size Mode";
-            // 
-            // autoToolStripMenuItem
-            // 
-            this.autoToolStripMenuItem.CheckOnClick = true;
-            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
-            this.autoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.autoToolStripMenuItem.Text = "Auto";
-            // 
-            // centreToolStripMenuItem
-            // 
-            this.centreToolStripMenuItem.CheckOnClick = true;
-            this.centreToolStripMenuItem.Name = "centreToolStripMenuItem";
-            this.centreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.centreToolStripMenuItem.Text = "Centre";
-            // 
-            // normalToolStripMenuItem
-            // 
-            this.normalToolStripMenuItem.CheckOnClick = true;
-            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
-            this.normalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.normalToolStripMenuItem.Text = "Normal";
-            // 
-            // stretchToolStripMenuItem
-            // 
-            this.stretchToolStripMenuItem.Checked = true;
-            this.stretchToolStripMenuItem.CheckOnClick = true;
-            this.stretchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
-            this.stretchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.stretchToolStripMenuItem.Text = "Stretch";
-            // 
-            // zoomToolStripMenuItem
-            // 
-            this.zoomToolStripMenuItem.CheckOnClick = true;
-            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.zoomToolStripMenuItem.Text = "Zoom";
             // 
             // fromScreenshotToolStripMenuItem
             // 
             this.fromScreenshotToolStripMenuItem.Name = "fromScreenshotToolStripMenuItem";
             this.fromScreenshotToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.fromScreenshotToolStripMenuItem.Text = "From Screenshot";
+            this.fromScreenshotToolStripMenuItem.Visible = false;
+            this.fromScreenshotToolStripMenuItem.Click += new System.EventHandler(this.fromScreenshotToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -411,28 +368,38 @@
             // 
             // BGBox
             // 
-            this.BGBox.BackColor = System.Drawing.Color.Silver;
+            this.BGBox.BackColor = System.Drawing.Color.Transparent;
             this.BGBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BGBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BGBox.Location = new System.Drawing.Point(0, 0);
             this.BGBox.Name = "BGBox";
-            this.BGBox.Size = new System.Drawing.Size(327, 286);
+            this.BGBox.Size = new System.Drawing.Size(329, 287);
             this.BGBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BGBox.TabIndex = 20;
             this.BGBox.TabStop = false;
-            this.BGBox.Visible = false;
             // 
             // BGPanel
             // 
-            this.BGPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.BGPanel.BackColor = System.Drawing.Color.Transparent;
             this.BGPanel.Controls.Add(this.BGBox);
-            this.BGPanel.Location = new System.Drawing.Point(198, 93);
+            this.BGPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BGPanel.Location = new System.Drawing.Point(196, 92);
             this.BGPanel.Name = "BGPanel";
-            this.BGPanel.Size = new System.Drawing.Size(327, 286);
+            this.BGPanel.Size = new System.Drawing.Size(329, 287);
             this.BGPanel.TabIndex = 22;
+            // 
+            // SizeBox
+            // 
+            this.SizeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SizeBox.Items.AddRange(new object[] {
+            "Auto",
+            "Center",
+            "Normal",
+            "Stretch",
+            "Zoom"});
+            this.SizeBox.Name = "SizeBox";
+            this.SizeBox.Size = new System.Drawing.Size(121, 23);
+            this.SizeBox.SelectedIndexChanged += new System.EventHandler(this.BgControl);
             // 
             // PeekPokerMainForm
             // 
@@ -506,13 +473,9 @@
         private System.Windows.Forms.ToolStripMenuItem showHidePluginsToolStripMenuItem;
         private System.Windows.Forms.PictureBox BGBox;
         private System.Windows.Forms.ToolStripMenuItem sizeModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem autoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem centreToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stretchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fromScreenshotToolStripMenuItem;
         private System.Windows.Forms.Panel BGPanel;
+        private System.Windows.Forms.ToolStripComboBox SizeBox;
 
     }
 }
