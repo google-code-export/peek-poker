@@ -55,8 +55,8 @@ namespace PeekPoker.PeekNPoke
             this.label7 = new System.Windows.Forms.Label();
             this.hexBox = new Be.Windows.Forms.HexBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.fillValueTextBox = new System.Windows.Forms.TextBox();
             this.fillCheckBox = new System.Windows.Forms.CheckBox();
+            this.fillValueTextBox = new System.Windows.Forms.TextBox();
             this.debugGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericInt32)).BeginInit();
@@ -267,7 +267,7 @@ namespace PeekPoker.PeekNPoke
             // 
             // newPeekButton
             // 
-            this.newPeekButton.Location = new System.Drawing.Point(176, 44);
+            this.newPeekButton.Location = new System.Drawing.Point(185, 44);
             this.newPeekButton.Name = "newPeekButton";
             this.newPeekButton.Size = new System.Drawing.Size(61, 25);
             this.newPeekButton.TabIndex = 46;
@@ -277,7 +277,7 @@ namespace PeekPoker.PeekNPoke
             // 
             // pokeButton
             // 
-            this.pokeButton.Location = new System.Drawing.Point(243, 9);
+            this.pokeButton.Location = new System.Drawing.Point(252, 9);
             this.pokeButton.Name = "pokeButton";
             this.pokeButton.Size = new System.Drawing.Size(61, 25);
             this.pokeButton.TabIndex = 43;
@@ -296,7 +296,7 @@ namespace PeekPoker.PeekNPoke
             // 
             // peekLengthTextBox
             // 
-            this.peekLengthTextBox.Location = new System.Drawing.Point(87, 48);
+            this.peekLengthTextBox.Location = new System.Drawing.Point(96, 48);
             this.peekLengthTextBox.Name = "peekLengthTextBox";
             this.peekLengthTextBox.Size = new System.Drawing.Size(83, 22);
             this.peekLengthTextBox.TabIndex = 41;
@@ -305,7 +305,7 @@ namespace PeekPoker.PeekNPoke
             // 
             // peekButton
             // 
-            this.peekButton.Location = new System.Drawing.Point(176, 9);
+            this.peekButton.Location = new System.Drawing.Point(185, 9);
             this.peekButton.Name = "peekButton";
             this.peekButton.Size = new System.Drawing.Size(61, 25);
             this.peekButton.TabIndex = 44;
@@ -326,7 +326,7 @@ namespace PeekPoker.PeekNPoke
             // 
             this.peekPokeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.peekPokeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(87, 12);
+            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(96, 12);
             this.peekPokeAddressTextBox.Name = "peekPokeAddressTextBox";
             this.peekPokeAddressTextBox.Size = new System.Drawing.Size(83, 22);
             this.peekPokeAddressTextBox.TabIndex = 40;
@@ -375,13 +375,6 @@ namespace PeekPoker.PeekNPoke
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Fill";
             // 
-            // fillValueTextBox
-            // 
-            this.fillValueTextBox.Location = new System.Drawing.Point(146, 21);
-            this.fillValueTextBox.Name = "fillValueTextBox";
-            this.fillValueTextBox.Size = new System.Drawing.Size(30, 22);
-            this.fillValueTextBox.TabIndex = 0;
-            // 
             // fillCheckBox
             // 
             this.fillCheckBox.AutoSize = true;
@@ -391,6 +384,13 @@ namespace PeekPoker.PeekNPoke
             this.fillCheckBox.TabIndex = 1;
             this.fillCheckBox.Text = "Memory With 0x:";
             this.fillCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // fillValueTextBox
+            // 
+            this.fillValueTextBox.Location = new System.Drawing.Point(146, 21);
+            this.fillValueTextBox.Name = "fillValueTextBox";
+            this.fillValueTextBox.Size = new System.Drawing.Size(30, 22);
+            this.fillValueTextBox.TabIndex = 0;
             // 
             // PeekNPoke
             // 
