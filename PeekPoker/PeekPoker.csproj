@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Important Files\Be.Windows.Forms.HexBox.dll" />
+    <Content Include="Important Files\Images\about.jpg" />
     <Content Include="Important Files\Images\icon.ico" />
     <Content Include="Important Files\Images\plugin.png" />
     <Content Include="Important Files\Images\settings.png" />
