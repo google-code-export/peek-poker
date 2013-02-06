@@ -15,7 +15,7 @@ namespace PeekPoker.Search
         public event GetTextBoxTextHandler GetTextBoxText;
 
         private BindingList<SearchResults> _searchResult = new BindingList<SearchResults>();
-        private RealTimeMemory _rtm;
+        private readonly RealTimeMemory _rtm;
 
         public Search(RealTimeMemory rtm)
         {

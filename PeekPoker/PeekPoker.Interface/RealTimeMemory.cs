@@ -19,6 +19,9 @@ namespace PeekPoker.Interface
     {
         #region Eventhandlers/DelegateHandlers
 
+        /// <summary>
+        /// Send the progress bar update to the main
+        /// </summary>
         public event UpdateProgressBarHandler ReportProgress;
 
         #endregion
@@ -180,8 +183,15 @@ namespace PeekPoker.Interface
             }
         }
 
+        /// <summary>
+        /// Find pointer offset
+        /// </summary>
+        /// <param name="pointer"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public BindingList<SearchResults> FindHexOffset(string pointer)
         {
+            _stopSearch = false;
             if (pointer == null)
                 throw new Exception("Empty Search string!");
             if (!Functions.IsHex(pointer))
@@ -201,7 +211,8 @@ namespace PeekPoker.Interface
                 //No need to mess with it :D
                 for (int i = 0; i < size/1024; i++)
                 {
-                    if (_stopSearch) return null;
+                    if (_stopSearch) 
+                        return new BindingList<SearchResults>();
                     _tcp.Client.Receive(data);
                     _readWriter.WriteBytes(data, 2, 1024);
                     ReportProgress(0, (int) (size/1024), (i + 1), "Dumping Memory...");
@@ -210,14 +221,16 @@ namespace PeekPoker.Interface
                 int extra = (int) (size%1024);
                 if (extra > 0)
                 {
-                    if (_stopSearch) return null;
+                    if (_stopSearch)
+                        return new BindingList<SearchResults>();
                     _tcp.Client.Receive(data);
                     _readWriter.WriteBytes(data, 2, extra);
                 }
                 _readWriter.Flush();
                 //===================================
                 //===================================
-                if (_stopSearch) return null;
+                if (_stopSearch)
+                    return new BindingList<SearchResults>();
                 _readWriter.Position = 0;
                 values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer),
                                                                                 _startDumpOffset);
@@ -228,7 +241,8 @@ namespace PeekPoker.Interface
                 _readWriter.Flush();
                 //===================================
                 //===================================
-                if (_stopSearch) return null;
+                if (_stopSearch)
+                    return new BindingList<SearchResults>();
                 _readWriter.Position = 0;
                 values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer),
                                                                                 _startDumpOffset);
@@ -249,11 +263,23 @@ namespace PeekPoker.Interface
             }
         }
 
+        /// <summary>
+        /// Dump the memory
+        /// </summary>
+        /// <param name="filename">The file to save to</param>
+        /// <param name="startDumpAddress">The start dump address</param>
+        /// <param name="dumpLength">The dump length</param>
         public void Dump(string filename, string startDumpAddress, string dumpLength)
         {
             Dump(filename, Functions.Convert(startDumpAddress), Functions.Convert(dumpLength));
         }
 
+        /// <summary>
+        /// Dump the memory
+        /// </summary>
+        /// <param name="filename">The file to save to</param>
+        /// <param name="startDumpAddress">The start dump address</param>
+        /// <param name="dumpLength">The dump length</param>
         public void Dump(string filename, uint startDumpAddress, uint dumpLength)
         {
             if (!Connect()) return; //Call function - If not connected return
@@ -345,16 +371,11 @@ namespace PeekPoker.Interface
         private void WriteMemory(uint address, string data)
         {
             int sent = 0;
-
             try
             {
                 // Send the setmem command
                 _tcp.Client.Send(
                     Encoding.ASCII.GetBytes(string.Format("SETMEM ADDR=0x{0} DATA={1}\r\n", address.ToString("X2"), data)));
-
-                // Check to see our response
-                //byte[] packet = new byte[1026];
-               // _tcp.Client.Receive(packet);
             }
             catch (SocketException ex)
             {
@@ -423,6 +444,9 @@ namespace PeekPoker.Interface
             get { return _startDumpLength; }
         }
 
+        /// <summary>
+        /// Stop any searching
+        /// </summary>
         public bool StopSearch
         {
             get
