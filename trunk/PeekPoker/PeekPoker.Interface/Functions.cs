@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace PeekPoker.Interface
 {
+    /// <summary>
+    /// Various Functions
+    /// </summary>
     public static class Functions
     {
         #region Hex
@@ -34,6 +37,10 @@ namespace PeekPoker.Interface
             }
         }
 
+        /// <summary>
+        /// Turn bytes to hex string array
+        /// </summary>
+        /// <param name="bytes">The byte</param>
         public static string ByteArrayToString(byte[] bytes)
         {
             string text = "";
@@ -165,6 +172,10 @@ namespace PeekPoker.Interface
         #endregion
 
         #region Others
+        /// <summary>
+        /// Turn hex string to byte array
+        /// </summary>
+        /// <param name="text">The hex string</param>
         public static byte[] StringToByteArray(string text)
         {
             byte[] bytes = new byte[text.Length/2];
@@ -178,6 +189,11 @@ namespace PeekPoker.Interface
             return bytes;
         }
 
+        /// <summary>
+        /// Convert string to unsigned value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static uint Convert(string value)
         {
             //using Ternary operator
@@ -394,6 +410,12 @@ namespace PeekPoker.Interface
 
         #region float/double to byte array to float/double
 
+        /// <summary>
+        /// Convert floating point to byte array
+        /// </summary>
+        /// <param name="f"></param>
+        /// <param name="isBigEndian"></param>
+        /// <returns></returns>
         public static Byte[] FloatToByteArray(Single f, bool isBigEndian = true)
         {
             Byte[] buffer = BitConverter.GetBytes(f);
@@ -403,6 +425,12 @@ namespace PeekPoker.Interface
             return buffer;
         }
 
+        /// <summary>
+        /// Convert byte array to floating point aka single
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="isBigEndian"></param>
+        /// <returns></returns>
         public static Single BytesToSingle(Byte[] bytes, bool isBigEndian = true)
         {
             if (isBigEndian)
@@ -411,6 +439,11 @@ namespace PeekPoker.Interface
             return BitConverter.ToSingle(bytes, 0);
         }
 
+        /// <summary>
+        /// Convert floating point double to byte array
+        /// </summary>
+        /// <param name="d">The double</param>
+        /// <param name="isBigEndian">Endian type</param>
         public static Byte[] DoubleToByteArray(Double d, bool isBigEndian = true)
         {
             Byte[] buffer = BitConverter.GetBytes(d);
@@ -420,6 +453,11 @@ namespace PeekPoker.Interface
             return buffer;
         }
 
+        /// <summary>
+        /// Convert byte array to double
+        /// </summary>
+        /// <param name="bytes">The byte array</param>
+        /// <param name="isBigEndian">The endian type</param>
         public static Double BytesToDouble(Byte[] bytes, bool isBigEndian = true)
         {
             if (isBigEndian)

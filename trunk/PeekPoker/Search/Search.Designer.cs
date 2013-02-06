@@ -229,7 +229,7 @@ namespace PeekPoker.Search
             this.groupBox3.Size = new System.Drawing.Size(224, 227);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Remove If Not";
+            this.groupBox3.Text = "Next Search";
             // 
             // newValueTextBox
             // 
@@ -256,9 +256,9 @@ namespace PeekPoker.Search
             this.ifLessThanRadioButton.AutoSize = true;
             this.ifLessThanRadioButton.Location = new System.Drawing.Point(7, 128);
             this.ifLessThanRadioButton.Name = "ifLessThanRadioButton";
-            this.ifLessThanRadioButton.Size = new System.Drawing.Size(133, 19);
+            this.ifLessThanRadioButton.Size = new System.Drawing.Size(179, 19);
             this.ifLessThanRadioButton.TabIndex = 3;
-            this.ifLessThanRadioButton.Text = "If Less Than (Keep)";
+            this.ifLessThanRadioButton.Text = "If Less Than Current (Keep)";
             this.ifLessThanRadioButton.UseVisualStyleBackColor = true;
             // 
             // ifGreaterThanRadioButton
@@ -266,9 +266,9 @@ namespace PeekPoker.Search
             this.ifGreaterThanRadioButton.AutoSize = true;
             this.ifGreaterThanRadioButton.Location = new System.Drawing.Point(7, 102);
             this.ifGreaterThanRadioButton.Name = "ifGreaterThanRadioButton";
-            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(151, 19);
+            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(197, 19);
             this.ifGreaterThanRadioButton.TabIndex = 2;
-            this.ifGreaterThanRadioButton.Text = "If Greater Than (Keep)";
+            this.ifGreaterThanRadioButton.Text = "If Greater Than Current (Keep)";
             this.ifGreaterThanRadioButton.UseVisualStyleBackColor = true;
             // 
             // ifEqualsRadioButton
@@ -276,9 +276,9 @@ namespace PeekPoker.Search
             this.ifEqualsRadioButton.AutoSize = true;
             this.ifEqualsRadioButton.Location = new System.Drawing.Point(7, 45);
             this.ifEqualsRadioButton.Name = "ifEqualsRadioButton";
-            this.ifEqualsRadioButton.Size = new System.Drawing.Size(113, 19);
+            this.ifEqualsRadioButton.Size = new System.Drawing.Size(134, 19);
             this.ifEqualsRadioButton.TabIndex = 1;
-            this.ifEqualsRadioButton.Text = "If Equals (Keep)";
+            this.ifEqualsRadioButton.Text = "If Equals to: (Keep)";
             this.ifEqualsRadioButton.UseVisualStyleBackColor = true;
             // 
             // defaultRadioButton
