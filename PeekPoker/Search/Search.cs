@@ -135,6 +135,19 @@ namespace PeekPoker.Search
                             newSearchResults.Add(searchResultItem);
                         }
                     }
+                    else if (this.ifChangeRadioButton.Checked)
+                    {
+                        if (item.Value == retvalue)
+                        {
+                            SearchResults searchResultItem = new SearchResults
+                            {
+                                ID = item.ID,
+                                Offset = item.Offset,
+                                Value = retvalue
+                            };
+                            newSearchResults.Add(searchResultItem);
+                        } 
+                    }
                 }
                 if(this.defaultRadioButton.Checked)
                     this.ResultGridUpdate();

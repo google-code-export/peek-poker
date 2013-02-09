@@ -46,7 +46,7 @@ namespace PeekPoker.PluginInfo
             this.pluginListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pluginListView.Location = new System.Drawing.Point(0, 0);
             this.pluginListView.Name = "pluginListView";
-            this.pluginListView.Size = new System.Drawing.Size(707, 250);
+            this.pluginListView.Size = new System.Drawing.Size(678, 196);
             this.pluginListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.pluginListView.TabIndex = 3;
             this.pluginListView.UseCompatibleStateImageBehavior = false;
@@ -55,12 +55,12 @@ namespace PeekPoker.PluginInfo
             // nameColumn
             // 
             this.nameColumn.Text = "Name";
-            this.nameColumn.Width = 177;
+            this.nameColumn.Width = 166;
             // 
             // descriptionColumn
             // 
             this.descriptionColumn.Text = "Description";
-            this.descriptionColumn.Width = 289;
+            this.descriptionColumn.Width = 232;
             // 
             // authorColumn
             // 
@@ -70,14 +70,15 @@ namespace PeekPoker.PluginInfo
             // versionColumn
             // 
             this.versionColumn.Text = "Version";
-            this.versionColumn.Width = 100;
+            this.versionColumn.Width = 67;
             // 
             // PluginInfo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 250);
+            this.ClientSize = new System.Drawing.Size(678, 196);
             this.Controls.Add(this.pluginListView);
+            this.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "PluginInfo";

@@ -12,6 +12,7 @@ namespace PeekPoker.Plugin
     public class PluginService
     {
         private readonly List<AbstractPlugin> _pluginDatas = new List<AbstractPlugin>();
+        private readonly List<AbstractPlugin> _optionPluginDatas = new List<AbstractPlugin>();
 
         /// <summary>
         ///     Plug-in service constructor
@@ -47,6 +48,14 @@ namespace PeekPoker.Plugin
                 return _pluginDatas;
             }
         }
+        public List<AbstractPlugin> OptionPluginDatas
+        {
+            get
+            {
+                _optionPluginDatas.Sort((x, y) => String.CompareOrdinal(y.ApplicationName, x.ApplicationName));
+                return _optionPluginDatas;
+            }
+        }
 
         private void AddPlugin(string pluginPath)
         {
@@ -65,7 +74,10 @@ namespace PeekPoker.Plugin
                     AbstractPlugin pluginInterfaceInstance =
                         (AbstractPlugin)(Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
 
-                    _pluginDatas.Add(pluginInterfaceInstance);
+                    if (pluginInterfaceInstance.PluginType == PluginType.Game)
+                        _pluginDatas.Add(pluginInterfaceInstance);
+                    else
+                        _optionPluginDatas.Add(pluginInterfaceInstance);
                 }
             }
             catch (Exception e)
