@@ -18,4 +18,19 @@
         /// </summary>
         public string Value { get; set; }
     }
+
+    /// <summary>
+    /// The type of plugin being added to the application
+    /// </summary>
+    public enum PluginType
+    {
+        /// <summary>
+        /// A game editor or a realtime editor
+        /// </summary>
+        Game,
+        /// <summary>
+        /// A form program located on the selection option
+        /// </summary>
+        SelectionOption,
+    }
 }

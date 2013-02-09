@@ -41,6 +41,7 @@ namespace PeekPoker.Interface
             this.Author = "Unavailable";
             this.Version = "Unavailable";
             this.Icon = null;
+            this.PluginType = PluginType.Game;
         }
 
         //Values Set From peek poker Application
@@ -63,6 +64,10 @@ namespace PeekPoker.Interface
         /// Set or Get if the plugin loads as a MDI
         /// </summary>
         public bool IsMdiChild { get; set; }
+        /// <summary>
+        /// The Plugin type
+        /// </summary>
+        public PluginType PluginType { get; set; }
         #endregion
 
         #region IPlugin

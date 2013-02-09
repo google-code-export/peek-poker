@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using PeekPoker.About;
 using PeekPoker.Interface;
 using PeekPoker.Plugin;
@@ -37,7 +35,6 @@ namespace PeekPoker
             Process.GetCurrentProcess().Kill(); //Immediately stop the process
         }
 
-        //TODO: All config will be loaded at start up so this should be removed
         private void Form1Load(Object sender, EventArgs e)
         {
             try
@@ -114,6 +111,20 @@ namespace PeekPoker
                     plugin.APSetTextBoxText += this.SetTextBoxText;
                     plugin.Display(this);
                 }
+                foreach (AbstractPlugin plugin in _pluginService.OptionPluginDatas)
+                {
+                    if (plugin.ApplicationName != item.Name) continue;
+
+                    //Setting Values
+                    plugin.APRtm = this._rtm;
+                    plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
+                    plugin.APShowMessageBox += this.ShowMessageBox;
+                    plugin.APEnableControl += this.EnableControl;
+                    plugin.APUpdateProgressBar += this.UpdateProgressbar;
+                    plugin.APGetTextBoxText += this.GetTextBoxText;
+                    plugin.APSetTextBoxText += this.SetTextBoxText;
+                    plugin.Display(this);
+                }
             }
             catch (Exception ex)
             {
@@ -121,7 +132,6 @@ namespace PeekPoker
             }
         }
 
-        //TODO: Once user connect save the ip to config file
         //When you click on the connect button
         private void ConnectButtonClick(object sender, EventArgs e)
         {
@@ -171,15 +181,6 @@ namespace PeekPoker
             form.Show();
         }
 
-        private void converterButton_Click(object sender, EventArgs e)
-        {
-            Converter.Converter form = displayOutsideParentBox.Checked
-                                 ? new Converter.Converter()
-                                 : new Converter.Converter {MdiParent = this};
-            form.ShowMessageBox += ShowMessageBox;
-            form.Show();
-           }
-
         private void pluginInfoButton_Click(object sender, EventArgs e)
         {
             PluginInfo.PluginInfo form = displayOutsideParentBox.Checked
@@ -220,6 +221,30 @@ namespace PeekPoker
                     item.Click += PluginClickEventHandler;
                     pluginPanel.Controls.Add(item);
 
+                    //Plugin Details
+                    ListViewItem listviewItem = new ListViewItem(pluginData.ApplicationName);
+                    listviewItem.SubItems.Add(pluginData.Description);
+                    listviewItem.SubItems.Add(pluginData.Author);
+                    listviewItem.SubItems.Add(pluginData.Version);
+                    _listviewItem.Add(listviewItem);
+                }
+
+                //Load Options
+                foreach (AbstractPlugin pluginData in _pluginService.OptionPluginDatas)
+                {
+                    Button item = new Button
+                    {
+                        Name = pluginData.ApplicationName,
+                        Tag = pluginData.ApplicationName,
+                        Text = pluginData.ApplicationName,
+                        Size = new Size(187, 33),
+                        MaximumSize = new Size(187, 33),
+                        Dock = DockStyle.Top,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                    };
+                    item.Click += PluginClickEventHandler;
+                    mainGroupBox.Controls.Add(item);
+                    this.MinimumSize = new Size(this.MinimumSize.Width, this.MinimumSize.Height + 33);
                     //Plugin Details
                     ListViewItem listviewItem = new ListViewItem(pluginData.ApplicationName);
                     listviewItem.SubItems.Add(pluginData.Description);
