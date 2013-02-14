@@ -25,6 +25,7 @@ namespace PeekPoker.PeekNPoke
         {
             this.InitializeComponent();
             this._rtm = rtm;
+            this.ChangeNumericMaxMin();
         }
 
         #region Handlers
@@ -75,7 +76,14 @@ namespace PeekPoker.PeekNPoke
         {
             if (this.hexBox.ByteProvider != null)
             {
-                this.ChangedNumericValue(sender);
+                if (((Control)sender).Tag.ToString() == "text")
+                {
+                    this.ChangedNumericValue(sender, false);
+                }
+                else
+                {
+                    this.ChangedNumericValue(sender);
+                }
             }
         }
         private void FixTheAddresses(object sender, EventArgs e)
@@ -182,6 +190,7 @@ namespace PeekPoker.PeekNPoke
                     Functions.BytesToInt16(buffer.GetRange((int)this.hexBox.SelectionStart, 2).ToArray()) : 0;
                 this.NumericInt32.Value = (buffer.Count - this.hexBox.SelectionStart) > 3 ?
                     Functions.BytesToInt32(buffer.GetRange((int)this.hexBox.SelectionStart, 4).ToArray()) : 0;
+
                 this.NumericFloatTextBox.Clear();
                 float f = (buffer.Count - this.hexBox.SelectionStart) > 3
                     ? Functions.BytesToSingle(buffer.GetRange((int)this.hexBox.SelectionStart, 4).ToArray()) : 0;
@@ -205,47 +214,52 @@ namespace PeekPoker.PeekNPoke
             var address = Functions.BytesToInt32(prev);
             this.SelAddress.Text = string.Format((address + (int)this.hexBox.SelectionStart).ToString("X8"));
         }
-        private void ChangedNumericValue(object sender)
+        private void ChangedNumericValue(object sender, bool numfield = true)
         {
             if (this.hexBox.SelectionStart >= this.hexBox.ByteProvider.Bytes.Count) return;
-            var numeric = (NumericUpDown)sender;
-            switch (numeric.Name)
+            if (numfield)
             {
-                case "NumericInt8":
-                    if (this.isSigned.Checked)
-                    {
-                        Console.WriteLine(((sbyte)numeric.Value).ToString("X2"));
-                        this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart,
-                                                      Functions.HexToBytes(((sbyte)numeric.Value).ToString("X2"))[0]);
-                    }
-                    else
-                    {
-                        this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart,
-                                                      Convert.ToByte((byte)numeric.Value));
-                    }
-                    break;
-                case "NumericInt16":
-                    for (var i = 0; i < 2; i++)
-                    {
-                        this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart + i, this.isSigned.Checked
-                                                                                    ? Functions.Int16ToBytes((short)numeric.Value)[i]
-                                                                                    : Functions.UInt16ToBytes((ushort)numeric.Value)[i]);
-                    }
-                    break;
-                case "NumericInt32":
-                    for (var i = 0; i < 4; i++)
-                    {
-                        this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart + i, this.isSigned.Checked
-                                                                                    ? Functions.Int32ToBytes((int)numeric.Value)[i]
-                                                                                    : Functions.UInt32ToBytes((uint)numeric.Value)[i]);
-                    }
-                    break;
-                case "NumericFloat":
-                    for (var i = 0; i < 4; i++)
-                    {
-                        this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart + i, Functions.FloatToByteArray((int)numeric.Value)[i]);
-                    }
-                    break;
+                var numeric = (NumericUpDown)sender;
+                switch (numeric.Name)
+                {
+                    case "NumericInt8":
+                        if (this.isSigned.Checked)
+                        {
+                            Console.WriteLine(((sbyte)numeric.Value).ToString("X2"));
+                            this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart,
+                                                          Functions.HexToBytes(((sbyte)numeric.Value).ToString("X2"))[0]);
+                        }
+                        else
+                        {
+                            this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart,
+                                                          Convert.ToByte((byte)numeric.Value));
+                        }
+                        break;
+                    case "NumericInt16":
+                        for (var i = 0; i < 2; i++)
+                        {
+                            this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart + i, this.isSigned.Checked
+                                                                                        ? Functions.Int16ToBytes((short)numeric.Value)[i]
+                                                                                        : Functions.UInt16ToBytes((ushort)numeric.Value)[i]);
+                        }
+                        break;
+                    case "NumericInt32":
+                        for (var i = 0; i < 4; i++)
+                        {
+                            this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart + i, this.isSigned.Checked
+                                                                                        ? Functions.Int32ToBytes((int)numeric.Value)[i]
+                                                                                        : Functions.UInt32ToBytes((uint)numeric.Value)[i]);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                var textbox = (TextBox)sender;
+                for (var i = 0; i < 4; i++)
+                {
+                    this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart + i, Functions.FloatToByteArray(Convert.ToSingle(textbox.Text))[i]);
+                }
             }
             this.hexBox.Refresh();
         }

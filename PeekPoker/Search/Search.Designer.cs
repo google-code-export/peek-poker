@@ -28,6 +28,7 @@ namespace PeekPoker.Search
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.resultGrid = new System.Windows.Forms.DataGridView();
             this.resultRefreshButton = new System.Windows.Forms.Button();
@@ -49,10 +50,13 @@ namespace PeekPoker.Search
             this.ifGreaterThanRadioButton = new System.Windows.Forms.RadioButton();
             this.ifEqualsRadioButton = new System.Windows.Forms.RadioButton();
             this.defaultRadioButton = new System.Windows.Forms.RadioButton();
+            this.ResultsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.ResultsContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -73,6 +77,7 @@ namespace PeekPoker.Search
             this.resultGrid.BackgroundColor = System.Drawing.SystemColors.Control;
             this.resultGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.resultGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resultGrid.ContextMenuStrip = this.ResultsContextMenu;
             this.resultGrid.Location = new System.Drawing.Point(7, 14);
             this.resultGrid.MultiSelect = false;
             this.resultGrid.Name = "resultGrid";
@@ -118,7 +123,7 @@ namespace PeekPoker.Search
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(342, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 15);
+            this.label1.Size = new System.Drawing.Size(53, 15);
             this.label1.TabIndex = 21;
             this.label1.Text = "Total 0x:";
             // 
@@ -129,7 +134,7 @@ namespace PeekPoker.Search
             this.totalTextBoxText.Location = new System.Drawing.Point(405, 36);
             this.totalTextBoxText.Name = "totalTextBoxText";
             this.totalTextBoxText.ReadOnly = true;
-            this.totalTextBoxText.Size = new System.Drawing.Size(87, 22);
+            this.totalTextBoxText.Size = new System.Drawing.Size(87, 21);
             this.totalTextBoxText.TabIndex = 20;
             this.totalTextBoxText.Text = "C000FFFF";
             // 
@@ -138,7 +143,7 @@ namespace PeekPoker.Search
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(192, 39);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(70, 15);
+            this.label12.Size = new System.Drawing.Size(64, 15);
             this.label12.TabIndex = 19;
             this.label12.Text = "Length 0x:";
             // 
@@ -169,7 +174,7 @@ namespace PeekPoker.Search
             this.startRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.startRangeAddressTextBox.Location = new System.Drawing.Point(105, 36);
             this.startRangeAddressTextBox.Name = "startRangeAddressTextBox";
-            this.startRangeAddressTextBox.Size = new System.Drawing.Size(80, 22);
+            this.startRangeAddressTextBox.Size = new System.Drawing.Size(80, 21);
             this.startRangeAddressTextBox.TabIndex = 5;
             this.startRangeAddressTextBox.Text = "C0000000";
             this.startRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
@@ -179,7 +184,7 @@ namespace PeekPoker.Search
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(13, 72);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(89, 15);
+            this.label13.Size = new System.Drawing.Size(82, 15);
             this.label13.TabIndex = 10;
             this.label13.Text = "Search for 0x:";
             // 
@@ -188,7 +193,7 @@ namespace PeekPoker.Search
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(8, 39);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 15);
+            this.label6.Size = new System.Drawing.Size(85, 15);
             this.label6.TabIndex = 0;
             this.label6.Text = "Start Offset 0x:";
             // 
@@ -198,7 +203,7 @@ namespace PeekPoker.Search
             this.searchRangeValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchRangeValueTextBox.Location = new System.Drawing.Point(105, 66);
             this.searchRangeValueTextBox.Name = "searchRangeValueTextBox";
-            this.searchRangeValueTextBox.Size = new System.Drawing.Size(383, 22);
+            this.searchRangeValueTextBox.Size = new System.Drawing.Size(383, 21);
             this.searchRangeValueTextBox.TabIndex = 8;
             this.searchRangeValueTextBox.Text = "FF00FF00FF00";
             this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchRangeValueTextBoxKeyUp);
@@ -210,7 +215,7 @@ namespace PeekPoker.Search
             this.lengthRangeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.lengthRangeAddressTextBox.Location = new System.Drawing.Point(266, 36);
             this.lengthRangeAddressTextBox.Name = "lengthRangeAddressTextBox";
-            this.lengthRangeAddressTextBox.Size = new System.Drawing.Size(70, 22);
+            this.lengthRangeAddressTextBox.Size = new System.Drawing.Size(70, 21);
             this.lengthRangeAddressTextBox.TabIndex = 7;
             this.lengthRangeAddressTextBox.Text = "FFFF";
             this.lengthRangeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
@@ -237,7 +242,7 @@ namespace PeekPoker.Search
             this.newValueTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.newValueTextBox.Location = new System.Drawing.Point(7, 72);
             this.newValueTextBox.Name = "newValueTextBox";
-            this.newValueTextBox.Size = new System.Drawing.Size(201, 22);
+            this.newValueTextBox.Size = new System.Drawing.Size(201, 21);
             this.newValueTextBox.TabIndex = 9;
             this.newValueTextBox.Text = "FF00FF00FF00";
             // 
@@ -246,7 +251,7 @@ namespace PeekPoker.Search
             this.ifChangeRadioButton.AutoSize = true;
             this.ifChangeRadioButton.Location = new System.Drawing.Point(7, 155);
             this.ifChangeRadioButton.Name = "ifChangeRadioButton";
-            this.ifChangeRadioButton.Size = new System.Drawing.Size(216, 19);
+            this.ifChangeRadioButton.Size = new System.Drawing.Size(206, 19);
             this.ifChangeRadioButton.TabIndex = 4;
             this.ifChangeRadioButton.Text = "If Change (Unknown Value Keep)";
             this.ifChangeRadioButton.UseVisualStyleBackColor = true;
@@ -256,7 +261,7 @@ namespace PeekPoker.Search
             this.ifLessThanRadioButton.AutoSize = true;
             this.ifLessThanRadioButton.Location = new System.Drawing.Point(7, 128);
             this.ifLessThanRadioButton.Name = "ifLessThanRadioButton";
-            this.ifLessThanRadioButton.Size = new System.Drawing.Size(179, 19);
+            this.ifLessThanRadioButton.Size = new System.Drawing.Size(174, 19);
             this.ifLessThanRadioButton.TabIndex = 3;
             this.ifLessThanRadioButton.Text = "If Less Than Current (Keep)";
             this.ifLessThanRadioButton.UseVisualStyleBackColor = true;
@@ -266,7 +271,7 @@ namespace PeekPoker.Search
             this.ifGreaterThanRadioButton.AutoSize = true;
             this.ifGreaterThanRadioButton.Location = new System.Drawing.Point(7, 102);
             this.ifGreaterThanRadioButton.Name = "ifGreaterThanRadioButton";
-            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(197, 19);
+            this.ifGreaterThanRadioButton.Size = new System.Drawing.Size(189, 19);
             this.ifGreaterThanRadioButton.TabIndex = 2;
             this.ifGreaterThanRadioButton.Text = "If Greater Than Current (Keep)";
             this.ifGreaterThanRadioButton.UseVisualStyleBackColor = true;
@@ -276,7 +281,7 @@ namespace PeekPoker.Search
             this.ifEqualsRadioButton.AutoSize = true;
             this.ifEqualsRadioButton.Location = new System.Drawing.Point(7, 45);
             this.ifEqualsRadioButton.Name = "ifEqualsRadioButton";
-            this.ifEqualsRadioButton.Size = new System.Drawing.Size(134, 19);
+            this.ifEqualsRadioButton.Size = new System.Drawing.Size(128, 19);
             this.ifEqualsRadioButton.TabIndex = 1;
             this.ifEqualsRadioButton.Text = "If Equals to: (Keep)";
             this.ifEqualsRadioButton.UseVisualStyleBackColor = true;
@@ -287,11 +292,25 @@ namespace PeekPoker.Search
             this.defaultRadioButton.Checked = true;
             this.defaultRadioButton.Location = new System.Drawing.Point(7, 18);
             this.defaultRadioButton.Name = "defaultRadioButton";
-            this.defaultRadioButton.Size = new System.Drawing.Size(168, 19);
+            this.defaultRadioButton.Size = new System.Drawing.Size(164, 19);
             this.defaultRadioButton.TabIndex = 0;
             this.defaultRadioButton.TabStop = true;
             this.defaultRadioButton.Text = "Default (Original Refresh)";
             this.defaultRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ResultsContextMenu
+            // 
+            this.ResultsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CCopy});
+            this.ResultsContextMenu.Name = "ResultsContextMenu";
+            this.ResultsContextMenu.Size = new System.Drawing.Size(103, 26);
+            // 
+            // CCopy
+            // 
+            this.CCopy.Name = "CCopy";
+            this.CCopy.Size = new System.Drawing.Size(102, 22);
+            this.CCopy.Text = "Copy";
+            this.CCopy.Click += new System.EventHandler(this.ResultCopy);
             // 
             // Search
             // 
@@ -301,7 +320,7 @@ namespace PeekPoker.Search
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Font = new System.Drawing.Font("Lucida Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Search";
@@ -312,6 +331,7 @@ namespace PeekPoker.Search
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.ResultsContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -339,5 +359,7 @@ namespace PeekPoker.Search
         private System.Windows.Forms.RadioButton defaultRadioButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox totalTextBoxText;
+        private System.Windows.Forms.ContextMenuStrip ResultsContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem CCopy;
     }
 }
