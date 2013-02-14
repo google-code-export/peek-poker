@@ -304,5 +304,10 @@ namespace PeekPoker.Search
                 e.SuppressKeyPress = true;
             }
         }
+
+        private void ResultCopy(object sender, EventArgs e)
+        {
+            Clipboard.SetText(string.Format("" + this.resultGrid.Rows[this.resultGrid.SelectedRows[0].Index].Cells[1].Value));
+        }
     }
 }
