@@ -307,7 +307,25 @@ namespace PeekPoker.Search
 
         private void ResultCopy(object sender, EventArgs e)
         {
+            if (this.resultGrid.Rows.Count == 0)
+                return;
             Clipboard.SetText(string.Format("" + this.resultGrid.Rows[this.resultGrid.SelectedRows[0].Index].Cells[1].Value));
+        }
+
+        private void searchRangeValueTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char) 13)
+            {
+                try
+                {
+                    Thread oThread = new Thread(this.SearchRange);
+                    oThread.Start();
+                }
+                catch (Exception ex)
+                {
+                    this.ShowMessageBox(ex.Message, string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

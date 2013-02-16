@@ -31,6 +31,8 @@ namespace PeekPoker.Search
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.resultGrid = new System.Windows.Forms.DataGridView();
+            this.ResultsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.resultRefreshButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,13 +52,11 @@ namespace PeekPoker.Search
             this.ifGreaterThanRadioButton = new System.Windows.Forms.RadioButton();
             this.ifEqualsRadioButton = new System.Windows.Forms.RadioButton();
             this.defaultRadioButton = new System.Windows.Forms.RadioButton();
-            this.ResultsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
+            this.ResultsContextMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.ResultsContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -88,6 +88,20 @@ namespace PeekPoker.Search
             this.resultGrid.TabIndex = 14;
             this.resultGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResultGridCellValueChanged);
             this.resultGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.resultGrid_KeyDown);
+            // 
+            // ResultsContextMenu
+            // 
+            this.ResultsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CCopy});
+            this.ResultsContextMenu.Name = "ResultsContextMenu";
+            this.ResultsContextMenu.Size = new System.Drawing.Size(103, 26);
+            // 
+            // CCopy
+            // 
+            this.CCopy.Name = "CCopy";
+            this.CCopy.Size = new System.Drawing.Size(102, 22);
+            this.CCopy.Text = "Copy";
+            this.CCopy.Click += new System.EventHandler(this.ResultCopy);
             // 
             // resultRefreshButton
             // 
@@ -206,6 +220,7 @@ namespace PeekPoker.Search
             this.searchRangeValueTextBox.Size = new System.Drawing.Size(383, 21);
             this.searchRangeValueTextBox.TabIndex = 8;
             this.searchRangeValueTextBox.Text = "FF00FF00FF00";
+            this.searchRangeValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchRangeValueTextBox_KeyPress);
             this.searchRangeValueTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchRangeValueTextBoxKeyUp);
             this.searchRangeValueTextBox.Leave += new System.EventHandler(this.SearchRangeValueTextBoxLeave);
             // 
@@ -298,20 +313,6 @@ namespace PeekPoker.Search
             this.defaultRadioButton.Text = "Default (Original Refresh)";
             this.defaultRadioButton.UseVisualStyleBackColor = true;
             // 
-            // ResultsContextMenu
-            // 
-            this.ResultsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CCopy});
-            this.ResultsContextMenu.Name = "ResultsContextMenu";
-            this.ResultsContextMenu.Size = new System.Drawing.Size(103, 26);
-            // 
-            // CCopy
-            // 
-            this.CCopy.Name = "CCopy";
-            this.CCopy.Size = new System.Drawing.Size(102, 22);
-            this.CCopy.Text = "Copy";
-            this.CCopy.Click += new System.EventHandler(this.ResultCopy);
-            // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -327,11 +328,11 @@ namespace PeekPoker.Search
             this.Text = "Search";
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).EndInit();
+            this.ResultsContextMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.ResultsContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

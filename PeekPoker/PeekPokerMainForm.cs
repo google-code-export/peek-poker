@@ -138,6 +138,12 @@ namespace PeekPoker
             ThreadPool.QueueUserWorkItem(Connect);
         }
 
+        private void ipAddressTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+                ThreadPool.QueueUserWorkItem(Connect);
+        }
+
         //When you click on the www.360haven.com
         private void ToolStripStatusLabel2Click(object sender, EventArgs e)
         {
