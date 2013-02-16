@@ -205,6 +205,7 @@
             this.ipAddressTextBox.Name = "ipAddressTextBox";
             this.ipAddressTextBox.Size = new System.Drawing.Size(187, 22);
             this.ipAddressTextBox.TabIndex = 1;
+            this.ipAddressTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ipAddressTextBox_KeyPress);
             // 
             // mainGroupBox
             // 

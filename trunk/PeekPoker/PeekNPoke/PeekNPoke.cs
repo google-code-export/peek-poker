@@ -185,9 +185,9 @@ namespace PeekPoker.PeekNPoke
             if (this.isSigned.Checked)
             {
                 this.NumericInt8.Value = (buffer.Count - this.hexBox.SelectionStart) > 0 ?
-                    Functions.ByteToSByte(this.hexBox.ByteProvider.ReadByte(this.hexBox.SelectionStart)) : 0;
+                    Functions.ByteToSByte(this.hexBox.ByteProvider.ReadByte(this.hexBox.SelectionStart)) : (short)0;
                 this.NumericInt16.Value = (buffer.Count - this.hexBox.SelectionStart) > 1 ?
-                    Functions.BytesToInt16(buffer.GetRange((int)this.hexBox.SelectionStart, 2).ToArray()) : 0;
+                    Functions.BytesToInt16(buffer.GetRange((int)this.hexBox.SelectionStart, 2).ToArray()) : (short)0;
                 this.NumericInt32.Value = (buffer.Count - this.hexBox.SelectionStart) > 3 ?
                     Functions.BytesToInt32(buffer.GetRange((int)this.hexBox.SelectionStart, 4).ToArray()) : 0;
 
@@ -199,9 +199,9 @@ namespace PeekPoker.PeekNPoke
             else
             {
                 this.NumericInt8.Value = (buffer.Count - this.hexBox.SelectionStart) > 0 ?
-                    buffer[(int)this.hexBox.SelectionStart] : 0;
+                    buffer[(int)this.hexBox.SelectionStart] : (byte)0;
                 this.NumericInt16.Value = (buffer.Count - this.hexBox.SelectionStart) > 1 ?
-                    Functions.BytesToUInt16(buffer.GetRange((int)this.hexBox.SelectionStart, 2).ToArray()) : 0;
+                    Functions.BytesToUInt16(buffer.GetRange((int)this.hexBox.SelectionStart, 2).ToArray()) : (ushort)0;
                 this.NumericInt32.Value = (buffer.Count - this.hexBox.SelectionStart) > 3 ?
                     Functions.BytesToUInt32(buffer.GetRange((int)this.hexBox.SelectionStart, 4).ToArray()) : 0;
                 
