@@ -87,22 +87,25 @@ namespace PeekPoker.PeekNPoke
             }
         }
         private void FixTheAddresses(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!Functions.IsHex(peekPokeAddressTextBox.Text))
+        {var Sender = sender as TextBox;
+            if (Sender != null)
+                try
                 {
-                    if (!this.peekPokeAddressTextBox.Text.Equals(""))
-                        this.peekPokeAddressTextBox.Text = uint.Parse(this.peekPokeAddressTextBox.Text).ToString("X");
+                    if (!Functions.IsHex(Sender.Text))
+                    {
+                        if (Sender.Text.ToUpper().StartsWith("0X"))
+                            Sender.Text = (Sender.Text.ToUpper().Substring(2));
+                      else
+                        {
+                            ShowMessageBox("Input must be hex.",null,MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+
+                    }
                 }
-                if (Functions.IsHex(peekLengthTextBox.Text)) return;
-                if (!this.peekLengthTextBox.Text.Equals(""))
-                    this.peekLengthTextBox.Text = uint.Parse(this.peekLengthTextBox.Text).ToString("X");
-            }
-            catch (Exception ex)
-            {
-                this.ShowMessageBox(ex.Message,"PeekNPoke",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
+                catch (Exception ex)
+                {
+                    this.ShowMessageBox(ex.Message, "PeekNPoke", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            
         }
         private void PeekButtonClick(object sender, EventArgs e)
         {
@@ -385,5 +388,5 @@ namespace PeekPoker.PeekNPoke
             }
         }
         #endregion
-    }
+        }
 }
