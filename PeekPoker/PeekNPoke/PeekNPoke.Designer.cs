@@ -35,6 +35,7 @@ namespace PeekPoker.PeekNPoke
             this.freezeButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.LabelFloat = new System.Windows.Forms.Label();
+            this.NumericFloatTextBox = new System.Windows.Forms.TextBox();
             this.isSigned = new System.Windows.Forms.CheckBox();
             this.LabelInt8 = new System.Windows.Forms.Label();
             this.LabelInt16 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@ namespace PeekPoker.PeekNPoke
             this.NumericInt8 = new System.Windows.Forms.NumericUpDown();
             this.NumericInt16 = new System.Windows.Forms.NumericUpDown();
             this.LabelInt32 = new System.Windows.Forms.Label();
-            this.NumericFloatTextBox = new System.Windows.Forms.TextBox();
             this.labelSelAddress = new System.Windows.Forms.Label();
             this.SelAddress = new System.Windows.Forms.TextBox();
             this.newPeekButton = new System.Windows.Forms.Button();
@@ -141,12 +141,23 @@ namespace PeekPoker.PeekNPoke
             this.LabelFloat.TabIndex = 19;
             this.LabelFloat.Text = "Float";
             // 
+            // NumericFloatTextBox
+            // 
+            this.NumericFloatTextBox.Location = new System.Drawing.Point(63, 155);
+            this.NumericFloatTextBox.Name = "NumericFloatTextBox";
+            this.NumericFloatTextBox.Size = new System.Drawing.Size(109, 21);
+            this.NumericFloatTextBox.TabIndex = 20;
+            this.NumericFloatTextBox.Tag = "text";
+            this.NumericFloatTextBox.Text = "0";
+            this.NumericFloatTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumericFloatTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
+            // 
             // isSigned
             // 
             this.isSigned.AutoSize = true;
             this.isSigned.Location = new System.Drawing.Point(39, 21);
             this.isSigned.Name = "isSigned";
-            this.isSigned.Size = new System.Drawing.Size(105, 19);
+            this.isSigned.Size = new System.Drawing.Size(94, 17);
             this.isSigned.TabIndex = 16;
             this.isSigned.Text = "Signed Values";
             this.isSigned.UseVisualStyleBackColor = true;
@@ -237,17 +248,6 @@ namespace PeekPoker.PeekNPoke
             this.LabelInt32.TabIndex = 17;
             this.LabelInt32.Text = "(U)Int32";
             // 
-            // NumericFloatTextBox
-            // 
-            this.NumericFloatTextBox.Location = new System.Drawing.Point(63, 155);
-            this.NumericFloatTextBox.Name = "NumericFloatTextBox";
-            this.NumericFloatTextBox.Size = new System.Drawing.Size(109, 21);
-            this.NumericFloatTextBox.TabIndex = 20;
-            this.NumericFloatTextBox.Tag = "text";
-            this.NumericFloatTextBox.Text = "0";
-            this.NumericFloatTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.NumericFloatTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
-            // 
             // labelSelAddress
             // 
             this.labelSelAddress.AutoSize = true;
@@ -329,10 +329,12 @@ namespace PeekPoker.PeekNPoke
             this.peekPokeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.peekPokeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.peekPokeAddressTextBox.Location = new System.Drawing.Point(96, 12);
+            this.peekPokeAddressTextBox.MaxLength = 10;
             this.peekPokeAddressTextBox.Name = "peekPokeAddressTextBox";
             this.peekPokeAddressTextBox.Size = new System.Drawing.Size(83, 21);
             this.peekPokeAddressTextBox.TabIndex = 40;
             this.peekPokeAddressTextBox.Text = "C0000000";
+            this.peekPokeAddressTextBox.WordWrap = false;
             this.peekPokeAddressTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // label7
@@ -382,7 +384,7 @@ namespace PeekPoker.PeekNPoke
             this.fillCheckBox.AutoSize = true;
             this.fillCheckBox.Location = new System.Drawing.Point(13, 23);
             this.fillCheckBox.Name = "fillCheckBox";
-            this.fillCheckBox.Size = new System.Drawing.Size(117, 19);
+            this.fillCheckBox.Size = new System.Drawing.Size(105, 17);
             this.fillCheckBox.TabIndex = 1;
             this.fillCheckBox.Text = "Memory With 0x:";
             this.fillCheckBox.UseVisualStyleBackColor = true;
