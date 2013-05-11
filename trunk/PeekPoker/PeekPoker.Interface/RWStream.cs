@@ -157,7 +157,9 @@ namespace PeekPoker.Interface
             try
             {
                 if (Position == Length)
+                {
                     throw new Exception("Cannot move position past file size");
+                }
                 if (length == 0)
                     return new byte[0];
                 byte[] buffer = new byte[length];
@@ -225,7 +227,7 @@ namespace PeekPoker.Interface
                     results.ID = x.ToString();
                     positions.Add(results);
 
-                    if (positions.Count == 1000) return positions;
+                    //if (positions.Count == 1000) return positions;
                     if (_stopSearch) return positions;
                     i = IndexOfInt(buffer, pattern[0], i + pattern.Length);
                     x++;
