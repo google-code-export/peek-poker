@@ -76,14 +76,14 @@ namespace PeekPoker.PeekNPoke
         {
             if (this.hexBox.ByteProvider != null)
             {
-                if (((Control)sender).Tag.ToString() == "text")
-                {
-                    this.ChangedNumericValue(sender, false);
-                }
-                else
-                {
-                    this.ChangedNumericValue(sender);
-                }
+                this.ChangedNumericValue(sender);
+            }
+        }
+        private void Numeric_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.hexBox.ByteProvider != null)
+            {
+                this.ChangedNumericValue(sender);
             }
         }
         private void FixTheAddresses(object sender, EventArgs e)
@@ -217,12 +217,12 @@ namespace PeekPoker.PeekNPoke
             var address = Functions.BytesToInt32(prev);
             this.SelAddress.Text = string.Format((address + (int)this.hexBox.SelectionStart).ToString("X8"));
         }
-        private void ChangedNumericValue(object sender, bool numfield = true)
+        private void ChangedNumericValue(object numfield)
         {
             if (this.hexBox.SelectionStart >= this.hexBox.ByteProvider.Bytes.Count) return;
-            if (numfield)
+            if (numfield.GetType() == typeof(NumericUpDown))
             {
-                var numeric = (NumericUpDown)sender;
+                var numeric = (NumericUpDown)numfield;
                 switch (numeric.Name)
                 {
                     case "NumericInt8":
@@ -258,7 +258,7 @@ namespace PeekPoker.PeekNPoke
             }
             else
             {
-                var textbox = (TextBox)sender;
+                var textbox = (TextBox)numfield;
                 for (var i = 0; i < 4; i++)
                 {
                     this.hexBox.ByteProvider.WriteByte(this.hexBox.SelectionStart + i, Functions.FloatToByteArray(Convert.ToSingle(textbox.Text))[i]);
