@@ -15,13 +15,20 @@ namespace PeekPoker.Search
         public event GetTextBoxTextHandler GetTextBoxText;
 
         private BindingList<SearchResults> _searchResult = new BindingList<SearchResults>();
+        private BindingList<SearchResults> _searchLimitedResult = new BindingList<SearchResults>();
         private readonly RealTimeMemory _rtm;
+        private RwStream _readWriter;
 
+        // temporary position and length for refreshing purpose
+        private string _tempLength;
+        private string _tempOffset;
+        private string _id;
+        private string _length;
         public Search(RealTimeMemory rtm)
         {
             this.InitializeComponent();
             this._rtm = rtm;
-            this.resultGrid.DataSource = this._searchResult;
+            this.resultGrid.DataSource = this._searchLimitedResult;
         }
 
         //Control changes
@@ -30,13 +37,15 @@ namespace PeekPoker.Search
             if (this.resultGrid.InvokeRequired)
                 this.resultGrid.Invoke((MethodInvoker)(() => this.GridRowColours(value)));
             else
-                this.resultGrid.Rows[value - 1].DefaultCellStyle.ForeColor = Color.Red;
+                this.resultGrid.Rows[value].DefaultCellStyle.ForeColor = Color.Red;
         }
 
         private void SearchRangeButtonClick(object sender, EventArgs e)
         {
             try
             {
+                this._tempLength = this.GetTextBoxText(this.lengthRangeAddressTextBox);
+                this._tempOffset = this.GetTextBoxText(this.startRangeAddressTextBox);
                 Thread oThread = new Thread(this.SearchRange);
                 oThread.Start();
             }
@@ -52,26 +61,71 @@ namespace PeekPoker.Search
             {
                 this.EnableControl(this.resultRefreshButton, false);
                 BindingList<SearchResults> newSearchResults = new BindingList<SearchResults>();
+                BindingList<SearchResults> limitSearchResults = new BindingList<SearchResults>();
                 var value = 0;
+                string retvalue = "";
+
+                if (this._searchResult.Count > 500)
+                {
+                    var results = this._rtm.Peek(this._tempOffset, this._tempLength, this._tempOffset, this._tempLength);
+
+                    this._readWriter = new RwStream();
+                    try
+                    {
+                        byte[] _buffer = Functions.HexToBytes(results);
+                        this._readWriter.WriteBytes(_buffer, 0, _buffer.Length);
+
+                        this._readWriter.Flush();
+                        this._readWriter.Position = 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                    
+                }
+                
                 foreach (var item in this._searchResult)
                 {
                     this.UpdateProgressbar(0, this._searchResult.Count, value, "Refreshing...");
-                    value++;
 
                     var length = (item.Value.Length / 2).ToString("X");
-                    var retvalue = this._rtm.Peek(item.Offset, length, item.Offset, length);
+                    if (this._searchResult.Count > 500)
+                    {
+                        //var retvalue = this._rtm.
+                        uint pos = uint.Parse(item.Offset, System.Globalization.NumberStyles.AllowHexSpecifier);
+                        uint spos = uint.Parse(this._tempOffset, System.Globalization.NumberStyles.AllowHexSpecifier);
+                        this._readWriter.Position = (pos - spos);
+                        byte[] _value = this._readWriter.ReadBytes((item.Value.Length / 2));
+                        retvalue = Functions.ToHexString(_value);
+                        
+                    }
+                    else
+                    {
+                        retvalue = this._rtm.Peek(item.Offset, length, item.Offset, length);
+                    }
+
+                    uint currentResults;
+                    uint newResult;
+
+                    if (!uint.TryParse(item.Value, out currentResults))
+                        throw new Exception("Invalid Search Value this function only works for Unsigned Integers.");
+                    uint.TryParse(retvalue, out newResult);
 
                     //===================================================
                     //Default
                     if(this.defaultRadioButton.Checked)
                     {
                         if (item.Value == retvalue) continue; //if value hasn't change continue for each loop
-                        this.GridRowColours(value);
+                        if (value < 1000)
+                        {
+                            this.GridRowColours(value);
+                        }
                         item.Value = retvalue;
                     }
                     else if (this.ifEqualsRadioButton.Checked)
                     {
-                        if (retvalue == this.newValueTextBox.Text)
+                        if (newResult == currentResults)
                         {
                             SearchResults searchResultItem = new SearchResults
                                                                  {
@@ -84,13 +138,6 @@ namespace PeekPoker.Search
                     }
                     else if (this.ifGreaterThanRadioButton.Checked)
                     {
-                        uint currentResults;
-                        uint newResult;
-
-                        if(!uint.TryParse(this.searchRangeValueTextBox.Text, out currentResults))
-                            throw new Exception("Invalid Search Value this function only works for Unsigned Integers.");
-                        uint.TryParse(retvalue, out newResult);
-
                         if (newResult > currentResults)
                         {
                             SearchResults searchResultItem = new SearchResults
@@ -104,13 +151,6 @@ namespace PeekPoker.Search
                     }
                     else if (this.ifLessThanRadioButton.Checked)
                     {
-                        uint currentResults;
-                        uint newResult;
-
-                        if (!uint.TryParse(this.searchRangeValueTextBox.Text, out currentResults))
-                            throw new Exception("Invalid Search Value this function only works for Unsigned Integers.");
-                        uint.TryParse(retvalue, out newResult);
-
                         if (newResult < currentResults)
                         {
                             SearchResults searchResultItem = new SearchResults
@@ -124,7 +164,7 @@ namespace PeekPoker.Search
                     }
                     else if (this.ifLessThanRadioButton.Checked)
                     {
-                        if (retvalue != this.newValueTextBox.Text)
+                        if (newResult != currentResults)
                         {
                             SearchResults searchResultItem = new SearchResults
                             {
@@ -137,7 +177,7 @@ namespace PeekPoker.Search
                     }
                     else if (this.ifChangeRadioButton.Checked)
                     {
-                        if (item.Value == retvalue)
+                        if (item.Value != retvalue)
                         {
                             SearchResults searchResultItem = new SearchResults
                             {
@@ -148,13 +188,28 @@ namespace PeekPoker.Search
                             newSearchResults.Add(searchResultItem);
                         } 
                     }
+
+                    value++;
                 }
-                if(this.defaultRadioButton.Checked)
+                if (this.defaultRadioButton.Checked)
+                {
                     this.ResultGridUpdate();
+                    this.ResultCountBoxUpdate();
+                }
                 else
                 {
                     this._searchResult = newSearchResults;
+                    for (int i = 0; i < this._searchResult.Count; i++)
+                    {
+                        if (i >= 1000)
+                            break;
+
+                        limitSearchResults.Add(this._searchResult[i]);
+                    }
+
+                    this._searchLimitedResult = limitSearchResults;
                     this.ResultGridUpdate();
+                    this.ResultCountBoxUpdate();
                 }
                 this.UpdateProgressbar(0, 100, 0, "idle");
             }
@@ -222,8 +277,20 @@ namespace PeekPoker.Search
                     this.ShowMessageBox(string.Format("No result/s found!"), string.Format("Peek Poker"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return; //We don't want it to continue
                 }
+
                 this._searchResult = results;
+                BindingList<SearchResults> newLimitResult = new BindingList<SearchResults>();
+
+                for (int i = 0; i < this._searchResult.Count; i++)
+                {
+                    if (i >= 1000)
+                        break;
+
+                    newLimitResult.Add(this._searchResult[i]);
+                }
+                this._searchLimitedResult = newLimitResult;
                 this.ResultGridUpdate();
+                this.ResultCountBoxUpdate();
             }
             catch (Exception e)
             {
@@ -254,8 +321,21 @@ namespace PeekPoker.Search
                 this.resultGrid.Invoke((MethodInvoker)(this.ResultGridUpdate));
             else
             {
-                this.resultGrid.DataSource = this._searchResult;
+                this.resultGrid.DataSource = this._searchLimitedResult;
                 this.resultGrid.Refresh();
+            }
+        }
+        //ResultCountBox
+        private void ResultCountBoxUpdate()
+        {
+            //IList or represents a collection of objects(String)
+            if (this.ResultCountBox.InvokeRequired)
+                //lambda expression empty delegate that calls a recursive function if InvokeRequired
+                this.ResultCountBox.Invoke((MethodInvoker)(this.ResultCountBoxUpdate));
+            else
+            {
+                this.ResultCountBox.Text = this._searchResult.Count.ToString();
+                this.ResultCountBox.Refresh();
             }
         }
 

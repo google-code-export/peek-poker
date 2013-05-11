@@ -52,6 +52,8 @@ namespace PeekPoker.Search
             this.ifGreaterThanRadioButton = new System.Windows.Forms.RadioButton();
             this.ifEqualsRadioButton = new System.Windows.Forms.RadioButton();
             this.defaultRadioButton = new System.Windows.Forms.RadioButton();
+            this.Results_Label = new System.Windows.Forms.Label();
+            this.ResultCountBox = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultGrid)).BeginInit();
             this.ResultsContextMenu.SuspendLayout();
@@ -62,7 +64,7 @@ namespace PeekPoker.Search
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.resultGrid);
-            this.groupBox2.Location = new System.Drawing.Point(14, 127);
+            this.groupBox2.Location = new System.Drawing.Point(14, 157);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(397, 227);
             this.groupBox2.TabIndex = 21;
@@ -244,7 +246,7 @@ namespace PeekPoker.Search
             this.groupBox3.Controls.Add(this.ifGreaterThanRadioButton);
             this.groupBox3.Controls.Add(this.ifEqualsRadioButton);
             this.groupBox3.Controls.Add(this.defaultRadioButton);
-            this.groupBox3.Location = new System.Drawing.Point(419, 127);
+            this.groupBox3.Location = new System.Drawing.Point(419, 157);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(224, 227);
             this.groupBox3.TabIndex = 22;
@@ -313,11 +315,33 @@ namespace PeekPoker.Search
             this.defaultRadioButton.Text = "Default (Original Refresh)";
             this.defaultRadioButton.UseVisualStyleBackColor = true;
             // 
+            // Results_Label
+            // 
+            this.Results_Label.AutoSize = true;
+            this.Results_Label.Location = new System.Drawing.Point(22, 133);
+            this.Results_Label.Name = "Results_Label";
+            this.Results_Label.Size = new System.Drawing.Size(51, 15);
+            this.Results_Label.TabIndex = 23;
+            this.Results_Label.Text = "Results:";
+            // 
+            // ResultCountBox
+            // 
+            this.ResultCountBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ResultCountBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ResultCountBox.Location = new System.Drawing.Point(79, 130);
+            this.ResultCountBox.Name = "ResultCountBox";
+            this.ResultCountBox.ReadOnly = true;
+            this.ResultCountBox.Size = new System.Drawing.Size(564, 21);
+            this.ResultCountBox.TabIndex = 22;
+            this.ResultCountBox.Text = "0";
+            // 
             // Search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 363);
+            this.ClientSize = new System.Drawing.Size(649, 390);
+            this.Controls.Add(this.ResultCountBox);
+            this.Controls.Add(this.Results_Label);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -334,6 +358,7 @@ namespace PeekPoker.Search
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -362,5 +387,7 @@ namespace PeekPoker.Search
         private System.Windows.Forms.TextBox totalTextBoxText;
         private System.Windows.Forms.ContextMenuStrip ResultsContextMenu;
         private System.Windows.Forms.ToolStripMenuItem CCopy;
+        private System.Windows.Forms.Label Results_Label;
+        private System.Windows.Forms.TextBox ResultCountBox;
     }
 }

@@ -163,11 +163,12 @@ namespace PeekPoker.Interface
                 byte[] value = readWriter.ReadBytes(peekSize);
                 return Functions.ToHexString(value);
             }
-            catch (SocketException)
+            catch (SocketException se)
             {
                 readWriter.Flush();
                 readWriter.Position = total;
                 byte[] value = readWriter.ReadBytes(peekSize);
+                throw new Exception(se.Message);
                 return Functions.ToHexString(value);
             }
             catch (Exception ex)
