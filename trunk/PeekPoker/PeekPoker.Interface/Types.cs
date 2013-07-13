@@ -9,10 +9,12 @@
         /// The ID
         /// </summary>
         public string ID { get; set; }
+
         /// <summary>
         /// The Offset
         /// </summary>
         public string Offset { get; set; }
+
         /// <summary>
         /// The value
         /// </summary>
@@ -28,6 +30,7 @@
         /// A game editor or a realtime editor
         /// </summary>
         Game,
+
         /// <summary>
         /// A form program located on the selection option
         /// </summary>

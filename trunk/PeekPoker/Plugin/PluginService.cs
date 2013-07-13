@@ -11,8 +11,8 @@ namespace PeekPoker.Plugin
     /// </summary>
     public class PluginService
     {
-        private readonly List<AbstractPlugin> _pluginDatas = new List<AbstractPlugin>();
         private readonly List<AbstractPlugin> _optionPluginDatas = new List<AbstractPlugin>();
+        private readonly List<AbstractPlugin> _pluginDatas = new List<AbstractPlugin>();
 
         /// <summary>
         ///     Plug-in service constructor
@@ -24,7 +24,7 @@ namespace PeekPoker.Plugin
             {
                 foreach (string plugin in Directory.GetFiles(folderPath))
                 {
-                    FileInfo file = new FileInfo(plugin);
+                    var file = new FileInfo(plugin);
                     if (file.Extension.Equals(".dll"))
                     {
                         AddPlugin(plugin);
@@ -48,6 +48,7 @@ namespace PeekPoker.Plugin
                 return _pluginDatas;
             }
         }
+
         public List<AbstractPlugin> OptionPluginDatas
         {
             get
@@ -68,11 +69,12 @@ namespace PeekPoker.Plugin
                     if (!pluginType.IsPublic) continue; //break the for each loop to next iteration if any
                     if (pluginType.IsAbstract) continue; //break the for each loop to next iteration if any
                     //search for specified interface while ignoring case sensitivity
-                    if (pluginType.BaseType == null || pluginType.BaseType.FullName != "PeekPoker.Interface.AbstractPlugin")
+                    if (pluginType.BaseType == null ||
+                        pluginType.BaseType.FullName != "PeekPoker.Interface.AbstractPlugin")
                         continue;
                     //New plug-in information setting
-                    AbstractPlugin pluginInterfaceInstance =
-                        (AbstractPlugin)(Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
+                    var pluginInterfaceInstance =
+                        (AbstractPlugin) (Activator.CreateInstance(pluginAssembly.GetType(pluginType.ToString())));
 
                     if (pluginInterfaceInstance.PluginType == PluginType.Game)
                         _pluginDatas.Add(pluginInterfaceInstance);

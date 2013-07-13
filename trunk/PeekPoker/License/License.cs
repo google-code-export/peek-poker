@@ -12,7 +12,7 @@ namespace PeekPoker.License
             InitializeComponent();
         }
 
-        private void agreeButton_Click(object sender, System.EventArgs e)
+        private void agreeButton_Click(object sender, EventArgs e)
         {
             string ip = "";
             string line;
@@ -20,11 +20,13 @@ namespace PeekPoker.License
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
             if (!(File.Exists(filePath)))
             {
-                using (FileStream str = File.Create(filePath)) { str.Close(); }
+                using (FileStream str = File.Create(filePath))
+                {
+                    str.Close();
+                }
             }
-            using (StreamReader file = new StreamReader(filePath))
+            using (var file = new StreamReader(filePath))
             {
-                
                 while ((line = file.ReadLine()) != null)
                 {
                     switch (line)
@@ -37,25 +39,25 @@ namespace PeekPoker.License
             }
 
             //Save
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("#License#");
             stringBuilder.AppendLine("Accept");
             stringBuilder.AppendLine("#IP#");
             stringBuilder.AppendLine(ip);
 
             line = stringBuilder.ToString();
-            using (StreamWriter file = new StreamWriter(filePath))
+            using (var file = new StreamWriter(filePath))
             {
                 file.Write(line);
             }
-            PeekPokerMainForm form = new PeekPokerMainForm();
+            var form = new PeekPokerMainForm();
             form.Show();
-            this.Hide();
+            Hide();
         }
 
-        private void notAgreeButton_Click(object sender, System.EventArgs e)
+        private void notAgreeButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

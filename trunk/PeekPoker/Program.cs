@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 namespace PeekPoker
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             try
             {
@@ -20,9 +20,12 @@ namespace PeekPoker
                 string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
                 if (!(File.Exists(filePath)))
                 {
-                    using (FileStream str = File.Create(filePath)) { str.Close(); }
+                    using (FileStream str = File.Create(filePath))
+                    {
+                        str.Close();
+                    }
                 }
-                using (StreamReader file = new StreamReader(filePath))
+                using (var file = new StreamReader(filePath))
                 {
                     string line;
                     while ((line = file.ReadLine()) != null)
@@ -46,7 +49,6 @@ namespace PeekPoker
                 MessageBox.Show(ex.Message, String.Format("Peek Poker"), MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
-            
         }
     }
 }

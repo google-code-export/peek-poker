@@ -7,7 +7,7 @@ namespace PeekPoker.PluginInfo
     {
         public PluginInfo(List<ListViewItem> items)
         {
-            this.InitializeComponent();
+            InitializeComponent();
             foreach (ListViewItem item in items)
             {
                 pluginListView.Items.Add(item);

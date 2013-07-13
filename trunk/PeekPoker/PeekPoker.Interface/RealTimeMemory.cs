@@ -67,7 +67,7 @@ namespace PeekPoker.Interface
                 //Connect to the specified host using port 730
                 _tcp.Connect(_ipAddress, 730);
                 _tcp.ReceiveTimeout = 5000; //1sec
-                byte[] response = new byte[1024];
+                var response = new byte[1024];
                 _tcp.Client.Receive(response);
                 string reponseString = Encoding.ASCII.GetString(response).Replace("\0", "");
                 //validate connection
@@ -139,10 +139,10 @@ namespace PeekPoker.Interface
             if (!GetMeMex(startDumpAddress, dumpLength))
                 return null; //call function - If not connected or if somethign wrong return
 
-            RwStream readWriter = new RwStream();
+            var readWriter = new RwStream();
             try
             {
-                byte[] data = new byte[1026]; //byte chuncks
+                var data = new byte[1026]; //byte chuncks
 
                 //Writing each byte chuncks========
                 for (int i = 0; i < dumpLength/1024; i++)
@@ -152,7 +152,7 @@ namespace PeekPoker.Interface
                     ReportProgress(0, (int) (dumpLength/1024), (i + 1), "Dumping Memory...");
                 }
                 //Write whatever is left
-                int extra = (int) (dumpLength%1024);
+                var extra = (int) (dumpLength%1024);
                 if (extra > 0)
                 {
                     _tcp.Client.Receive(data);
@@ -206,20 +206,20 @@ namespace PeekPoker.Interface
                 uint size = _startDumpLength;
                 _readWriter = new RwStream();
                 _readWriter.ReportProgress += ReportProgress;
-                byte[] data = new byte[1026]; //byte chuncks
+                var data = new byte[1026]; //byte chuncks
 
                 //Writing each byte chuncks========
                 //No need to mess with it :D
                 for (int i = 0; i < size/1024; i++)
                 {
-                    if (_stopSearch) 
+                    if (_stopSearch)
                         return new BindingList<SearchResults>();
                     _tcp.Client.Receive(data);
                     _readWriter.WriteBytes(data, 2, 1024);
                     ReportProgress(0, (int) (size/1024), (i + 1), "Dumping Memory...");
                 }
                 //Write whatever is left
-                int extra = (int) (size%1024);
+                var extra = (int) (size%1024);
                 if (extra > 0)
                 {
                     if (_stopSearch)
@@ -234,7 +234,7 @@ namespace PeekPoker.Interface
                     return new BindingList<SearchResults>();
                 _readWriter.Position = 0;
                 values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer),
-                                                                                _startDumpOffset);
+                                                     _startDumpOffset);
                 return values;
             }
             catch (SocketException)
@@ -246,7 +246,7 @@ namespace PeekPoker.Interface
                     return new BindingList<SearchResults>();
                 _readWriter.Position = 0;
                 values = _readWriter.SearchHexString(Functions.StringToByteArray(pointer),
-                                                                                _startDumpOffset);
+                                                     _startDumpOffset);
 
                 return values;
             }
@@ -287,10 +287,10 @@ namespace PeekPoker.Interface
             if (!GetMeMex(startDumpAddress, dumpLength))
                 return; //call function - If not connected or if something wrong return
 
-            RwStream readWriter = new RwStream(filename);
+            var readWriter = new RwStream(filename);
             try
             {
-                byte[] data = new byte[1026]; //byte chuncks
+                var data = new byte[1026]; //byte chuncks
                 //Writing each byte chuncks========
                 for (int i = 0; i < dumpLength/1024; i++)
                 {
@@ -299,7 +299,7 @@ namespace PeekPoker.Interface
                     ReportProgress(0, (int) (dumpLength/1024), (i + 1), "Dumping Memory...");
                 }
                 //Write whatever is left
-                int extra = (int) (dumpLength%1024);
+                var extra = (int) (dumpLength%1024);
                 if (extra > 0)
                 {
                     _tcp.Client.Receive(data);
@@ -307,7 +307,10 @@ namespace PeekPoker.Interface
                 }
                 readWriter.Flush();
             }
-            catch (SocketException) { readWriter.Flush(); }
+            catch (SocketException)
+            {
+                readWriter.Flush();
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -327,7 +330,7 @@ namespace PeekPoker.Interface
             try
             {
                 if (!Connect()) return; //Call function - If not connected return
-                byte[] response = new byte[1024];
+                var response = new byte[1024];
                 //Send a stop command to the xbox - freeze
                 _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("STOP\r\n")));
                 _tcp.Client.Receive(response);
@@ -350,7 +353,7 @@ namespace PeekPoker.Interface
             try
             {
                 if (!Connect()) return; //Call function - If not connected return
-                byte[] response = new byte[1024];
+                var response = new byte[1024];
                 //Send a start command to the xbox - resume
                 _tcp.Client.Send(Encoding.ASCII.GetBytes(string.Format("GO\r\n")));
                 _tcp.Client.Receive(response);
@@ -388,7 +391,7 @@ namespace PeekPoker.Interface
                     Thread.Sleep(30);
                 }
                 else
-                    throw new Exception(ex.Message+" - "+sent);  // any serious error occurr
+                    throw new Exception(ex.Message + " - " + sent); // any serious error occurr
             }
         }
 
@@ -404,7 +407,7 @@ namespace PeekPoker.Interface
             //LENGTH = Length of the dump
             _tcp.Client.Send(
                 Encoding.ASCII.GetBytes(string.Format("GETMEMEX ADDR={0} LENGTH={1}\r\n", startDump, length)));
-            byte[] response = new byte[1024];
+            var response = new byte[1024];
             _tcp.Client.Receive(response);
             string reponseString = Encoding.ASCII.GetString(response).Replace("\0", "");
             //validate connection
@@ -416,14 +419,14 @@ namespace PeekPoker.Interface
         {
             if (value.Contains("0x"))
                 return System.Convert.ToUInt32(value.Substring(2), 16);
-            return System.Convert.ToUInt32(value,16);
+            return System.Convert.ToUInt32(value, 16);
         }
 
         private static int ConvertSigned(string value)
         {
             if (value.Contains("0x"))
                 return System.Convert.ToInt32(value.Substring(2), 16);
-            return System.Convert.ToInt32(value,16);
+            return System.Convert.ToInt32(value, 16);
         }
 
         #endregion

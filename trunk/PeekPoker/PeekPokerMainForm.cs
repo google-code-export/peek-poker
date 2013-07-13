@@ -21,7 +21,7 @@ namespace PeekPoker
         private PluginService _pluginService;
         private RealTimeMemory _rtm; //DLL is now in the Important File Folder
 
-        #endregion
+        #endregion global varibales
 
         public PeekPokerMainForm()
         {
@@ -44,9 +44,12 @@ namespace PeekPoker
                 string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
                 if (!(File.Exists(filePath)))
                 {
-                    using (FileStream str = File.Create(filePath)) { str.Close(); }
+                    using (FileStream str = File.Create(filePath))
+                    {
+                        str.Close();
+                    }
                 }
-                using (StreamReader file = new StreamReader(filePath))
+                using (var file = new StreamReader(filePath))
                 {
                     string line;
                     while ((line = file.ReadLine()) != null)
@@ -64,7 +67,7 @@ namespace PeekPoker
             }
             catch (Exception ex)
             {
-                ShowMessageBox(ex.Message,"Peek Poker",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowMessageBox(ex.Message, "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -74,7 +77,7 @@ namespace PeekPoker
         {
             if (optionPanel.Visible)
                 optionPanel.Hide();
-           else
+            else
                 optionPanel.Show();
         }
 
@@ -85,9 +88,10 @@ namespace PeekPoker
             else
                 pluginPanel.Show();
         }
+
         private void AboutToolStripMenuItem1Click(object sender, EventArgs e)
         {
-            AboutBox aboutBox = new AboutBox();
+            var aboutBox = new AboutBox();
             aboutBox.ShowDialog(this);
         }
 
@@ -96,19 +100,19 @@ namespace PeekPoker
         {
             try
             {
-                var item = (Button)sender; // get the menu item
+                var item = (Button) sender; // get the menu item
                 foreach (AbstractPlugin plugin in _pluginService.PluginDatas)
                 {
                     if (plugin.ApplicationName != item.Name) continue;
 
                     //Setting Values
-                    plugin.APRtm = this._rtm;
-                    plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
-                    plugin.APShowMessageBox += this.ShowMessageBox;
-                    plugin.APEnableControl += this.EnableControl;
-                    plugin.APUpdateProgressBar += this.UpdateProgressbar;
-                    plugin.APGetTextBoxText += this.GetTextBoxText;
-                    plugin.APSetTextBoxText += this.SetTextBoxText;
+                    plugin.APRtm = _rtm;
+                    plugin.IsMdiChild = !displayOutsideParentBox.Checked;
+                    plugin.APShowMessageBox += ShowMessageBox;
+                    plugin.APEnableControl += EnableControl;
+                    plugin.APUpdateProgressBar += UpdateProgressbar;
+                    plugin.APGetTextBoxText += GetTextBoxText;
+                    plugin.APSetTextBoxText += SetTextBoxText;
                     plugin.Display(this);
                 }
                 foreach (AbstractPlugin plugin in _pluginService.OptionPluginDatas)
@@ -116,13 +120,13 @@ namespace PeekPoker
                     if (plugin.ApplicationName != item.Name) continue;
 
                     //Setting Values
-                    plugin.APRtm = this._rtm;
-                    plugin.IsMdiChild = !this.displayOutsideParentBox.Checked;
-                    plugin.APShowMessageBox += this.ShowMessageBox;
-                    plugin.APEnableControl += this.EnableControl;
-                    plugin.APUpdateProgressBar += this.UpdateProgressbar;
-                    plugin.APGetTextBoxText += this.GetTextBoxText;
-                    plugin.APSetTextBoxText += this.SetTextBoxText;
+                    plugin.APRtm = _rtm;
+                    plugin.IsMdiChild = !displayOutsideParentBox.Checked;
+                    plugin.APShowMessageBox += ShowMessageBox;
+                    plugin.APEnableControl += EnableControl;
+                    plugin.APUpdateProgressBar += UpdateProgressbar;
+                    plugin.APGetTextBoxText += GetTextBoxText;
+                    plugin.APSetTextBoxText += SetTextBoxText;
                     plugin.Display(this);
                 }
             }
@@ -140,7 +144,7 @@ namespace PeekPoker
 
         private void ipAddressTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)13)
+            if (e.KeyChar == (char) 13)
                 ThreadPool.QueueUserWorkItem(Connect);
         }
 
@@ -149,12 +153,12 @@ namespace PeekPoker
         {
             Process.Start("www.360haven.com");
         }
- 
+
         private void peekNpokeButton_Click(object sender, EventArgs e)
         {
             PeekNPoke.PeekNPoke form = displayOutsideParentBox.Checked
-                                 ? new PeekNPoke.PeekNPoke(_rtm)
-                                 : new PeekNPoke.PeekNPoke(_rtm) {MdiParent = this};
+                                           ? new PeekNPoke.PeekNPoke(_rtm)
+                                           : new PeekNPoke.PeekNPoke(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.UpdateProgressbar += UpdateProgressbar;
             form.EnableControl += EnableControl;
@@ -166,8 +170,8 @@ namespace PeekPoker
         private void dumpButton_Click(object sender, EventArgs e)
         {
             Dump.Dump form = displayOutsideParentBox.Checked
-                            ? new Dump.Dump(_rtm)
-                            : new Dump.Dump(_rtm) {MdiParent = this};
+                                 ? new Dump.Dump(_rtm)
+                                 : new Dump.Dump(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
@@ -178,8 +182,8 @@ namespace PeekPoker
         private void SearchButtonClick(object sender, EventArgs e)
         {
             Search.Search form = displayOutsideParentBox.Checked
-                              ? new Search.Search(_rtm)
-                              : new Search.Search(_rtm) {MdiParent = this};
+                                     ? new Search.Search(_rtm)
+                                     : new Search.Search(_rtm) {MdiParent = this};
             form.ShowMessageBox += ShowMessageBox;
             form.EnableControl += EnableControl;
             form.GetTextBoxText += GetTextBoxText;
@@ -190,12 +194,12 @@ namespace PeekPoker
         private void pluginInfoButton_Click(object sender, EventArgs e)
         {
             PluginInfo.PluginInfo form = displayOutsideParentBox.Checked
-                                  ? new PluginInfo.PluginInfo(_listviewItem)
-                                  : new PluginInfo.PluginInfo(_listviewItem) {MdiParent = this};
+                                             ? new PluginInfo.PluginInfo(_listviewItem)
+                                             : new PluginInfo.PluginInfo(_listviewItem) {MdiParent = this};
             form.Show();
         }
 
-        #endregion
+        #endregion button clicks
 
         #region Functions
 
@@ -212,23 +216,23 @@ namespace PeekPoker
                 foreach (AbstractPlugin pluginData in _pluginService.PluginDatas)
                 {
                     EnableControl(pluginInfoButton, true);
-                    Button item = new Button
-                                      {
-                                          Name = pluginData.ApplicationName,
-                                          Tag = pluginData.ApplicationName,
-                                          Text = pluginData.ApplicationName,
-                                          Image = pluginData.Icon.ToBitmap(),
-                                          Size = new Size(108, 75),
-                                          ImageAlign = ContentAlignment.TopCenter,
-                                          MaximumSize = new Size(108, 75),
-                                          Dock = DockStyle.Left,
-                                          TextAlign = ContentAlignment.BottomCenter,
-                                      };
+                    var item = new Button
+                                   {
+                                       Name = pluginData.ApplicationName,
+                                       Tag = pluginData.ApplicationName,
+                                       Text = pluginData.ApplicationName,
+                                       Image = pluginData.Icon.ToBitmap(),
+                                       Size = new Size(108, 75),
+                                       ImageAlign = ContentAlignment.TopCenter,
+                                       MaximumSize = new Size(108, 75),
+                                       Dock = DockStyle.Left,
+                                       TextAlign = ContentAlignment.BottomCenter,
+                                   };
                     item.Click += PluginClickEventHandler;
                     pluginPanel.Controls.Add(item);
 
                     //Plugin Details
-                    ListViewItem listviewItem = new ListViewItem(pluginData.ApplicationName);
+                    var listviewItem = new ListViewItem(pluginData.ApplicationName);
                     listviewItem.SubItems.Add(pluginData.Description);
                     listviewItem.SubItems.Add(pluginData.Author);
                     listviewItem.SubItems.Add(pluginData.Version);
@@ -238,21 +242,21 @@ namespace PeekPoker
                 //Load Options
                 foreach (AbstractPlugin pluginData in _pluginService.OptionPluginDatas)
                 {
-                    Button item = new Button
-                    {
-                        Name = pluginData.ApplicationName,
-                        Tag = pluginData.ApplicationName,
-                        Text = pluginData.ApplicationName,
-                        Size = new Size(187, 33),
-                        MaximumSize = new Size(187, 33),
-                        Dock = DockStyle.Top,
-                        TextAlign = ContentAlignment.MiddleCenter,
-                    };
+                    var item = new Button
+                                   {
+                                       Name = pluginData.ApplicationName,
+                                       Tag = pluginData.ApplicationName,
+                                       Text = pluginData.ApplicationName,
+                                       Size = new Size(187, 33),
+                                       MaximumSize = new Size(187, 33),
+                                       Dock = DockStyle.Top,
+                                       TextAlign = ContentAlignment.MiddleCenter,
+                                   };
                     item.Click += PluginClickEventHandler;
                     mainGroupBox.Controls.Add(item);
-                    this.MinimumSize = new Size(this.MinimumSize.Width, this.MinimumSize.Height + 33);
+                    MinimumSize = new Size(MinimumSize.Width, MinimumSize.Height + 33);
                     //Plugin Details
-                    ListViewItem listviewItem = new ListViewItem(pluginData.ApplicationName);
+                    var listviewItem = new ListViewItem(pluginData.ApplicationName);
                     listviewItem.SubItems.Add(pluginData.Description);
                     listviewItem.SubItems.Add(pluginData.Author);
                     listviewItem.SubItems.Add(pluginData.Version);
@@ -264,29 +268,33 @@ namespace PeekPoker
                 ShowMessageBox(e.Message, "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void Save()
         {
             string ipAddress = GetTextBoxText(ipAddressTextBox);
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "config.ini";
             if (!(File.Exists(filePath)))
             {
-                using (FileStream str = File.Create(filePath)) { str.Close(); }
+                using (FileStream str = File.Create(filePath))
+                {
+                    str.Close();
+                }
             }
 
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("#License#");
             stringBuilder.AppendLine("Accept");
             stringBuilder.AppendLine("#IP#");
             stringBuilder.AppendLine(ipAddress);
 
             string line = stringBuilder.ToString();
-            using (StreamWriter file = new StreamWriter(filePath))
+            using (var file = new StreamWriter(filePath))
             {
                 file.Write(line);
             }
         }
 
-        #endregion
+        #endregion Functions
 
         #region Thread Functions
 
@@ -294,19 +302,21 @@ namespace PeekPoker
         {
             if (ipAddressTextBox.Text.ToUpper() == "DEBUG") //For debugging PP without a connection to xbox
             {
-                EnableControl(mainGroupBox, true); EnableControl(pluginPanel, true); 
+                EnableControl(mainGroupBox, true);
+                EnableControl(pluginPanel, true);
                 return; //Bypass needing to connect to xbox for debugging purposes.
             }
             try
             {
-                if (!Regex.IsMatch(ipAddressTextBox.Text, @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")) //Checks if valid IP
-            {
-                MessageBox.Show(" IP Address is not valid!");
-                return;
-            }
+                if (!Regex.IsMatch(ipAddressTextBox.Text, @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"))
+                    //Checks if valid IP
+                {
+                    MessageBox.Show(" IP Address is not valid!");
+                    return;
+                }
 
-               Save(); //Moved to own function
-               _rtm = new RealTimeMemory(ipAddressTextBox.Text, 0, 0); //initialize real time memory
+                Save(); //Moved to own function
+                _rtm = new RealTimeMemory(ipAddressTextBox.Text, 0, 0); //initialize real time memory
                 _rtm.ReportProgress += UpdateProgressbar;
 
                 if (!_rtm.Connect())
@@ -322,7 +332,7 @@ namespace PeekPoker
                 ShowMessageBox("Connected!", "Peek Poker", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetTextBoxText(connectButton, "Re-Connect");
-                this.EnableControl(pluginPanel,true);
+                EnableControl(pluginPanel, true);
             }
             catch (Exception ex)
             {
@@ -331,7 +341,7 @@ namespace PeekPoker
             }
         }
 
-        #endregion
+        #endregion Thread Functions
 
         #region safeThreadingProperties
 
@@ -404,6 +414,6 @@ namespace PeekPoker
             }
         }
 
-        #endregion
+        #endregion safeThreadingProperties
     }
 }
