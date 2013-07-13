@@ -202,7 +202,7 @@ namespace PeekPoker.PeekNPoke
             this.NumericInt32.Size = new System.Drawing.Size(109, 21);
             this.NumericInt32.TabIndex = 18;
             this.NumericInt32.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.NumericInt32.ValueChanged += new System.EventHandler(this.Numeric_ValueChanged);
+            this.NumericInt32.ValueChanged += new System.EventHandler(this.NumericValueChanged);
             this.NumericInt32.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
             // 
             // NumericInt8
@@ -223,7 +223,7 @@ namespace PeekPoker.PeekNPoke
             this.NumericInt8.Size = new System.Drawing.Size(109, 17);
             this.NumericInt8.TabIndex = 18;
             this.NumericInt8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.NumericInt8.ValueChanged += new System.EventHandler(this.Numeric_ValueChanged);
+            this.NumericInt8.ValueChanged += new System.EventHandler(this.NumericValueChanged);
             this.NumericInt8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
             // 
             // NumericInt16
@@ -243,7 +243,7 @@ namespace PeekPoker.PeekNPoke
             this.NumericInt16.Size = new System.Drawing.Size(109, 21);
             this.NumericInt16.TabIndex = 18;
             this.NumericInt16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.NumericInt16.ValueChanged += new System.EventHandler(this.Numeric_ValueChanged);
+            this.NumericInt16.ValueChanged += new System.EventHandler(this.NumericValueChanged);
             this.NumericInt16.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericIntKeyPress);
             // 
             // LabelInt32
@@ -278,7 +278,7 @@ namespace PeekPoker.PeekNPoke
             // 
             // newPeekButton
             // 
-            this.newPeekButton.Location = new System.Drawing.Point(185, 44);
+            this.newPeekButton.Location = new System.Drawing.Point(281, 44);
             this.newPeekButton.Name = "newPeekButton";
             this.newPeekButton.Size = new System.Drawing.Size(61, 25);
             this.newPeekButton.TabIndex = 46;
@@ -288,7 +288,7 @@ namespace PeekPoker.PeekNPoke
             // 
             // pokeButton
             // 
-            this.pokeButton.Location = new System.Drawing.Point(252, 9);
+            this.pokeButton.Location = new System.Drawing.Point(348, 9);
             this.pokeButton.Name = "pokeButton";
             this.pokeButton.Size = new System.Drawing.Size(61, 25);
             this.pokeButton.TabIndex = 43;
@@ -307,16 +307,17 @@ namespace PeekPoker.PeekNPoke
             // 
             // peekLengthTextBox
             // 
-            this.peekLengthTextBox.Location = new System.Drawing.Point(96, 48);
+            this.peekLengthTextBox.Location = new System.Drawing.Point(87, 48);
+            this.peekLengthTextBox.MaxLength = 255;
             this.peekLengthTextBox.Name = "peekLengthTextBox";
-            this.peekLengthTextBox.Size = new System.Drawing.Size(83, 21);
+            this.peekLengthTextBox.Size = new System.Drawing.Size(188, 21);
             this.peekLengthTextBox.TabIndex = 41;
             this.peekLengthTextBox.Text = "FFFF";
             this.peekLengthTextBox.Leave += new System.EventHandler(this.FixTheAddresses);
             // 
             // peekButton
             // 
-            this.peekButton.Location = new System.Drawing.Point(185, 9);
+            this.peekButton.Location = new System.Drawing.Point(281, 9);
             this.peekButton.Name = "peekButton";
             this.peekButton.Size = new System.Drawing.Size(61, 25);
             this.peekButton.TabIndex = 44;
@@ -337,10 +338,10 @@ namespace PeekPoker.PeekNPoke
             // 
             this.peekPokeAddressTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.peekPokeAddressTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(96, 12);
-            this.peekPokeAddressTextBox.MaxLength = 10;
+            this.peekPokeAddressTextBox.Location = new System.Drawing.Point(87, 12);
+            this.peekPokeAddressTextBox.MaxLength = 255;
             this.peekPokeAddressTextBox.Name = "peekPokeAddressTextBox";
-            this.peekPokeAddressTextBox.Size = new System.Drawing.Size(83, 21);
+            this.peekPokeAddressTextBox.Size = new System.Drawing.Size(188, 21);
             this.peekPokeAddressTextBox.TabIndex = 40;
             this.peekPokeAddressTextBox.Text = "C0000000";
             this.peekPokeAddressTextBox.WordWrap = false;

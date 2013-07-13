@@ -22,9 +22,6 @@ namespace PeekPoker.Interface
 
         #endregion
 
-        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern int memcmp(byte[] b1, byte[] b2, long count);
-
         private bool _accessed;
         private BinaryReader _bReader;
         private BinaryWriter _bWriter;
@@ -162,7 +159,7 @@ namespace PeekPoker.Interface
                 }
                 if (length == 0)
                     return new byte[0];
-                byte[] buffer = new byte[length];
+                var buffer = new byte[length];
                 _fStream.Read(buffer, 0, length);
 
                 return buffer;
@@ -176,7 +173,7 @@ namespace PeekPoker.Interface
         private static bool ByteArrayCompare(byte[] b1, byte[] b2)
         {
             // Validate buffers are the same length.
-            // This also ensures that the count does not exceed the length of either buffer.  
+            // This also ensures that the count does not exceed the length of either buffer.
             return b1.Length == b2.Length && memcmp(b1, b2, b1.Length) == 0;
         }
 
@@ -200,10 +197,10 @@ namespace PeekPoker.Interface
         /// <returns></returns>
         public BindingList<SearchResults> SearchHexString(byte[] pattern, uint startDumpOffset)
         {
-            byte[] buffer = new byte[_fStream.Length];
-            _fStream.Read(buffer, 0, (int)_fStream.Length);
+            var buffer = new byte[_fStream.Length];
+            _fStream.Read(buffer, 0, (int) _fStream.Length);
             int i = IndexOfInt(buffer, pattern[0], 0);
-            BindingList<SearchResults> positions = new BindingList<SearchResults>();
+            var positions = new BindingList<SearchResults>();
 
             int x = 1;
             while (i >= 0 && i <= buffer.Length - pattern.Length)
@@ -211,15 +208,15 @@ namespace PeekPoker.Interface
                 if (_stopSearch) return positions;
                 ReportProgress(0, buffer.Length, i, "Searching...");
 
-                byte[] segment = new byte[pattern.Length];
+                var segment = new byte[pattern.Length];
                 Buffer.BlockCopy(buffer, i, segment, 0, pattern.Length);
 
                 if (ByteArrayCompare(segment, pattern))
                 {
-                    SearchResults results = new SearchResults();
-                    results.Offset = String.Format("{0:X}", startDumpOffset + (uint)i);
+                    var results = new SearchResults();
+                    results.Offset = String.Format("{0:X}", startDumpOffset + (uint) i);
 
-                    StringBuilder hex = new StringBuilder(segment.Length * 2);
+                    var hex = new StringBuilder(segment.Length*2);
                     foreach (byte b in segment)
                         hex.AppendFormat("{0:x2}", b);
 
@@ -310,5 +307,8 @@ namespace PeekPoker.Interface
         }
 
         #endregion
+
+        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int memcmp(byte[] b1, byte[] b2, long count);
     }
 }

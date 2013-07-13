@@ -10,6 +10,7 @@ namespace PeekPoker.Interface
     public static class Functions
     {
         #region Hex
+
         /// <summary>Converts a Hex string to bytes</summary>
         /// <param name="input">Is the String input</param>
         public static byte[] HexToBytes(String input)
@@ -18,16 +19,16 @@ namespace PeekPoker.Interface
             input = input.Replace("-", "");
             input = input.Replace("0x", "");
             input = input.Replace("0X", "");
-            if ((input.Length % 2) != 0)
+            if ((input.Length%2) != 0)
                 input = "0" + input;
-            byte[] output = new byte[(input.Length / 2)];
+            var output = new byte[(input.Length/2)];
 
             try
             {
                 int index;
                 for (index = 0; index < output.Length; index++)
                 {
-                    output[index] = System.Convert.ToByte(input.Substring((index * 2), 2), 16);
+                    output[index] = System.Convert.ToByte(input.Substring((index*2), 2), 16);
                 }
                 return output;
             }
@@ -52,7 +53,6 @@ namespace PeekPoker.Interface
 
             return text;
         }
-
 
         /// <summary>Convert Long to String Hex</summary>
         /// <param name="value">The byte array</param>
@@ -132,7 +132,7 @@ namespace PeekPoker.Interface
                 hexString = hexString.Replace("0X", "");
                 string str = hexString.Remove(finalCharPos + 1, hexString.Length - (finalCharPos + 1));
                 string str2 = str.Substring(firstCharPos, str.Length - firstCharPos);
-                if ((str2.Length % 2) != 0)
+                if ((str2.Length%2) != 0)
                 {
                     return "0" + str2;
                 }
@@ -169,16 +169,18 @@ namespace PeekPoker.Interface
                 throw new Exception(exception.Message);
             }
         }
-        #endregion
+
+        #endregion Hex
 
         #region Others
+
         /// <summary>
         /// Turn hex string to byte array
         /// </summary>
         /// <param name="text">The hex string</param>
         public static byte[] StringToByteArray(string text)
         {
-            byte[] bytes = new byte[text.Length/2];
+            var bytes = new byte[text.Length/2];
 
             for (int i = 0; i < text.Length; i += 2)
             {
@@ -206,14 +208,15 @@ namespace PeekPoker.Interface
         /// <param name="value">The value to be converted</param>
         public static Byte[] UInt32ToBytes(UInt32 value)
         {
-            byte[] buffer = new Byte[4];
+            var buffer = new Byte[4];
             buffer[3] = (Byte) (value & 0xFF);
             buffer[2] = (Byte) ((value >> 8) & 0xFF);
             buffer[1] = (Byte) ((value >> 16) & 0xFF);
             buffer[0] = (Byte) ((value >> 24) & 0xFF);
             return buffer;
         }
-        #endregion
+
+        #endregion Others
 
         #region byte to sbyte to byte
 
@@ -228,7 +231,7 @@ namespace PeekPoker.Interface
             return (sbyte) signed;
         }
 
-        #endregion
+        #endregion byte to sbyte to byte
 
         #region (u)int to byte array to (u)int
 
@@ -406,7 +409,7 @@ namespace PeekPoker.Interface
             return buffer;
         }
 
-        #endregion
+        #endregion (u)int to byte array to (u)int
 
         #region float/double to byte array to float/double
 
@@ -466,7 +469,7 @@ namespace PeekPoker.Interface
             return BitConverter.ToDouble(bytes, 0);
         }
 
-        #endregion
+        #endregion float/double to byte array to float/double
 
         #region Values
 
@@ -479,7 +482,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 2)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return (ushort)(buffer[1] << 8 | buffer[0]);
+            return (ushort) (buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 2 Bytes Array to Integer 16</summary>
@@ -491,7 +494,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 2)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return (short)(buffer[1] << 8 | buffer[0]);
+            return (short) (buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 3 Bytes Array to Integer 24</summary>
@@ -515,7 +518,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 3)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((uint)buffer[2] << 16 | (uint)buffer[1] << 8 | buffer[0]);
+            return ((uint) buffer[2] << 16 | (uint) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 4 Bytes Array to Integer 32</summary>
@@ -539,7 +542,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 4)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return (uint)(buffer[3] << 24 | buffer[2] << 16 | buffer[1] << 8 | buffer[0]);
+            return (uint) (buffer[3] << 24 | buffer[2] << 16 | buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 5 Bytes Array to Integer 64</summary>
@@ -551,7 +554,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 5)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[4] << 32 | (long)buffer[3] << 24 | (long)buffer[2] << 16 | (long)buffer[1] << 8 |
+            return ((long) buffer[4] << 32 | (long) buffer[3] << 24 | (long) buffer[2] << 16 | (long) buffer[1] << 8 |
                     buffer[0]);
         }
 
@@ -564,7 +567,7 @@ namespace PeekPoker.Interface
             if (buffer.Length < 5)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[4] << 32 | (ulong)buffer[3] << 24 | (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 |
+            return ((ulong) buffer[4] << 32 | (ulong) buffer[3] << 24 | (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 |
                     buffer[0]);
         }
 
@@ -577,8 +580,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 6)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[5] << 40 | (long)buffer[4] << 32 | (long)buffer[3] << 24 | (long)buffer[2] << 16 |
-                    (long)buffer[1] << 8 | buffer[0]);
+            return ((long) buffer[5] << 40 | (long) buffer[4] << 32 | (long) buffer[3] << 24 | (long) buffer[2] << 16 |
+                    (long) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 6 Bytes Array to Unsigned Integer 64</summary>
@@ -590,8 +593,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 6)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[5] << 40 | (ulong)buffer[4] << 32 | (ulong)buffer[3] << 24 |
-                    (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 | buffer[0]);
+            return ((ulong) buffer[5] << 40 | (ulong) buffer[4] << 32 | (ulong) buffer[3] << 24 |
+                    (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 7 Bytes Array to Integer 64</summary>
@@ -603,8 +606,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 7)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[6] << 48 | (long)buffer[5] << 40 | (long)buffer[4] << 32 | (long)buffer[3] << 24 |
-                    (long)buffer[2] << 16 | (long)buffer[1] << 8 | buffer[0]);
+            return ((long) buffer[6] << 48 | (long) buffer[5] << 40 | (long) buffer[4] << 32 | (long) buffer[3] << 24 |
+                    (long) buffer[2] << 16 | (long) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 7 Bytes Array to Unsigned Integer 64</summary>
@@ -616,8 +619,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 7)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[6] << 48 | (ulong)buffer[5] << 40 | (ulong)buffer[4] << 32 |
-                    (ulong)buffer[3] << 24 | (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 | buffer[0]);
+            return ((ulong) buffer[6] << 48 | (ulong) buffer[5] << 40 | (ulong) buffer[4] << 32 |
+                    (ulong) buffer[3] << 24 | (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 8 Bytes Array to Integer 64</summary>
@@ -629,8 +632,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 8)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((long)buffer[7] << 56 | (long)buffer[6] << 48 | (long)buffer[5] << 40 | (long)buffer[4] << 32 |
-                    (long)buffer[3] << 24 | (long)buffer[2] << 16 | (long)buffer[1] << 8 | buffer[0]);
+            return ((long) buffer[7] << 56 | (long) buffer[6] << 48 | (long) buffer[5] << 40 | (long) buffer[4] << 32 |
+                    (long) buffer[3] << 24 | (long) buffer[2] << 16 | (long) buffer[1] << 8 | buffer[0]);
         }
 
         /// <summary>Converts 8 Bytes Array to Unsigned Integer 64</summary>
@@ -642,8 +645,8 @@ namespace PeekPoker.Interface
             if (buffer.Length < 8)
                 throw new Exception("Buffer size too small");
             Array.Reverse(buffer);
-            return ((ulong)buffer[7] << 56 | (ulong)buffer[6] << 48 | (ulong)buffer[5] << 40 |
-                    (ulong)buffer[4] << 32 | (ulong)buffer[3] << 24 | (ulong)buffer[2] << 16 | (ulong)buffer[1] << 8 |
+            return ((ulong) buffer[7] << 56 | (ulong) buffer[6] << 48 | (ulong) buffer[5] << 40 |
+                    (ulong) buffer[4] << 32 | (ulong) buffer[3] << 24 | (ulong) buffer[2] << 16 | (ulong) buffer[1] << 8 |
                     buffer[0]);
         }
 
@@ -711,7 +714,7 @@ namespace PeekPoker.Interface
             }
         }
 
-        #endregion
+        #endregion Values
 
         #region ToByteArray
 
@@ -722,9 +725,9 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] Int16(Int16 value)
             {
-                byte[] buffer = new Byte[2];
-                buffer[1] = (Byte)(value & 0xFF);
-                buffer[0] = (Byte)((value >> 8) & 0xFF);
+                var buffer = new Byte[2];
+                buffer[1] = (Byte) (value & 0xFF);
+                buffer[0] = (Byte) ((value >> 8) & 0xFF);
                 return buffer;
             }
 
@@ -732,9 +735,9 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] UInt16(UInt16 value)
             {
-                byte[] buffer = new Byte[2];
-                buffer[1] = (Byte)(value & 0xFF);
-                buffer[0] = (Byte)((value >> 8) & 0xFF);
+                var buffer = new Byte[2];
+                buffer[1] = (Byte) (value & 0xFF);
+                buffer[0] = (Byte) ((value >> 8) & 0xFF);
                 return buffer;
             }
 
@@ -744,10 +747,10 @@ namespace PeekPoker.Interface
             {
                 if (value < -8388608 || value > 8388607)
                     throw new Exception("Invalid value");
-                byte[] buffer = new Byte[3];
-                buffer[2] = (Byte)(value & 0xFF);
-                buffer[1] = (Byte)((value >> 8) & 0xFF);
-                buffer[0] = (Byte)((value >> 16) & 0xFF);
+                var buffer = new Byte[3];
+                buffer[2] = (Byte) (value & 0xFF);
+                buffer[1] = (Byte) ((value >> 8) & 0xFF);
+                buffer[0] = (Byte) ((value >> 16) & 0xFF);
                 return buffer;
             }
 
@@ -757,10 +760,10 @@ namespace PeekPoker.Interface
             {
                 if (value > 16777215)
                     throw new Exception("Invalid value");
-                byte[] buffer = new Byte[3];
-                buffer[2] = (Byte)(value & 0xFF);
-                buffer[1] = (Byte)((value >> 8) & 0xFF);
-                buffer[0] = (Byte)((value >> 16) & 0xFF);
+                var buffer = new Byte[3];
+                buffer[2] = (Byte) (value & 0xFF);
+                buffer[1] = (Byte) ((value >> 8) & 0xFF);
+                buffer[0] = (Byte) ((value >> 16) & 0xFF);
                 return buffer;
             }
 
@@ -768,11 +771,11 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] Int32(Int32 value)
             {
-                byte[] buffer = new Byte[4];
-                buffer[3] = (Byte)(value & 0xFF);
-                buffer[2] = (Byte)((value >> 8) & 0xFF);
-                buffer[1] = (Byte)((value >> 16) & 0xFF);
-                buffer[0] = (Byte)((value >> 24) & 0xFF);
+                var buffer = new Byte[4];
+                buffer[3] = (Byte) (value & 0xFF);
+                buffer[2] = (Byte) ((value >> 8) & 0xFF);
+                buffer[1] = (Byte) ((value >> 16) & 0xFF);
+                buffer[0] = (Byte) ((value >> 24) & 0xFF);
                 return buffer;
             }
 
@@ -780,11 +783,11 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] UInt32(UInt32 value)
             {
-                byte[] buffer = new Byte[4];
-                buffer[3] = (Byte)(value & 0xFF);
-                buffer[2] = (Byte)((value >> 8) & 0xFF);
-                buffer[1] = (Byte)((value >> 16) & 0xFF);
-                buffer[0] = (Byte)((value >> 24) & 0xFF);
+                var buffer = new Byte[4];
+                buffer[3] = (Byte) (value & 0xFF);
+                buffer[2] = (Byte) ((value >> 8) & 0xFF);
+                buffer[1] = (Byte) ((value >> 16) & 0xFF);
+                buffer[0] = (Byte) ((value >> 24) & 0xFF);
                 return buffer;
             }
 
@@ -796,12 +799,12 @@ namespace PeekPoker.Interface
                 {
                     throw new Exception("Invalid value");
                 }
-                byte[] buffer = new Byte[5];
-                buffer[4] = (Byte)(value & 0xFF);
-                buffer[3] = (Byte)((value >> 8) & 0xFF);
-                buffer[2] = (Byte)((value >> 16) & 0xFF);
-                buffer[1] = (Byte)((value >> 24) & 0xFF);
-                buffer[0] = (Byte)((value >> 32) & 0xFF);
+                var buffer = new Byte[5];
+                buffer[4] = (Byte) (value & 0xFF);
+                buffer[3] = (Byte) ((value >> 8) & 0xFF);
+                buffer[2] = (Byte) ((value >> 16) & 0xFF);
+                buffer[1] = (Byte) ((value >> 24) & 0xFF);
+                buffer[0] = (Byte) ((value >> 32) & 0xFF);
                 return buffer;
             }
 
@@ -813,12 +816,12 @@ namespace PeekPoker.Interface
                 {
                     throw new Exception("Invalid value");
                 }
-                byte[] buffer = new Byte[5];
-                buffer[4] = (Byte)(value & 0xFF);
-                buffer[3] = (Byte)((value >> 8) & 0xFF);
-                buffer[2] = (Byte)((value >> 16) & 0xFF);
-                buffer[1] = (Byte)((value >> 24) & 0xFF);
-                buffer[0] = (Byte)((value >> 32) & 0xFF);
+                var buffer = new Byte[5];
+                buffer[4] = (Byte) (value & 0xFF);
+                buffer[3] = (Byte) ((value >> 8) & 0xFF);
+                buffer[2] = (Byte) ((value >> 16) & 0xFF);
+                buffer[1] = (Byte) ((value >> 24) & 0xFF);
+                buffer[0] = (Byte) ((value >> 32) & 0xFF);
                 return buffer;
             }
 
@@ -826,13 +829,13 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] Int48(Int64 value)
             {
-                byte[] buffer = new Byte[6];
-                buffer[5] = (Byte)(value & 0xFF);
-                buffer[4] = (Byte)((value >> 8) & 0xFF);
-                buffer[3] = (Byte)((value >> 16) & 0xFF);
-                buffer[2] = (Byte)((value >> 24) & 0xFF);
-                buffer[1] = (Byte)((value >> 32) & 0xFF);
-                buffer[0] = (Byte)((value >> 40) & 0xFF);
+                var buffer = new Byte[6];
+                buffer[5] = (Byte) (value & 0xFF);
+                buffer[4] = (Byte) ((value >> 8) & 0xFF);
+                buffer[3] = (Byte) ((value >> 16) & 0xFF);
+                buffer[2] = (Byte) ((value >> 24) & 0xFF);
+                buffer[1] = (Byte) ((value >> 32) & 0xFF);
+                buffer[0] = (Byte) ((value >> 40) & 0xFF);
                 return buffer;
             }
 
@@ -840,13 +843,13 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] UInt48(UInt64 value)
             {
-                byte[] buffer = new Byte[6];
-                buffer[5] = (Byte)(value & 0xFF);
-                buffer[4] = (Byte)((value >> 8) & 0xFF);
-                buffer[3] = (Byte)((value >> 16) & 0xFF);
-                buffer[2] = (Byte)((value >> 24) & 0xFF);
-                buffer[1] = (Byte)((value >> 32) & 0xFF);
-                buffer[0] = (Byte)((value >> 40) & 0xFF);
+                var buffer = new Byte[6];
+                buffer[5] = (Byte) (value & 0xFF);
+                buffer[4] = (Byte) ((value >> 8) & 0xFF);
+                buffer[3] = (Byte) ((value >> 16) & 0xFF);
+                buffer[2] = (Byte) ((value >> 24) & 0xFF);
+                buffer[1] = (Byte) ((value >> 32) & 0xFF);
+                buffer[0] = (Byte) ((value >> 40) & 0xFF);
                 return buffer;
             }
 
@@ -854,14 +857,14 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] Int56(Int64 value)
             {
-                byte[] buffer = new Byte[7];
-                buffer[6] = (Byte)(value & 0xFF);
-                buffer[5] = (Byte)((value >> 8) & 0xFF);
-                buffer[4] = (Byte)((value >> 16) & 0xFF);
-                buffer[3] = (Byte)((value >> 24) & 0xFF);
-                buffer[2] = (Byte)((value >> 32) & 0xFF);
-                buffer[1] = (Byte)((value >> 40) & 0xFF);
-                buffer[0] = (Byte)((value >> 48) & 0xFF);
+                var buffer = new Byte[7];
+                buffer[6] = (Byte) (value & 0xFF);
+                buffer[5] = (Byte) ((value >> 8) & 0xFF);
+                buffer[4] = (Byte) ((value >> 16) & 0xFF);
+                buffer[3] = (Byte) ((value >> 24) & 0xFF);
+                buffer[2] = (Byte) ((value >> 32) & 0xFF);
+                buffer[1] = (Byte) ((value >> 40) & 0xFF);
+                buffer[0] = (Byte) ((value >> 48) & 0xFF);
                 return buffer;
             }
 
@@ -869,14 +872,14 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] UInt56(UInt64 value)
             {
-                byte[] buffer = new Byte[7];
-                buffer[6] = (Byte)(value & 0xFF);
-                buffer[5] = (Byte)((value >> 8) & 0xFF);
-                buffer[4] = (Byte)((value >> 16) & 0xFF);
-                buffer[3] = (Byte)((value >> 24) & 0xFF);
-                buffer[2] = (Byte)((value >> 32) & 0xFF);
-                buffer[1] = (Byte)((value >> 40) & 0xFF);
-                buffer[0] = (Byte)((value >> 48) & 0xFF);
+                var buffer = new Byte[7];
+                buffer[6] = (Byte) (value & 0xFF);
+                buffer[5] = (Byte) ((value >> 8) & 0xFF);
+                buffer[4] = (Byte) ((value >> 16) & 0xFF);
+                buffer[3] = (Byte) ((value >> 24) & 0xFF);
+                buffer[2] = (Byte) ((value >> 32) & 0xFF);
+                buffer[1] = (Byte) ((value >> 40) & 0xFF);
+                buffer[0] = (Byte) ((value >> 48) & 0xFF);
                 return buffer;
             }
 
@@ -884,15 +887,15 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] Int64(Int64 value)
             {
-                byte[] buffer = new Byte[8];
-                buffer[7] = (Byte)(value & 0xFF);
-                buffer[6] = (Byte)((value >> 8) & 0xFF);
-                buffer[5] = (Byte)((value >> 16) & 0xFF);
-                buffer[4] = (Byte)((value >> 24) & 0xFF);
-                buffer[3] = (Byte)((value >> 32) & 0xFF);
-                buffer[2] = (Byte)((value >> 40) & 0xFF);
-                buffer[1] = (Byte)((value >> 48) & 0xFF);
-                buffer[0] = (Byte)((value >> 56) & 0xFF);
+                var buffer = new Byte[8];
+                buffer[7] = (Byte) (value & 0xFF);
+                buffer[6] = (Byte) ((value >> 8) & 0xFF);
+                buffer[5] = (Byte) ((value >> 16) & 0xFF);
+                buffer[4] = (Byte) ((value >> 24) & 0xFF);
+                buffer[3] = (Byte) ((value >> 32) & 0xFF);
+                buffer[2] = (Byte) ((value >> 40) & 0xFF);
+                buffer[1] = (Byte) ((value >> 48) & 0xFF);
+                buffer[0] = (Byte) ((value >> 56) & 0xFF);
                 return buffer;
             }
 
@@ -900,15 +903,15 @@ namespace PeekPoker.Interface
             /// <param name="value">The value to be converted</param>
             public static Byte[] UInt64(UInt64 value)
             {
-                byte[] buffer = new Byte[8];
-                buffer[7] = (Byte)(value & 0xFF);
-                buffer[6] = (Byte)((value >> 8) & 0xFF);
-                buffer[5] = (Byte)((value >> 16) & 0xFF);
-                buffer[4] = (Byte)((value >> 24) & 0xFF);
-                buffer[3] = (Byte)((value >> 32) & 0xFF);
-                buffer[2] = (Byte)((value >> 40) & 0xFF);
-                buffer[1] = (Byte)((value >> 48) & 0xFF);
-                buffer[0] = (Byte)((value >> 56) & 0xFF);
+                var buffer = new Byte[8];
+                buffer[7] = (Byte) (value & 0xFF);
+                buffer[6] = (Byte) ((value >> 8) & 0xFF);
+                buffer[5] = (Byte) ((value >> 16) & 0xFF);
+                buffer[4] = (Byte) ((value >> 24) & 0xFF);
+                buffer[3] = (Byte) ((value >> 32) & 0xFF);
+                buffer[2] = (Byte) ((value >> 40) & 0xFF);
+                buffer[1] = (Byte) ((value >> 48) & 0xFF);
+                buffer[0] = (Byte) ((value >> 56) & 0xFF);
                 return buffer;
             }
 
@@ -948,14 +951,13 @@ namespace PeekPoker.Interface
                 return buffer;
             }
 
-
             /// <summary>Get a piece of a full byte array</summary>
             /// <param name="piece">The Full byte you want to take a piece from</param>
             /// <param name="startOffset">The starting offset</param>
             /// <param name="size">The full size of your new byte piece</param>
             public static Byte[] BytePiece(Byte[] piece, UInt32 startOffset, UInt32 size)
             {
-                byte[] buffer = new Byte[size];
+                var buffer = new Byte[size];
 
                 for (int i = 0; i < size; i++)
                 {
@@ -965,6 +967,6 @@ namespace PeekPoker.Interface
             }
         }
 
-        #endregion
+        #endregion ToByteArray
     }
 }
