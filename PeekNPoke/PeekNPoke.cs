@@ -116,21 +116,21 @@ namespace PeekPoker.PeekNPoke
                         if (Sender == peekPokeAddressTextBox) //Address specific formatting. [32 Bit Address, no "0x"]
                         {
                             string math = Sender.Text.Contains("+") ? "+" : "-";
-                                //Checks for addition or subtraction symbol, defaults to subtract which is harmless if its not there.
+                            //Checks for addition or subtraction symbol, defaults to subtract which is harmless if its not there.
                             Sender.Text = Sender.Text.ToUpper().StartsWith("0X")
                                               ? (Sender.Text.ToUpper().Substring(2).Trim())
                                               : Sender.Text.ToUpper().Trim();
-                                //If has 0x remove it, set to upper and traim spaces.
+                            //If has 0x remove it, set to upper and traim spaces.
                             string[] adrsample = Sender.Text.Split(Convert.ToChar(math));
                             //Now we check for addition commands
                             if (adrsample.Length >= 2)
                             {
                                 var adrhex = ((uint) new UInt32Converter().ConvertFromString("0x" + adrsample[0]));
-                                    //Formats address to have 4 bytes and be hex.
+                                //Formats address to have 4 bytes and be hex.
                                 if (!adrsample[1].Contains("0x"))
                                     adrsample[1] = ("0x" + adrsample[1]); //Preps for conversion.
                                 var adrhex2 = ((uint) new UInt32Converter().ConvertFromString(adrsample[1]));
-                                    //Formats address to have 4 bytes and be hex.
+                                //Formats address to have 4 bytes and be hex.
                                 Sender.Text = math == "+"
                                                   ? (adrhex + adrhex2).ToString("X8")
                                                   : (adrhex - adrhex2).ToString("X8");

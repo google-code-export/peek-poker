@@ -27,7 +27,7 @@ namespace PeekPoker.About
 
             Text = String.Format("About {0}", AssemblyTitle);
             labelProductName.Text = "PeekPoker";
-            labelVersion.Text = String.Format("Version {0}", AssemblyVersion + " " + "Revision 8");
+            labelVersion.Text = String.Format("Version {0}", AssemblyVersion + " " + ".Net3.5 Port Revision 1");
             labelCopyright.Text = "GNU GPL v3";
             textBoxDescription.Text = stringBuilder.ToString();
         }
